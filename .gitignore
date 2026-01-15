@@ -1,20 +1,9 @@
-# Rust
-/target/
-
-# IDE
+# IDEs
 .idea/
 .vscode/
-*.swp
-*.swo
 
-# OS
-.DS_Store
-Thumbs.db
+# Rust
+target/
 
 # AUR
-*.tar.gz
-*.tar.zst
-*.pkg.tar.*
-pkg/
-src/
 .SRCINFO
