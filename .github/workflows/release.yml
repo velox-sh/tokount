@@ -11,8 +11,20 @@ permissions:
 jobs:
   release:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Build
+        run: cargo build --release
+
+      - name: Package binary
+        run: |
+          tar -czvf tokount-linux-x86_64.tar.gz -C target/release tokount
+          sha256sum tokount-linux-x86_64.tar.gz > tokount-linux-x86_64.tar.gz.sha256
 
       - name: Extract release notes from changelog
         run: |
@@ -24,3 +36,6 @@ jobs:
         with:
           body_path: release_notes.md
           generate_release_notes: false
+          files: |
+            tokount-linux-x86_64.tar.gz
+            tokount-linux-x86_64.tar.gz.sha256
