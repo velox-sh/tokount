@@ -1,0 +1,16 @@
+{
+  "useTabs": true,
+  "tabWidth": 4,
+  "singleQuote": false,
+  "trailingComma": "all",
+  "proseWrap": "preserve",
+  "overrides": [
+    {
+      "files": ["*.yml", "*.yaml", "*.json", "*.toml"],
+      "options": {
+        "tabWidth": 2,
+        "useTabs": false
+      }
+    }
+  ]
+}

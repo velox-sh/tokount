@@ -1,0 +1,6 @@
+target/
+*.rs
+*.sh
+PKGBUILD
+.SRCINFO
+Cargo.lock
