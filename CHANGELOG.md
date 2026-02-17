@@ -27,8 +27,6 @@ First version. A fast line counter for codebases, powered by `tokei`
 - Git repository detection
 - Gitignore pattern collection
 - CLI argument parsing with `clap` derive macros
-- PKGBUILD for AUR
-- GitHub Actions release workflow
 
 <p align="right">(<a href="#changelog-top">back to top</a>)</p>
 
