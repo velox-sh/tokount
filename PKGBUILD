@@ -9,7 +9,7 @@ license=('MIT')
 depends=('gcc-libs')
 makedepends=('cargo')
 source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/v$pkgver.tar.gz")
-sha256sums=('SKIP')
+sha256sums=('94bcb34609dbf26033adf5ee795a169001e6a78fbf06ece59f6a89b9b0a599b9')
 
 prepare() {
   cd "$pkgname-$pkgver"

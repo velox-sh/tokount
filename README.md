@@ -3,7 +3,6 @@
 <!-- PROJECT SHIELDS -->
 <div align="center">
 
-[![Crates.io](https://img.shields.io/crates/v/tokount?label=crates.io)](https://crates.io/crates/tokount)
 [![AUR Version](https://img.shields.io/aur/version/tokount?label=AUR)](https://aur.archlinux.org/packages/tokount)
 [![License](https://img.shields.io/github/license/MihaiStreames/tokount?label=License)](LICENSE)
 
@@ -45,10 +44,7 @@ tokount is a simple CLI wrapper around tokei that outputs JSON stats. Built for 
 ## Installation
 
 ```bash
-# with cargo
-cargo install tokount
-
-# or with yay (AUR)
+# with yay (AUR)
 yay -S tokount
 
 # or with paru (AUR)
