@@ -1,15 +1,29 @@
 {
-  "useTabs": true,
-  "tabWidth": 4,
+  "printWidth": 100,
+  "tabWidth": 2,
+  "useTabs": false,
+  "semi": true,
   "singleQuote": false,
   "trailingComma": "all",
-  "proseWrap": "preserve",
+  "bracketSpacing": true,
+  "endOfLine": "lf",
   "overrides": [
     {
-      "files": ["*.yml", "*.yaml", "*.json", "*.toml"],
+      "files": "*.md",
       "options": {
-        "tabWidth": 2,
-        "useTabs": false
+        "proseWrap": "preserve"
+      }
+    },
+    {
+      "files": "*.toml",
+      "options": {
+        "tabWidth": 2
+      }
+    },
+    {
+      "files": "*.yml",
+      "options": {
+        "tabWidth": 2
       }
     }
   ]

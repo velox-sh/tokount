@@ -3,8 +3,10 @@ mod cli;
 mod git;
 mod types;
 
-use cli::{Args, emit_error};
 use std::collections::HashMap;
+
+use cli::Args;
+use cli::emit_error;
 
 fn main() {
     let args = Args::parse_args();

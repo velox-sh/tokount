@@ -1,8 +1,11 @@
-use crate::types::{ErrorBody, ErrorPayload};
-use clap::Parser;
 use std::collections::HashMap;
 use std::path::PathBuf;
 use std::process;
+
+use clap::Parser;
+
+use crate::types::ErrorBody;
+use crate::types::ErrorPayload;
 
 /// tokei-powered fast line counter for codebases
 #[derive(Parser, Debug)]

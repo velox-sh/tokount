@@ -1,7 +1,9 @@
 use std::collections::HashSet;
 use std::fs::File;
-use std::io::{BufRead, BufReader};
+use std::io::BufRead;
+use std::io::BufReader;
 use std::path::Path;
+
 use walkdir::WalkDir;
 
 /// Parse a .gitignore file and extract patterns (non-empty, non-comment lines)

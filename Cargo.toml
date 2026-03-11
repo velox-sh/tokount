@@ -1,13 +1,13 @@
 [package]
 name = "tokount"
-version = "1.0.0"
+version = "1.0.1"
 description = "Fast line counter for codebases (tokei-powered) used by ghlang"
 authors = ["MihaiStreames <72852703+MihaiStreames@users.noreply.github.com>"]
 license = "MIT"
 homepage = "https://github.com/MihaiStreames/ghlang"
 repository = "https://github.com/MihaiStreames/ghlang"
-keywords = ["code-analysis", "line-count", "tokei", "cli", "metrics"]
-categories = ["command-line-utilities", "development-tools"]
+keywords = ["code-analysis", "developer-tools", "tokei", "cli", "metrics"]
+categories = ["command-line-utilities", "development-tools::metrics", "development-tools::code-analysis"]
 edition = "2024"
 
 [dependencies]
@@ -15,7 +15,7 @@ serde = { version = "1.0.228", features = ["derive"] }
 serde_json = "1.0.149"
 tokei = "14.0.0"
 walkdir = "2.5.0"
-clap = { version = "4.5.59", features = ["derive"] }
+clap = { version = "4.5.60", features = ["derive"] }
 
 [[bin]]
 name = "tokount"
@@ -48,3 +48,8 @@ trivially_copy_pass_by_ref = "warn"          # Keep tiny Copy types passed by va
 unused_self = "warn"                         # Ensure self is used intentionally
 redundant_closure_for_method_calls = "warn"  # Prefer direct method calls
 redundant_clone = "warn"                     # Avoid redundant cloning
+too_many_arguments = "warn"                  # Flag functions with too many params; threshold in clippy.toml
+too_many_lines = "warn"                      # Keep functions short and focused; threshold in clippy.toml
+cognitive_complexity = "warn"                # Limit branching/nesting complexity; threshold in clippy.toml
+enum_variant_name = "warn"                   # Avoid redundant enum name prefix in variants; threshold in clippy.toml
+type_complexity = "warn"                     # Flag overly nested/complex type expressions; threshold in clippy.toml

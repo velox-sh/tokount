@@ -1,9 +1,14 @@
-use crate::types::{LangStats, OutputStats};
-use std::collections::{HashMap, HashSet};
+use std::collections::HashMap;
+use std::collections::HashSet;
 use std::fs;
 use std::path::Path;
-use tokei::{Config, Languages};
+
+use tokei::Config;
+use tokei::Languages;
 use walkdir::WalkDir;
+
+use crate::types::LangStats;
+use crate::types::OutputStats;
 
 /// Resolve symlinks in a directory and return all unique parent directories
 fn resolve_symlinks_in_dir(root: &Path) -> Vec<String> {

@@ -7,12 +7,14 @@ repos:
         language: system
         types: [rust]
         pass_filenames: false
+
       - id: cargo-check
         name: cargo check
         entry: cargo check
         language: system
         types: [rust]
         pass_filenames: false
+
       - id: cargo-clippy
         name: cargo clippy
         entry: cargo clippy -- -D warnings
@@ -26,3 +28,9 @@ repos:
       - id: trailing-whitespace
       - id: end-of-file-fixer
       - id: check-yaml
+
+ci:
+  skip:
+    - cargo-fmt
+    - cargo-check
+    - cargo-clippy
