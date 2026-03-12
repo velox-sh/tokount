@@ -3,7 +3,9 @@
 <!-- PROJECT SHIELDS -->
 <div align="center">
 
+[![Stars](https://img.shields.io/github/stars/MihaiStreames/tokount?style=social)](https://github.com/MihaiStreames/tokount/stargazers)
 [![AUR Version](https://img.shields.io/aur/version/tokount?label=AUR)](https://aur.archlinux.org/packages/tokount)
+[![Rust Edition](https://img.shields.io/badge/Rust-2024-ed7a1f)](https://www.rust-lang.org/)
 [![License](https://img.shields.io/github/license/MihaiStreames/tokount?label=License)](LICENSE)
 
 </div>
