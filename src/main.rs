@@ -6,6 +6,7 @@ mod types;
 
 use std::collections::HashMap;
 use std::path::Path;
+use std::path::PathBuf;
 use std::time::Instant;
 
 use cli::Args;
@@ -44,7 +45,7 @@ fn main() {
     }
 
     let excluded = args.excluded_dirs();
-    let path_refs: Vec<&Path> = args.paths.iter().map(|p| p.as_path()).collect();
+    let path_refs: Vec<&Path> = args.paths.iter().map(PathBuf::as_path).collect();
 
     // spinner is a no-op when stderr is not a TTY (CI, pipes), so --json piping is
     // clean

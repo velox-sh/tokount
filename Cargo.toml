@@ -53,5 +53,5 @@ redundant_clone = "warn"                     # Avoid redundant cloning
 too_many_arguments = "warn"                  # Flag functions with too many params; threshold in clippy.toml
 too_many_lines = "warn"                      # Keep functions short and focused; threshold in clippy.toml
 cognitive_complexity = "warn"                # Limit branching/nesting complexity; threshold in clippy.toml
-enum_variant_name = "warn"                   # Avoid redundant enum name prefix in variants; threshold in clippy.toml
+enum_variant_names = "warn"                  # Avoid redundant enum name prefix in variants; threshold in clippy.toml
 type_complexity = "warn"                     # Flag overly nested/complex type expressions; threshold in clippy.toml
