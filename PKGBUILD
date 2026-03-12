@@ -1,15 +1,15 @@
 # Maintainer: MihaiStreames <72852703+MihaiStreames@users.noreply.github.com>
 pkgname=tokount
-pkgver=1.0.0
+pkgver=1.1.0
 pkgrel=1
 pkgdesc="Fast line counter for codebases, powered by tokei"
-arch=('x86_64')
+arch=(x86_64)
 url="https://github.com/MihaiStreames/tokount"
-license=('MIT')
-depends=('gcc-libs')
-makedepends=('cargo')
+license=(MIT)
+depends=(gcc-libs)
+makedepends=(cargo)
 source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/v$pkgver.tar.gz")
-sha256sums=('94bcb34609dbf26033adf5ee795a169001e6a78fbf06ece59f6a89b9b0a599b9')
+sha256sums=('SKIP')
 
 prepare() {
 	cd "$pkgname-$pkgver"

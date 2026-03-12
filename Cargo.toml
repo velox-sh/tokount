@@ -1,11 +1,11 @@
 [package]
 name = "tokount"
-version = "1.0.1"
-description = "Fast line counter for codebases (tokei-powered) used by ghlang"
+version = "1.1.0"
+description = "Fast line counter for codebases, powered by tokei"
 authors = ["MihaiStreames <72852703+MihaiStreames@users.noreply.github.com>"]
 license = "MIT"
-homepage = "https://github.com/MihaiStreames/ghlang"
-repository = "https://github.com/MihaiStreames/ghlang"
+homepage = "https://github.com/MihaiStreames/tokount"
+repository = "https://github.com/MihaiStreames/tokount"
 keywords = ["code-analysis", "developer-tools", "tokei", "cli", "metrics"]
 categories = ["command-line-utilities", "development-tools::metrics", "development-tools::code-analysis"]
 edition = "2024"
@@ -13,9 +13,11 @@ edition = "2024"
 [dependencies]
 serde = { version = "1.0.228", features = ["derive"] }
 serde_json = "1.0.149"
+clap = { version = "4.5.60", features = ["derive"] }
 tokei = "14.0.0"
 walkdir = "2.5.0"
-clap = { version = "4.5.60", features = ["derive"] }
+comfy-table = "7.2.2"
+indicatif = "0.18.4"
 
 [[bin]]
 name = "tokount"

@@ -1,0 +1,12 @@
+{
+  "name": "frontend",
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build"
+  },
+  "dependencies": {
+    "react": "^19.2.4",
+    "next": "^16.1.6"
+  }
+}

@@ -35,7 +35,7 @@
 
 ## About The Project
 
-tokount is a simple CLI wrapper around tokei that outputs JSON stats. Built for use with [ghlang](https://github.com/MihaiStreames/ghlang), but works standalone too.
+tokount is a fast CLI line counter built on [tokei](https://github.com/XAMPPRocky/tokei). It outputs a human-readable table by default, or raw JSON with `--json` for piping into other tools like [ghlang](https://github.com/MihaiStreames/ghlang).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -64,9 +64,25 @@ tokount .
 # analyze specific path
 tokount /path/to/project
 
+# multiple paths (e.g. from git ls-files)
+tokount $(git ls-files)
+
 # exclude directories
-tokount /path/to/project node_modules,vendor,.git
+tokount . --excluded node_modules,vendor
+
+# machine-readable JSON output
+tokount . --json
 ```
+
+### Flags
+
+| Flag                | Short | What it does                                      |
+| ------------------- | ----- | ------------------------------------------------- |
+| `--excluded <DIRS>` | `-e`  | comma-separated directories to exclude            |
+| `--follow-symlinks` | `-L`  | follow symbolic links when scanning               |
+| `--json`            | `-j`  | output raw JSON instead of a human-readable table |
+| `--help`            | `-h`  | print help                                        |
+| `--version`         | `-V`  | print version                                     |
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -74,23 +90,57 @@ tokount /path/to/project node_modules,vendor,.git
 
 ## Output
 
-tokount outputs JSON to stdout:
+By default, tokount prints a table with timing stats:
+
+```text
+github.com/MihaiStreames/tokount v1.0.1  T=0.02s  (1703 files/s, 51810 lines/s)
+41 files  •  0 git repos  •  55 paths
+
+─────────────────────────────────────────────────────────────
+ Language               Files     Blank     Comment     Code 
+═════════════════════════════════════════════════════════════
+ JSON                       6         0           0      137 
+─────────────────────────────────────────────────────────────
+ Pacman's makepkg           1         4           1       32 
+─────────────────────────────────────────────────────────────
+ Python                     1         2           1        4 
+─────────────────────────────────────────────────────────────
+ Rust                      13       100          14      507 
+─────────────────────────────────────────────────────────────
+ Shell                      2         6           5       21 
+─────────────────────────────────────────────────────────────
+ TOML                       5        10           3       78 
+─────────────────────────────────────────────────────────────
+ TSX                        1         1           1       12 
+─────────────────────────────────────────────────────────────
+ TypeScript                 2         4           1       16 
+─────────────────────────────────────────────────────────────
+ YAML                      10        33           2      252 
+─────────────────────────────────────────────────────────────
+ SUM                       41       160          28     1059 
+─────────────────────────────────────────────────────────────
+```
+
+With `--json`, tokount outputs to stdout:
 
 ```json
 {
-  "Rust": {"nFiles": 5, "blank": 120, "comment": 45, "code": 890},
-  "Python": {"nFiles": 3, "blank": 50, "comment": 20, "code": 340},
-  "SUM": {"nFiles": 8, "blank": 170, "comment": 65, "code": 1230}
+  "Rust": {"nFiles": 12, "blank": 89, "comment": 11, "code": 416},
+  "TOML": {"nFiles": 5,  "blank": 10, "comment": 3,  "code": 78},
+  "SUM":  {"nFiles": 17, "blank": 99, "comment": 14, "code": 494},
+  "gitRepos": 1,
+  "gitignorePatterns": ["target/", "node_modules/"]
 }
 ```
 
-Errors are output as structured JSON to stderr:
+Errors are emitted as structured JSON to stderr:
 
 ```json
 {
   "error": {
     "kind": "NotFound",
-    "message": "Path does not exist"
+    "message": "Path does not exist",
+    "details": {"path": "/nonexistent"}
   }
 }
 ```

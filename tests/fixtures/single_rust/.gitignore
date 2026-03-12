@@ -1,0 +1,6 @@
+# Rust artifacts
+target/
+*.rs.bk
+
+# Editor
+.vscode/

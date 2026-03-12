@@ -1,0 +1,22 @@
+{
+  "Python": {
+    "blank": 2,
+    "code": 4,
+    "comment": 1,
+    "nFiles": 1
+  },
+  "Rust": {
+    "blank": 1,
+    "code": 6,
+    "comment": 0,
+    "nFiles": 1
+  },
+  "SUM": {
+    "blank": 3,
+    "code": 10,
+    "comment": 1,
+    "nFiles": 2
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

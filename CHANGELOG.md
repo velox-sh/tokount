@@ -10,10 +10,30 @@
 <details>
   <summary>Table of Contents</summary>
   <ol>
+    <li><a href="#v110--human-readable-output--multi-path-support">v1.1.0</a></li>
     <li><a href="#v101--maintenance">v1.0.1</a></li>
     <li><a href="#v100--initial-release">v1.0.0</a></li>
   </ol>
 </details>
+
+## v1.1.0 — Human-readable output & multi-path support
+
+**New stuff:**
+
+- Human-readable table by default with timing stats (files/s, lines/s), file count, and git repo count
+- `--json` / `-j` flag for machine-readable JSON output (replaces old default behaviour)
+- Spinner progress indicator during scan; suppressed automatically when piping or using `--json`
+- Multiple path arguments: `tokount file1 file2 dir/` and `tokount $(git ls-files)`
+- Integration test suite with fixture directories and JSON snapshots
+
+**Changed:**
+
+- Excluded dirs are now a named flag `-e`/`--excluded` instead of a positional arg (breaking change)
+- Fixed `homepage` and `repository` in `Cargo.toml` pointing to wrong repo
+
+<p align="right">(<a href="#changelog-top">back to top</a>)</p>
+
+---
 
 ## v1.0.1 — Maintenance
 

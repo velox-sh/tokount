@@ -1,0 +1,5 @@
+# root-level ignores shared across all projects
+*.log
+*.tmp
+.env
+.DS_Store

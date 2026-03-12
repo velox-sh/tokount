@@ -11,16 +11,21 @@ use crate::types::ErrorPayload;
 #[derive(Parser, Debug)]
 #[command(name = "tokount", version, about)]
 pub struct Args {
-    /// Path to analyze
-    pub path: PathBuf,
+    /// Paths to analyze (files or directories)
+    #[arg(num_args(1..))]
+    pub paths: Vec<PathBuf>,
 
     /// Comma-separated directories to exclude
-    #[arg(value_delimiter = ',')]
+    #[arg(short = 'e', long, value_delimiter = ',')]
     pub excluded: Option<Vec<String>>,
 
     /// Follow symbolic links
     #[arg(short = 'L', long)]
     pub follow_symlinks: bool,
+
+    /// Output raw JSON instead of a human-readable table
+    #[arg(short = 'j', long)]
+    pub json: bool,
 }
 
 impl Args {

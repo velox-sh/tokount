@@ -34,9 +34,9 @@ fn resolve_symlinks_in_dir(root: &Path) -> Vec<String> {
     resolved_paths.into_iter().collect()
 }
 
-/// Run analysis on the given path
+/// Run analysis on the given paths
 pub fn count_lines(
-    path: &Path,
+    paths: &[&Path],
     excluded: &[&str],
     follow_symlinks: bool,
     git_repo_count: usize,
@@ -45,18 +45,27 @@ pub fn count_lines(
     let config = Config::default();
     let mut languages = Languages::new();
 
-    let path_str = path.to_string_lossy();
-
     if follow_symlinks {
-        let resolved_dirs = resolve_symlinks_in_dir(path);
-        let mut all_paths: Vec<&str> = vec![&path_str];
-        let resolved_refs: Vec<&str> = resolved_dirs.iter().map(String::as_str).collect();
-        all_paths.extend(resolved_refs);
+        let mut all_path_strs: Vec<String> = paths
+            .iter()
+            .map(|p| p.to_string_lossy().into_owned())
+            .collect();
 
-        languages.get_statistics(&all_paths, excluded, &config);
+        // add resolved symlink parent dirs for each root
+        for path in paths {
+            let resolved = resolve_symlinks_in_dir(path);
+            all_path_strs.extend(resolved);
+        }
+
+        let all_refs: Vec<&str> = all_path_strs.iter().map(String::as_str).collect();
+        languages.get_statistics(&all_refs, excluded, &config);
     } else {
-        let path_arr: &[&str] = &[&path_str];
-        languages.get_statistics(path_arr, excluded, &config);
+        let path_strs: Vec<String> = paths
+            .iter()
+            .map(|p| p.to_string_lossy().into_owned())
+            .collect();
+        let path_refs: Vec<&str> = path_strs.iter().map(String::as_str).collect();
+        languages.get_statistics(&path_refs, excluded, &config);
     }
 
     let mut result: HashMap<String, LangStats> = HashMap::new();
