@@ -10,11 +10,22 @@
 <details>
   <summary>Table of Contents</summary>
   <ol>
+    <li><a href="#v111--windows-symlink-guard">v1.1.1</a></li>
     <li><a href="#v110--human-readable-output--multi-path-support">v1.1.0</a></li>
     <li><a href="#v101--maintenance">v1.0.1</a></li>
     <li><a href="#v100--initial-release">v1.0.0</a></li>
   </ol>
 </details>
+
+## v1.1.1 — Windows symlink guard
+
+**Changed:**
+
+- `-L`/`--follow-symlinks` now exits with an error on Windows (unsupported platform)
+
+<p align="right">(<a href="#changelog-top">back to top</a>)</p>
+
+---
 
 ## v1.1.0 — Human-readable output & multi-path support
 

@@ -30,7 +30,15 @@ pub struct Args {
 
 impl Args {
     pub fn parse_args() -> Self {
-        Self::parse()
+        let args = Self::parse();
+
+        #[cfg(target_os = "windows")]
+        if args.follow_symlinks {
+            eprintln!("error: -L/--follow-symlinks is not supported on Windows");
+            process::exit(2);
+        }
+
+        args
     }
 
     /// Get excluded directories as a Vec of &str

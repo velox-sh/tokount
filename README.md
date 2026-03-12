@@ -151,7 +151,7 @@ Errors are emitted as structured JSON to stderr:
 
 ## License
 
-MIT. See [LICENSE](LICENSE) for details.
+MIT. Do whatever you want with it. See [LICENSE](LICENSE) for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
