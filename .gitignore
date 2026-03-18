@@ -47,3 +47,5 @@ perf.data
 
 # LLMs
 .claude/
+CLAUDE.md
+data/

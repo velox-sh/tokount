@@ -1,6 +1,6 @@
 # Maintainer: MihaiStreames <72852703+MihaiStreames@users.noreply.github.com>
 pkgname=tokount
-pkgver=1.1.1
+pkgver=2.0.0
 pkgrel=1
 pkgdesc="Fast line counter for codebases, powered by tokei"
 arch=(x86_64)
