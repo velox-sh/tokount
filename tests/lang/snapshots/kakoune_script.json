@@ -1,0 +1,16 @@
+{
+  "Kakoune script": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 2,
+    "code": 8
+  },
+  "SUM": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 2,
+    "code": 8
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

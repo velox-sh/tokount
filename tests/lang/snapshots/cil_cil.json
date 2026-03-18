@@ -1,0 +1,16 @@
+{
+  "SUM": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 3,
+    "code": 15
+  },
+  "CIL (SELinux)": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 3,
+    "code": 15
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

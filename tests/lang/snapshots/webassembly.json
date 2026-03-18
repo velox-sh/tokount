@@ -1,0 +1,16 @@
+{
+  "SUM": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 1,
+    "code": 8
+  },
+  "WebAssembly": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 1,
+    "code": 8
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

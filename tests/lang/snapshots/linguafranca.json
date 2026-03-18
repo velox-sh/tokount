@@ -1,0 +1,16 @@
+{
+  "SUM": {
+    "nFiles": 1,
+    "blank": 11,
+    "comment": 9,
+    "code": 16
+  },
+  "Lingua Franca": {
+    "nFiles": 1,
+    "blank": 11,
+    "comment": 9,
+    "code": 16
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

@@ -1,0 +1,16 @@
+{
+  "SUM": {
+    "nFiles": 1,
+    "blank": 5,
+    "comment": 21,
+    "code": 15
+  },
+  "Svelte": {
+    "nFiles": 1,
+    "blank": 5,
+    "comment": 21,
+    "code": 15
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

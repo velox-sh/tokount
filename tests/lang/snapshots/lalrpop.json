@@ -1,0 +1,16 @@
+{
+  "LALRPOP": {
+    "nFiles": 1,
+    "blank": 8,
+    "comment": 3,
+    "code": 26
+  },
+  "SUM": {
+    "nFiles": 1,
+    "blank": 8,
+    "comment": 3,
+    "code": 26
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

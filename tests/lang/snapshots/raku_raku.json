@@ -1,0 +1,16 @@
+{
+  "Raku": {
+    "nFiles": 1,
+    "blank": 13,
+    "comment": 4,
+    "code": 32
+  },
+  "SUM": {
+    "nFiles": 1,
+    "blank": 13,
+    "comment": 4,
+    "code": 32
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

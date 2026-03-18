@@ -1,0 +1,16 @@
+{
+  "Hex0": {
+    "nFiles": 1,
+    "blank": 30,
+    "comment": 34,
+    "code": 89
+  },
+  "SUM": {
+    "nFiles": 1,
+    "blank": 30,
+    "comment": 34,
+    "code": 89
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

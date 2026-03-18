@@ -1,0 +1,16 @@
+{
+  "OpenQASM": {
+    "nFiles": 1,
+    "blank": 10,
+    "comment": 21,
+    "code": 58
+  },
+  "SUM": {
+    "nFiles": 1,
+    "blank": 10,
+    "comment": 21,
+    "code": 58
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

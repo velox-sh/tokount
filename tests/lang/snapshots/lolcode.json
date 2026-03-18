@@ -1,0 +1,16 @@
+{
+  "SUM": {
+    "nFiles": 1,
+    "blank": 6,
+    "comment": 9,
+    "code": 11
+  },
+  "LOLCODE": {
+    "nFiles": 1,
+    "blank": 6,
+    "comment": 9,
+    "code": 11
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

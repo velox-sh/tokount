@@ -1,0 +1,16 @@
+{
+  "Bazel": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 3,
+    "code": 13
+  },
+  "SUM": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 3,
+    "code": 13
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

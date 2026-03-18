@@ -1,0 +1,16 @@
+{
+  "C3": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 1,
+    "code": 6
+  },
+  "SUM": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 1,
+    "code": 6
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

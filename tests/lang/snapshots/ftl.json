@@ -1,0 +1,16 @@
+{
+  "FreeMarker": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 3,
+    "code": 5
+  },
+  "SUM": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 3,
+    "code": 5
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

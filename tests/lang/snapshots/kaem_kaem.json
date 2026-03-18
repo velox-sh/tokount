@@ -1,0 +1,16 @@
+{
+  "SUM": {
+    "nFiles": 1,
+    "blank": 7,
+    "comment": 33,
+    "code": 2
+  },
+  "Kaem": {
+    "nFiles": 1,
+    "blank": 7,
+    "comment": 33,
+    "code": 2
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

@@ -1,0 +1,16 @@
+{
+  "hledger": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 10,
+    "code": 6
+  },
+  "SUM": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 10,
+    "code": 6
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

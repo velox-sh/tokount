@@ -1,0 +1,16 @@
+{
+  "SUM": {
+    "nFiles": 1,
+    "blank": 16,
+    "comment": 4,
+    "code": 22
+  },
+  "RPM Specfile": {
+    "nFiles": 1,
+    "blank": 16,
+    "comment": 4,
+    "code": 22
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

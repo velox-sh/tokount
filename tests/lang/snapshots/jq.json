@@ -1,0 +1,16 @@
+{
+  "jq": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 5,
+    "code": 3
+  },
+  "SUM": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 5,
+    "code": 3
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

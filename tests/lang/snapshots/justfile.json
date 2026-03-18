@@ -1,0 +1,16 @@
+{
+  "Just": {
+    "nFiles": 1,
+    "blank": 50,
+    "comment": 11,
+    "code": 153
+  },
+  "SUM": {
+    "nFiles": 1,
+    "blank": 50,
+    "comment": 11,
+    "code": 153
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

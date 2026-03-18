@@ -1,0 +1,16 @@
+{
+  "Tera": {
+    "nFiles": 1,
+    "blank": 5,
+    "comment": 11,
+    "code": 26
+  },
+  "SUM": {
+    "nFiles": 1,
+    "blank": 5,
+    "comment": 11,
+    "code": 26
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

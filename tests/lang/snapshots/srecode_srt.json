@@ -1,0 +1,16 @@
+{
+  "SUM": {
+    "nFiles": 1,
+    "blank": 12,
+    "comment": 2,
+    "code": 23
+  },
+  "SRecode Template": {
+    "nFiles": 1,
+    "blank": 12,
+    "comment": 2,
+    "code": 23
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

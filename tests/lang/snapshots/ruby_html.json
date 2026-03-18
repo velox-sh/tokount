@@ -1,0 +1,16 @@
+{
+  "Ruby HTML": {
+    "nFiles": 1,
+    "blank": 5,
+    "comment": 8,
+    "code": 21
+  },
+  "SUM": {
+    "nFiles": 1,
+    "blank": 5,
+    "comment": 8,
+    "code": 21
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

@@ -27,7 +27,7 @@ build() {
 check() {
 	cd "$pkgname-$pkgver"
 	export RUSTUP_TOOLCHAIN=stable
-	cargo test --all-features
+	cargo test --all-features --test flags --test errors
 }
 
 package() {

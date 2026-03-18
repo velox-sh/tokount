@@ -1,0 +1,16 @@
+{
+  "SUM": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 13,
+    "code": 10
+  },
+  "BrightScript": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 13,
+    "code": 10
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

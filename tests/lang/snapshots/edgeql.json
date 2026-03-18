@@ -1,0 +1,16 @@
+{
+  "EdgeQL": {
+    "nFiles": 1,
+    "blank": 4,
+    "comment": 3,
+    "code": 21
+  },
+  "SUM": {
+    "nFiles": 1,
+    "blank": 4,
+    "comment": 3,
+    "code": 21
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

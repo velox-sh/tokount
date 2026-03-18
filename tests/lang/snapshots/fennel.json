@@ -1,0 +1,16 @@
+{
+  "SUM": {
+    "nFiles": 1,
+    "blank": 5,
+    "comment": 5,
+    "code": 8
+  },
+  "Fennel": {
+    "nFiles": 1,
+    "blank": 5,
+    "comment": 5,
+    "code": 8
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

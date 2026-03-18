@@ -1,0 +1,16 @@
+{
+  "TSX": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 3,
+    "code": 5
+  },
+  "SUM": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 3,
+    "code": 5
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

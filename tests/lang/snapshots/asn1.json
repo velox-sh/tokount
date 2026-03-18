@@ -1,0 +1,16 @@
+{
+  "ASN.1": {
+    "nFiles": 1,
+    "blank": 7,
+    "comment": 11,
+    "code": 16
+  },
+  "SUM": {
+    "nFiles": 1,
+    "blank": 7,
+    "comment": 11,
+    "code": 16
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

@@ -1,0 +1,16 @@
+{
+  "SUM": {
+    "nFiles": 1,
+    "blank": 15,
+    "comment": 3,
+    "code": 71
+  },
+  "GraphQL": {
+    "nFiles": 1,
+    "blank": 15,
+    "comment": 3,
+    "code": 71
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

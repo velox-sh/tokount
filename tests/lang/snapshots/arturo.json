@@ -1,0 +1,16 @@
+{
+  "Arturo": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 3,
+    "code": 3
+  },
+  "SUM": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 3,
+    "code": 3
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

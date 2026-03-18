@@ -1,0 +1,16 @@
+{
+  "Liquid": {
+    "nFiles": 1,
+    "blank": 4,
+    "comment": 1,
+    "code": 19
+  },
+  "SUM": {
+    "nFiles": 1,
+    "blank": 4,
+    "comment": 1,
+    "code": 19
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

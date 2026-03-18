@@ -1,0 +1,16 @@
+{
+  "Emacs Lisp": {
+    "nFiles": 1,
+    "blank": 4,
+    "comment": 6,
+    "code": 11
+  },
+  "SUM": {
+    "nFiles": 1,
+    "blank": 4,
+    "comment": 6,
+    "code": 11
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

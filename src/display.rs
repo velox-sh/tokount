@@ -7,13 +7,13 @@ use comfy_table::ContentArrangement;
 use comfy_table::Table;
 use comfy_table::presets::UTF8_HORIZONTAL_ONLY;
 
+use crate::cli::SortColumn;
 use crate::types::OutputStats;
 
 const VERSION: &str = env!("CARGO_PKG_VERSION");
 const REPO: &str = "github.com/MihaiStreames/tokount";
 
-/// Print a human-readable table of language statistics to stdout
-pub fn print_table(output: &OutputStats, label: &str, elapsed: Duration) {
+pub fn print_table(output: &OutputStats, label: &str, elapsed: Duration, sort: SortColumn) {
     let sum = output.languages.get("SUM");
     let total_files = sum.map_or(0, |s| s.n_files);
     let total_lines = sum.map_or(0, |s| s.blank + s.comment + s.code);
@@ -59,24 +59,23 @@ pub fn print_table(output: &OutputStats, label: &str, elapsed: Duration) {
                 .set_alignment(CellAlignment::Right),
         ]);
 
-    // language col gets right padding
-    // numeric cols get left+right
     table.column_mut(0).unwrap().set_padding((1, 3));
     for col_idx in 1..=4 {
-        table.column_mut(col_idx).unwrap().set_padding((3, 1));
+        table.column_mut(col_idx).unwrap().set_padding((4, 1));
     }
 
-    // languages sorted alphabetically, SUM last
     let mut langs: Vec<&str> = output
         .languages
         .keys()
         .filter(|k| k.as_str() != "SUM")
         .map(String::as_str)
         .collect();
-    langs.sort_unstable();
+
+    sort_langs(&mut langs, output, sort);
 
     for lang in langs {
         let s = &output.languages[lang];
+
         table.add_row(vec![
             Cell::new(lang),
             Cell::new(s.n_files).set_alignment(CellAlignment::Right),
@@ -105,4 +104,51 @@ pub fn print_table(output: &OutputStats, label: &str, elapsed: Duration) {
     }
 
     println!("{table}");
+}
+
+pub fn print_csv(output: &OutputStats, sort: SortColumn) {
+    println!("language,files,blank,comment,code");
+
+    let mut langs: Vec<&str> = output
+        .languages
+        .keys()
+        .filter(|k| k.as_str() != "SUM")
+        .map(String::as_str)
+        .collect();
+
+    sort_langs(&mut langs, output, sort);
+
+    for lang in langs {
+        let s = &output.languages[lang];
+        println!(
+            "{},{},{},{},{}",
+            lang, s.n_files, s.blank, s.comment, s.code
+        );
+    }
+
+    if let Some(sum) = output.languages.get("SUM") {
+        println!(
+            "SUM,{},{},{},{}",
+            sum.n_files, sum.blank, sum.comment, sum.code
+        );
+    }
+}
+
+fn sort_langs(langs: &mut Vec<&str>, output: &OutputStats, sort: SortColumn) {
+    langs.sort_unstable_by(|a, b| {
+        let as_ = &output.languages[*a];
+        let bs = &output.languages[*b];
+        let cmp = match sort {
+            SortColumn::Files => bs.n_files.cmp(&as_.n_files),
+            SortColumn::Lines => {
+                let bl = bs.blank + bs.comment + bs.code;
+                let al = as_.blank + as_.comment + as_.code;
+                bl.cmp(&al)
+            }
+            SortColumn::Blank => bs.blank.cmp(&as_.blank),
+            SortColumn::Comment => bs.comment.cmp(&as_.comment),
+            SortColumn::Code => bs.code.cmp(&as_.code),
+        };
+        cmp.then_with(|| a.cmp(b))
+    });
 }

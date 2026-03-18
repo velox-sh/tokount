@@ -1,0 +1,16 @@
+{
+  "SUM": {
+    "nFiles": 1,
+    "blank": 7,
+    "comment": 7,
+    "code": 20
+  },
+  "VHDL": {
+    "nFiles": 1,
+    "blank": 7,
+    "comment": 7,
+    "code": 20
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

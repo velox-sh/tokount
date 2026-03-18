@@ -1,0 +1,16 @@
+{
+  "SUM": {
+    "nFiles": 1,
+    "blank": 4,
+    "comment": 14,
+    "code": 6
+  },
+  "Swift": {
+    "nFiles": 1,
+    "blank": 4,
+    "comment": 14,
+    "code": 6
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

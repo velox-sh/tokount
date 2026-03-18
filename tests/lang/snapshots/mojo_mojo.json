@@ -1,0 +1,16 @@
+{
+  "SUM": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 3,
+    "code": 15
+  },
+  "Mojo": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 3,
+    "code": 15
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

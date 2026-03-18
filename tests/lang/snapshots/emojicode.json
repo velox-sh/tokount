@@ -1,0 +1,16 @@
+{
+  "SUM": {
+    "nFiles": 1,
+    "blank": 4,
+    "comment": 10,
+    "code": 10
+  },
+  "Emojicode": {
+    "nFiles": 1,
+    "blank": 4,
+    "comment": 10,
+    "code": 10
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

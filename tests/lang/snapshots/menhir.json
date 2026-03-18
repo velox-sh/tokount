@@ -1,0 +1,16 @@
+{
+  "Menhir": {
+    "nFiles": 1,
+    "blank": 9,
+    "comment": 7,
+    "code": 31
+  },
+  "SUM": {
+    "nFiles": 1,
+    "blank": 9,
+    "comment": 7,
+    "code": 31
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

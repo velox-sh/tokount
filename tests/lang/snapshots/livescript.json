@@ -1,0 +1,16 @@
+{
+  "LiveScript": {
+    "nFiles": 1,
+    "blank": 6,
+    "comment": 12,
+    "code": 10
+  },
+  "SUM": {
+    "nFiles": 1,
+    "blank": 6,
+    "comment": 12,
+    "code": 10
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

@@ -1,0 +1,16 @@
+{
+  "SUM": {
+    "nFiles": 1,
+    "blank": 5,
+    "comment": 7,
+    "code": 17
+  },
+  "Odin": {
+    "nFiles": 1,
+    "blank": 5,
+    "comment": 7,
+    "code": 17
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

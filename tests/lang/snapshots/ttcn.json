@@ -1,0 +1,16 @@
+{
+  "TTCN-3": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 6,
+    "code": 7
+  },
+  "SUM": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 6,
+    "code": 7
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

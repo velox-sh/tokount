@@ -1,0 +1,16 @@
+{
+  "Chapel": {
+    "nFiles": 1,
+    "blank": 6,
+    "comment": 9,
+    "code": 9
+  },
+  "SUM": {
+    "nFiles": 1,
+    "blank": 6,
+    "comment": 9,
+    "code": 9
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

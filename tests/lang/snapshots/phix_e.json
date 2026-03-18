@@ -1,0 +1,16 @@
+{
+  "Phix": {
+    "nFiles": 1,
+    "blank": 7,
+    "comment": 8,
+    "code": 25
+  },
+  "SUM": {
+    "nFiles": 1,
+    "blank": 7,
+    "comment": 8,
+    "code": 25
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

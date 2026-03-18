@@ -1,0 +1,16 @@
+{
+  "Racket": {
+    "nFiles": 1,
+    "blank": 11,
+    "comment": 14,
+    "code": 15
+  },
+  "SUM": {
+    "nFiles": 1,
+    "blank": 11,
+    "comment": 14,
+    "code": 15
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

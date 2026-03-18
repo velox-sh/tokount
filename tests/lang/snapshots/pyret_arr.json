@@ -1,0 +1,16 @@
+{
+  "Pyret": {
+    "nFiles": 1,
+    "blank": 5,
+    "comment": 3,
+    "code": 14
+  },
+  "SUM": {
+    "nFiles": 1,
+    "blank": 5,
+    "comment": 3,
+    "code": 14
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

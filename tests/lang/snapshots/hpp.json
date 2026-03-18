@@ -1,0 +1,16 @@
+{
+  "SUM": {
+    "nFiles": 1,
+    "blank": 5,
+    "comment": 5,
+    "code": 11
+  },
+  "C++ Header": {
+    "nFiles": 1,
+    "blank": 5,
+    "comment": 5,
+    "code": 11
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

@@ -1,0 +1,16 @@
+{
+  "SUM": {
+    "nFiles": 1,
+    "blank": 4,
+    "comment": 6,
+    "code": 13
+  },
+  "Arduino C++": {
+    "nFiles": 1,
+    "blank": 4,
+    "comment": 6,
+    "code": 13
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

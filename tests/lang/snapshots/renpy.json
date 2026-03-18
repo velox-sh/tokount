@@ -1,0 +1,16 @@
+{
+  "SUM": {
+    "nFiles": 1,
+    "blank": 15,
+    "comment": 9,
+    "code": 8
+  },
+  "Ren'Py": {
+    "nFiles": 1,
+    "blank": 15,
+    "comment": 9,
+    "code": 8
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

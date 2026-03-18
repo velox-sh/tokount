@@ -1,0 +1,16 @@
+{
+  "SUM": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 5,
+    "code": 7
+  },
+  "GDB Script": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 5,
+    "code": 7
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

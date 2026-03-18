@@ -1,0 +1,16 @@
+{
+  "SUM": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 16,
+    "code": 15
+  },
+  "OpenSCAD": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 16,
+    "code": 15
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

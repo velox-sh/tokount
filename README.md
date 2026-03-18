@@ -14,11 +14,7 @@
 <div align="center">
   <h1>tokount</h1>
 
-  <h3 align="center">Fast line counter for codebases</h3>
-
-  <p align="center">
-    Powered by <a href="https://github.com/XAMPPRocky/tokei">tokei</a>
-  </p>
+  <h3 align="center">The fastest line counter for codebases</h3>
 </div>
 
 <!-- TABLE OF CONTENTS -->
@@ -29,6 +25,7 @@
     <li><a href="#installation">Installation</a></li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#output">Output</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
     <li><a href="#license">License</a></li>
   </ol>
 </details>
@@ -37,7 +34,7 @@
 
 ## About The Project
 
-tokount is a fast CLI line counter built on [tokei](https://github.com/XAMPPRocky/tokei). It outputs a human-readable table by default, or raw JSON with `--json` for piping into other tools like [ghlang](https://github.com/MihaiStreames/ghlang).
+tokount is a fast CLI line counter for codebases. It outputs a human-readable table by default, with JSON and CSV options for piping into other tools like [ghlang](https://github.com/MihaiStreames/ghlang).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -46,7 +43,10 @@ tokount is a fast CLI line counter built on [tokei](https://github.com/XAMPPRock
 ## Installation
 
 ```bash
-# with yay (AUR)
+# with cargo
+cargo install tokount
+
+# or with yay (AUR)
 yay -S tokount
 
 # or with paru (AUR)
@@ -70,21 +70,40 @@ tokount /path/to/project
 tokount $(git ls-files)
 
 # exclude directories
-tokount . --excluded node_modules,vendor
+tokount . -e node_modules,vendor
 
-# machine-readable JSON output
-tokount . --json
+# JSON output
+tokount . -o json
+
+# CSV output
+tokount . -o csv
+
+# sort by lines instead of code
+tokount . -s lines
+
+# filter to specific languages
+tokount . -t Rust,Python
+
+# disable .gitignore respect
+tokount . --no-ignore
+
+# list all 475+ supported languages
+tokount -l
 ```
 
 ### Flags
 
-| Flag                | Short | What it does                                      |
-| ------------------- | ----- | ------------------------------------------------- |
-| `--excluded <DIRS>` | `-e`  | comma-separated directories to exclude            |
-| `--follow-symlinks` | `-L`  | follow symbolic links when scanning               |
-| `--json`            | `-j`  | output raw JSON instead of a human-readable table |
-| `--help`            | `-h`  | print help                                        |
-| `--version`         | `-V`  | print version                                     |
+| Flag                | Short | What it does                                         |
+| ------------------- | ----- | ---------------------------------------------------- |
+| `--excluded <DIRS>` | `-e`  | comma-separated directories to exclude               |
+| `--follow-symlinks` | `-L`  | follow symbolic links when scanning                  |
+| `--output <FORMAT>` | `-o`  | output format: `table` (default), `json`, `csv`      |
+| `--sort <COLUMN>`   | `-s`  | sort by: `files`, `lines`, `blank`, `comment`, `code`|
+| `--types <LANGS>`   | `-t`  | filter to specific language(s), comma-separated      |
+| `--no-ignore`       |       | disable `.gitignore` / `.prettierignore` respect     |
+| `--languages`       | `-l`  | print all supported languages and exit               |
+| `--help`            | `-h`  | print help                                           |
+| `--version`         | `-V`  | print version                                        |
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -94,44 +113,44 @@ tokount . --json
 
 By default, tokount prints a table with timing stats:
 
-```text
-github.com/MihaiStreames/tokount v1.1.0  T=0.02s  (1703 files/s, 51810 lines/s)
-41 files  •  0 git repos  •  55 paths
+```console
+github.com/MihaiStreames/tokount v2.1.0  T=0.22s  (250 files/s, 60690 lines/s)
+54 files  •  1 git repos  •  .
 
-─────────────────────────────────────────────────────────────
- Language               Files     Blank     Comment     Code
-═════════════════════════════════════════════════════════════
- JSON                       6         0           0      137
-─────────────────────────────────────────────────────────────
- Pacman's makepkg           1         4           1       32
-─────────────────────────────────────────────────────────────
- Python                     1         2           1        4
-─────────────────────────────────────────────────────────────
- Rust                      13       100          14      507
-─────────────────────────────────────────────────────────────
- Shell                      2         6           5       21
-─────────────────────────────────────────────────────────────
- TOML                       5        10           3       78
-─────────────────────────────────────────────────────────────
- TSX                        1         1           1       12
-─────────────────────────────────────────────────────────────
- TypeScript                 2         4           1       16
-─────────────────────────────────────────────────────────────
- YAML                      10        33           2      252
-─────────────────────────────────────────────────────────────
- SUM                       41       160          28     1059
-─────────────────────────────────────────────────────────────
+────────────────────────────────────────────────────────────
+ Language          Files      Blank      Comment       Code
+════════════════════════════════════════════════════════════
+ JSON                  6          0            0      10335
+────────────────────────────────────────────────────────────
+ Rust                 19        175           71       1295
+────────────────────────────────────────────────────────────
+ Markdown              4        137            0        304
+────────────────────────────────────────────────────────────
+ YAML                 11         36            7        249
+────────────────────────────────────────────────────────────
+ Python                3         48            1        178
+────────────────────────────────────────────────────────────
+ Shell                 3         27           25         86
+────────────────────────────────────────────────────────────
+ TOML                  5         11            3         86
+────────────────────────────────────────────────────────────
+ TypeScript            2          4            1         16
+────────────────────────────────────────────────────────────
+ TSX                   1          1            1         12
+────────────────────────────────────────────────────────────
+ SUM                  54        439          109      12561
+────────────────────────────────────────────────────────────
 ```
 
-With `--json`, tokount outputs to stdout:
+With `-o json`:
 
 ```json
 {
-  "Rust": {"nFiles": 12, "blank": 89, "comment": 11, "code": 416},
-  "TOML": {"nFiles": 5,  "blank": 10, "comment": 3,  "code": 78},
-  "SUM":  {"nFiles": 17, "blank": 99, "comment": 14, "code": 494},
+  "Rust": {"nFiles": 19, "blank": 175, "comment": 71,  "code": 1295},
+  "TOML": {"nFiles": 5,  "blank": 11,  "comment": 3,   "code": 86},
+  "SUM":  {"nFiles": 54, "blank": 439, "comment": 109, "code": 12561},
   "gitRepos": 1,
-  "gitignorePatterns": ["target/", "node_modules/"]
+  "gitignorePatterns": ["target/", "node_modules/", "..."]
 }
 ```
 
@@ -149,11 +168,23 @@ Errors are emitted as structured JSON to stderr:
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+<!-- ACKNOWLEDGMENTS -->
+
+## Acknowledgments
+
+Many thanks to these projects for their work and inspiration, especially for publishing language definition files and pattern research that were useful for testing tokount:
+
+- [cloc](https://github.com/AlDanial/cloc)
+- [scc](https://github.com/boyter/scc)
+- [tokei](https://github.com/XAMPPRocky/tokei)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 <!-- LICENSE -->
 
 ## License
 
-MIT. Do whatever you want with it. See [LICENSE](LICENSE) for more information.
+MIT. Do whatever you want with it.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

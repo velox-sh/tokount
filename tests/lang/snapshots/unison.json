@@ -1,0 +1,16 @@
+{
+  "SUM": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 8,
+    "code": 6
+  },
+  "Unison": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 8,
+    "code": 6
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

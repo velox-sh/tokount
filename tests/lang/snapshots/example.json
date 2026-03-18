@@ -1,0 +1,16 @@
+{
+  "UMPL": {
+    "nFiles": 1,
+    "blank": 8,
+    "comment": 2,
+    "code": 58
+  },
+  "SUM": {
+    "nFiles": 1,
+    "blank": 8,
+    "comment": 2,
+    "code": 58
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

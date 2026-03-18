@@ -1,0 +1,16 @@
+{
+  "ATS": {
+    "nFiles": 1,
+    "blank": 8,
+    "comment": 9,
+    "code": 25
+  },
+  "SUM": {
+    "nFiles": 1,
+    "blank": 8,
+    "comment": 9,
+    "code": 25
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

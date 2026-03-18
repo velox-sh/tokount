@@ -1,0 +1,16 @@
+{
+  "SUM": {
+    "nFiles": 1,
+    "blank": 10,
+    "comment": 18,
+    "code": 41
+  },
+  "Monkey C": {
+    "nFiles": 1,
+    "blank": 10,
+    "comment": 18,
+    "code": 41
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

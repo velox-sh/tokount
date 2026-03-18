@@ -1,0 +1,16 @@
+{
+  "TypeScript": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 10,
+    "code": 20
+  },
+  "SUM": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 10,
+    "code": 20
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

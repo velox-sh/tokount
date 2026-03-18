@@ -1,0 +1,16 @@
+{
+  "MSBuild": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 1,
+    "code": 10
+  },
+  "SUM": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 1,
+    "code": 10
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

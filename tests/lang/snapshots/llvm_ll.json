@@ -1,0 +1,16 @@
+{
+  "LLVM": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 1,
+    "code": 17
+  },
+  "SUM": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 1,
+    "code": 17
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

@@ -1,0 +1,16 @@
+{
+  "Bitbake": {
+    "nFiles": 1,
+    "blank": 5,
+    "comment": 5,
+    "code": 13
+  },
+  "SUM": {
+    "nFiles": 1,
+    "blank": 5,
+    "comment": 5,
+    "code": 13
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

@@ -1,0 +1,16 @@
+{
+  "SUM": {
+    "nFiles": 1,
+    "blank": 19,
+    "comment": 40,
+    "code": 20
+  },
+  "Forge Config": {
+    "nFiles": 1,
+    "blank": 19,
+    "comment": 40,
+    "code": 20
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

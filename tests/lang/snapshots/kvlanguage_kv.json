@@ -1,0 +1,16 @@
+{
+  "SUM": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 3,
+    "code": 17
+  },
+  "KV Language": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 3,
+    "code": 17
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

@@ -1,0 +1,16 @@
+{
+  "Dhall": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 5,
+    "code": 9
+  },
+  "SUM": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 5,
+    "code": 9
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

@@ -10,12 +10,104 @@
 <details>
   <summary>Table of Contents</summary>
   <ol>
+    <li><a href="#v211--engine-correctness--test-infrastructure">v2.1.1</a></li>
+    <li><a href="#v210--flag-parity">v2.1.0</a></li>
+    <li><a href="#v200--simd-engine">v2.0.0</a></li>
     <li><a href="#v111--windows-symlink-guard">v1.1.1</a></li>
     <li><a href="#v110--human-readable-output--multi-path-support">v1.1.0</a></li>
     <li><a href="#v101--maintenance">v1.0.1</a></li>
     <li><a href="#v100--initial-release">v1.0.0</a></li>
   </ol>
 </details>
+
+## v2.1.1 — Engine correctness & test infrastructure
+
+**Fixed:**
+
+- **Delimiter priority bug**: string literal and block comment openers are now always tried longest-first,
+  so `"""` and `'''` correctly shadow `"` / `'`. Affected 27+ languages including Python, Cangjie,
+  Boo, Dart, TOML, Vala, Xtend, GraphQL, GDScript, and others.
+- **Cangjie `##"..."##` raw strings**: added as a raw string type (no escape processing), fixing a
+  line-merging bug where `\` before `\n` inside the literal collapsed two code lines into one.
+- **F# string literals**: added `"..."`, `@"..."` (verbatim/raw), and `"""..."""` to F#'s language
+  definition; previously `(*` inside a string was incorrectly opened as a block comment.
+
+**Changed:**
+
+- Test infrastructure: extracted shared helpers into `tests/common/mod.rs`; split error-condition
+  tests into `tests/errors.rs`; removed redundant fixture-snapshot tests.
+- PKGBUILD `check` phase now runs only `flags` and `errors` tests (not the 197-language corpus).
+
+**Benchmarks:**
+
+All benchmarks were run on an Intel Core i7-8650U @ 1.90GHz with 16 GB RAM running Artix Linux, using [hyperfine](https://github.com/sharkdp/hyperfine) (`--warmup 3 --runs 5`).
+
+You can reproduce the tests locally with `./benchmark.sh` but your mileage may vary.
+
+<table>
+  <tr>
+    <td><img src="assets/benchmarks/tokount-25k-lines.png" alt="Tokount (~25k lines)"/></td>
+    <td><img src="assets/benchmarks/redis-375k-lines.png" alt="Redis (~375k lines)"/></td>
+    <td><img src="assets/benchmarks/ruff-1m-lines.png" alt="Ruff (~1M lines)"/></td>
+  </tr>
+  <tr>
+    <td><img src="assets/benchmarks/cpython-2-2m-lines.png" alt="CPython (~2.2M lines)"/></td>
+    <td><img src="assets/benchmarks/rust-3-5m-lines.png" alt="Rust compiler (~3.5M lines)"/></td>
+    <td><img src="assets/benchmarks/linux-31-3m-lines.png" alt="Linux kernel (~31.3M lines)"/></td>
+  </tr>
+</table>
+
+> **Note:** At 25k lines all tools finish in under 20ms and timing noise dominates. The trend becomes clear from Redis onwards.
+
+<p align="right">(<a href="#changelog-top">back to top</a>)</p>
+
+---
+
+## v2.1.0 — Flag parity
+
+Bringing tokount's CLI closer to parity with other tools.
+
+**New stuff:**
+
+- `-o`/`--output` - output format: `table` (default), `json`, `csv`
+- `-s`/`--sort` - sort by column: `files`, `lines`, `blank`, `comment`, `code` (default: `code`)
+- `-t`/`--types` - filter to specific language(s), comma-separated (e.g. `-t Rust,Python`)
+- `--no-ignore` - disable `.gitignore` / `.prettierignore` respect entirely
+- `-l`/`--languages` - print all 475+ supported languages and exit
+
+**Breaking:**
+
+- `--json`/`-j` removed; use `--output json` / `-o json` instead
+
+<p align="right">(<a href="#changelog-top">back to top</a>)</p>
+
+---
+
+## v2.0.0 — SIMD engine
+
+Complete rewrite of the counting engine. Replaced `tokei` with a custom byte-level FSM and SIMD-accelerated scanning, making tokount the fastest line counter available! We are beating tokei and scc on real-world codebases!
+
+**New stuff:**
+
+- Custom byte-level finite state machine (FSM) replaces tokei dependency entirely
+- SIMD-accelerated byte scanning via `memchr` (SSE2/AVX2 under the hood)
+- Language definitions generated at compile time from a merged scc/tokei/cloc database (475+ languages)
+- `ignore`-crate parallel walker (same engine as ripgrep) replaces `walkdir`
+- Thread-local `FileReader` with buffer reuse — zero heap allocation in the hot path
+- Hybrid I/O: mmap for files >64KB (zero-copy), buffered read for small files
+- `crossbeam_channel::unbounded` + `rayon::par_bridge` streaming pipeline
+- Git-aware ignore logic: uses `.gitignore` in git repos, adds `.prettierignore` support everywhere
+
+**Changed:**
+
+- `opt-level` changed from `"z"` (size) to `3` (speed) (enables SIMD auto-vectorization)
+- Removed `tokei` and `walkdir` dependencies
+- `src/git.rs` removed; git repo counting and ignore collection are now part of the engine walker
+- `src/analyze.rs` removed; engine called directly from `main.rs`
+
+<p align="right">(<a href="#changelog-top">back to top</a>)</p>
+
+---
 
 ## v1.1.1 — Windows symlink guard
 

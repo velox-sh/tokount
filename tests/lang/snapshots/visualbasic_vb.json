@@ -1,0 +1,16 @@
+{
+  "SUM": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 2,
+    "code": 4
+  },
+  "Visual Basic": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 2,
+    "code": 4
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

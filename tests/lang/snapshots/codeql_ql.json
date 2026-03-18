@@ -1,0 +1,16 @@
+{
+  "CodeQL": {
+    "nFiles": 1,
+    "blank": 7,
+    "comment": 15,
+    "code": 17
+  },
+  "SUM": {
+    "nFiles": 1,
+    "blank": 7,
+    "comment": 15,
+    "code": 17
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

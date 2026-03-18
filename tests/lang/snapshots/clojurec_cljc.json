@@ -1,0 +1,16 @@
+{
+  "SUM": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 4,
+    "code": 12
+  },
+  "Clojure": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 4,
+    "code": 12
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}

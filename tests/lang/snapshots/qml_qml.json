@@ -1,0 +1,16 @@
+{
+  "SUM": {
+    "nFiles": 1,
+    "blank": 4,
+    "comment": 5,
+    "code": 11
+  },
+  "QML": {
+    "nFiles": 1,
+    "blank": 4,
+    "comment": 5,
+    "code": 11
+  },
+  "gitRepos": 0,
+  "gitignorePatterns": []
+}
