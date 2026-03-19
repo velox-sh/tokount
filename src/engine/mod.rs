@@ -8,6 +8,8 @@ pub mod stats;
 pub mod walker;
 
 use std::cell::RefCell;
+use std::fs;
+use std::io::BufRead as _;
 use std::path::Path;
 use std::path::PathBuf;
 use std::sync::Arc;
@@ -63,11 +65,27 @@ pub fn count(paths: &[&Path], config: &EngineConfig<'_>) -> crate::types::Output
         .map(|path| {
             let mut thread_stats = stats::ThreadStats::new();
 
-            let ext = path.extension().and_then(|e| e.to_str()).unwrap_or("");
+            let ext_raw = path.extension().and_then(|e| e.to_str()).unwrap_or("");
+            // extensions in the map are lowercase; normalise before lookup
+            let ext_lower;
+            let ext = if ext_raw.bytes().any(|b| b.is_ascii_uppercase()) {
+                ext_lower = ext_raw.to_ascii_lowercase();
+                ext_lower.as_str()
+            } else {
+                ext_raw
+            };
             let filename = path.file_name().and_then(|n| n.to_str()).unwrap_or("");
 
             let lang = language::LanguageDef::from_extension(ext)
-                .or_else(|| language::LanguageDef::from_filename(filename));
+                .or_else(|| language::LanguageDef::from_filename(filename))
+                .or_else(|| {
+                    // shebang detection only for files with no recognized extension
+                    if ext.is_empty() {
+                        peek_shebang(&path)
+                    } else {
+                        None
+                    }
+                });
 
             if let Some(lang) = lang {
                 // skip files whose language isn't in the types filter
@@ -99,4 +117,12 @@ pub fn count(paths: &[&Path], config: &EngineConfig<'_>) -> crate::types::Output
     merged.gitignore_patterns = walk_info.gitignore_patterns;
 
     merged.into_output()
+}
+
+/// Read the first line of a file and check for a shebang interpreter name
+fn peek_shebang(path: &Path) -> Option<&'static language::LanguageDef> {
+    let file = fs::File::open(path).ok()?;
+    let mut line = String::new();
+    std::io::BufReader::new(file).read_line(&mut line).ok()?;
+    language::LanguageDef::from_shebang(line.trim_end())
 }

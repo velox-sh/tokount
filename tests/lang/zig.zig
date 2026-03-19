@@ -1,4 +1,4 @@
-// 11 lines 5 code 3 comments 3 blanks
+// 11 lines 5 code 3 comments 2 blanks
 
 /// Documentation comment
 pub fn main() void {

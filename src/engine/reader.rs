@@ -51,17 +51,14 @@ impl FileReader {
             // is stored in self.mmap and dropped before the next read() call
             let map = unsafe { Mmap::map(&file) }.ok()?;
 
-            self.mmap = Some(map);
-            self.buf.clear();
-
-            let data = self.mmap.as_deref().unwrap();
-            let check_len = data.len().min(BINARY_CHECK_LEN);
-            if memchr::memchr(0, &data[..check_len]).is_some() {
-                self.mmap = None;
+            let check_len = map.len().min(BINARY_CHECK_LEN);
+            if memchr::memchr(0, &map[..check_len]).is_some() {
                 return None;
             }
 
-            return Some(self.mmap.as_deref().unwrap());
+            self.mmap = Some(map);
+            self.buf.clear();
+            return self.mmap.as_deref();
         }
 
         self.mmap = None;

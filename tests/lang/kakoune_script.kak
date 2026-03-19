@@ -1,4 +1,4 @@
-# 13 lines, 8 code, 2 comments, 3 blanks
+# 13 lines, 8 code, 2 comments, 2 blanks
 hook global BufCreate (.*/)?(kakrc|.*.kak) %{
   set-option buffer filetype kak
 }

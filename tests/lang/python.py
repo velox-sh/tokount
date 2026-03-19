@@ -1,18 +1,15 @@
-# line comment
-
-def foo():
-    x = "contains # not a comment"
-    y = '# also not a comment'
-    # real comment
-    return x + y
+# 15 lines, 10 code, 2 comments, 3 blanks
 
 
-def bar():
+def add(x, y):
     """
-    triple-quoted string (not a comment — treated as code)
-    spanning multiple lines
+    Hello World
+    # Real Second line
+    Second line
     """
-    z = """another
-    multi-line
-    string"""
-    return z
+
+    string = "Hello World  #\
+    "
+    y += len(string)
+    # Add the two numbers.
+    x + y

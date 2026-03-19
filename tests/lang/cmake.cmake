@@ -1,4 +1,4 @@
-# 25 lines 16 code 3 comments 6 blanks
+# 25 lines 16 code 3 comments 5 blanks
 
 SET(_POSSIBLE_XYZ_INCLUDE include include/xyz)
 SET(_POSSIBLE_XYZ_EXECUTABLE xyz)

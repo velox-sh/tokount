@@ -1,4 +1,4 @@
-/* 8 lines 5 code 1 comments 2 blanks */
+/* 8 lines 5 code 1 comments 1 blanks */
 
 void main() {
     auto x = 5; /+ a /+ nested +/ comment /* +/

@@ -1,18 +1,47 @@
-// line comment — this whole line is a comment
+//! 48 lines 33 code 10 comments 4 blanks
+//! ```rust
+//! fn main () {
+//!     // Comment
+//!
+//!     println!("Hello World!");
+//! }
+//! ```
 
+/* /**/ */
 fn main() {
-    let _raw = r##"/* not a block comment */ // not a line comment"##;
-    let _str = "contains /* fake block */ and // fake line";
-    // another comment
-    let x = 5; // trailing comment does not make this a comment line
-
-    /* block comment
-       spanning two lines */
-    let _nested = /* inline block */ 42;
+    let start = r##"/*##\"
+\"##;
+    // comment
+    loop {
+        if x.len() >= 2 && x[0] == '*' && x[1] == '/' { // found the */
+            break;
+        }
+    }
 }
 
-/*
- * multi-line block comment
- * at top level
- */
-fn foo() {}
+fn foo<'a, 'b>(name: &'b str) {
+    let this_ends = "a \"test/*.";
+    call1();
+    call2();
+    let this_does_not = /* a /* nested */ comment " */
+        "*/another /*test
+            call3();
+            */";
+}
+
+fn foobar() {
+    let does_not_start = // "
+        "until here,
+        test/*
+        test"; // a quote: "
+    let also_doesnt_start = /* " */
+        "until here,
+        test,*/
+        test"; // another quote: "
+}
+
+fn foo() {
+    let a = 4; // /*
+    let b = 5;
+    let c = 6; // */
+}

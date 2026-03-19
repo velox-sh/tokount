@@ -1,4 +1,4 @@
-// 37 lines 26 code 3 comments 8 blanks
+// 37 lines 26 code 3 comments 7 blanks
 use crate::ast::{ExprSymbol, Opcode};
 use crate::tok9::Tok;
 

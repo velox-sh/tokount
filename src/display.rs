@@ -59,9 +59,13 @@ pub fn print_table(output: &OutputStats, label: &str, elapsed: Duration, sort: S
                 .set_alignment(CellAlignment::Right),
         ]);
 
-    table.column_mut(0).unwrap().set_padding((1, 3));
+    if let Some(col) = table.column_mut(0) {
+        col.set_padding((1, 3));
+    }
     for col_idx in 1..=4 {
-        table.column_mut(col_idx).unwrap().set_padding((4, 1));
+        if let Some(col) = table.column_mut(col_idx) {
+            col.set_padding((4, 1));
+        }
     }
 
     let mut langs: Vec<&str> = output

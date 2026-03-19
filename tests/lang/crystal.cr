@@ -1,4 +1,4 @@
-# 20 lines 14 code 2 comments 4 blanks
+# 20 lines 14 code 2 comments 3 blanks
 x = 3
 if x < 2
   p = "Smaller"

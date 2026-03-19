@@ -15,16 +15,34 @@
   <h1>tokount</h1>
 
   <h3 align="center">The fastest line counter for codebases</h3>
+
+  <p align="center">
+    Language-aware code/comment/blank classification at SIMD speed
+  </p>
 </div>
 
 <!-- TABLE OF CONTENTS -->
 <details>
   <summary>Table of Contents</summary>
   <ol>
-    <li><a href="#about-the-project">About The Project</a></li>
-    <li><a href="#installation">Installation</a></li>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#output">Output</a></li>
+    <li><a href="#how-it-works">How It Works</a></li>
+    <li><a href="#output-formats">Output Formats</a></li>
+    <li><a href="#benchmarks">Benchmarks</a></li>
+    <li><a href="#development">Development</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
     <li><a href="#license">License</a></li>
   </ol>
@@ -34,13 +52,45 @@
 
 ## About The Project
 
-tokount is a fast CLI line counter for codebases. It outputs a human-readable table by default, with JSON and CSV options for piping into other tools like [ghlang](https://github.com/MihaiStreames/ghlang).
+`tokount` counts lines of code across an entire codebase and breaks them down by language into code, comments, and blank lines. It has a custom byte-level FSM engine with SIMD-accelerated scanning, making it faster than `tokei`, `scc`, and `cloc` on large repos.
+
+Why use `tokount`?
+
+- **Fastest available** — beats `tokei`, `scc`, and `cloc` at every repo size from 375K lines up
+- **Language-aware** — not just `wc -l`; tracks strings, comments, and nesting per-language
+- **Verified accuracy** — 214 languages tested fixture-by-fixture against `tokei` and `scc`
+- **Flexible output** — table (default), JSON, or CSV for scripts/CI/dashboards
+- **Respects ignore files** — `.gitignore` in git repos, `.prettierignore` everywhere
+
+Why not use `tokount` (yet)?
+
+- You need complexity metrics or COCOMO/ULOC (not implemented)
+- You need follow-symlink mode on Windows (`-L` is intentionally unsupported there)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- INSTALLATION -->
+### Built With
 
-## Installation
+- [Rust](https://www.rust-lang.org/)
+- [clap](https://github.com/clap-rs/clap)
+- [ignore](https://github.com/BurntSushi/ripgrep/tree/master/crates/ignore)
+- [rayon](https://github.com/rayon-rs/rayon)
+- [crossbeam-channel](https://github.com/crossbeam-rs/crossbeam)
+- [memchr](https://github.com/BurntSushi/memchr)
+- [memmap2](https://github.com/RazrFalcon/memmap2-rs)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- GETTING STARTED -->
+
+## Getting Started
+
+### Prerequisites
+
+- Linux or macOS (Windows supported except `-L`)
+- Rust toolchain if installing with `cargo`
+
+### Installation
 
 ```bash
 # with cargo
@@ -63,98 +113,100 @@ paru -S tokount
 # analyze current directory
 tokount .
 
-# analyze specific path
+# analyze a specific path
 tokount /path/to/project
 
-# multiple paths (e.g. from git ls-files)
+# analyze many paths (e.g. from git)
 tokount $(git ls-files)
 
 # exclude directories
 tokount . -e node_modules,vendor
 
-# JSON output
+# machine output
 tokount . -o json
-
-# CSV output
 tokount . -o csv
 
-# sort by lines instead of code
+# sort by a different column
 tokount . -s lines
 
-# filter to specific languages
+# count only specific languages
 tokount . -t Rust,Python
 
-# disable .gitignore respect
+# disable ignore file behavior
 tokount . --no-ignore
 
-# list all 475+ supported languages
+# list all supported languages
 tokount -l
 ```
 
-### Flags
+### All the Flags
 
-| Flag                | Short | What it does                                         |
-| ------------------- | ----- | ---------------------------------------------------- |
-| `--excluded <DIRS>` | `-e`  | comma-separated directories to exclude               |
-| `--follow-symlinks` | `-L`  | follow symbolic links when scanning                  |
-| `--output <FORMAT>` | `-o`  | output format: `table` (default), `json`, `csv`      |
-| `--sort <COLUMN>`   | `-s`  | sort by: `files`, `lines`, `blank`, `comment`, `code`|
-| `--types <LANGS>`   | `-t`  | filter to specific language(s), comma-separated      |
-| `--no-ignore`       |       | disable `.gitignore` / `.prettierignore` respect     |
-| `--languages`       | `-l`  | print all supported languages and exit               |
-| `--help`            | `-h`  | print help                                           |
-| `--version`         | `-V`  | print version                                        |
+| Flag                | Short | What it does                                          |
+| ------------------- | ----- | ----------------------------------------------------- |
+| `--excluded <DIRS>` | `-e`  | comma-separated directories to exclude                |
+| `--follow-symlinks` | `-L`  | follow symbolic links when scanning                   |
+| `--output <FORMAT>` | `-o`  | output format: `table` (default), `json`, `csv`       |
+| `--sort <COLUMN>`   | `-s`  | sort by: `files`, `lines`, `blank`, `comment`, `code` |
+| `--types <LANGS>`   | `-t`  | filter to specific language(s), comma-separated       |
+| `--no-ignore`       |       | disable `.gitignore` / `.prettierignore` respect      |
+| `--languages`       | `-l`  | print all supported languages and exit                |
+| `--help`            | `-h`  | print help                                            |
+| `--version`         | `-V`  | print version                                         |
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- OUTPUT -->
+<!-- HOW IT WORKS -->
 
-## Output
+## How It Works
 
-By default, tokount prints a table with timing stats:
+`tokount`'s speed comes from a pipeline that stays cache-friendly end to end:
+
+1. **Parallel walking** with `ignore` (same traversal logic as ripgrep)
+2. **Hybrid I/O** — mmap for files ≥64 KB, buffered reads for smaller files
+3. **Byte-level FSM** — not line-by-line string splitting; one pass per file
+4. **SIMD scanning** via `memchr` (SSE2/AVX2) for newline and token candidates
+5. **Thread-local buffer reuse** — zero heap allocation per file in the hot path
+6. **Streaming pipeline** — `crossbeam-channel` + Rayon `par_bridge`
+
+Language definitions are compiled into static PHF maps at build time from `languages.json` via `build.rs`. Editing `languages.json` directly affects which languages are recognized and how they are parsed.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- OUTPUT FORMATS -->
+
+## Output Formats
+
+**Table** (default):
 
 ```console
-github.com/MihaiStreames/tokount v2.1.0  T=0.22s  (250 files/s, 60690 lines/s)
-54 files  •  1 git repos  •  .
+github.com/MihaiStreames/tokount v2.0.0  T=0.17s  (1513 files/s, 77285 lines/s)
+251 files  •  1 git repos  •  tokount/
 
-────────────────────────────────────────────────────────────
- Language          Files      Blank      Comment       Code
-════════════════════════════════════════════════════════════
- JSON                  6          0            0      10335
-────────────────────────────────────────────────────────────
- Rust                 19        175           71       1295
-────────────────────────────────────────────────────────────
- Markdown              4        137            0        304
-────────────────────────────────────────────────────────────
- YAML                 11         36            7        249
-────────────────────────────────────────────────────────────
- Python                3         48            1        178
-────────────────────────────────────────────────────────────
- Shell                 3         27           25         86
-────────────────────────────────────────────────────────────
- TOML                  5         11            3         86
-────────────────────────────────────────────────────────────
- TypeScript            2          4            1         16
-────────────────────────────────────────────────────────────
- TSX                   1          1            1         12
-────────────────────────────────────────────────────────────
- SUM                  54        439          109      12561
-────────────────────────────────────────────────────────────
+────────────────────────────────────────────────────────────────────────────────
+ Language                               Files      Blank      Comment      Code
+════════════════════════════════════════════════════════════════════════════════
+ Rust                                      24        294          141      1767
+────────────────────────────────────────────────────────────────────────────────
+ YAML                                      16         66           10       436
+────────────────────────────────────────────────────────────────────────────────
+ SUM                                      251       1631         1595      9599
+────────────────────────────────────────────────────────────────────────────────
 ```
 
-With `-o json`:
+**JSON** (`-o json`):
 
 ```json
 {
-  "Rust": {"nFiles": 19, "blank": 175, "comment": 71,  "code": 1295},
-  "TOML": {"nFiles": 5,  "blank": 11,  "comment": 3,   "code": 86},
-  "SUM":  {"nFiles": 54, "blank": 439, "comment": 109, "code": 12561},
+  "Rust": { "nFiles": 24 , "blank": 294 , "comment": 141 , "code": 1767 },
+  "SUM":  { "nFiles": 251, "blank": 1631, "comment": 1595, "code": 9599 },
   "gitRepos": 1,
-  "gitignorePatterns": ["target/", "node_modules/", "..."]
+  "gitignorePatterns": ["target/", "node_modules/", ... ]
 }
 ```
 
-Errors are emitted as structured JSON to stderr:
+**CSV** (`-o csv`): tabular export for spreadsheets and downstream tooling.
+
+Errors go to stderr as structured JSON:
 
 ```json
 {
@@ -164,6 +216,63 @@ Errors are emitted as structured JSON to stderr:
     "details": {"path": "/nonexistent"}
   }
 }
+```
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- BENCHMARKS -->
+
+## Benchmarks
+
+All benchmarks were run on an Intel Core i7-8650U @ 1.90 GHz / 16 GB RAM / Artix Linux using [hyperfine](https://github.com/sharkdp/hyperfine) (`--warmup 5 --runs 5`).
+
+<table>
+  <tr>
+    <td><img src="assets/benchmarks/tokount-25k-lines.png" alt="tokount repo (~25k lines)"/></td>
+    <td><img src="assets/benchmarks/redis-375k-lines.png" alt="Redis (~375k lines)"/></td>
+    <td><img src="assets/benchmarks/ruff-1m-lines.png" alt="Ruff (~1M lines)"/></td>
+  </tr>
+  <tr>
+    <td><img src="assets/benchmarks/cpython-2-2m-lines.png" alt="CPython (~2.2M lines)"/></td>
+    <td><img src="assets/benchmarks/rust-3-5m-lines.png" alt="Rust compiler (~3.5M lines)"/></td>
+    <td><img src="assets/benchmarks/linux-31-3m-lines.png" alt="Linux kernel (~31.3M lines)"/></td>
+  </tr>
+</table>
+
+> At 25k lines all tools finish under 20ms and timing noise dominates. The advantage is clear from Redis onwards.
+
+To reproduce:
+
+```bash
+./benchmark.sh
+```
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- DEVELOPMENT -->
+
+## Development
+
+```bash
+# run all tests
+cargo test
+
+# run clippy
+cargo clippy --all-targets
+
+# fixture-based language accuracy tests (one test, all languages)
+cargo test --test lang_accuracy all_languages
+
+# optional cross-tool comparison (requires tokei + scc installed)
+cargo test --test lang_accuracy -- --ignored cross_tool_compare
+```
+
+Quick accuracy check against other tools:
+
+```bash
+tokount . -o json > /tmp/tokount.json
+tokei   . -o json > /tmp/tokei.json
+scc     . --format json > /tmp/scc.json
 ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -184,7 +293,7 @@ Many thanks to these projects for their work and inspiration, especially for pub
 
 ## License
 
-MIT. Do whatever you want with it.
+MIT. Do whatever you want with it. See [LICENSE](LICENSE) for details.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

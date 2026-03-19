@@ -119,8 +119,10 @@ pub fn walk_parallel(config: &WalkConfig<'_>, tx: &Sender<PathBuf>) -> WalkResul
 
                 if name == ".gitignore" || name == ".prettierignore" {
                     let new_pats = parse_ignore_file(entry.path());
-                    if !new_pats.is_empty() {
-                        patterns.lock().unwrap().extend(new_pats);
+                    if !new_pats.is_empty()
+                        && let Ok(mut guard) = patterns.lock()
+                    {
+                        guard.extend(new_pats);
                     }
                     return WalkState::Continue;
                 }
@@ -136,7 +138,12 @@ pub fn walk_parallel(config: &WalkConfig<'_>, tx: &Sender<PathBuf>) -> WalkResul
     drop(git_repos_clone);
     drop(patterns_clone);
 
-    let mut pats = Arc::try_unwrap(patterns).unwrap().into_inner().unwrap();
+    // Arc strong count is 1 here (clone was dropped above); Mutex is never poisoned
+    // (no panics inside the parallel walk body), so both unwraps are infallible
+    let mut pats = Arc::try_unwrap(patterns)
+        .expect("patterns Arc still has live clones")
+        .into_inner()
+        .expect("patterns Mutex was poisoned");
     pats.sort();
     pats.dedup();
 

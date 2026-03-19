@@ -1,4 +1,4 @@
-// 67 lines 46 code 10 comments 11 blanks
+// 67 lines 50 code 6 comments 11 blanks
 #include "config.h"
 
 /* BIG FAT WARNING GOES HERE */

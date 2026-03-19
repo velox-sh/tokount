@@ -15,7 +15,12 @@ struct LangDef {
     #[serde(default)]
     nested: bool,
     #[serde(default)]
+    close_line_is_code: bool,
+    #[serde(default)]
     filenames: Vec<String>,
+    /// interpreter names for shebang detection (e.g. ["ruby"] -> #!/usr/bin/env ruby)
+    #[serde(default)]
+    env: Vec<String>,
 }
 
 fn escape_bytes(s: &str) -> String {
@@ -36,7 +41,7 @@ fn escape_bytes(s: &str) -> String {
     out
 }
 
-#[allow(clippy::cognitive_complexity, clippy::too_many_lines)]
+#[expect(clippy::cognitive_complexity, clippy::too_many_lines)]
 fn main() {
     let manifest_dir = env::var("CARGO_MANIFEST_DIR").expect("CARGO_MANIFEST_DIR not set");
     let json_path = Path::new(&manifest_dir).join("languages.json");
@@ -170,9 +175,10 @@ fn main() {
 			\tblock_comments: {bc_str},\n\
 			\tstring_literals: {sl_str},\n\
 			\tnested_comments: {},\n\
+			\tclose_line_is_code: {},\n\
 			\tinterest_mask: {mask_str},\n\
 			}};\n",
-            lang.nested
+            lang.nested, lang.close_line_is_code
         )
         .unwrap();
     }
@@ -228,6 +234,33 @@ fn main() {
         out,
         "pub(super) static FILENAME_MAP: phf::Map<&'static str, &'static LanguageDef> = {};",
         fn_map.build()
+    )
+    .unwrap();
+
+    // collect shebang/env entries (#!/usr/bin/env <name>)
+    let mut seen_envs = std::collections::HashSet::new();
+    let mut env_entries: Vec<(String, String)> = Vec::new();
+
+    for (name, lang) in &langs {
+        let const_name = lang_const_names[name].clone();
+
+        for interp in &lang.env {
+            if seen_envs.insert(interp.clone()) {
+                env_entries.push((interp.clone(), format!("&{const_name}")));
+            }
+        }
+    }
+
+    let mut env_map = phf_codegen::Map::new();
+
+    for (k, v) in &env_entries {
+        env_map.entry(k.as_str(), v.as_str());
+    }
+
+    writeln!(
+        out,
+        "pub(super) static SHEBANG_MAP: phf::Map<&'static str, &'static LanguageDef> = {};",
+        env_map.build()
     )
     .unwrap();
 

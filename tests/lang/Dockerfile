@@ -1,4 +1,4 @@
-# 17 lines 7 code 3 comments 7 blanks
+# 17 lines 7 code 3 comments 6 blanks
 
 FROM netbsd:7.0.2
 

@@ -21,7 +21,7 @@ fn spinner() -> ProgressBar {
         ProgressStyle::default_spinner()
             .tick_strings(&["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"])
             .template("{spinner} {msg}")
-            .unwrap(),
+            .expect("spinner template is valid"),
     );
     pb.enable_steady_tick(std::time::Duration::from_millis(80));
     pb
@@ -97,7 +97,10 @@ fn main() {
 
     match fmt {
         OutputFormat::Table => display::print_table(&output, &label, elapsed, sort),
-        OutputFormat::Json => println!("{}", serde_json::to_string(&output).unwrap()),
+        OutputFormat::Json => println!(
+            "{}",
+            serde_json::to_string(&output).expect("output is serializable")
+        ),
         OutputFormat::Csv => display::print_csv(&output, sort),
     }
 }

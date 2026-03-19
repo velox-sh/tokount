@@ -45,24 +45,38 @@ pub struct LineCounts {
 
 /// Identify which token (if any) starts at `rest` for the given language
 /// Returns the token kind and the number of bytes to advance past the opener
+/// Uses longest-match: a longer opener beats a shorter one even across token types,
+/// so e.g. `////` (block comment) wins over `//` (line comment) in AsciiDoc
 #[inline(always)]
 fn match_token(rest: &[u8], lang: &LanguageDef) -> (TokenMatch, usize) {
+    let mut best: Option<TokenMatch> = None;
+    let mut best_len = 0usize;
+
     for &lc in lang.line_comments {
-        if rest.starts_with(lc) {
-            return (TokenMatch::LineComment, lc.len());
+        if lc.len() > best_len && rest.starts_with(lc) {
+            best = Some(TokenMatch::LineComment);
+            best_len = lc.len();
         }
     }
+
     for &(open, close) in lang.block_comments {
-        if rest.starts_with(open) {
-            return (TokenMatch::BlockComment { open, close }, open.len());
+        if open.len() > best_len && rest.starts_with(open) {
+            best = Some(TokenMatch::BlockComment { open, close });
+            best_len = open.len();
         }
     }
+
     for &(open, close, raw) in lang.string_literals {
-        if rest.starts_with(open) {
-            return (TokenMatch::StringLiteral { close, raw }, open.len());
+        if open.len() > best_len && rest.starts_with(open) {
+            best = Some(TokenMatch::StringLiteral { close, raw });
+            best_len = open.len();
         }
     }
-    (TokenMatch::Other, 1)
+
+    match best {
+        Some(m) => (m, best_len),
+        None => (TokenMatch::Other, 1),
+    }
 }
 
 /// Emit the current line into `counts`
@@ -89,6 +103,7 @@ pub fn count_file(content: &[u8], lang: &LanguageDef) -> LineCounts {
         comment: 0,
         blank: 0,
     };
+
     if content.is_empty() {
         return counts;
     }
@@ -101,6 +116,8 @@ pub fn count_file(content: &[u8], lang: &LanguageDef) -> LineCounts {
     let mut block_open: &[u8] = b"/*";
     let mut string_raw: bool = false;
     let mut pos = 0;
+    // true when a block comment opened in Normal state on the current line (not a continuation)
+    let mut block_started_this_line = false;
 
     while pos < content.len() {
         let bytes = &content[pos..];
@@ -110,9 +127,11 @@ pub fn count_file(content: &[u8], lang: &LanguageDef) -> LineCounts {
                 match scanner::find_newline(bytes) {
                     Some(nl) => {
                         line_type = emit(&mut counts, line_type, parse);
+                        block_started_this_line = false;
                         parse = ParseState::Normal;
                         pos += nl + 1;
                     }
+
                     None => {
                         // EOF: count final line
                         emit(&mut counts, line_type, parse);
@@ -130,9 +149,11 @@ pub fn count_file(content: &[u8], lang: &LanguageDef) -> LineCounts {
                         Some(i) => {
                             if bytes[i] == b'\n' {
                                 line_type = emit(&mut counts, line_type, parse);
+                                block_started_this_line = false;
                                 pos += i + 1;
                             } else {
                                 let rest = &content[pos + i..];
+
                                 if rest.starts_with(block_close) {
                                     if depth > 1 {
                                         parse = ParseState::BlockComment { depth: depth - 1 };
@@ -157,13 +178,16 @@ pub fn count_file(content: &[u8], lang: &LanguageDef) -> LineCounts {
                     }
                 } else {
                     let close_first = block_close.first().copied().unwrap_or(b'*');
+
                     match scanner::find_newline_or(bytes, close_first) {
                         Some(i) => {
                             if bytes[i] == b'\n' {
                                 line_type = emit(&mut counts, line_type, parse);
+                                block_started_this_line = false;
                                 pos += i + 1;
                             } else {
                                 let rest = &content[pos + i..];
+
                                 if rest.starts_with(block_close) {
                                     parse = ParseState::Normal;
                                     pos += i + block_close.len();
@@ -185,24 +209,36 @@ pub fn count_file(content: &[u8], lang: &LanguageDef) -> LineCounts {
 
             ParseState::String => {
                 let close_first = string_close.first().copied().unwrap_or(b'"');
+
                 let found = if string_raw {
                     scanner::find_string_end_no_escape(bytes, close_first)
                 } else {
                     scanner::find_string_end(bytes, close_first)
                 };
+
                 match found {
                     Some(i) => {
                         let b = bytes[i];
+
                         if b == b'\n' {
                             // multi-line string: both this line and the next are code
                             emit(&mut counts, LineType::Code, parse);
+                            block_started_this_line = false;
                             line_type = LineType::Code;
                             pos += i + 1;
                         } else if b == b'\\' {
-                            // escape sequence: skip the escaped byte (only when !string_raw)
+                            // when \<LF>, emit current line as code and keep next as code
+                            if content.get(pos + i + 1).copied() == Some(b'\n') {
+                                emit(&mut counts, LineType::Code, parse);
+                                block_started_this_line = false;
+                                // continuation line is still inside the string -> code
+                                line_type = LineType::Code;
+                            }
+                            // skip the escaped byte (only when !string_raw)
                             pos += i + 2;
                         } else {
                             let rest = &content[pos + i..];
+
                             if rest.starts_with(string_close) {
                                 parse = ParseState::Normal;
                                 pos += i + string_close.len();
@@ -227,7 +263,25 @@ pub fn count_file(content: &[u8], lang: &LanguageDef) -> LineCounts {
                             let has_nonws = bytes[..i]
                                 .iter()
                                 .any(|&c| !matches!(c, b' ' | b'\t' | b'\r'));
+
                             if has_nonws {
+                                line_type = LineType::Code;
+                            }
+                        } else if i > 0
+                            && line_type == LineType::Comment
+                            && (block_started_this_line || lang.close_line_is_code)
+                        {
+                            // block comment opened and closed on this line
+                            // (block_started_this_line), or language marks close-lines as code
+                            // (close_line_is_code, e.g. Raku's `=end DESCRIPTION` after closing
+                            // `=begin pod`): alphanumeric content is real code so we upgrade to
+                            // Code use alphanumeric not has_nonws: orphaned close delimiters like
+                            // `*/` are punctuation-only and must not trigger this upgrade
+                            let has_code = bytes[..i]
+                                .iter()
+                                .any(|&c| c.is_ascii_alphanumeric() || c == b'_');
+
+                            if has_code {
                                 line_type = LineType::Code;
                             }
                         }
@@ -236,6 +290,7 @@ pub fn count_file(content: &[u8], lang: &LanguageDef) -> LineCounts {
 
                         if bytes[i] == b'\n' {
                             line_type = emit(&mut counts, line_type, parse);
+                            block_started_this_line = false;
                             pos += 1;
                             continue;
                         }
@@ -256,6 +311,7 @@ pub fn count_file(content: &[u8], lang: &LanguageDef) -> LineCounts {
                                 if line_type == LineType::Blank {
                                     line_type = LineType::Comment;
                                 }
+                                block_started_this_line = true;
                                 parse = ParseState::BlockComment { depth: 1 };
                             }
                             TokenMatch::StringLiteral { close, raw } => {
@@ -265,7 +321,13 @@ pub fn count_file(content: &[u8], lang: &LanguageDef) -> LineCounts {
                                 parse = ParseState::String;
                             }
                             TokenMatch::Other => {
-                                if bytes[i] != b' ' && bytes[i] != b'\t' && bytes[i] != b'\r' {
+                                // only upgrade blank -> code; a comment line stays comment
+                                // even if orphaned delimiters (e.g. `*/`) follow a block close
+                                if line_type == LineType::Blank
+                                    && bytes[i] != b' '
+                                    && bytes[i] != b'\t'
+                                    && bytes[i] != b'\r'
+                                {
                                     line_type = LineType::Code;
                                 }
                             }
@@ -277,7 +339,20 @@ pub fn count_file(content: &[u8], lang: &LanguageDef) -> LineCounts {
                         // no more interesting bytes -> check for a trailing non-newline line
                         let has_nonws = bytes.iter().any(|&b| !matches!(b, b' ' | b'\t' | b'\r'));
                         if has_nonws {
-                            line_type = LineType::Code;
+                            if line_type != LineType::Comment {
+                                line_type = LineType::Code;
+                            } else if block_started_this_line || lang.close_line_is_code {
+                                // block opened and closed on this line at EOF
+                                // (block_started_this_line),
+                                // or language marks close-lines as code (close_line_is_code)
+                                let has_code = bytes
+                                    .iter()
+                                    .any(|&c| c.is_ascii_alphanumeric() || c == b'_');
+                                if has_code {
+                                    line_type = LineType::Code;
+                                }
+                            }
+                            // else: continuation Comment line at EOF stays Comment
                         }
                         if !bytes.is_empty() {
                             emit(&mut counts, line_type, parse);
@@ -287,6 +362,15 @@ pub fn count_file(content: &[u8], lang: &LanguageDef) -> LineCounts {
                 }
             }
         }
+    }
+
+    // file has no trailing newline: the final line was typed but never emitted
+    // skip if the file ends with '\n' since that newline already emitted the last real
+    // line and set line_type = Code for a "next" line that doesn't exist (e.g. a
+    // multi-line string whose continuation would begin after the final newline)
+    let ends_with_newline = content.last().copied() == Some(b'\n');
+    if line_type != LineType::Blank && !ends_with_newline {
+        emit(&mut counts, line_type, parse);
     }
 
     counts

@@ -48,21 +48,63 @@ pub fn run_json(path: &Path, extra_args: &[&str]) -> Value {
     serde_json::from_slice(&out.stdout).expect("output is not valid JSON")
 }
 
-/// Load a JSON snapshot file relative to the given snapshots directory
+/// Expected line counts parsed from a tokei fixture file header
 #[allow(dead_code)]
-pub fn load_snapshot(snapshots_dir: &Path, name: &str) -> Value {
-    let path = snapshots_dir.join(format!("{name}.json"));
-    let raw = std::fs::read_to_string(&path)
-        .unwrap_or_else(|_| panic!("snapshot not found: {}", path.display()));
-    serde_json::from_str(&raw).expect("snapshot is not valid JSON")
+pub struct ExpectedCounts {
+    pub lines: u32,
+    pub code: u32,
+    pub comment: u32,
+    pub blank: u32,
 }
 
-/// Assert actual JSON equals the named snapshot, with a diff-friendly message on failure
+/// Parse expected counts from the first 6 lines of a file's content
+///
+/// Handles all formats found in tokei fixtures:
+///   `// 50 lines 33 code 8 comments 9 blanks`
+///   `# 15 lines, 10 code, 2 comments, 3 blanks`
+///   `# 16 lines, 9 code, 5 blanks, 2 comments`
+///   `dnl 7 lines 3 code 1 blanks 3 comments`
+///   `/* 50 lines 34 code 8 comments 8 blanks */`
+///
+/// Returns None if no count line is found (file should be skipped)
 #[allow(dead_code)]
-pub fn assert_snapshot(actual: &Value, snapshots_dir: &Path, name: &str) {
-    let expected = load_snapshot(snapshots_dir, name);
-    assert_eq!(
-        actual, &expected,
-        "snapshot mismatch for '{name}'\n  actual:   {actual}\n  expected: {expected}"
-    );
+pub fn parse_expected_counts(content: &str) -> Option<ExpectedCounts> {
+    content.lines().take(6).find_map(try_parse_counts)
+}
+
+fn try_parse_counts(line: &str) -> Option<ExpectedCounts> {
+    // Each metric is a number immediately preceding its label word
+    // Fields can appear in any order and may be comma-separated
+    let n_before = |label: &str| -> Option<u32> {
+        let words: Vec<&str> = line.split_whitespace().collect();
+
+        for (i, &word) in words.iter().enumerate() {
+            // strip trailing comma/punctuation from the label candidate
+            let clean = word.trim_end_matches([',', '.', '/', '*', ')']);
+
+            if (clean == label || clean == label.trim_end_matches('s')) && i > 0 {
+                // strip trailing comma from the number candidate
+                let num_str = words[i - 1].trim_end_matches(',');
+
+                if let Ok(n) = num_str.parse::<u32>() {
+                    return Some(n);
+                }
+            }
+        }
+        None
+    };
+
+    let lines = n_before("lines")?;
+    let code = n_before("code")?;
+    // "comments" or "comment"
+    let comment = n_before("comments").or_else(|| n_before("comment"))?;
+    // "blanks" or "blank"
+    let blank = n_before("blanks").or_else(|| n_before("blank"))?;
+
+    Some(ExpectedCounts {
+        lines,
+        code,
+        comment,
+        blank,
+    })
 }
