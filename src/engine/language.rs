@@ -8,9 +8,8 @@ pub struct LanguageDef {
     /// the line to Code if alphanumeric content follows the close delimiter
     /// (e.g. `=end DESCRIPTION` -> Code). Default false (tokei-like behavior)
     pub close_line_is_code: bool,
-    /// precomputed: true for bytes that could start any token
-    /// (comment, string, newline, backslash)
-    pub interest_mask: [bool; 256],
+    /// bytes that could start any token (comment/string opener, newline)
+    pub interest_bytes: &'static [u8],
 }
 
 #[allow(dead_code, non_upper_case_globals, unused, non_snake_case)]

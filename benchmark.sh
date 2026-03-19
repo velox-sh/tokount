@@ -115,7 +115,7 @@ for i in "${!CASE_NAMES[@]}"; do
     done
 
     tmpfile=$(mktemp /tmp/bench_XXXXXX.json)
-    hyperfine --warmup 5 --runs 5 --export-json "$tmpfile" "${CMDS[@]}"
+    hyperfine --warmup 10 --runs 10 --export-json "$tmpfile" "${CMDS[@]}"
 
     [[ $first -eq 0 ]] && echo "," >> "$RESULTS"
     first=0

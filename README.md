@@ -39,10 +39,8 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#how-it-works">How It Works</a></li>
     <li><a href="#output-formats">Output Formats</a></li>
     <li><a href="#benchmarks">Benchmarks</a></li>
-    <li><a href="#development">Development</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
     <li><a href="#license">License</a></li>
   </ol>
@@ -52,12 +50,11 @@
 
 ## About The Project
 
-`tokount` counts lines of code across an entire codebase and breaks them down by language into code, comments, and blank lines. It has a custom byte-level FSM engine with SIMD-accelerated scanning, making it faster than `tokei`, `scc`, and `cloc` on large repos.
+`tokount` counts lines of code across an entire codebase and breaks them down by language into code, comments, and blank lines.
 
 Why use `tokount`?
 
 - **Fastest available** — beats `tokei`, `scc`, and `cloc` at every repo size from 375K lines up
-- **Language-aware** — not just `wc -l`; tracks strings, comments, and nesting per-language
 - **Verified accuracy** — 214 languages tested fixture-by-fixture against `tokei` and `scc`
 - **Flexible output** — table (default), JSON, or CSV for scripts/CI/dashboards
 - **Respects ignore files** — `.gitignore` in git repos, `.prettierignore` everywhere
@@ -155,23 +152,6 @@ tokount -l
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- HOW IT WORKS -->
-
-## How It Works
-
-`tokount`'s speed comes from a pipeline that stays cache-friendly end to end:
-
-1. **Parallel walking** with `ignore` (same traversal logic as ripgrep)
-2. **Hybrid I/O** — mmap for files ≥64 KB, buffered reads for smaller files
-3. **Byte-level FSM** — not line-by-line string splitting; one pass per file
-4. **SIMD scanning** via `memchr` (SSE2/AVX2) for newline and token candidates
-5. **Thread-local buffer reuse** — zero heap allocation per file in the hot path
-6. **Streaming pipeline** — `crossbeam-channel` + Rayon `par_bridge`
-
-Language definitions are compiled into static PHF maps at build time from `languages.json` via `build.rs`. Editing `languages.json` directly affects which languages are recognized and how they are parsed.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 <!-- OUTPUT FORMATS -->
 
 ## Output Formats
@@ -224,7 +204,7 @@ Errors go to stderr as structured JSON:
 
 ## Benchmarks
 
-All benchmarks were run on an Intel Core i7-8650U @ 1.90 GHz / 16 GB RAM / Artix Linux using [hyperfine](https://github.com/sharkdp/hyperfine) (`--warmup 5 --runs 5`).
+All benchmarks were run on an Intel Core i7-8650U @ 1.90 GHz / 16 GB RAM / Artix Linux using [hyperfine](https://github.com/sharkdp/hyperfine) (`--warmup 10 --runs 10`).
 
 <table>
   <tr>
@@ -239,8 +219,6 @@ All benchmarks were run on an Intel Core i7-8650U @ 1.90 GHz / 16 GB RAM / Artix
   </tr>
 </table>
 
-> At 25k lines all tools finish under 20ms and timing noise dominates. The advantage is clear from Redis onwards.
-
 To reproduce:
 
 ```bash
@@ -249,39 +227,11 @@ To reproduce:
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- DEVELOPMENT -->
-
-## Development
-
-```bash
-# run all tests
-cargo test
-
-# run clippy
-cargo clippy --all-targets
-
-# fixture-based language accuracy tests (one test, all languages)
-cargo test --test lang_accuracy all_languages
-
-# optional cross-tool comparison (requires tokei + scc installed)
-cargo test --test lang_accuracy -- --ignored cross_tool_compare
-```
-
-Quick accuracy check against other tools:
-
-```bash
-tokount . -o json > /tmp/tokount.json
-tokei   . -o json > /tmp/tokei.json
-scc     . --format json > /tmp/scc.json
-```
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 <!-- ACKNOWLEDGMENTS -->
 
 ## Acknowledgments
 
-Many thanks to these projects for their work and inspiration, especially for publishing language definition files and pattern research that were useful for testing tokount:
+Many thanks to these projects for their work and inspiration, especially for publishing language definition files and pattern research that were useful for testing `tokount`:
 
 - [cloc](https://github.com/AlDanial/cloc)
 - [scc](https://github.com/boyter/scc)

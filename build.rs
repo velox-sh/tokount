@@ -87,6 +87,7 @@ fn main() {
             .iter()
             .map(|s| format!("b\"{}\"", escape_bytes(s)))
             .collect();
+
         let lc_str = format!("&[{}]", lc.join(", "));
 
         // block_comments: longest-first so longer openers shadow shorter prefixes
@@ -107,12 +108,14 @@ fn main() {
                 )
             })
             .collect();
+
         let bc_str = format!("&[{}]", bc.join(", "));
 
         // string_literals: longest-first so longer openers shadow shorter prefixes
         let mut quotes_sorted: Vec<&Vec<String>> =
             lang.quotes.iter().filter(|pair| pair.len() >= 2).collect();
         quotes_sorted.sort_by_key(|p| std::cmp::Reverse(p[0].len()));
+
         let sl: Vec<String> = quotes_sorted
             .iter()
             .map(|pair| {
@@ -125,25 +128,26 @@ fn main() {
                 )
             })
             .collect();
+
         let sl_str = format!("&[{}]", sl.join(", "));
 
-        // interest_mask: bytes that could start a token
-        let mut mask = [false; 256];
-        mask[b'\n' as usize] = true;
+        // interest_bytes: sorted, deduplicated bytes that could start a token
+        let mut interesting: std::collections::BTreeSet<u8> = std::collections::BTreeSet::new();
+        interesting.insert(b'\n');
 
         for s in &lang.line_comment {
             if let Some(b) = s.bytes().next() {
-                mask[b as usize] = true;
+                interesting.insert(b);
             }
         }
 
         for pair in &lang.multi_line {
             if pair.len() == 2 {
                 if let Some(b) = pair[0].bytes().next() {
-                    mask[b as usize] = true;
+                    interesting.insert(b);
                 }
                 if let Some(b) = pair[1].bytes().next() {
-                    mask[b as usize] = true;
+                    interesting.insert(b);
                 }
             }
         }
@@ -151,20 +155,20 @@ fn main() {
         for pair in &lang.quotes {
             if pair.len() >= 2 {
                 if let Some(b) = pair[0].bytes().next() {
-                    mask[b as usize] = true;
+                    interesting.insert(b);
                 }
                 if let Some(b) = pair[1].bytes().next() {
-                    mask[b as usize] = true;
+                    interesting.insert(b);
                 }
             }
         }
 
         let mask_str = {
-            let vals: Vec<&str> = mask
+            let vals: Vec<String> = interesting
                 .iter()
-                .map(|b| if *b { "true" } else { "false" })
+                .map(std::string::ToString::to_string)
                 .collect();
-            format!("[{}]", vals.join(", "))
+            format!("&[{}u8]", vals.join(", "))
         };
 
         writeln!(
@@ -176,7 +180,7 @@ fn main() {
 			\tstring_literals: {sl_str},\n\
 			\tnested_comments: {},\n\
 			\tclose_line_is_code: {},\n\
-			\tinterest_mask: {mask_str},\n\
+			\tinterest_bytes: {mask_str},\n\
 			}};\n",
             lang.nested, lang.close_line_is_code
         )
