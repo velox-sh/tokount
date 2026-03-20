@@ -1,4 +1,4 @@
--- 10 lines 4 code 4 comments 2 blanks
+-- 10 lines 4 code 4 comments 1 blanks
 local name = "World"
 
 --[[ Module documentation
