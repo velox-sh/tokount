@@ -22,7 +22,7 @@ pub fn find_interesting(bytes: &[u8], needles: &[u8]) -> Option<usize> {
 /// SSE2 is part of the x86-64 ABI so no runtime detection needed
 #[cfg(target_arch = "x86_64")]
 #[target_feature(enable = "sse2")]
-#[allow(unsafe_code)] // required for std::arch intrinsics
+#[expect(unsafe_code)] // required for std::arch intrinsics
 unsafe fn find_interesting_sse2(bytes: &[u8], needles: &[u8]) -> Option<usize> {
     use std::arch::x86_64::*;
 
@@ -61,13 +61,61 @@ unsafe fn find_interesting_sse2(bytes: &[u8], needles: &[u8]) -> Option<usize> {
 #[inline]
 fn find_interesting_wide(bytes: &[u8], needles: &[u8]) -> Option<usize> {
     // SSE2 is part of the x86-64 ABI baseline
-    #[allow(unsafe_code)]
+    #[expect(unsafe_code)]
     unsafe {
         find_interesting_sse2(bytes, needles)
     }
 }
 
-#[cfg(not(target_arch = "x86_64"))]
+#[cfg(target_arch = "aarch64")]
+#[target_feature(enable = "neon")]
+#[expect(unsafe_code)]
+unsafe fn find_interesting_neon(bytes: &[u8], needles: &[u8]) -> Option<usize> {
+    use std::arch::aarch64::*;
+
+    unsafe {
+        let len = bytes.len();
+        let ptr = bytes.as_ptr();
+        let mut i = 0;
+
+        while i + 16 <= len {
+            let chunk = vld1q_u8(ptr.add(i));
+            let mut hit = vdupq_n_u8(0);
+
+            for &n in needles {
+                hit = vorrq_u8(hit, vceqq_u8(chunk, vdupq_n_u8(n)));
+            }
+
+            // no movemask on ARM so shrink each 8-bit lane to 4 bits via vshrn,
+            // pack into a u64, then trailing_zeros / 4 gives the byte offset
+            let narrowed = vreinterpret_u64_u8(vshrn_n_u16(vreinterpretq_u16_u8(hit), 4));
+
+            let mask = vget_lane_u64(narrowed, 0);
+            if mask != 0 {
+                return Some(i + mask.trailing_zeros() as usize / 4);
+            }
+
+            i += 16;
+        }
+
+        bytes[i..]
+            .iter()
+            .position(|b| needles.contains(b))
+            .map(|p| i + p)
+    }
+}
+
+#[cfg(target_arch = "aarch64")]
+#[inline]
+fn find_interesting_wide(bytes: &[u8], needles: &[u8]) -> Option<usize> {
+    // NEON is part of the aarch64 ABI baseline
+    #[expect(unsafe_code)]
+    unsafe {
+        find_interesting_neon(bytes, needles)
+    }
+}
+
+#[cfg(not(any(target_arch = "x86_64", target_arch = "aarch64")))]
 #[inline]
 fn find_interesting_wide(bytes: &[u8], needles: &[u8]) -> Option<usize> {
     bytes.iter().position(|b| needles.contains(b))
