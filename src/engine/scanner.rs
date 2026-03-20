@@ -2,11 +2,7 @@ use memchr::memchr;
 use memchr::memchr2;
 use memchr::memchr3;
 
-/// Find the next byte that could start a token
-///
-/// Dispatches to memchr/memchr2/memchr3 (guaranteed SIMD) for <=3 needles
-/// For larger sets, uses an SSE2 loop on x86-64 (SSE2 is baseline there)
-/// or a scalar fallback on other targets
+// memchr/2/3 for ≤3 needles (guaranteed SIMD); SSE2 loop for >3 on x86-64; scalar elsewhere
 #[inline]
 pub fn find_interesting(bytes: &[u8], needles: &[u8]) -> Option<usize> {
     match needles {
@@ -18,16 +14,12 @@ pub fn find_interesting(bytes: &[u8], needles: &[u8]) -> Option<usize> {
     }
 }
 
-/// SSE2 implementation for >3 needles
-/// SSE2 is part of the x86-64 ABI so no runtime detection needed
 #[cfg(target_arch = "x86_64")]
 #[target_feature(enable = "sse2")]
-#[expect(unsafe_code)] // required for std::arch intrinsics
+#[expect(unsafe_code)]
 unsafe fn find_interesting_sse2(bytes: &[u8], needles: &[u8]) -> Option<usize> {
     use std::arch::x86_64::*;
 
-    // function only callable on x86-64 with SSE2 (enforced by #[target_feature])
-    // ptr arithmetic stays within the `bytes` slice (loop bound: i + 16 <= len)
     unsafe {
         let len = bytes.len();
         let ptr = bytes.as_ptr();
@@ -67,67 +59,17 @@ fn find_interesting_wide(bytes: &[u8], needles: &[u8]) -> Option<usize> {
     }
 }
 
-#[cfg(target_arch = "aarch64")]
-#[target_feature(enable = "neon")]
-#[expect(unsafe_code)]
-unsafe fn find_interesting_neon(bytes: &[u8], needles: &[u8]) -> Option<usize> {
-    use std::arch::aarch64::*;
-
-    unsafe {
-        let len = bytes.len();
-        let ptr = bytes.as_ptr();
-        let mut i = 0;
-
-        while i + 16 <= len {
-            let chunk = vld1q_u8(ptr.add(i));
-            let mut hit = vdupq_n_u8(0);
-
-            for &n in needles {
-                hit = vorrq_u8(hit, vceqq_u8(chunk, vdupq_n_u8(n)));
-            }
-
-            // no movemask on ARM so shrink each 8-bit lane to 4 bits via vshrn,
-            // pack into a u64, then trailing_zeros / 4 gives the byte offset
-            let narrowed = vreinterpret_u64_u8(vshrn_n_u16(vreinterpretq_u16_u8(hit), 4));
-
-            let mask = vget_lane_u64(narrowed, 0);
-            if mask != 0 {
-                return Some(i + mask.trailing_zeros() as usize / 4);
-            }
-
-            i += 16;
-        }
-
-        bytes[i..]
-            .iter()
-            .position(|b| needles.contains(b))
-            .map(|p| i + p)
-    }
-}
-
-#[cfg(target_arch = "aarch64")]
-#[inline]
-fn find_interesting_wide(bytes: &[u8], needles: &[u8]) -> Option<usize> {
-    // NEON is part of the aarch64 ABI baseline
-    #[expect(unsafe_code)]
-    unsafe {
-        find_interesting_neon(bytes, needles)
-    }
-}
-
-#[cfg(not(any(target_arch = "x86_64", target_arch = "aarch64")))]
+#[cfg(not(target_arch = "x86_64"))]
 #[inline]
 fn find_interesting_wide(bytes: &[u8], needles: &[u8]) -> Option<usize> {
     bytes.iter().position(|b| needles.contains(b))
 }
 
-/// Find next newline (LineComment state)
 #[inline]
 pub fn find_newline(bytes: &[u8]) -> Option<usize> {
     memchr(b'\n', bytes)
 }
 
-/// Find next newline or close byte (BlockComment state)
 #[inline]
 pub fn find_newline_or(bytes: &[u8], close_byte: u8) -> Option<usize> {
     if close_byte == b'\n' {
@@ -137,20 +79,16 @@ pub fn find_newline_or(bytes: &[u8], close_byte: u8) -> Option<usize> {
     }
 }
 
-/// Find next newline, close byte, or backslash (String state)
 #[inline]
 pub fn find_string_end(bytes: &[u8], close_byte: u8) -> Option<usize> {
     memchr3(b'\n', close_byte, b'\\', bytes)
 }
 
-/// Find next newline or close byte, no backslash check (raw/verbatim strings)
 #[inline]
 pub fn find_string_end_no_escape(bytes: &[u8], close_byte: u8) -> Option<usize> {
     memchr2(b'\n', close_byte, bytes)
 }
 
-/// Find next newline, open-delimiter first-byte, or close-delimiter first-byte
-/// (nested block comment state)
 #[inline]
 pub fn find_nested_block(bytes: &[u8], open_first: u8, close_first: u8) -> Option<usize> {
     if open_first == close_first {

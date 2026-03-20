@@ -1,4 +1,4 @@
-#![allow(unsafe_code)]
+#![expect(unsafe_code)]
 
 use std::fs::File;
 use std::io::Read;
@@ -7,7 +7,8 @@ use std::path::Path;
 
 use memmap2::Mmap;
 
-// NUL byte detection window: matches the heuristic used by git and ripgrep
+// NUL byte detection window
+// matches the heuristic used by git and ripgrep
 const BINARY_CHECK_LEN: usize = 8 * 1024;
 
 // mmap for files larger than this

@@ -1,7 +1,6 @@
 use crate::engine::language::LanguageDef;
 use crate::engine::scanner;
 
-/// What kind of content we've seen on the current line so far
 #[derive(Clone, Copy, PartialEq, Eq)]
 enum LineType {
     Blank,
@@ -9,9 +8,7 @@ enum LineType {
     Comment,
 }
 
-/// Top-level parser state
-/// Block/string context is stored directly in the variant so no separate
-/// `block_open`, `block_close`, `string_close`, `string_raw` variables are needed
+// context is stored in the variant -> no separate `block_open`, `string_close` etc.
 #[derive(Clone, Copy, PartialEq, Eq)]
 enum ParseState {
     Normal,
@@ -27,7 +24,6 @@ enum ParseState {
     },
 }
 
-/// Result of matching a token at the current position in Normal state
 enum TokenMatch {
     LineComment,
     BlockComment {
@@ -38,20 +34,22 @@ enum TokenMatch {
         close: &'static [u8],
         raw: bool,
     },
-    /// non-whitespace byte that didn't start any token
     Other,
 }
 
+/// Line counts for a single file, broken down by classification
 #[derive(Copy, Clone)]
 pub struct LineCounts {
+    /// Lines containing code (possibly also containing a comment)
     pub code: u32,
+    /// Lines containing only comments (no code)
     pub comment: u32,
+    /// Empty or whitespace-only lines
     pub blank: u32,
 }
 
-/// Identify which token (if any) starts at `rest` for the given language
-/// Uses longest-match: a longer opener beats a shorter one even across token
-/// types, so e.g. `////` (block comment) wins over `//` (line comment) in AsciiDoc
+// longest-match: longer opener beats shorter prefix even across token types
+// (e.g. `////` block comment wins over `//` line comment in AsciiDoc)
 #[inline(always)]
 fn match_token(rest: &[u8], lang: &LanguageDef) -> (TokenMatch, usize) {
     let mut best: Option<TokenMatch> = None;
@@ -84,7 +82,6 @@ fn match_token(rest: &[u8], lang: &LanguageDef) -> (TokenMatch, usize) {
     }
 }
 
-/// Emit the current line into `counts` and returns the initial `LineType` for the next line
 #[inline(always)]
 fn emit(counts: &mut LineCounts, line_type: LineType, parse: ParseState) -> LineType {
     match line_type {
@@ -99,14 +96,8 @@ fn emit(counts: &mut LineCounts, line_type: LineType, parse: ParseState) -> Line
     }
 }
 
-/// Upgrade `line_type` based on what we've seen in `prefix` (bytes before the
-/// current position)
-///
-/// - Blank   -> Code if any non-whitespace byte is present
-/// - Comment -> Code if a block comment opened *and closed* on this line
-///   (`block_started_this_line`) or the language marks close-lines as code (`close_line_is_code`,
-///   e.g. Raku's `=end DESCRIPTION`), and the prefix contains alphanumeric content (orphaned `*/`
-///   punctuation must not trigger this)
+// Comment -> Code when block opened+closed on same line, or `close_line_is_code` (Raku `=end`),
+// but only if alphanumeric content is present — orphaned `*/` must not trigger this
 #[inline(always)]
 fn classify_prefix(
     prefix: &[u8],
@@ -136,7 +127,6 @@ fn classify_prefix(
     }
 }
 
-/// Count lines of code, comments, and blank lines for the given language
 #[expect(clippy::cognitive_complexity, clippy::too_many_lines)]
 pub fn count_file(content: &[u8], lang: &LanguageDef) -> LineCounts {
     let mut counts = LineCounts {

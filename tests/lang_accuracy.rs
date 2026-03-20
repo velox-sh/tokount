@@ -3,8 +3,6 @@ mod common;
 
 use std::fs;
 
-/// Single data-driven test: walks tests/lang/, parses expected counts from the
-/// tokei fixture header, runs tokount, and reports all mismatches at once
 #[test]
 fn all_languages() {
     let lang_dir = common::lang_dir();
@@ -102,10 +100,7 @@ fn all_languages() {
     }
 }
 
-/// Cross-tool comparison: runs tokei, scc, and tokount on each fixture and
-/// reports disagreements. Requires tokei and scc to be installed.
-///
-/// Run with: cargo test --test lang_accuracy -- --ignored cross_tool_compare
+// requires tokei and scc installed; run with: cargo test ... -- --ignored cross_tool_compare
 #[test]
 #[ignore]
 fn cross_tool_compare() {

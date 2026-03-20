@@ -20,7 +20,6 @@ pub fn lang_dir() -> PathBuf {
     repo_root().join("tests/lang")
 }
 
-/// Run the tokount binary and return parsed JSON output
 #[allow(dead_code)]
 pub fn run(args: &[&str]) -> std::process::Output {
     Command::new(env!("CARGO_BIN_EXE_tokount"))
@@ -29,7 +28,6 @@ pub fn run(args: &[&str]) -> std::process::Output {
         .expect("failed to spawn tokount")
 }
 
-/// Run tokount on a path with extra args, return parsed JSON
 #[allow(dead_code)]
 pub fn run_json(path: &Path, extra_args: &[&str]) -> Value {
     let out = Command::new(env!("CARGO_BIN_EXE_tokount"))
@@ -48,7 +46,6 @@ pub fn run_json(path: &Path, extra_args: &[&str]) -> Value {
     serde_json::from_slice(&out.stdout).expect("output is not valid JSON")
 }
 
-/// Expected line counts parsed from a tokei fixture file header
 #[allow(dead_code)]
 pub struct ExpectedCounts {
     pub lines: u32,
@@ -57,34 +54,24 @@ pub struct ExpectedCounts {
     pub blank: u32,
 }
 
-/// Parse expected counts from the first 6 lines of a file's content
-///
-/// Handles all formats found in tokei fixtures:
-///   `// 50 lines 33 code 8 comments 9 blanks`
-///   `# 15 lines, 10 code, 2 comments, 3 blanks`
-///   `# 16 lines, 9 code, 5 blanks, 2 comments`
-///   `dnl 7 lines 3 code 1 blanks 3 comments`
-///   `/* 50 lines 34 code 8 comments 8 blanks */`
-///
-/// Returns None if no count line is found (file should be skipped)
+// formats: `// N lines N code N comments N blanks`, `# N lines, N code, ...`,
+// `dnl N lines ...`, `/* N lines ... */` (fields in any order, comma-separated ok)
 #[allow(dead_code)]
 pub fn parse_expected_counts(content: &str) -> Option<ExpectedCounts> {
     content.lines().take(6).find_map(try_parse_counts)
 }
 
-/// Parse expected counts from a sidecar `.expected` file
-///
-/// Format: a single line with 4 space-separated numbers: `lines code comment blank`
-/// Used for languages with no comment syntax (JSON, CSV, etc.) where the fixture
-/// file itself cannot embed the count header.
+// sidecar format: single line `lines code comment blank` (for blank-only languages like JSON)
 #[allow(dead_code)]
 pub fn parse_expected_file(sidecar: &std::path::Path) -> Option<ExpectedCounts> {
     let content = std::fs::read_to_string(sidecar).ok()?;
     let line = content.lines().next()?;
+
     let nums: Vec<u32> = line
         .split_whitespace()
         .filter_map(|s| s.parse().ok())
         .collect();
+
     if nums.len() >= 4 {
         Some(ExpectedCounts {
             lines: nums[0],

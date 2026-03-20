@@ -18,11 +18,9 @@ struct LangDef {
     close_line_is_code: bool,
     #[serde(default)]
     filenames: Vec<String>,
-    /// interpreter names for shebang detection (e.g. ["ruby"] -> #!/usr/bin/env ruby)
     #[serde(default)]
     env: Vec<String>,
-    /// full shebang lines (e.g. ["#!/bin/bash"])
-    /// basename is extracted and merged into SHEBANG_MAP
+    // full shebang lines (e.g. "#!/bin/bash"); basename extracted and merged into SHEBANG_MAP
     #[serde(default)]
     shebangs: Vec<String>,
 }
@@ -61,8 +59,7 @@ fn main() {
 
     let mut out = fs::File::create(&dest).expect("failed to create output file");
 
-    // generate static LanguageDef instances
-    // (deduplicate const names with numeric suffix)
+    // deduplicate const names with numeric suffix
     let mut used_const_names: std::collections::HashMap<String, usize> =
         std::collections::HashMap::new();
     let mut lang_const_names: std::collections::HashMap<String, String> =
@@ -135,7 +132,6 @@ fn main() {
 
         let sl_str = format!("&[{}]", sl.join(", "));
 
-        // interest_bytes: sorted, deduplicated bytes that could start a token
         let mut interesting: std::collections::BTreeSet<u8> = std::collections::BTreeSet::new();
         interesting.insert(b'\n');
 
@@ -284,7 +280,6 @@ fn main() {
     )
     .unwrap();
 
-    // emit sorted unique language display names
     let names: Vec<String> = langs
         .keys()
         .map(|n| format!("\"{}\"", n.replace('"', "\\\"")))
@@ -316,7 +311,6 @@ fn to_const_name(name: &str) -> String {
             prev_was_sep = true;
         }
     }
-    // remove trailing underscore
     while result.ends_with('_') {
         result.pop();
     }

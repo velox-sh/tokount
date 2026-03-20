@@ -8,7 +8,6 @@ use clap::ValueEnum;
 use crate::types::ErrorBody;
 use crate::types::ErrorPayload;
 
-/// Sort column for output
 #[derive(Debug, Clone, Copy, ValueEnum, Default)]
 pub enum SortColumn {
     Files,
@@ -19,7 +18,6 @@ pub enum SortColumn {
     Code,
 }
 
-/// Output format
 #[derive(Debug, Clone, Copy, ValueEnum, Default)]
 pub enum OutputFormat {
     #[default]
@@ -83,7 +81,6 @@ impl Args {
         self.output.unwrap_or_default()
     }
 
-    /// Effective sort column
     pub fn sort_column(&self) -> SortColumn {
         self.sort.unwrap_or_default()
     }
@@ -102,7 +99,6 @@ impl Args {
     }
 }
 
-/// Emit a structured error payload to stderr and exit with a non-zero code
 pub fn emit_error(kind: &str, message: &str, details: Option<HashMap<String, String>>) -> ! {
     let payload = ErrorPayload {
         error: ErrorBody {

@@ -1,14 +1,21 @@
+/// Static definition of a language's syntax, generated at build time from `languages.json`
 pub struct LanguageDef {
+    /// Display name (e.g. `"Rust"`, `"Python"`)
     pub name: &'static str,
+    /// Line comment prefixes, longest-first (e.g. `["//", "#"]`)
     pub line_comments: &'static [&'static [u8]],
+    /// Block comment `(open, close)` pairs, longest-first (e.g. `[("/*", "*/")]`)
     pub block_comments: &'static [(&'static [u8], &'static [u8])],
+    /// String literal `(open, close, raw)` triples; `raw = true`
+    /// means backslash escapes are ignored
     pub string_literals: &'static [(&'static [u8], &'static [u8], bool)],
+    /// Whether block comments can be nested (e.g. Kotlin `/* /* */ */`)
     pub nested_comments: bool,
-    /// when a block comment closes mid-line on a continuation line, upgrade
+    /// When a block comment closes mid-line on a continuation line, upgrade
     /// the line to Code if alphanumeric content follows the close delimiter
-    /// (e.g. `=end DESCRIPTION` -> Code). Default false (tokei-like behavior)
+    /// (e.g. `=end DESCRIPTION` → Code).
     pub close_line_is_code: bool,
-    /// bytes that could start any token (comment/string opener, newline)
+    /// Deduplicated first-bytes of all tokens used by the scanner to skip uninteresting bytes
     pub interest_bytes: &'static [u8],
 }
 

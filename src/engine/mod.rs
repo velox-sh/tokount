@@ -15,10 +15,16 @@ use std::sync::Arc;
 use crossbeam_channel::unbounded;
 use rayon::prelude::*;
 
+/// Configuration for a [`count`] run
 pub struct EngineConfig<'a> {
+    /// Glob patterns for paths to exclude (e.g. `["target", "vendor"]`)
     pub excluded: &'a [&'a str],
+    /// Whether to follow symbolic links when walking directories
     pub follow_symlinks: bool,
+    /// Disable `.gitignore` / `.ignore` file filtering
     pub no_ignore: bool,
+    /// If set, only count files whose language name matches one of these strings
+    /// (case-insensitive)
     pub types_filter: Option<&'a [&'a str]>,
 }
 
@@ -28,6 +34,7 @@ thread_local! {
     static READER: RefCell<reader::FileReader> = RefCell::new(reader::FileReader::new());
 }
 
+/// Walk `paths`, detect languages, and return aggregate line statistics
 pub fn count(paths: &[&Path], config: &EngineConfig<'_>) -> crate::types::OutputStats {
     // unbounded: walker never blocks waiting for consumers (mirrors tokei)
     let (tx, rx) = unbounded::<PathBuf>();
@@ -125,7 +132,6 @@ pub fn count(paths: &[&Path], config: &EngineConfig<'_>) -> crate::types::Output
     merged.into_output()
 }
 
-/// Read the first line of a file and check for a shebang interpreter name
 fn peek_shebang(path: &Path) -> Option<&'static language::LanguageDef> {
     let file = fs::File::open(path).ok()?;
     let mut line = String::new();
