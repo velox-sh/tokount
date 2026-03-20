@@ -1,5 +1,3 @@
-use std::arch::x86_64::*;
-
 use memchr::memchr;
 use memchr::memchr2;
 use memchr::memchr3;
@@ -26,6 +24,8 @@ pub fn find_interesting(bytes: &[u8], needles: &[u8]) -> Option<usize> {
 #[target_feature(enable = "sse2")]
 #[allow(unsafe_code)] // required for std::arch intrinsics
 unsafe fn find_interesting_sse2(bytes: &[u8], needles: &[u8]) -> Option<usize> {
+    use std::arch::x86_64::*;
+
     // function only callable on x86-64 with SSE2 (enforced by #[target_feature])
     // ptr arithmetic stays within the `bytes` slice (loop bound: i + 16 <= len)
     unsafe {
