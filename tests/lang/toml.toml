@@ -1,0 +1,12 @@
+# 12 lines 7 code 3 comments 2 blanks
+[package]
+name = "tokount"
+version = "2.0.0"
+
+# Build settings
+[build]
+incremental = true
+opt-level = 3
+
+# Dependencies
+[dependencies]

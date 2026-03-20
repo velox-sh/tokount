@@ -1,0 +1,10 @@
+// 10 lines 6 code 2 comments 2 blanks
+syntax = "proto3";
+
+// User service definition
+package user;
+
+message User {
+  string id = 1;
+  string name = 2;
+}

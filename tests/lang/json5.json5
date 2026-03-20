@@ -1,0 +1,9 @@
+// 9 lines 6 code 2 comments 1 blank
+{
+  // API configuration
+  host: 'localhost',
+  port: 8080,
+
+  name: "tokount",
+  debug: true,
+}

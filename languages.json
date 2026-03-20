@@ -32,97 +32,6 @@
     "nested": false,
     "quotes": []
   },
-  "APL": {
-    "extensions": [
-      "apl",
-      "aplc",
-      "aplf",
-      "apln",
-      "apls",
-      "dyalog"
-    ],
-    "line_comment": [
-      "\u235d"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ]
-    ]
-  },
-  "ASN.1": {
-    "extensions": [
-      "asn1"
-    ],
-    "line_comment": [
-      "--"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ]
-    ]
-  },
-  "ATS": {
-    "extensions": [
-      "ats",
-      "atxt",
-      "dats",
-      "hats",
-      "sats"
-    ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ],
-      [
-        "(*",
-        "*)"
-      ],
-      [
-        "////",
-        "THISSHOULDNEVERAPPEARWEHOPE"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
-    ]
-  },
-  "AWK": {
-    "extensions": [
-      "awk"
-    ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
-    ]
-  },
   "Alloy": {
     "extensions": [
       "als"
@@ -153,6 +62,27 @@
         "*#"
       ]
     ],
+    "nested": false,
+    "quotes": [
+      [
+        "'",
+        "'"
+      ]
+    ]
+  },
+  "APL": {
+    "extensions": [
+      "apl",
+      "aplc",
+      "aplf",
+      "apln",
+      "apls",
+      "dyalog"
+    ],
+    "line_comment": [
+      "⍝"
+    ],
+    "multi_line": [],
     "nested": false,
     "quotes": [
       [
@@ -210,6 +140,27 @@
     "nested": false,
     "quotes": []
   },
+  "ASN.1": {
+    "extensions": [
+      "asn1"
+    ],
+    "line_comment": [
+      "--"
+    ],
+    "multi_line": [
+      [
+        "/*",
+        "*/"
+      ]
+    ],
+    "nested": false,
+    "quotes": [
+      [
+        "'",
+        "'"
+      ]
+    ]
+  },
   "Assembly": {
     "extensions": [
       "asm",
@@ -232,9 +183,82 @@
       ]
     ]
   },
-  "BQN": {
+  "ATS": {
     "extensions": [
-      "bqn"
+      "ats",
+      "atxt",
+      "dats",
+      "hats",
+      "sats"
+    ],
+    "line_comment": [
+      "//"
+    ],
+    "multi_line": [
+      [
+        "/*",
+        "*/"
+      ],
+      [
+        "(*",
+        "*)"
+      ],
+      [
+        "////",
+        "THISSHOULDNEVERAPPEARWEHOPE"
+      ]
+    ],
+    "nested": false,
+    "quotes": [
+      [
+        "\"",
+        "\""
+      ]
+    ]
+  },
+  "Autoconf": {
+    "extensions": [
+      "in"
+    ],
+    "filenames": [],
+    "line_comment": [
+      "#",
+      "dnl"
+    ],
+    "multi_line": [],
+    "nested": false,
+    "quotes": [
+      [
+        "\"",
+        "\""
+      ]
+    ]
+  },
+  "AutoHotKey": {
+    "extensions": [
+      "ahk"
+    ],
+    "filenames": [],
+    "line_comment": [
+      ";"
+    ],
+    "multi_line": [
+      [
+        "/*",
+        "*/"
+      ]
+    ],
+    "nested": false,
+    "quotes": [
+      [
+        "\"",
+        "\""
+      ]
+    ]
+  },
+  "AWK": {
+    "extensions": [
+      "awk"
     ],
     "line_comment": [
       "#"
@@ -243,8 +267,8 @@
     "nested": false,
     "quotes": [
       [
-        "'",
-        "'"
+        "\"",
+        "\""
       ]
     ]
   },
@@ -263,6 +287,30 @@
         "`",
         "`"
       ]
+    ]
+  },
+  "Bash": {
+    "extensions": [
+      "bash"
+    ],
+    "filenames": [],
+    "line_comment": [
+      "#"
+    ],
+    "multi_line": [],
+    "nested": false,
+    "quotes": [
+      [
+        "\"",
+        "\""
+      ],
+      [
+        "'",
+        "'"
+      ]
+    ],
+    "env": [
+      "bash"
     ]
   },
   "Basic": {
@@ -372,6 +420,32 @@
       ]
     ]
   },
+  "BQN": {
+    "extensions": [
+      "bqn"
+    ],
+    "line_comment": [
+      "#"
+    ],
+    "multi_line": [],
+    "nested": false,
+    "quotes": [
+      [
+        "'",
+        "'"
+      ]
+    ]
+  },
+  "Brainfuck": {
+    "extensions": [
+      "bf"
+    ],
+    "filenames": [],
+    "line_comment": [],
+    "multi_line": [],
+    "nested": false,
+    "quotes": []
+  },
   "BrightScript": {
     "extensions": [
       "brs"
@@ -405,6 +479,52 @@
         "\"",
         "\""
       ]
+    ]
+  },
+  "C Header": {
+    "extensions": [
+      "h"
+    ],
+    "filenames": [],
+    "line_comment": [
+      "//"
+    ],
+    "multi_line": [
+      [
+        "/*",
+        "*/"
+      ]
+    ],
+    "nested": false,
+    "quotes": [
+      [
+        "\"",
+        "\""
+      ]
+    ]
+  },
+  "C Shell": {
+    "extensions": [
+      "csh"
+    ],
+    "filenames": [],
+    "line_comment": [
+      "#"
+    ],
+    "multi_line": [],
+    "nested": false,
+    "quotes": [
+      [
+        "\"",
+        "\""
+      ],
+      [
+        "'",
+        "'"
+      ]
+    ],
+    "env": [
+      "csh"
     ]
   },
   "C#": {
@@ -559,58 +679,6 @@
       ]
     ]
   },
-  "CIL (SELinux)": {
-    "extensions": [
-      "cil"
-    ],
-    "line_comment": [
-      ";"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
-  },
-  "CMake": {
-    "extensions": [
-      "cmake",
-      "cmakelists.txt"
-    ],
-    "filenames": [
-      "cmakelists.txt"
-    ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [
-      [
-        "#[[",
-        "]]"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
-    ]
-  },
-  "CUE": {
-    "extensions": [
-      "cue"
-    ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ]
-    ]
-  },
   "Cairo": {
     "extensions": [
       "cairo"
@@ -694,6 +762,17 @@
       ]
     ]
   },
+  "CIL (SELinux)": {
+    "extensions": [
+      "cil"
+    ],
+    "line_comment": [
+      ";"
+    ],
+    "multi_line": [],
+    "nested": false,
+    "quotes": []
+  },
   "Circom": {
     "extensions": [
       "circom"
@@ -759,6 +838,31 @@
       ]
     ]
   },
+  "CMake": {
+    "extensions": [
+      "cmake",
+      "cmakelists.txt"
+    ],
+    "filenames": [
+      "cmakelists.txt"
+    ],
+    "line_comment": [
+      "#"
+    ],
+    "multi_line": [
+      [
+        "#[[",
+        "]]"
+      ]
+    ],
+    "nested": false,
+    "quotes": [
+      [
+        "\"",
+        "\""
+      ]
+    ]
+  },
   "CodeQL": {
     "extensions": [
       "ql",
@@ -808,6 +912,42 @@
       ]
     ]
   },
+  "CSS": {
+    "extensions": [
+      "css"
+    ],
+    "filenames": [],
+    "line_comment": [
+      "//"
+    ],
+    "multi_line": [
+      [
+        "/*",
+        "*/"
+      ]
+    ],
+    "nested": false,
+    "quotes": [
+      [
+        "\"",
+        "\""
+      ],
+      [
+        "'",
+        "'"
+      ]
+    ]
+  },
+  "CSV": {
+    "extensions": [
+      "csv"
+    ],
+    "filenames": [],
+    "line_comment": [],
+    "multi_line": [],
+    "nested": false,
+    "quotes": []
+  },
   "Cuda": {
     "extensions": [
       "cu"
@@ -826,6 +966,22 @@
       [
         "\"",
         "\""
+      ]
+    ]
+  },
+  "CUE": {
+    "extensions": [
+      "cue"
+    ],
+    "line_comment": [
+      "//"
+    ],
+    "multi_line": [],
+    "nested": false,
+    "quotes": [
+      [
+        "'",
+        "'"
       ]
     ]
   },
@@ -920,6 +1076,31 @@
     "nested": true,
     "quotes": []
   },
+  "Dhall": {
+    "extensions": [
+      "dhall"
+    ],
+    "line_comment": [
+      "--"
+    ],
+    "multi_line": [
+      [
+        "{-",
+        "-}"
+      ]
+    ],
+    "nested": true,
+    "quotes": [
+      [
+        "\"",
+        "\""
+      ],
+      [
+        "''",
+        "''"
+      ]
+    ]
+  },
   "DM": {
     "extensions": [
       "dm"
@@ -949,38 +1130,26 @@
       ]
     ]
   },
-  "Dhall": {
+  "Docker ignore": {
     "extensions": [
-      "dhall"
-    ],
-    "line_comment": [
-      "--"
-    ],
-    "multi_line": [
-      [
-        "{-",
-        "-}"
-      ]
-    ],
-    "nested": true,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "''",
-        "''"
-      ]
-    ]
-  },
-  "Dockerfile": {
-    "extensions": [
-      "Dockerfile",
       "dockerignore"
     ],
     "filenames": [
+      ".dockerignore"
+    ],
+    "line_comment": [
+      "#"
+    ],
+    "multi_line": [],
+    "nested": false,
+    "quotes": []
+  },
+  "Dockerfile": {
+    "extensions": [
       "Dockerfile"
+    ],
+    "filenames": [
+      "dockerfile"
     ],
     "line_comment": [
       "#"
@@ -1098,6 +1267,36 @@
     "nested": false,
     "quotes": []
   },
+  "Elixir": {
+    "extensions": [
+      "ex",
+      "exs"
+    ],
+    "filenames": [],
+    "line_comment": [
+      "#"
+    ],
+    "multi_line": [],
+    "nested": false,
+    "quotes": [
+      [
+        "\"\"\"",
+        "\"\"\""
+      ],
+      [
+        "\"",
+        "\""
+      ],
+      [
+        "'''",
+        "'''"
+      ],
+      [
+        "'",
+        "'"
+      ]
+    ]
+  },
   "Elvish": {
     "extensions": [
       "elv"
@@ -1143,30 +1342,30 @@
   "Emojicode": {
     "extensions": [
       "emojic",
-      "\ud83c\udf47"
+      "🍇"
     ],
     "line_comment": [
-      "\ud83d\udcad"
+      "💭"
     ],
     "multi_line": [
       [
-        "\ud83d\udcad\ud83d\udd1c",
-        "\ud83d\udd1a\ud83d\udcad"
+        "💭🔜",
+        "🔚💭"
       ],
       [
-        "\ud83d\udcd7",
-        "\ud83d\udcd7"
+        "📗",
+        "📗"
       ],
       [
-        "\ud83d\udcd8",
-        "\ud83d\udcd8"
+        "📘",
+        "📘"
       ]
     ],
     "nested": false,
     "quotes": [
       [
-        "\u274c\ud83d\udd24",
-        "\u274c\ud83d\udd24"
+        "❌🔤",
+        "❌🔤"
       ]
     ]
   },
@@ -1333,6 +1532,30 @@
       ]
     ]
   },
+  "Fish": {
+    "extensions": [
+      "fish"
+    ],
+    "filenames": [],
+    "line_comment": [
+      "#"
+    ],
+    "multi_line": [],
+    "nested": false,
+    "quotes": [
+      [
+        "\"",
+        "\""
+      ],
+      [
+        "'",
+        "'"
+      ]
+    ],
+    "env": [
+      "fish"
+    ]
+  },
   "FlatBuffers Schema": {
     "extensions": [
       "fbs"
@@ -1402,49 +1625,6 @@
     "nested": false,
     "quotes": []
   },
-  "GDB Script": {
-    "extensions": [
-      "gdb"
-    ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
-  },
-  "GDShader": {
-    "extensions": [
-      "gdshader"
-    ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": []
-  },
-  "GNU Style Assembly": {
-    "extensions": [
-      "s"
-    ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": []
-  },
   "Game Maker Language": {
     "extensions": [
       "gml"
@@ -1467,6 +1647,79 @@
       ]
     ]
   },
+  "GDB Script": {
+    "extensions": [
+      "gdb"
+    ],
+    "line_comment": [
+      "#"
+    ],
+    "multi_line": [],
+    "nested": false,
+    "quotes": []
+  },
+  "GDScript": {
+    "extensions": [
+      "gd"
+    ],
+    "filenames": [],
+    "line_comment": [
+      "#"
+    ],
+    "multi_line": [],
+    "nested": false,
+    "quotes": [
+      [
+        "\"\"\"",
+        "\"\"\""
+      ],
+      [
+        "\"",
+        "\""
+      ],
+      [
+        "'",
+        "'"
+      ]
+    ]
+  },
+  "GDShader": {
+    "extensions": [
+      "gdshader"
+    ],
+    "line_comment": [
+      "//"
+    ],
+    "multi_line": [
+      [
+        "/*",
+        "*/"
+      ]
+    ],
+    "nested": false,
+    "quotes": []
+  },
+  "Gemfile": {
+    "extensions": [],
+    "filenames": [
+      "gemfile"
+    ],
+    "line_comment": [
+      "#"
+    ],
+    "multi_line": [],
+    "nested": false,
+    "quotes": [
+      [
+        "\"",
+        "\""
+      ],
+      [
+        "'",
+        "'"
+      ]
+    ]
+  },
   "Gherkin (Cucumber)": {
     "extensions": [
       "feature"
@@ -1481,6 +1734,20 @@
   "Gherkin Specification": {
     "extensions": [
       "feature"
+    ],
+    "line_comment": [
+      "#"
+    ],
+    "multi_line": [],
+    "nested": false,
+    "quotes": []
+  },
+  "gitignore": {
+    "extensions": [
+      "gitignore"
+    ],
+    "filenames": [
+      ".gitignore"
     ],
     "line_comment": [
       "#"
@@ -1565,9 +1832,61 @@
       ]
     ]
   },
+  "GLSL": {
+    "extensions": [
+      "vert",
+      "tesc",
+      "tese",
+      "geom",
+      "frag",
+      "comp",
+      "mesh",
+      "task",
+      "rgen",
+      "rint",
+      "rahit",
+      "rchit",
+      "rmiss",
+      "rcall",
+      "glsl"
+    ],
+    "filenames": [],
+    "line_comment": [
+      "//"
+    ],
+    "multi_line": [
+      [
+        "/*",
+        "*/"
+      ]
+    ],
+    "nested": false,
+    "quotes": [
+      [
+        "\"",
+        "\""
+      ]
+    ]
+  },
   "Gml": {
     "extensions": [
       "gml"
+    ],
+    "line_comment": [
+      "//"
+    ],
+    "multi_line": [
+      [
+        "/*",
+        "*/"
+      ]
+    ],
+    "nested": false,
+    "quotes": []
+  },
+  "GNU Style Assembly": {
+    "extensions": [
+      "s"
     ],
     "line_comment": [
       "//"
@@ -1645,6 +1964,16 @@
     "nested": false,
     "quotes": []
   },
+  "Godot Scene": {
+    "extensions": [
+      "tscn"
+    ],
+    "filenames": [],
+    "line_comment": [],
+    "multi_line": [],
+    "nested": false,
+    "quotes": []
+  },
   "GraphQL": {
     "extensions": [
       "gql",
@@ -1698,6 +2027,28 @@
       ]
     ]
   },
+  "Haskell": {
+    "extensions": [
+      "hs"
+    ],
+    "filenames": [],
+    "line_comment": [
+      "--"
+    ],
+    "multi_line": [
+      [
+        "{-",
+        "-}"
+      ]
+    ],
+    "nested": true,
+    "quotes": [
+      [
+        "\"",
+        "\""
+      ]
+    ]
+  },
   "HCL": {
     "extensions": [
       "hcl",
@@ -1719,43 +2070,6 @@
       [
         "\"",
         "\""
-      ]
-    ]
-  },
-  "HICAD": {
-    "extensions": [
-      "MAC",
-      "mac"
-    ],
-    "line_comment": [
-      "REM",
-      "rem"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
-  },
-  "HTML": {
-    "extensions": [
-      "htm",
-      "html"
-    ],
-    "line_comment": [],
-    "multi_line": [
-      [
-        "<!--",
-        "-->"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "'",
-        "'"
       ]
     ]
   },
@@ -1816,12 +2130,82 @@
     "nested": false,
     "quotes": []
   },
-  "JSLT": {
+  "HICAD": {
     "extensions": [
-      "jslt"
+      "MAC",
+      "mac"
     ],
     "line_comment": [
-      "//"
+      "REM",
+      "rem"
+    ],
+    "multi_line": [],
+    "nested": false,
+    "quotes": []
+  },
+  "hledger": {
+    "extensions": [
+      "hledger"
+    ],
+    "line_comment": [
+      ";",
+      "#"
+    ],
+    "multi_line": [
+      [
+        "comment",
+        "end comment"
+      ]
+    ],
+    "nested": false,
+    "quotes": []
+  },
+  "HTML": {
+    "extensions": [
+      "htm",
+      "html"
+    ],
+    "line_comment": [],
+    "multi_line": [
+      [
+        "<!--",
+        "-->"
+      ]
+    ],
+    "nested": false,
+    "quotes": [
+      [
+        "\"",
+        "\""
+      ],
+      [
+        "'",
+        "'"
+      ]
+    ]
+  },
+  "ignore": {
+    "extensions": [
+      "ignore"
+    ],
+    "filenames": [
+      ".ignore"
+    ],
+    "line_comment": [
+      "#"
+    ],
+    "multi_line": [],
+    "nested": false,
+    "quotes": []
+  },
+  "INI": {
+    "extensions": [
+      "ini"
+    ],
+    "filenames": [],
+    "line_comment": [
+      ";",
+      "#"
     ],
     "multi_line": [],
     "nested": false,
@@ -1942,6 +2326,96 @@
     "nested": false,
     "quotes": []
   },
+  "jq": {
+    "extensions": [
+      "jq"
+    ],
+    "line_comment": [
+      "#"
+    ],
+    "multi_line": [],
+    "nested": false,
+    "quotes": [
+      [
+        "\"",
+        "\""
+      ]
+    ]
+  },
+  "JSLT": {
+    "extensions": [
+      "jslt"
+    ],
+    "line_comment": [
+      "//"
+    ],
+    "multi_line": [],
+    "nested": false,
+    "quotes": []
+  },
+  "JSON": {
+    "extensions": [
+      "json"
+    ],
+    "filenames": [],
+    "line_comment": [],
+    "multi_line": [],
+    "nested": false,
+    "quotes": []
+  },
+  "JSON5": {
+    "extensions": [
+      "json5"
+    ],
+    "filenames": [],
+    "line_comment": [
+      "//"
+    ],
+    "multi_line": [],
+    "nested": false,
+    "quotes": [
+      [
+        "\"",
+        "\""
+      ],
+      [
+        "'",
+        "'"
+      ]
+    ]
+  },
+  "JSONC": {
+    "extensions": [
+      "jsonc"
+    ],
+    "filenames": [],
+    "line_comment": [
+      "//"
+    ],
+    "multi_line": [
+      [
+        "/*",
+        "*/"
+      ]
+    ],
+    "nested": false,
+    "quotes": [
+      [
+        "\"",
+        "\""
+      ]
+    ]
+  },
+  "JSONL": {
+    "extensions": [
+      "jsonl"
+    ],
+    "filenames": [],
+    "line_comment": [],
+    "multi_line": [],
+    "nested": false,
+    "quotes": []
+  },
   "Jsonnet": {
     "extensions": [
       "jsonnet",
@@ -1978,6 +2452,35 @@
       [
         "@'",
         "'"
+      ]
+    ]
+  },
+  "JSX": {
+    "extensions": [
+      "jsx"
+    ],
+    "filenames": [],
+    "line_comment": [
+      "//"
+    ],
+    "multi_line": [
+      [
+        "/*",
+        "*/"
+      ]
+    ],
+    "nested": false,
+    "quotes": [
+      [
+        "\"",
+        "\""
+      ],
+      [
+        "'",
+        "'"
+      ],
+      [
+        ""
       ]
     ]
   },
@@ -2048,22 +2551,6 @@
       ]
     ]
   },
-  "KV Language": {
-    "extensions": [
-      "kv"
-    ],
-    "line_comment": [
-      "# "
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ]
-    ]
-  },
   "Kaem": {
     "extensions": [
       "kaem"
@@ -2126,6 +2613,49 @@
       ]
     ]
   },
+  "Kotlin": {
+    "extensions": [
+      "kt",
+      "kts"
+    ],
+    "filenames": [],
+    "line_comment": [
+      "//"
+    ],
+    "multi_line": [
+      [
+        "/*",
+        "*/"
+      ]
+    ],
+    "nested": true,
+    "quotes": [
+      [
+        "\"\"\"",
+        "\"\"\""
+      ],
+      [
+        "\"",
+        "\""
+      ]
+    ]
+  },
+  "KV Language": {
+    "extensions": [
+      "kv"
+    ],
+    "line_comment": [
+      "# "
+    ],
+    "multi_line": [],
+    "nested": false,
+    "quotes": [
+      [
+        "'",
+        "'"
+      ]
+    ]
+  },
   "LALRPOP": {
     "extensions": [
       "lalrpop"
@@ -2151,59 +2681,51 @@
       ]
     ]
   },
-  "LLVM": {
+  "LESS": {
     "extensions": [
-      "ll"
+      "less"
     ],
+    "filenames": [],
     "line_comment": [
-      ";"
+      "//"
     ],
-    "multi_line": [],
+    "multi_line": [
+      [
+        "/*",
+        "*/"
+      ]
+    ],
     "nested": false,
     "quotes": [
+      [
+        "\"",
+        "\""
+      ],
       [
         "'",
         "'"
       ]
     ]
   },
-  "LLVM IR": {
-    "extensions": [
-      "ll"
+  "License": {
+    "extensions": [],
+    "filenames": [
+      "license",
+      "licence",
+      "copying",
+      "copying3",
+      "unlicense",
+      "unlicence",
+      "license-apache",
+      "licence-apache",
+      "license-mit",
+      "licence-mit",
+      "copyright"
     ],
-    "line_comment": [
-      ";"
-    ],
+    "line_comment": [],
     "multi_line": [],
     "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
-    ]
-  },
-  "LOLCODE": {
-    "extensions": [
-      "lol",
-      "lols"
-    ],
-    "line_comment": [
-      "BTW"
-    ],
-    "multi_line": [
-      [
-        "OBTW",
-        "TLDR"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
-    ]
+    "quotes": []
   },
   "Lingua Franca": {
     "extensions": [
@@ -2245,6 +2767,30 @@
       ]
     ]
   },
+  "Lisp": {
+    "extensions": [
+      "lisp",
+      "lsp",
+      "asd"
+    ],
+    "filenames": [],
+    "line_comment": [
+      ";"
+    ],
+    "multi_line": [
+      [
+        "#|",
+        "|#"
+      ]
+    ],
+    "nested": true,
+    "quotes": [
+      [
+        "\"",
+        "\""
+      ]
+    ]
+  },
   "LiveScript": {
     "extensions": [
       "ls"
@@ -2270,6 +2816,38 @@
       ]
     ]
   },
+  "LLVM": {
+    "extensions": [
+      "ll"
+    ],
+    "line_comment": [
+      ";"
+    ],
+    "multi_line": [],
+    "nested": false,
+    "quotes": [
+      [
+        "'",
+        "'"
+      ]
+    ]
+  },
+  "LLVM IR": {
+    "extensions": [
+      "ll"
+    ],
+    "line_comment": [
+      ";"
+    ],
+    "multi_line": [],
+    "nested": false,
+    "quotes": [
+      [
+        "\"",
+        "\""
+      ]
+    ]
+  },
   "Logtalk": {
     "extensions": [
       "lgt",
@@ -2287,40 +2865,40 @@
     "nested": false,
     "quotes": []
   },
-  "M1 Assembly": {
+  "LOLCODE": {
     "extensions": [
-      "m1"
+      "lol",
+      "lols"
     ],
     "line_comment": [
-      "#",
-      ";"
+      "BTW"
     ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
-  },
-  "MSBuild": {
-    "extensions": [
-      "csproj",
-      "fsproj",
-      "ilproj",
-      "myapp",
-      "props",
-      "rdlc",
-      "resx",
-      "settings",
-      "sln",
-      "targets",
-      "vbproj",
-      "vcproj",
-      "vcxproj",
-      "vcxproj.filters"
-    ],
-    "line_comment": [],
     "multi_line": [
       [
-        "<!--",
-        "-->"
+        "OBTW",
+        "TLDR"
+      ]
+    ],
+    "nested": false,
+    "quotes": [
+      [
+        "\"",
+        "\""
+      ]
+    ]
+  },
+  "Lua": {
+    "extensions": [
+      "lua"
+    ],
+    "filenames": [],
+    "line_comment": [
+      "--"
+    ],
+    "multi_line": [
+      [
+        "--[[",
+        "]]"
       ]
     ],
     "nested": false,
@@ -2335,6 +2913,64 @@
       ]
     ]
   },
+  "Luau": {
+    "extensions": [
+      "luau"
+    ],
+    "filenames": [],
+    "line_comment": [
+      "--"
+    ],
+    "multi_line": [
+      [
+        "--[[",
+        "]]"
+      ]
+    ],
+    "nested": false,
+    "quotes": [
+      [
+        "\"",
+        "\""
+      ],
+      [
+        "'",
+        "'"
+      ],
+      [
+        ""
+      ]
+    ]
+  },
+  "M1 Assembly": {
+    "extensions": [
+      "m1"
+    ],
+    "line_comment": [
+      "#",
+      ";"
+    ],
+    "multi_line": [],
+    "nested": false,
+    "quotes": []
+  },
+  "m4": {
+    "extensions": [
+      "m4"
+    ],
+    "line_comment": [
+      "#",
+      "dnl"
+    ],
+    "multi_line": [],
+    "nested": false,
+    "quotes": [
+      [
+        "`",
+        "'"
+      ]
+    ]
+  },
   "Makefile": {
     "extensions": [
       "bp",
@@ -2344,7 +2980,7 @@
     ],
     "filenames": [
       "gnumakefile",
-      "Makefile"
+      "makefile"
     ],
     "line_comment": [
       "#"
@@ -2352,6 +2988,28 @@
     "multi_line": [],
     "nested": false,
     "quotes": []
+  },
+  "MATLAB": {
+    "extensions": [
+      "matlab"
+    ],
+    "filenames": [],
+    "line_comment": [
+      "%"
+    ],
+    "multi_line": [
+      [
+        "%{",
+        "%}"
+      ]
+    ],
+    "nested": false,
+    "quotes": [
+      [
+        "'",
+        "'"
+      ]
+    ]
   },
   "Menhir": {
     "extensions": [
@@ -2454,7 +3112,7 @@
   "Mojo": {
     "extensions": [
       "mojo",
-      "\ud83d\udd25"
+      "🔥"
     ],
     "line_comment": [
       "#"
@@ -2489,6 +3147,42 @@
       ]
     ]
   },
+  "MSBuild": {
+    "extensions": [
+      "csproj",
+      "fsproj",
+      "ilproj",
+      "myapp",
+      "props",
+      "rdlc",
+      "resx",
+      "settings",
+      "sln",
+      "targets",
+      "vbproj",
+      "vcproj",
+      "vcxproj",
+      "vcxproj.filters"
+    ],
+    "line_comment": [],
+    "multi_line": [
+      [
+        "<!--",
+        "-->"
+      ]
+    ],
+    "nested": false,
+    "quotes": [
+      [
+        "\"",
+        "\""
+      ],
+      [
+        "'",
+        "'"
+      ]
+    ]
+  },
   "Nextflow": {
     "extensions": [
       "nextflow",
@@ -2505,6 +3199,28 @@
     ],
     "nested": false,
     "quotes": []
+  },
+  "Nix": {
+    "extensions": [
+      "nix"
+    ],
+    "filenames": [],
+    "line_comment": [
+      "#"
+    ],
+    "multi_line": [
+      [
+        "/*",
+        "*/"
+      ]
+    ],
+    "nested": false,
+    "quotes": [
+      [
+        "\"",
+        "\""
+      ]
+    ]
   },
   "Not Quite Perl": {
     "extensions": [
@@ -2530,7 +3246,7 @@
   "NuGet Config": {
     "extensions": [],
     "filenames": [
-      "NuGet.Config",
+      "nuget.config",
       "packages.config",
       "nugetdefaults.config"
     ],
@@ -2546,6 +3262,28 @@
       [
         "'",
         "'"
+      ]
+    ]
+  },
+  "Objective-C": {
+    "extensions": [
+      "m"
+    ],
+    "filenames": [],
+    "line_comment": [
+      "//"
+    ],
+    "multi_line": [
+      [
+        "/*",
+        "*/"
+      ]
+    ],
+    "nested": false,
+    "quotes": [
+      [
+        "\"",
+        "\""
       ]
     ]
   },
@@ -2654,32 +3392,6 @@
     "nested": false,
     "quotes": []
   },
-  "PKGBUILD": {
-    "extensions": [
-      "PKGBUILD"
-    ],
-    "filenames": [
-      "PKGBUILD"
-    ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
-  },
-  "PO File": {
-    "extensions": [
-      "po",
-      "pot"
-    ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
-  },
   "Pan": {
     "extensions": [
       "pan",
@@ -2691,6 +3403,59 @@
     "multi_line": [],
     "nested": false,
     "quotes": [
+      [
+        "'",
+        "'"
+      ]
+    ]
+  },
+  "Pascal": {
+    "extensions": [
+      "pas"
+    ],
+    "filenames": [],
+    "line_comment": [
+      "//"
+    ],
+    "multi_line": [
+      [
+        "{",
+        "}"
+      ],
+      [
+        "(*",
+        "*)"
+      ]
+    ],
+    "nested": true,
+    "quotes": [
+      [
+        "'",
+        "'"
+      ]
+    ]
+  },
+  "Perl": {
+    "extensions": [
+      "pl",
+      "pm"
+    ],
+    "filenames": [],
+    "line_comment": [
+      "#"
+    ],
+    "multi_line": [
+      [
+        "=pod",
+        "=cut"
+      ]
+    ],
+    "nested": false,
+    "quotes": [
+      [
+        "\"",
+        "\""
+      ],
       [
         "'",
         "'"
@@ -2741,6 +3506,31 @@
       ]
     ]
   },
+  "PKGBUILD": {
+    "extensions": [
+      "PKGBUILD"
+    ],
+    "filenames": [
+      "pkgbuild"
+    ],
+    "line_comment": [
+      "#"
+    ],
+    "multi_line": [],
+    "nested": false,
+    "quotes": []
+  },
+  "Plain Text": {
+    "extensions": [
+      "text",
+      "txt"
+    ],
+    "filenames": [],
+    "line_comment": [],
+    "multi_line": [],
+    "nested": false,
+    "quotes": []
+  },
   "PlantUML": {
     "extensions": [
       "puml"
@@ -2761,6 +3551,18 @@
         "\""
       ]
     ]
+  },
+  "PO File": {
+    "extensions": [
+      "po",
+      "pot"
+    ],
+    "line_comment": [
+      "#"
+    ],
+    "multi_line": [],
+    "nested": false,
+    "quotes": []
   },
   "Poke": {
     "extensions": [
@@ -2853,6 +3655,23 @@
         "'@"
       ]
     ]
+  },
+  "Protocol Buffers": {
+    "extensions": [
+      "proto"
+    ],
+    "filenames": [],
+    "line_comment": [
+      "//"
+    ],
+    "multi_line": [
+      [
+        "/*",
+        "*/"
+      ]
+    ],
+    "nested": false,
+    "quotes": []
   },
   "Pug": {
     "extensions": [
@@ -3015,17 +3834,6 @@
       ]
     ]
   },
-  "RPM Specfile": {
-    "extensions": [
-      "spec"
-    ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
-  },
   "Racket": {
     "extensions": [
       "rkt",
@@ -3054,7 +3862,7 @@
     ],
     "filenames": [
       "rake",
-      "Rakefile"
+      "rakefile"
     ],
     "line_comment": [
       "#"
@@ -3105,8 +3913,8 @@
         "}"
       ],
       [
-        "#`\uff62",
-        "\uff63"
+        "#`｢",
+        "｣"
       ]
     ],
     "nested": false,
@@ -3116,28 +3924,28 @@
         "'"
       ],
       [
-        "\u201e",
-        "\u201c"
+        "„",
+        "“"
       ],
       [
-        "\u00ab",
-        "\u00bb"
+        "«",
+        "»"
       ],
       [
         "<<",
         ">>"
       ],
       [
-        "\u201c",
-        "\u201d"
+        "“",
+        "”"
       ],
       [
-        "\u2019",
-        "\u2018"
+        "’",
+        "‘"
       ],
       [
-        "\uff62",
-        "\uff63"
+        "｢",
+        "｣"
       ]
     ],
     "close_line_is_code": true
@@ -3209,6 +4017,26 @@
       ]
     ]
   },
+  "ReStructuredText": {
+    "extensions": [
+      "rst"
+    ],
+    "filenames": [],
+    "line_comment": [],
+    "multi_line": [],
+    "nested": false,
+    "quotes": []
+  },
+  "Rich Text Format": {
+    "extensions": [
+      "rtf"
+    ],
+    "filenames": [],
+    "line_comment": [],
+    "multi_line": [],
+    "nested": false,
+    "quotes": []
+  },
   "Roc": {
     "extensions": [
       "roc"
@@ -3228,6 +4056,17 @@
         "\""
       ]
     ]
+  },
+  "RPM Specfile": {
+    "extensions": [
+      "spec"
+    ],
+    "line_comment": [
+      "#"
+    ],
+    "multi_line": [],
+    "nested": false,
+    "quotes": []
   },
   "Ruby": {
     "extensions": [
@@ -3325,15 +4164,14 @@
     "nested": true,
     "quotes": []
   },
-  "SQL": {
+  "Sass": {
     "extensions": [
-      "ddl",
-      "dml",
-      "dql",
-      "sql"
+      "sass",
+      "scss"
     ],
+    "filenames": [],
     "line_comment": [
-      "--"
+      "//"
     ],
     "multi_line": [
       [
@@ -3344,21 +4182,37 @@
     "nested": false,
     "quotes": [
       [
+        "\"",
+        "\""
+      ],
+      [
         "'",
         "'"
       ]
     ]
   },
-  "SRecode Template": {
+  "Scala": {
     "extensions": [
-      "srt"
+      "sc",
+      "scala"
     ],
+    "filenames": [],
     "line_comment": [
-      ";;"
+      "//"
     ],
-    "multi_line": [],
+    "multi_line": [
+      [
+        "/*",
+        "*/"
+      ]
+    ],
     "nested": false,
-    "quotes": []
+    "quotes": [
+      [
+        "\"",
+        "\""
+      ]
+    ]
   },
   "Scheme": {
     "extensions": [
@@ -3385,7 +4239,7 @@
     ],
     "filenames": [
       "sconscript",
-      "SConstruct"
+      "sconstruct"
     ],
     "line_comment": [
       "#"
@@ -3468,7 +4322,7 @@
       "smk"
     ],
     "filenames": [
-      "Snakefile"
+      "snakefile"
     ],
     "line_comment": [
       "#"
@@ -3537,6 +4391,41 @@
         "<'"
       ]
     ],
+    "nested": false,
+    "quotes": []
+  },
+  "SQL": {
+    "extensions": [
+      "ddl",
+      "dml",
+      "dql",
+      "sql"
+    ],
+    "line_comment": [
+      "--"
+    ],
+    "multi_line": [
+      [
+        "/*",
+        "*/"
+      ]
+    ],
+    "nested": false,
+    "quotes": [
+      [
+        "'",
+        "'"
+      ]
+    ]
+  },
+  "SRecode Template": {
+    "extensions": [
+      "srt"
+    ],
+    "line_comment": [
+      ";;"
+    ],
+    "multi_line": [],
     "nested": false,
     "quotes": []
   },
@@ -3676,6 +4565,30 @@
       ]
     ]
   },
+  "SVG": {
+    "extensions": [
+      "svg"
+    ],
+    "filenames": [],
+    "line_comment": [],
+    "multi_line": [
+      [
+        "<!--",
+        "-->"
+      ]
+    ],
+    "nested": false,
+    "quotes": [
+      [
+        "\"",
+        "\""
+      ],
+      [
+        "'",
+        "'"
+      ]
+    ]
+  },
   "Swift": {
     "extensions": [
       "swift"
@@ -3712,54 +4625,6 @@
       ]
     ],
     "nested": true,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
-    ]
-  },
-  "TSX": {
-    "extensions": [
-      "tsx"
-    ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ],
-      [
-        "`",
-        "`"
-      ]
-    ]
-  },
-  "TTCN-3": {
-    "extensions": [
-      "ttcn",
-      "ttcn3",
-      "ttcnpp"
-    ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
     "quotes": [
       [
         "\"",
@@ -3865,6 +4730,19 @@
     "nested": false,
     "quotes": []
   },
+  "LaTeX": {
+    "extensions": [
+      "tex",
+      "sty"
+    ],
+    "filenames": [],
+    "line_comment": [
+      "%"
+    ],
+    "multi_line": [],
+    "nested": false,
+    "quotes": []
+  },
   "The WenYan Programming Language": {
     "extensions": [
       "wy"
@@ -3872,12 +4750,12 @@
     "line_comment": [],
     "multi_line": [
       [
-        "\u6279\u66f0\u3002",
-        "\u3002"
+        "批曰。",
+        "。"
       ],
       [
-        "\u758f\u66f0\u3002",
-        "\u3002"
+        "疏曰。",
+        "。"
       ]
     ],
     "nested": false,
@@ -3906,6 +4784,83 @@
       [
         "'",
         "'"
+      ]
+    ]
+  },
+  "TOML": {
+    "extensions": [
+      "toml"
+    ],
+    "filenames": [],
+    "line_comment": [
+      "#"
+    ],
+    "multi_line": [],
+    "nested": false,
+    "quotes": [
+      [
+        "\"\"\"",
+        "\"\"\""
+      ],
+      [
+        "'''",
+        "'''"
+      ],
+      [
+        "\"",
+        "\""
+      ],
+      [
+        "'",
+        "'"
+      ]
+    ]
+  },
+  "TSX": {
+    "extensions": [
+      "tsx"
+    ],
+    "line_comment": [
+      "//"
+    ],
+    "multi_line": [
+      [
+        "/*",
+        "*/"
+      ]
+    ],
+    "nested": false,
+    "quotes": [
+      [
+        "'",
+        "'"
+      ],
+      [
+        "`",
+        "`"
+      ]
+    ]
+  },
+  "TTCN-3": {
+    "extensions": [
+      "ttcn",
+      "ttcn3",
+      "ttcnpp"
+    ],
+    "line_comment": [
+      "//"
+    ],
+    "multi_line": [
+      [
+        "/*",
+        "*/"
+      ]
+    ],
+    "nested": false,
+    "quotes": [
+      [
+        "\"",
+        "\""
       ]
     ]
   },
@@ -3993,6 +4948,17 @@
       ]
     ]
   },
+  "Uiua": {
+    "extensions": [
+      "ua"
+    ],
+    "line_comment": [
+      "#"
+    ],
+    "multi_line": [],
+    "nested": false,
+    "quotes": []
+  },
   "UMPL": {
     "extensions": [
       "umpl"
@@ -4009,17 +4975,6 @@
       ]
     ]
   },
-  "Uiua": {
-    "extensions": [
-      "ua"
-    ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
-  },
   "Unison": {
     "extensions": [
       "u"
@@ -4035,6 +4990,84 @@
     ],
     "nested": true,
     "quotes": []
+  },
+  "Unreal Project": {
+    "extensions": [
+      "uproject"
+    ],
+    "filenames": [],
+    "line_comment": [],
+    "multi_line": [],
+    "nested": false,
+    "quotes": []
+  },
+  "Unreal Script": {
+    "extensions": [
+      "uc",
+      "uci",
+      "upkg"
+    ],
+    "filenames": [],
+    "line_comment": [
+      "//"
+    ],
+    "multi_line": [
+      [
+        "/*",
+        "*/"
+      ]
+    ],
+    "nested": false,
+    "quotes": [
+      [
+        "\"",
+        "\""
+      ]
+    ]
+  },
+  "Unreal Shader": {
+    "extensions": [
+      "usf"
+    ],
+    "filenames": [],
+    "line_comment": [
+      "//"
+    ],
+    "multi_line": [
+      [
+        "/*",
+        "*/"
+      ]
+    ],
+    "nested": false,
+    "quotes": [
+      [
+        "\"",
+        "\""
+      ]
+    ]
+  },
+  "Unreal Shader Header": {
+    "extensions": [
+      "ush"
+    ],
+    "filenames": [],
+    "line_comment": [
+      "//"
+    ],
+    "multi_line": [
+      [
+        "/*",
+        "*/"
+      ]
+    ],
+    "nested": false,
+    "quotes": [
+      [
+        "\"",
+        "\""
+      ]
+    ]
   },
   "Ur/Web": {
     "extensions": [
@@ -4210,6 +5243,126 @@
     "nested": false,
     "quotes": []
   },
+  "wenyan": {
+    "extensions": [
+      "wy"
+    ],
+    "line_comment": [],
+    "multi_line": [
+      [
+        "批曰。",
+        "。"
+      ],
+      [
+        "疏曰。",
+        "。"
+      ]
+    ],
+    "nested": false,
+    "quotes": []
+  },
+  "FXML": {
+    "extensions": [
+      "fxml"
+    ],
+    "filenames": [],
+    "line_comment": [],
+    "multi_line": [
+      [
+        "<!--",
+        "-->"
+      ]
+    ],
+    "nested": false,
+    "quotes": [
+      [
+        "\"",
+        "\""
+      ],
+      [
+        "'",
+        "'"
+      ]
+    ]
+  },
+  "XAML": {
+    "extensions": [
+      "xaml"
+    ],
+    "filenames": [],
+    "line_comment": [],
+    "multi_line": [
+      [
+        "<!--",
+        "-->"
+      ]
+    ],
+    "nested": false,
+    "quotes": [
+      [
+        "\"",
+        "\""
+      ],
+      [
+        "'",
+        "'"
+      ]
+    ]
+  },
+  "XHTML": {
+    "extensions": [
+      "xhtml"
+    ],
+    "filenames": [],
+    "line_comment": [],
+    "multi_line": [
+      [
+        "<!--",
+        "-->"
+      ]
+    ],
+    "nested": false,
+    "quotes": [
+      [
+        "\"",
+        "\""
+      ]
+    ]
+  },
+  "XML": {
+    "extensions": [
+      "xml"
+    ],
+    "filenames": [],
+    "line_comment": [],
+    "multi_line": [
+      [
+        "<!--",
+        "-->"
+      ]
+    ],
+    "nested": false,
+    "quotes": [
+      [
+        "\"",
+        "\""
+      ],
+      [
+        "'",
+        "'"
+      ]
+    ]
+  },
+  "XML Schema": {
+    "extensions": [
+      "xsd"
+    ],
+    "filenames": [],
+    "line_comment": [],
+    "multi_line": [],
+    "nested": false,
+    "quotes": []
+  },
   "XSL": {
     "extensions": [
       "xsl",
@@ -4280,6 +5433,16 @@
       ]
     ]
   },
+  "Yarn": {
+    "extensions": [
+      "yarn"
+    ],
+    "filenames": [],
+    "line_comment": [],
+    "multi_line": [],
+    "nested": false,
+    "quotes": []
+  },
   "ZenCode": {
     "extensions": [
       "zs"
@@ -4343,27 +5506,11 @@
     "nested": false,
     "quotes": []
   },
-  "hledger": {
+  "Zsh": {
     "extensions": [
-      "hledger"
+      "zsh"
     ],
-    "line_comment": [
-      ";",
-      "#"
-    ],
-    "multi_line": [
-      [
-        "comment",
-        "end comment"
-      ]
-    ],
-    "nested": false,
-    "quotes": []
-  },
-  "jq": {
-    "extensions": [
-      "jq"
-    ],
+    "filenames": [],
     "line_comment": [
       "#"
     ],
@@ -4373,42 +5520,14 @@
       [
         "\"",
         "\""
-      ]
-    ]
-  },
-  "m4": {
-    "extensions": [
-      "m4"
-    ],
-    "line_comment": [
-      "#",
-      "dnl"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "`",
-        "'"
-      ]
-    ]
-  },
-  "wenyan": {
-    "extensions": [
-      "wy"
-    ],
-    "line_comment": [],
-    "multi_line": [
-      [
-        "\u6279\u66f0\u3002",
-        "\u3002"
       ],
       [
-        "\u758f\u66f0\u3002",
-        "\u3002"
+        "'",
+        "'"
       ]
     ],
-    "nested": false,
-    "quotes": []
+    "env": [
+      "zsh"
+    ]
   }
 }

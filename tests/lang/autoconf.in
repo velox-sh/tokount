@@ -1,0 +1,10 @@
+# 10 lines 4 code 4 comments 2 blanks
+dnl Process this file with autoconf
+AC_INIT([mypackage], [1.0])
+
+# Check for required programs
+AC_PROG_CC
+AC_PROG_RANLIB
+
+dnl Done
+AC_OUTPUT

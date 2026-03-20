@@ -72,6 +72,31 @@ pub fn parse_expected_counts(content: &str) -> Option<ExpectedCounts> {
     content.lines().take(6).find_map(try_parse_counts)
 }
 
+/// Parse expected counts from a sidecar `.expected` file
+///
+/// Format: a single line with 4 space-separated numbers: `lines code comment blank`
+/// Used for languages with no comment syntax (JSON, CSV, etc.) where the fixture
+/// file itself cannot embed the count header.
+#[allow(dead_code)]
+pub fn parse_expected_file(sidecar: &std::path::Path) -> Option<ExpectedCounts> {
+    let content = std::fs::read_to_string(sidecar).ok()?;
+    let line = content.lines().next()?;
+    let nums: Vec<u32> = line
+        .split_whitespace()
+        .filter_map(|s| s.parse().ok())
+        .collect();
+    if nums.len() >= 4 {
+        Some(ExpectedCounts {
+            lines: nums[0],
+            code: nums[1],
+            comment: nums[2],
+            blank: nums[3],
+        })
+    } else {
+        None
+    }
+}
+
 fn try_parse_counts(line: &str) -> Option<ExpectedCounts> {
     // Each metric is a number immediately preceding its label word
     // Fields can appear in any order and may be comma-separated

@@ -21,6 +21,10 @@ struct LangDef {
     /// interpreter names for shebang detection (e.g. ["ruby"] -> #!/usr/bin/env ruby)
     #[serde(default)]
     env: Vec<String>,
+    /// full shebang lines (e.g. ["#!/bin/bash"])
+    /// basename is extracted and merged into SHEBANG_MAP
+    #[serde(default)]
+    shebangs: Vec<String>,
 }
 
 fn escape_bytes(s: &str) -> String {
@@ -222,8 +226,10 @@ fn main() {
     for (name, lang) in &langs {
         let const_name = lang_const_names[name].clone();
         for fname in &lang.filenames {
-            if seen_fns.insert(fname.clone()) {
-                fn_entries.push((fname.clone(), format!("&{const_name}")));
+            // filenames are matched case-insensitively; store lowercase
+            let fname_lower = fname.to_lowercase();
+            if seen_fns.insert(fname_lower.clone()) {
+                fn_entries.push((fname_lower, format!("&{const_name}")));
             }
         }
     }
@@ -241,7 +247,7 @@ fn main() {
     )
     .unwrap();
 
-    // collect shebang/env entries (#!/usr/bin/env <name>)
+    // collect shebang/env entries (#!/usr/bin/env <name> or #!/path/to/interp)
     let mut seen_envs = std::collections::HashSet::new();
     let mut env_entries: Vec<(String, String)> = Vec::new();
 
@@ -251,6 +257,16 @@ fn main() {
         for interp in &lang.env {
             if seen_envs.insert(interp.clone()) {
                 env_entries.push((interp.clone(), format!("&{const_name}")));
+            }
+        }
+
+        for shebang in &lang.shebangs {
+            // extract basename from full path, stripping flags (e.g. "#!/bin/awk -f" -> "awk")
+            let rest = shebang.strip_prefix("#!").unwrap_or(shebang);
+            let first_word = rest.split_whitespace().next().unwrap_or("");
+            let basename = first_word.rsplit('/').next().unwrap_or(first_word);
+            if !basename.is_empty() && seen_envs.insert(basename.to_string()) {
+                env_entries.push((basename.to_string(), format!("&{const_name}")));
             }
         }
     }

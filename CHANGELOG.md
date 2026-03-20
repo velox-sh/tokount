@@ -28,7 +28,7 @@ Complete rewrite of the counting engine. Replaced `tokei` with a custom byte-lev
 - SIMD-accelerated byte scanning via `memchr` (SSE2/AVX2 under the hood)
 - Language definitions generated at compile time via `build.rs` + `phf`
 - Shebang detection for extensionless files (`#!/usr/bin/env ruby` -> Ruby)
-- 214 languages verified against tokei/scc fixture files
+- 269 languages verified against tokei/scc fixture files
 
 **I/O pipeline:**
 

@@ -55,7 +55,7 @@
 Why use `tokount`?
 
 - **Fastest available** — beats `tokei`, `scc`, and `cloc` at every repo size from 375K lines up
-- **Verified accuracy** — 214 languages tested fixture-by-fixture against `tokei` and `scc`
+- **Verified accuracy** — 269 languages tested fixture-by-fixture against `tokei` and `scc`
 - **Flexible output** — table (default), JSON, or CSV for scripts/CI/dashboards
 - **Respects ignore files** — `.gitignore` in git repos, `.prettierignore` everywhere
 

@@ -12,7 +12,14 @@ fn all_languages() {
     let mut entries: Vec<_> = fs::read_dir(&lang_dir)
         .expect("failed to read tests/lang")
         .filter_map(|e| e.ok())
-        .filter(|e| e.file_type().map(|t| t.is_file()).unwrap_or(false))
+        .filter(|e| {
+            if !e.file_type().map(|t| t.is_file()).unwrap_or(false) {
+                return false;
+            }
+            // skip sidecar .expected files (they're not language fixtures)
+            let name = e.file_name();
+            !name.to_string_lossy().ends_with(".expected")
+        })
         .collect();
 
     entries.sort_by_key(|e| e.file_name());
@@ -36,8 +43,15 @@ fn all_languages() {
         let expected = match common::parse_expected_counts(&content) {
             Some(c) => c,
             None => {
-                skipped.push(format!("{name} (no count header)"));
-                continue;
+                // fall back to sidecar: <fixture>.expected contains "lines code comment blank"
+                let sidecar = path.with_file_name(format!("{name}.expected"));
+                match common::parse_expected_file(&sidecar) {
+                    Some(c) => c,
+                    None => {
+                        skipped.push(format!("{name} (no count header)"));
+                        continue;
+                    }
+                }
             }
         };
 
@@ -102,7 +116,10 @@ fn cross_tool_compare() {
     let mut entries: Vec<_> = fs::read_dir(&lang_dir)
         .expect("failed to read tests/lang")
         .filter_map(|e| e.ok())
-        .filter(|e| e.file_type().map(|t| t.is_file()).unwrap_or(false))
+        .filter(|e| {
+            e.file_type().map(|t| t.is_file()).unwrap_or(false)
+                && !e.file_name().to_string_lossy().ends_with(".expected")
+        })
         .collect();
 
     entries.sort_by_key(|e| e.file_name());

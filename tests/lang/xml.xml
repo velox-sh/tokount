@@ -1,0 +1,10 @@
+<!-- 10 lines 7 code 2 comments 1 blank -->
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <!-- Configuration -->
+  <database>
+    <host>localhost</host>
+
+    <port>5432</port>
+  </database>
+</root>

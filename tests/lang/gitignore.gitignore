@@ -1,0 +1,8 @@
+# 8 lines 4 code 3 comments 1 blank
+# Build artifacts
+target/
+*.o
+
+# Editor files
+.vscode/
+.idea/

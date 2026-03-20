@@ -1,0 +1,10 @@
+// 10 lines 5 code 3 comments 2 blanks
+#include "Common.ush"
+
+/* Vertex output */
+struct FVertexOutput {
+    float4 Position : SV_Position;
+    float2 UV : TEXCOORD0;
+};
+
+// Main vertex shader

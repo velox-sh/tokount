@@ -1,5 +1,3 @@
-// IO-optimized SIMD engine for counting lines of code
-
 pub mod fsm;
 pub mod language;
 pub mod reader;
@@ -74,7 +72,15 @@ pub fn count(paths: &[&Path], config: &EngineConfig<'_>) -> crate::types::Output
             } else {
                 ext_raw
             };
-            let filename = path.file_name().and_then(|n| n.to_str()).unwrap_or("");
+            let filename_raw = path.file_name().and_then(|n| n.to_str()).unwrap_or("");
+            // filename map is keyed lowercase; normalise before lookup
+            let filename_lower;
+            let filename = if filename_raw.bytes().any(|b| b.is_ascii_uppercase()) {
+                filename_lower = filename_raw.to_ascii_lowercase();
+                filename_lower.as_str()
+            } else {
+                filename_raw
+            };
 
             let lang = language::LanguageDef::from_extension(ext)
                 .or_else(|| language::LanguageDef::from_filename(filename))
