@@ -110,8 +110,8 @@ pub fn count(paths: &[&Path], config: &EngineConfig<'_>) -> crate::types::Output
 
                 READER.with(|r| {
                     if let Some(content) = r.borrow_mut().read(&path) {
-                        let counts = fsm::count_file(content, lang);
-                        thread_stats.add(lang.name, counts);
+                        let result = fsm::count_file(content, lang);
+                        thread_stats.add(lang.name, result);
                     }
                 });
             }

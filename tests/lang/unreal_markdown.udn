@@ -1,0 +1,20 @@
+Title: Availability
+Crumbs: %ROOT%
+Description: Overview of supported platforms.
+
+# Platform Availability
+
+This page describes the platforms supported by the engine.
+
+## Desktop
+
+The engine supports **Windows**, **macOS**, and **Linux**.
+
+```
+// code block inside markdown
+int x = 0;
+```
+
+## Mobile
+
+Mobile platforms include iOS and Android.

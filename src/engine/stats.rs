@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use crate::engine::fsm::LineCounts;
+use crate::engine::fsm::FileResult;
 use crate::types::LangStats;
 use crate::types::OutputStats;
 
@@ -15,6 +15,7 @@ pub struct LangEntry {
 #[derive(Default)]
 pub struct ThreadStats {
     pub langs: HashMap<&'static str, LangEntry>,
+    pub children: HashMap<&'static str, HashMap<&'static str, LangEntry>>,
     pub git_repos: usize,
     pub gitignore_patterns: Vec<String>,
 }
@@ -24,12 +25,25 @@ impl ThreadStats {
         Self::default()
     }
 
-    pub fn add(&mut self, lang_name: &'static str, counts: LineCounts) {
+    pub fn add(&mut self, lang_name: &'static str, result: FileResult) {
         let entry = self.langs.entry(lang_name).or_default();
         entry.files += 1;
-        entry.code += counts.code as usize;
-        entry.comment += counts.comment as usize;
-        entry.blank += counts.blank as usize;
+        entry.code += result.counts.code as usize;
+        entry.comment += result.counts.comment as usize;
+        entry.blank += result.counts.blank as usize;
+
+        for (child_name, child_counts) in result.children {
+            let child = self
+                .children
+                .entry(lang_name)
+                .or_default()
+                .entry(child_name)
+                .or_default();
+
+            child.code += child_counts.code as usize;
+            child.comment += child_counts.comment as usize;
+            child.blank += child_counts.blank as usize;
+        }
     }
 
     pub fn merge(&mut self, other: ThreadStats) {
@@ -39,6 +53,16 @@ impl ThreadStats {
             e.code += entry.code;
             e.comment += entry.comment;
             e.blank += entry.blank;
+        }
+
+        for (parent, child_map) in other.children {
+            let dest = self.children.entry(parent).or_default();
+            for (child, entry) in child_map {
+                let e = dest.entry(child).or_default();
+                e.code += entry.code;
+                e.comment += entry.comment;
+                e.blank += entry.blank;
+            }
         }
 
         self.git_repos += other.git_repos;
@@ -51,6 +75,7 @@ impl ThreadStats {
             blank: 0,
             comment: 0,
             code: 0,
+            children: HashMap::new(),
         };
         let mut languages = HashMap::new();
 
@@ -60,6 +85,29 @@ impl ThreadStats {
                 total.blank += entry.blank;
                 total.comment += entry.comment;
                 total.code += entry.code;
+
+                let child_stats: HashMap<String, LangStats> = self
+                    .children
+                    .get(name)
+                    .map(|child_map| {
+                        child_map
+                            .iter()
+                            .map(|(child_name, e)| {
+                                (
+                                    child_name.to_string(),
+                                    LangStats {
+                                        n_files: 0,
+                                        blank: e.blank,
+                                        comment: e.comment,
+                                        code: e.code,
+                                        children: HashMap::new(),
+                                    },
+                                )
+                            })
+                            .collect()
+                    })
+                    .unwrap_or_default();
+
                 languages.insert(
                     name.to_string(),
                     LangStats {
@@ -67,6 +115,7 @@ impl ThreadStats {
                         blank: entry.blank,
                         comment: entry.comment,
                         code: entry.code,
+                        children: child_stats,
                     },
                 );
             }

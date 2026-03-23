@@ -10,6 +10,7 @@
 <details>
   <summary>Table of Contents</summary>
   <ol>
+    <li><a href="#v201--embedded-languages">v2.0.1</a></li>
     <li><a href="#v200--simd-engine">v2.0.0</a></li>
     <li><a href="#v111--windows-symlink-guard">v1.1.1</a></li>
     <li><a href="#v110--human-readable-output--multi-path-support">v1.1.0</a></li>
@@ -18,17 +19,34 @@
   </ol>
 </details>
 
+## v2.0.1 — Embedded languages
+
+Added embedded languages support and decided that literate languages should be counted as comments unless they're Markdown, Djot, MDX, etc. An important thing to note is that `tokei` classifies Unreal Markdown as being non-literate, yet it has the `important_syntax` fields. This might be an error. I decided to have it be literate as it's more logical.
+
+**New stuff:**
+
+- `literal` support for languages
+- Embedded languages support
+-
+
+**Changed:**
+
+-
+-
+
 ## v2.0.0 — SIMD engine
 
-Complete rewrite of the counting engine. Replaced `tokei` with a custom byte-level FSM and SIMD-accelerated scanning, making tokount the fastest line counter available!
+Using some help and directions from @big-lip-bob, I managed to entirely rewrite counting engine. That means `tokei` is now replaced by a custom byte-level FSM with SIMD-accelerated scanning which now makes `tokount` the fastest line counter available!
+
+> Note: It is only the fastest when we take SSE2 into account. Other architectures will need a deeper look into in order to figure out how to implement SIMD as efficiently as SSE2 does on `x86_64`!
 
 **Engine:**
 
-- Custom byte-level finite state machine (FSM) — handles line/block comments, string literals, raw strings, nested comments, shebangs
+- Custom byte-level finite state machine (FSM) which handles line/block comments, string literals, raw strings, nested comments, shebangs
 - SIMD-accelerated byte scanning via `memchr` (SSE2/AVX2 under the hood)
 - Language definitions generated at compile time via `build.rs` + `phf`
 - Shebang detection for extensionless files (`#!/usr/bin/env ruby` -> Ruby)
-- 269 languages verified against tokei/scc fixture files
+- 280 languages verified against tokei/scc fixture files
 
 **I/O pipeline:**
 
@@ -48,7 +66,7 @@ Complete rewrite of the counting engine. Replaced `tokei` with a custom byte-lev
 
 **Changed:**
 
-- `opt-level` changed from `"z"` (size) to `3` (speed) — enables SIMD auto-vectorization
+- `opt-level` changed from `"z"` (size) to `3` (speed), that enables SIMD auto-vectorization
 - Removed `tokei` and `walkdir` dependencies
 - `src/git.rs` removed; git repo counting and ignore collection are now part of the engine walker
 - `src/analyze.rs` removed; engine called directly from `main.rs`

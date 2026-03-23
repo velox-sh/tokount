@@ -23,6 +23,12 @@ struct LangDef {
     // full shebang lines (e.g. "#!/bin/bash"); basename extracted and merged into SHEBANG_MAP
     #[serde(default)]
     shebangs: Vec<String>,
+    // all non-blank lines outside code fences are comments (e.g. Plain Text, Markdown)
+    #[serde(default)]
+    literate: bool,
+    // markers that toggle between literate-comment and code mode (e.g. ["```"] for Markdown)
+    #[serde(default)]
+    important_syntax: Vec<String>,
 }
 
 fn escape_bytes(s: &str) -> String {
@@ -80,7 +86,6 @@ fn main() {
     for (name, lang) in &langs {
         let const_name = lang_const_names[name].clone();
 
-        // line_comments: longest-first so longer markers shadow shorter prefixes
         let mut line_comments_sorted = lang.line_comment.clone();
         line_comments_sorted.sort_by_key(|s| std::cmp::Reverse(s.len()));
 
@@ -91,7 +96,6 @@ fn main() {
 
         let lc_str = format!("&[{}]", lc.join(", "));
 
-        // block_comments: longest-first so longer openers shadow shorter prefixes
         let mut multi_line_sorted: Vec<&Vec<String>> = lang
             .multi_line
             .iter()
@@ -112,7 +116,6 @@ fn main() {
 
         let bc_str = format!("&[{}]", bc.join(", "));
 
-        // string_literals: longest-first so longer openers shadow shorter prefixes
         let mut quotes_sorted: Vec<&Vec<String>> =
             lang.quotes.iter().filter(|pair| pair.len() >= 2).collect();
         quotes_sorted.sort_by_key(|p| std::cmp::Reverse(p[0].len()));
@@ -146,6 +149,7 @@ fn main() {
                 if let Some(b) = pair[0].bytes().next() {
                     interesting.insert(b);
                 }
+
                 if let Some(b) = pair[1].bytes().next() {
                     interesting.insert(b);
                 }
@@ -157,9 +161,16 @@ fn main() {
                 if let Some(b) = pair[0].bytes().next() {
                     interesting.insert(b);
                 }
+
                 if let Some(b) = pair[1].bytes().next() {
                     interesting.insert(b);
                 }
+            }
+        }
+
+        for s in &lang.important_syntax {
+            if let Some(b) = s.bytes().next() {
+                interesting.insert(b);
             }
         }
 
@@ -171,6 +182,16 @@ fn main() {
             format!("&[{}u8]", vals.join(", "))
         };
 
+        let mut isyn_sorted = lang.important_syntax.clone();
+        isyn_sorted.sort_by_key(|s| std::cmp::Reverse(s.len()));
+
+        let isyn: Vec<String> = isyn_sorted
+            .iter()
+            .map(|s| format!("b\"{}\"", escape_bytes(s)))
+            .collect();
+
+        let isyn_str = format!("&[{}]", isyn.join(", "));
+
         writeln!(
             out,
             "static {const_name}: LanguageDef = LanguageDef {{\n\
@@ -181,8 +202,10 @@ fn main() {
 			\tnested_comments: {},\n\
 			\tclose_line_is_code: {},\n\
 			\tinterest_bytes: {mask_str},\n\
+			\tliterate: {},\n\
+			\timportant_syntax: {isyn_str},\n\
 			}};\n",
-            lang.nested, lang.close_line_is_code
+            lang.nested, lang.close_line_is_code, lang.literate
         )
         .unwrap();
     }
@@ -277,6 +300,31 @@ fn main() {
         out,
         "pub(super) static SHEBANG_MAP: phf::Map<&'static str, &'static LanguageDef> = {};",
         env_map.build()
+    )
+    .unwrap();
+
+    // NAME_MAP: lowercased language name -> &LanguageDef (for fence identifier resolution)
+    let mut name_entries: Vec<(String, String)> = Vec::new();
+    let mut seen_names = std::collections::HashSet::new();
+
+    for name in langs.keys() {
+        let const_name = lang_const_names[name].clone();
+        let lower = name.to_lowercase();
+        if seen_names.insert(lower.clone()) {
+            name_entries.push((lower, format!("&{const_name}")));
+        }
+    }
+
+    let mut name_map = phf_codegen::Map::new();
+
+    for (k, v) in &name_entries {
+        name_map.entry(k.as_str(), v.as_str());
+    }
+
+    writeln!(
+        out,
+        "pub(super) static NAME_MAP: phf::Map<&'static str, &'static LanguageDef> = {};",
+        name_map.build()
     )
     .unwrap();
 

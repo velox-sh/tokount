@@ -10,6 +10,9 @@ pub struct LangStats {
     pub blank: usize,
     pub comment: usize,
     pub code: usize,
+    /// Embedded child language blocks (e.g. Rust code inside Markdown fences)
+    #[serde(skip_serializing_if = "HashMap::is_empty")]
+    pub children: HashMap<String, LangStats>,
 }
 
 /// Complete output structure with language stats and metadata

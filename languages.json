@@ -1,4 +1,24 @@
 {
+  ".NET Resource": {
+    "extensions": [
+      "resx"
+    ],
+    "filenames": [],
+    "line_comment": [],
+    "multi_line": [
+      [
+        "<!--",
+        "-->"
+      ]
+    ],
+    "nested": false,
+    "quotes": [
+      [
+        "\"",
+        "\""
+      ]
+    ]
+  },
   "8th": {
     "extensions": [
       "8th"
@@ -80,7 +100,7 @@
       "dyalog"
     ],
     "line_comment": [
-      "⍝"
+      "\u235d"
     ],
     "multi_line": [],
     "nested": false,
@@ -1076,6 +1096,40 @@
     "nested": true,
     "quotes": []
   },
+  "Dart": {
+    "extensions": [
+      "dart"
+    ],
+    "filenames": [],
+    "line_comment": [
+      "//"
+    ],
+    "multi_line": [
+      [
+        "/*",
+        "*/"
+      ]
+    ],
+    "nested": false,
+    "quotes": [
+      [
+        "\"",
+        "\""
+      ],
+      [
+        "'",
+        "'"
+      ],
+      [
+        "\"\"\"",
+        "\"\"\""
+      ],
+      [
+        "'''",
+        "'''"
+      ]
+    ]
+  },
   "Dhall": {
     "extensions": [
       "dhall"
@@ -1099,6 +1153,21 @@
         "''",
         "''"
       ]
+    ]
+  },
+  "Djot": {
+    "extensions": [
+      "dj",
+      "djot"
+    ],
+    "filenames": [],
+    "line_comment": [],
+    "multi_line": [],
+    "nested": false,
+    "quotes": [],
+    "literate": true,
+    "important_syntax": [
+      "```"
     ]
   },
   "DM": {
@@ -1297,6 +1366,35 @@
       ]
     ]
   },
+  "Elixir Template": {
+    "extensions": [
+      "eex"
+    ],
+    "filenames": [],
+    "line_comment": [
+      "#"
+    ],
+    "multi_line": [],
+    "nested": false,
+    "quotes": [
+      [
+        "\"\"\"",
+        "\"\"\""
+      ],
+      [
+        "\"",
+        "\""
+      ],
+      [
+        "'''",
+        "'''"
+      ],
+      [
+        "'",
+        "'"
+      ]
+    ]
+  },
   "Elvish": {
     "extensions": [
       "elv"
@@ -1342,30 +1440,30 @@
   "Emojicode": {
     "extensions": [
       "emojic",
-      "🍇"
+      "\ud83c\udf47"
     ],
     "line_comment": [
-      "💭"
+      "\ud83d\udcad"
     ],
     "multi_line": [
       [
-        "💭🔜",
-        "🔚💭"
+        "\ud83d\udcad\ud83d\udd1c",
+        "\ud83d\udd1a\ud83d\udcad"
       ],
       [
-        "📗",
-        "📗"
+        "\ud83d\udcd7",
+        "\ud83d\udcd7"
       ],
       [
-        "📘",
-        "📘"
+        "\ud83d\udcd8",
+        "\ud83d\udcd8"
       ]
     ],
     "nested": false,
     "quotes": [
       [
-        "❌🔤",
-        "❌🔤"
+        "\u274c\ud83d\udd24",
+        "\u274c\ud83d\udd24"
       ]
     ]
   },
@@ -1584,6 +1682,23 @@
     "nested": false,
     "quotes": []
   },
+  "Fragment Shader File": {
+    "extensions": [
+      "fsh"
+    ],
+    "filenames": [],
+    "line_comment": [
+      "//"
+    ],
+    "multi_line": [],
+    "nested": false,
+    "quotes": [
+      [
+        "\"",
+        "\""
+      ]
+    ]
+  },
   "FreeMarker": {
     "extensions": [
       "ftl",
@@ -1624,6 +1739,30 @@
     "multi_line": [],
     "nested": false,
     "quotes": []
+  },
+  "FXML": {
+    "extensions": [
+      "fxml"
+    ],
+    "filenames": [],
+    "line_comment": [],
+    "multi_line": [
+      [
+        "<!--",
+        "-->"
+      ]
+    ],
+    "nested": false,
+    "quotes": [
+      [
+        "\"",
+        "\""
+      ],
+      [
+        "'",
+        "'"
+      ]
+    ]
   },
   "Game Maker Language": {
     "extensions": [
@@ -2094,6 +2233,21 @@
       ]
     ]
   },
+  "HEEx": {
+    "extensions": [
+      "heex"
+    ],
+    "filenames": [],
+    "line_comment": [],
+    "multi_line": [],
+    "nested": false,
+    "quotes": [
+      [
+        "\"",
+        "\""
+      ]
+    ]
+  },
   "Hex0": {
     "extensions": [
       "hex0"
@@ -2159,6 +2313,32 @@
     ],
     "nested": false,
     "quotes": []
+  },
+  "HLSL": {
+    "extensions": [
+      "hlsl",
+      "cginc",
+      "fx",
+      "fxh",
+      "hlsli"
+    ],
+    "filenames": [],
+    "line_comment": [
+      "//"
+    ],
+    "multi_line": [
+      [
+        "/*",
+        "*/"
+      ]
+    ],
+    "nested": false,
+    "quotes": [
+      [
+        "\"",
+        "\""
+      ]
+    ]
   },
   "HTML": {
     "extensions": [
@@ -2681,6 +2861,19 @@
       ]
     ]
   },
+  "LaTeX": {
+    "extensions": [
+      "tex",
+      "sty"
+    ],
+    "filenames": [],
+    "line_comment": [
+      "%"
+    ],
+    "multi_line": [],
+    "nested": false,
+    "quotes": []
+  },
   "LESS": {
     "extensions": [
       "less"
@@ -2989,6 +3182,21 @@
     "nested": false,
     "quotes": []
   },
+  "Markdown": {
+    "extensions": [
+      "md",
+      "markdown"
+    ],
+    "filenames": [],
+    "line_comment": [],
+    "multi_line": [],
+    "nested": false,
+    "quotes": [],
+    "literate": true,
+    "important_syntax": [
+      "```"
+    ]
+  },
   "MATLAB": {
     "extensions": [
       "matlab"
@@ -3009,6 +3217,20 @@
         "'",
         "'"
       ]
+    ]
+  },
+  "MDX": {
+    "extensions": [
+      "mdx"
+    ],
+    "filenames": [],
+    "line_comment": [],
+    "multi_line": [],
+    "nested": false,
+    "quotes": [],
+    "literate": true,
+    "important_syntax": [
+      "```"
     ]
   },
   "Menhir": {
@@ -3112,7 +3334,7 @@
   "Mojo": {
     "extensions": [
       "mojo",
-      "🔥"
+      "\ud83d\udd25"
     ],
     "line_comment": [
       "#"
@@ -3155,9 +3377,7 @@
       "myapp",
       "props",
       "rdlc",
-      "resx",
       "settings",
-      "sln",
       "targets",
       "vbproj",
       "vcproj",
@@ -3392,6 +3612,27 @@
     "nested": false,
     "quotes": []
   },
+  "Pacman's makepkg": {
+    "extensions": [],
+    "filenames": [
+      "pkgbuild"
+    ],
+    "line_comment": [
+      "#"
+    ],
+    "multi_line": [],
+    "nested": false,
+    "quotes": [
+      [
+        "\"",
+        "\""
+      ],
+      [
+        "'",
+        "'"
+      ]
+    ]
+  },
   "Pan": {
     "extensions": [
       "pan",
@@ -3520,6 +3761,41 @@
     "nested": false,
     "quotes": []
   },
+  "PL/SQL": {
+    "extensions": [
+      "pls",
+      "bdy",
+      "fnc",
+      "pck",
+      "pkb",
+      "pks",
+      "plb",
+      "plsql",
+      "prc",
+      "spc",
+      "tpb",
+      "tps",
+      "trg",
+      "vw"
+    ],
+    "filenames": [],
+    "line_comment": [
+      "--"
+    ],
+    "multi_line": [
+      [
+        "/*",
+        "*/"
+      ]
+    ],
+    "nested": false,
+    "quotes": [
+      [
+        "'",
+        "'"
+      ]
+    ]
+  },
   "Plain Text": {
     "extensions": [
       "text",
@@ -3529,7 +3805,8 @@
     "line_comment": [],
     "multi_line": [],
     "nested": false,
-    "quotes": []
+    "quotes": [],
+    "literate": true
   },
   "PlantUML": {
     "extensions": [
@@ -3913,8 +4190,8 @@
         "}"
       ],
       [
-        "#`｢",
-        "｣"
+        "#`\uff62",
+        "\uff63"
       ]
     ],
     "nested": false,
@@ -3924,28 +4201,28 @@
         "'"
       ],
       [
-        "„",
-        "“"
+        "\u201e",
+        "\u201c"
       ],
       [
-        "«",
-        "»"
+        "\u00ab",
+        "\u00bb"
       ],
       [
         "<<",
         ">>"
       ],
       [
-        "“",
-        "”"
+        "\u201c",
+        "\u201d"
       ],
       [
-        "’",
-        "‘"
+        "\u2019",
+        "\u2018"
       ],
       [
-        "｢",
-        "｣"
+        "\uff62",
+        "\uff63"
       ]
     ],
     "close_line_is_code": true
@@ -4730,19 +5007,6 @@
     "nested": false,
     "quotes": []
   },
-  "LaTeX": {
-    "extensions": [
-      "tex",
-      "sty"
-    ],
-    "filenames": [],
-    "line_comment": [
-      "%"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
-  },
   "The WenYan Programming Language": {
     "extensions": [
       "wy"
@@ -4750,12 +5014,12 @@
     "line_comment": [],
     "multi_line": [
       [
-        "批曰。",
-        "。"
+        "\u6279\u66f0\u3002",
+        "\u3002"
       ],
       [
-        "疏曰。",
-        "。"
+        "\u758f\u66f0\u3002",
+        "\u3002"
       ]
     ],
     "nested": false,
@@ -4991,6 +5255,20 @@
     "nested": true,
     "quotes": []
   },
+  "Unreal Markdown": {
+    "extensions": [
+      "udn"
+    ],
+    "filenames": [],
+    "line_comment": [],
+    "multi_line": [],
+    "nested": false,
+    "quotes": [],
+    "literate": true,
+    "important_syntax": [
+      "```"
+    ]
+  },
   "Unreal Project": {
     "extensions": [
       "uproject"
@@ -5127,6 +5405,23 @@
     "nested": false,
     "quotes": []
   },
+  "Vertex Shader File": {
+    "extensions": [
+      "vsh"
+    ],
+    "filenames": [],
+    "line_comment": [
+      "//"
+    ],
+    "multi_line": [],
+    "nested": false,
+    "quotes": [
+      [
+        "\"",
+        "\""
+      ]
+    ]
+  },
   "VHDL": {
     "extensions": [
       "vhd",
@@ -5162,6 +5457,16 @@
     "line_comment": [
       "'"
     ],
+    "multi_line": [],
+    "nested": false,
+    "quotes": []
+  },
+  "Visual Studio Solution": {
+    "extensions": [
+      "sln"
+    ],
+    "filenames": [],
+    "line_comment": [],
     "multi_line": [],
     "nested": false,
     "quotes": []
@@ -5250,40 +5555,16 @@
     "line_comment": [],
     "multi_line": [
       [
-        "批曰。",
-        "。"
+        "\u6279\u66f0\u3002",
+        "\u3002"
       ],
       [
-        "疏曰。",
-        "。"
+        "\u758f\u66f0\u3002",
+        "\u3002"
       ]
     ],
     "nested": false,
     "quotes": []
-  },
-  "FXML": {
-    "extensions": [
-      "fxml"
-    ],
-    "filenames": [],
-    "line_comment": [],
-    "multi_line": [
-      [
-        "<!--",
-        "-->"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "'",
-        "'"
-      ]
-    ]
   },
   "XAML": {
     "extensions": [

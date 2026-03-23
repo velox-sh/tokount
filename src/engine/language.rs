@@ -17,6 +17,10 @@ pub struct LanguageDef {
     pub close_line_is_code: bool,
     /// Deduplicated first-bytes of all tokens used by the scanner to skip uninteresting bytes
     pub interest_bytes: &'static [u8],
+    /// All non-blank lines outside code fences are comments (e.g. Plain Text, Markdown)
+    pub literate: bool,
+    /// Markers that toggle between literate-comment and code mode (e.g. `["```"]` for Markdown)
+    pub important_syntax: &'static [&'static [u8]],
 }
 
 #[allow(dead_code, non_upper_case_globals, unused, non_snake_case)]
@@ -51,5 +55,17 @@ impl LanguageDef {
 
     pub fn all_names() -> &'static [&'static str] {
         generated::LANGUAGE_NAMES
+    }
+
+    /// Look up a language by its display name (case-insensitive)
+    pub fn from_name(name: &str) -> Option<&'static LanguageDef> {
+        // avoid allocation for the common case where name is already lowercase
+        if name.bytes().any(|b| b.is_ascii_uppercase()) {
+            generated::NAME_MAP
+                .get(name.to_ascii_lowercase().as_str())
+                .copied()
+        } else {
+            generated::NAME_MAP.get(name).copied()
+        }
     }
 }

@@ -1,6 +1,13 @@
 use crate::engine::language::LanguageDef;
 use crate::engine::scanner;
 
+/// Result of counting a single file, including any embedded child language blocks
+pub struct FileResult {
+    pub counts: LineCounts,
+    /// Embedded child language blocks: `(language_name, counts)`
+    pub children: Vec<(&'static str, LineCounts)>,
+}
+
 #[derive(Clone, Copy, PartialEq, Eq)]
 enum LineType {
     Blank,
@@ -127,8 +134,182 @@ fn classify_prefix(
     }
 }
 
+/// Pure literate: every non-blank line is a comment (e.g. Plain Text)
+/// No syntax tokens, no code possible
+fn count_pure_literate(content: &[u8]) -> LineCounts {
+    let mut counts = LineCounts {
+        code: 0,
+        comment: 0,
+        blank: 0,
+    };
+    let mut line_has_content = false;
+    let mut pos = 0;
+
+    while pos < content.len() {
+        match scanner::find_newline(&content[pos..]) {
+            Some(i) => {
+                let line = &content[pos..pos + i];
+                if line_has_content || line.iter().any(|&b| b != b' ' && b != b'\t' && b != b'\r') {
+                    counts.comment += 1;
+                } else {
+                    counts.blank += 1;
+                }
+                line_has_content = false;
+                pos += i + 1;
+            }
+
+            None => {
+                let line = &content[pos..];
+                if !line.is_empty() {
+                    if line.iter().any(|&b| b != b' ' && b != b'\t' && b != b'\r') {
+                        counts.comment += 1;
+                    } else {
+                        counts.blank += 1;
+                    }
+                }
+                break;
+            }
+        }
+    }
+
+    counts
+}
+
+/// Literate with code fences (e.g. Markdown, MDX, Djot)
+/// Lines outside fences are comments (or blank); lines inside fences belong to the child language
+/// Fence delimiter lines (``` or ```rust) count as parent comments
+fn count_literate_file(content: &[u8], lang: &LanguageDef) -> FileResult {
+    let mut counts = LineCounts {
+        code: 0,
+        comment: 0,
+        blank: 0,
+    };
+    let mut children: Vec<(&'static str, LineCounts)> = Vec::new();
+
+    // reusable buffer for fenced block content
+    let mut fence_buf: Vec<u8> = Vec::new();
+    let mut in_fence = false;
+    let mut fence_lang: Option<&'static LanguageDef> = None;
+    let mut pos = 0;
+
+    // check if a line starts with an important_syntax marker (e.g. ```)
+    let fence_marker: &[u8] = lang.important_syntax.first().copied().unwrap_or(b"```");
+
+    while pos < content.len() {
+        let line_end = scanner::find_newline(&content[pos..]).map_or(content.len(), |i| pos + i);
+
+        let line = &content[pos..line_end];
+        let has_newline = line_end < content.len();
+
+        if in_fence {
+            // check for closing fence
+            if line.starts_with(fence_marker)
+                && line[fence_marker.len()..]
+                    .iter()
+                    .all(|&b| b == b' ' || b == b'\t' || b == b'\r')
+            {
+                // closing fence line — parent comment
+                counts.comment += 1;
+                // count fenced content under child language
+                if let Some(child) = fence_lang {
+                    let child_result = count_file(&fence_buf, child);
+                    children.push((child.name, child_result.counts));
+                    // merge any deeper children (rare but possible)
+                    children.extend(child_result.children);
+                } else {
+                    // unknown child lang: count fenced lines as parent code
+                    let fenced = count_pure_code(&fence_buf);
+                    counts.code += fenced.code;
+                    counts.comment += fenced.comment;
+                    counts.blank += fenced.blank;
+                }
+                fence_buf.clear();
+                fence_lang = None;
+                in_fence = false;
+            } else {
+                // accumulate fenced content (include the newline so line counts are right)
+                fence_buf.extend_from_slice(line);
+                if has_newline {
+                    fence_buf.push(b'\n');
+                }
+            }
+        } else {
+            // check for opening fence
+            if line.starts_with(fence_marker) {
+                // opening fence line — parent comment
+                counts.comment += 1;
+                // extract language identifier after the fence marker
+                let after = &line[fence_marker.len()..];
+                let ident = after
+                    .iter()
+                    .position(|&b| b == b' ' || b == b'\t' || b == b'\r')
+                    .map_or(after, |i| &after[..i]);
+                // try to find the child language: first by extension, then by name
+                fence_lang = if ident.is_empty() {
+                    None
+                } else if let Ok(s) = std::str::from_utf8(ident) {
+                    LanguageDef::from_extension(s).or_else(|| LanguageDef::from_name(s))
+                } else {
+                    None
+                };
+                in_fence = true;
+            } else if line.iter().any(|&b| b != b' ' && b != b'\t' && b != b'\r') {
+                counts.comment += 1;
+            } else {
+                counts.blank += 1;
+            }
+        }
+
+        pos = line_end + usize::from(has_newline);
+    }
+
+    // unclosed fence: flush remaining content as parent code
+    if in_fence && !fence_buf.is_empty() {
+        let fenced = count_pure_code(&fence_buf);
+        counts.code += fenced.code;
+        counts.blank += fenced.blank;
+    }
+
+    FileResult { counts, children }
+}
+
+/// Count non-blank lines as code (used for fenced blocks with unknown child language)
+fn count_pure_code(content: &[u8]) -> LineCounts {
+    let mut counts = LineCounts {
+        code: 0,
+        comment: 0,
+        blank: 0,
+    };
+    let mut pos = 0;
+
+    while pos < content.len() {
+        let end = scanner::find_newline(&content[pos..]).map_or(content.len(), |i| pos + i);
+        let line = &content[pos..end];
+        if line.iter().any(|&b| b != b' ' && b != b'\t' && b != b'\r') {
+            counts.code += 1;
+        } else if !line.is_empty() || end < content.len() {
+            counts.blank += 1;
+        }
+        pos = end + if end < content.len() { 1 } else { 0 };
+    }
+
+    counts
+}
+
 #[expect(clippy::cognitive_complexity, clippy::too_many_lines)]
-pub fn count_file(content: &[u8], lang: &LanguageDef) -> LineCounts {
+pub fn count_file(content: &[u8], lang: &LanguageDef) -> FileResult {
+    // literate languages have their own fast paths
+    if lang.literate {
+        return if lang.important_syntax.is_empty() {
+            FileResult {
+                counts: count_pure_literate(content),
+                children: Vec::new(),
+            }
+        } else {
+            count_literate_file(content, lang)
+        };
+    }
+
     let mut counts = LineCounts {
         code: 0,
         comment: 0,
@@ -136,7 +317,10 @@ pub fn count_file(content: &[u8], lang: &LanguageDef) -> LineCounts {
     };
 
     if content.is_empty() {
-        return counts;
+        return FileResult {
+            counts,
+            children: Vec::new(),
+        };
     }
 
     let mut parse = ParseState::Normal;
@@ -159,7 +343,10 @@ pub fn count_file(content: &[u8], lang: &LanguageDef) -> LineCounts {
                 }
                 None => {
                     emit(&mut counts, line_type, parse);
-                    return counts;
+                    return FileResult {
+                        counts,
+                        children: Vec::new(),
+                    };
                 }
             },
 
@@ -202,7 +389,10 @@ pub fn count_file(content: &[u8], lang: &LanguageDef) -> LineCounts {
 
                         None => {
                             emit(&mut counts, line_type, parse);
-                            return counts;
+                            return FileResult {
+                                counts,
+                                children: Vec::new(),
+                            };
                         }
                     }
                 } else {
@@ -229,7 +419,10 @@ pub fn count_file(content: &[u8], lang: &LanguageDef) -> LineCounts {
 
                         None => {
                             emit(&mut counts, line_type, parse);
-                            return counts;
+                            return FileResult {
+                                counts,
+                                children: Vec::new(),
+                            };
                         }
                     }
                 }
@@ -272,7 +465,10 @@ pub fn count_file(content: &[u8], lang: &LanguageDef) -> LineCounts {
 
                     None => {
                         counts.code += 1;
-                        return counts;
+                        return FileResult {
+                            counts,
+                            children: Vec::new(),
+                        };
                     }
                 }
             }
@@ -354,7 +550,10 @@ pub fn count_file(content: &[u8], lang: &LanguageDef) -> LineCounts {
                             emit(&mut counts, line_type, parse);
                         }
 
-                        return counts;
+                        return FileResult {
+                            counts,
+                            children: Vec::new(),
+                        };
                     }
                 }
             }
@@ -368,5 +567,8 @@ pub fn count_file(content: &[u8], lang: &LanguageDef) -> LineCounts {
         emit(&mut counts, line_type, parse);
     }
 
-    counts
+    FileResult {
+        counts,
+        children: Vec::new(),
+    }
 }

@@ -1,0 +1,15 @@
+# 15 lines 13 code 2 comments 0 blanks
+<html>
+<head>
+  <title><%= @page_title %></title>
+</head>
+<body>
+  # render user list
+  <%= for user <- @users do %>
+    <div class="user">
+      <span><%= user.name %></span>
+      <span><%= user.email %></span>
+    </div>
+  <% end %>
+</body>
+</html>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!--
+    ResX file schema - do not remove
+  -->
+  <data name="WelcomeMessage" xml:space="preserve">
+    <value>Welcome to the application!</value>
+  </data>
+  <data name="ErrorNotFound" xml:space="preserve">
+    <value>The requested resource was not found.</value>
+  </data>
+  <data name="ButtonOk" xml:space="preserve">
+    <value>OK</value>
+  </data>
+</root>

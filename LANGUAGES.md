@@ -1,25 +1,25 @@
 # Languages
 
-## Supported (269)
+## Supported (280)
 
 All languages below have a fixture file in `tests/lang/` verified against `tokei` and `scc`.
 
 ```text
+.NET Resource
 8th
 ABNF
-APL
-ASN.1
-ATS
-AWK
 Alloy
 Apache Velocity
+APL
 Arduino C++
 Arturo
 AsciiDoc
+ASN.1
 Assembly
-AutoHotKey
+ATS
 Autoconf
-BQN
+AutoHotKey
+AWK
 Ballerina
 Bash
 Basic
@@ -27,6 +27,7 @@ Bazel
 Bean
 Bicep
 Bitbake
+BQN
 Brainfuck
 BrightScript
 C
@@ -37,28 +38,29 @@ C++
 C++ Header
 C++ Module
 C3
-CIL (SELinux)
-CMake
-CSS
-CSV
-CUE
 Cairo
 Cangjie
 Chapel
+CIL (SELinux)
 Circom
 Clojure
 ClojureC
 ClojureScript
+CMake
 CodeQL
 Cogent
 Crystal
+CSS
+CSV
 Cuda
+CUE
 Cython
 D
 D2
 DAML
-DM
+Dart
 Dhall
+DM
 Docker ignore
 Dockerfile
 Dream Maker
@@ -68,34 +70,37 @@ EdgeDB Schema Definition
 EdgeQL
 Edn
 Elixir
+Elixir Template
 Elvish
 Emacs Dev Env
 Emacs Lisp
 Emojicode
 F#
 F*
-FXML
 Factor
 Fennel
 Fish
 FlatBuffers Schema
 Forge Config
+Fragment Shader File
 FreeMarker
 Freemarker Template
 Futhark
+FXML
+Game Maker Language
 GDB Script
 GDScript
 GDShader
-GLSL
-GNU Style Assembly
-Game Maker Language
 Gemfile
 Gherkin (Cucumber)
 Gherkin Specification
+gitignore
 Gleam
 Glimmer JS
 Glimmer TS
+GLSL
 Gml
+GNU Style Assembly
 Go
 Go HTML
 Go Template
@@ -103,55 +108,60 @@ Godot Scene
 GraphQL
 Gwion
 HAML
-HCL
-HICAD
-HTML
 Haskell
+HCL
 Headache
+HEEx
 Hex0
 Hex1
 Hex2
+HICAD
+hledger
+HLSL
+HTML
+ignore
 INI
-JSLT
-JSON
-JSON5
-JSONC
-JSONL
-JSX
 Janet
 Java
 JavaScript
 Jinja
 Jinja2
+jq
+JSLT
+JSON
+JSON5
+JSONC
+JSONL
 Jsonnet
+JSX
 Jupyter
 Jupyter Notebooks
 Just
 K
-KV Language
 Kaem
 Kakoune script
 Koka
 Korn Shell
 Kotlin
+KV Language
 LALRPOP
-LESS
-LLVM
-LLVM IR
-LOLCODE
 LaTeX
+LESS
 License
 Lingua Franca
 Liquid
 Lisp
 LiveScript
+LLVM
+LLVM IR
 Logtalk
+LOLCODE
 Lua
 Luau
 M1 Assembly
-MATLAB
-MSBuild
+m4
 Makefile
+MATLAB
 Menhir
 Metal
 Metal Shading Language
@@ -160,6 +170,7 @@ Modelica
 Module-Definition
 Mojo
 Monkey C
+MSBuild
 Nextflow
 Nix
 Not Quite Perl
@@ -171,15 +182,17 @@ OpenQASM
 OpenSCAD
 OpenType Feature File
 Org
-PKGBUILD
-PO File
+Pacman's makepkg
 Pan
 Pascal
 Perl
 Pest
 Phix
+PKGBUILD
+PL/SQL
 Plain Text
 PlantUML
+PO File
 Poke
 Pony
 PostCSS
@@ -191,23 +204,20 @@ Pyret
 Python
 Q
 QML
-RPM Specfile
 Racket
 Rakefile
 Raku
 Razor
-ReStructuredText
 Redscript
 Ren'Py
+ReStructuredText
 Rich Text Format
 Roc
+RPM Specfile
 Ruby
 Ruby HTML
 Rust
 Rusty Object Notation
-SQL
-SRecode Template
-SVG
 Sass
 Scala
 Scheme
@@ -218,29 +228,33 @@ Slint
 Snakemake
 Solidity
 Specman e
+SQL
+SRecode Template
 Stan
 Stata
 Stratego/XT
 Stylus
 Svelte
+SVG
 Swift
 Swig
-TOML
-TSX
-TTCN-3
 Tact
 Templ
 Tera
 Terraform
 The WenYan Programming Language
 Thrift
+TOML
+TSX
+TTCN-3
 Twig
 Twig Template
 TypeScript
 Typst
-UMPL
 Uiua
+UMPL
 Unison
+Unreal Markdown
 Unreal Project
 Unreal Script
 Unreal Shader
@@ -249,13 +263,16 @@ Ur/Web
 Ur/Web Project
 VB6/VBA
 VBScript
+Vertex Shader File
 VHDL
 Visual Basic
 Visual Basic for Applications
+Visual Studio Solution
 Vue
 WebAssembly
 WebGPU Shader Language
 WebGPU Shading Language
+wenyan
 XAML
 XHTML
 XML
@@ -268,20 +285,13 @@ ZenCode
 Zig
 ZoKrates
 Zsh
-gitignore
-hledger
-ignore
-jq
-m4
-wenyan
 ```
 
-## To Add (100)
+## To Add (91)
 
 Languages below lack a test fixture. To add one: create a fixture in `tests/lang/` with expected counts in the first line, verify against `tokei`/`scc`, then add or restore the language definition.
 
 ```text
-.NET Resource
 ASP
 AXAML
 Ada
@@ -303,15 +313,12 @@ CoffeeScript
 ColdFusion CFScript
 Coq
 Cypher
-Dart
 Djot
-Elixir Template
 EmiT
 Expect
 FIDL
 FSL
 Forth
-Fragment Shader File
 Game Maker Project
 Gradle
 Groovy
@@ -343,9 +350,7 @@ OCaml
 Opalang
 OpenTofu
 PHP
-PL/SQL
 PRQL
-Pacman's makepkg
 Phoenix LiveView
 Pkl
 PostScript
@@ -369,13 +374,10 @@ TOON
 Teal
 Textile
 TypeScript Typings
-Unreal Markdown
 Up
 Vala
 Verilog
-Vertex Shader File
 Virgil
-Visual Studio Solution
 Web Services Description Language
 Wolfram
 XMake
