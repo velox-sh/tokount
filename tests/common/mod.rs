@@ -4,6 +4,49 @@ use std::process::Command;
 
 use serde_json::Value;
 
+#[allow(dead_code)]
+pub struct ExpectedCounts {
+    pub lines: u32,
+    pub code: u32,
+    pub comment: u32,
+    pub blank: u32,
+}
+
+fn try_parse_counts(line: &str) -> Option<ExpectedCounts> {
+    // Each metric is a number immediately preceding its label word
+    // Fields can appear in any order and may be comma-separated
+    let n_before = |label: &str| -> Option<u32> {
+        let words: Vec<&str> = line.split_whitespace().collect();
+
+        for (i, &word) in words.iter().enumerate() {
+            // strip trailing comma/punctuation from the label candidate
+            let clean = word.trim_end_matches([',', '.', '/', '*', ')']);
+
+            if (clean == label || clean == label.trim_end_matches('s')) && i > 0 {
+                // strip trailing comma from the number candidate
+                let num_str = words[i - 1].trim_end_matches(',');
+
+                if let Ok(n) = num_str.parse::<u32>() {
+                    return Some(n);
+                }
+            }
+        }
+        None
+    };
+
+    let lines = n_before("lines")?;
+    let code = n_before("code")?;
+    let comment = n_before("comments").or_else(|| n_before("comment"))?;
+    let blank = n_before("blanks").or_else(|| n_before("blank"))?;
+
+    Some(ExpectedCounts {
+        lines,
+        code,
+        comment,
+        blank,
+    })
+}
+
 // shared across test binaries; not every binary uses every helper
 #[allow(dead_code)]
 pub fn repo_root() -> PathBuf {
@@ -46,14 +89,6 @@ pub fn run_json(path: &Path, extra_args: &[&str]) -> Value {
     serde_json::from_slice(&out.stdout).expect("output is not valid JSON")
 }
 
-#[allow(dead_code)]
-pub struct ExpectedCounts {
-    pub lines: u32,
-    pub code: u32,
-    pub comment: u32,
-    pub blank: u32,
-}
-
 // formats: `// N lines N code N comments N blanks`, `# N lines, N code, ...`,
 // `dnl N lines ...`, `/* N lines ... */` (fields in any order, comma-separated ok)
 #[allow(dead_code)]
@@ -82,41 +117,4 @@ pub fn parse_expected_file(sidecar: &std::path::Path) -> Option<ExpectedCounts> 
     } else {
         None
     }
-}
-
-fn try_parse_counts(line: &str) -> Option<ExpectedCounts> {
-    // Each metric is a number immediately preceding its label word
-    // Fields can appear in any order and may be comma-separated
-    let n_before = |label: &str| -> Option<u32> {
-        let words: Vec<&str> = line.split_whitespace().collect();
-
-        for (i, &word) in words.iter().enumerate() {
-            // strip trailing comma/punctuation from the label candidate
-            let clean = word.trim_end_matches([',', '.', '/', '*', ')']);
-
-            if (clean == label || clean == label.trim_end_matches('s')) && i > 0 {
-                // strip trailing comma from the number candidate
-                let num_str = words[i - 1].trim_end_matches(',');
-
-                if let Ok(n) = num_str.parse::<u32>() {
-                    return Some(n);
-                }
-            }
-        }
-        None
-    };
-
-    let lines = n_before("lines")?;
-    let code = n_before("code")?;
-    // "comments" or "comment"
-    let comment = n_before("comments").or_else(|| n_before("comment"))?;
-    // "blanks" or "blank"
-    let blank = n_before("blanks").or_else(|| n_before("blank"))?;
-
-    Some(ExpectedCounts {
-        lines,
-        code,
-        comment,
-        blank,
-    })
 }

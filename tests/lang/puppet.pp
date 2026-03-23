@@ -1,4 +1,4 @@
-# 18 lines 14 code 3 comments 1 blanks
+# 18 lines 14 code 3 comments 1 blank
 class example::class(
   $param1,
   $param2=2,

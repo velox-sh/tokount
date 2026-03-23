@@ -8,24 +8,6 @@ use clap::ValueEnum;
 use crate::types::ErrorBody;
 use crate::types::ErrorPayload;
 
-#[derive(Debug, Clone, Copy, ValueEnum, Default)]
-pub enum SortColumn {
-    Files,
-    Lines,
-    Blank,
-    Comment,
-    #[default]
-    Code,
-}
-
-#[derive(Debug, Clone, Copy, ValueEnum, Default)]
-pub enum OutputFormat {
-    #[default]
-    Table,
-    Json,
-    Csv,
-}
-
 /// Fast line counter for codebases (faster than tokei, scc, and cloc btw)
 #[derive(Parser, Debug)]
 #[command(name = "tokount", version, about)]
@@ -59,9 +41,31 @@ pub struct Args {
     #[arg(long)]
     pub no_ignore: bool,
 
+    /// Disable ANSI colors in table output
+    #[arg(long)]
+    pub no_color: bool,
+
     /// Print all supported languages and exit
     #[arg(short = 'l', long)]
     pub languages: bool,
+}
+
+#[derive(Debug, Clone, Copy, ValueEnum, Default)]
+pub enum SortColumn {
+    Files,
+    Lines,
+    Blank,
+    Comment,
+    #[default]
+    Code,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, ValueEnum, Default)]
+pub enum OutputFormat {
+    #[default]
+    Table,
+    Json,
+    Csv,
 }
 
 impl Args {

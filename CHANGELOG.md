@@ -31,7 +31,7 @@ Added embedded languages support and decided that literate languages should be c
 
 **Changed:**
 
--
+- Table output now includes embedded languages and has nice colors now
 -
 
 ## v2.0.0 — SIMD engine

@@ -1,4 +1,4 @@
-// 9 lines, 5 code, 3 comments, 1 blanks
+// 9 lines, 5 code, 3 comments,1 blank
 
 /** string two numbers together */
 const stringNums = (x: number, y: number) => {

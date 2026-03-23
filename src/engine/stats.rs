@@ -80,19 +80,24 @@ impl ThreadStats {
         let mut languages = HashMap::new();
 
         for (name, entry) in &self.langs {
-            if entry.code > 0 || entry.comment > 0 || entry.blank > 0 {
+            let child_map = self.children.get(name);
+            let has_children = child_map.is_some_and(|m| !m.is_empty());
+
+            if entry.code > 0 || entry.comment > 0 || entry.blank > 0 || has_children {
                 total.n_files += entry.files;
                 total.blank += entry.blank;
                 total.comment += entry.comment;
                 total.code += entry.code;
 
-                let child_stats: HashMap<String, LangStats> = self
-                    .children
-                    .get(name)
+                let child_stats: HashMap<String, LangStats> = child_map
                     .map(|child_map| {
                         child_map
                             .iter()
                             .map(|(child_name, e)| {
+                                total.blank += e.blank;
+                                total.comment += e.comment;
+                                total.code += e.code;
+
                                 (
                                     child_name.to_string(),
                                     LangStats {

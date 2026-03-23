@@ -24,6 +24,14 @@ pub struct WalkResult {
     pub gitignore_patterns: Vec<String>,
 }
 
+#[inline]
+fn empty_walk_result() -> WalkResult {
+    WalkResult {
+        git_repos: 0,
+        gitignore_patterns: Vec::new(),
+    }
+}
+
 fn is_git_repo(path: &Path) -> bool {
     let mut current = Some(path);
     while let Some(dir) = current {
@@ -49,12 +57,18 @@ fn parse_ignore_file(path: &Path) -> Vec<String> {
     patterns
 }
 
+#[inline]
+fn extend_patterns(patterns: &Mutex<Vec<String>>, new_patterns: Vec<String>) {
+    if !new_patterns.is_empty()
+        && let Ok(mut guard) = patterns.lock()
+    {
+        guard.extend(new_patterns);
+    }
+}
+
 pub fn walk_parallel(config: &WalkConfig<'_>, tx: &Sender<PathBuf>) -> WalkResult {
     if config.roots.is_empty() {
-        return WalkResult {
-            git_repos: 0,
-            gitignore_patterns: Vec::new(),
-        };
+        return empty_walk_result();
     }
 
     let git_repos = Arc::new(AtomicUsize::new(0));
@@ -118,12 +132,7 @@ pub fn walk_parallel(config: &WalkConfig<'_>, tx: &Sender<PathBuf>) -> WalkResul
                 let name = entry.file_name().to_str().unwrap_or("");
 
                 if name == ".gitignore" || name == ".prettierignore" {
-                    let new_pats = parse_ignore_file(entry.path());
-                    if !new_pats.is_empty()
-                        && let Ok(mut guard) = patterns.lock()
-                    {
-                        guard.extend(new_pats);
-                    }
+                    extend_patterns(&patterns, parse_ignore_file(entry.path()));
                     return WalkState::Continue;
                 }
 

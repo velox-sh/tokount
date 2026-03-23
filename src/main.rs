@@ -2,6 +2,7 @@ mod cli;
 mod display;
 
 use std::collections::HashMap;
+use std::io::IsTerminal;
 use std::path::Path;
 use std::path::PathBuf;
 use std::time::Instant;
@@ -14,6 +15,38 @@ use indicatif::ProgressStyle;
 use tokount::engine;
 use tokount::engine::EngineConfig;
 use tokount::types;
+
+fn single_detail(key: &str, value: String) -> HashMap<String, String> {
+    let mut details = HashMap::new();
+    details.insert(key.to_string(), value);
+    details
+}
+
+fn io_details(path: &Path, err: &std::io::Error) -> HashMap<String, String> {
+    let mut details = single_detail("path", path.display().to_string());
+    details.insert("error".to_string(), err.to_string());
+    details
+}
+
+fn validate_paths(paths: &[PathBuf]) {
+    for path in paths {
+        if !path.exists() {
+            emit_error(
+                "NotFound",
+                "Path does not exist",
+                Some(single_detail("path", path.display().to_string())),
+            );
+        }
+
+        if let Err(err) = path.metadata() {
+            emit_error(
+                "IoError",
+                "Failed to read path metadata",
+                Some(io_details(path, &err)),
+            );
+        }
+    }
+}
 
 fn spinner() -> ProgressBar {
     let pb = ProgressBar::new_spinner();
@@ -38,20 +71,7 @@ fn main() {
         return;
     }
 
-    for path in &args.paths {
-        if !path.exists() {
-            let mut details = HashMap::new();
-            details.insert("path".to_string(), path.display().to_string());
-            emit_error("NotFound", "Path does not exist", Some(details));
-        }
-
-        if let Err(err) = path.metadata() {
-            let mut details = HashMap::new();
-            details.insert("path".to_string(), path.display().to_string());
-            details.insert("error".to_string(), err.to_string());
-            emit_error("IoError", "Failed to read path metadata", Some(details));
-        }
-    }
+    validate_paths(&args.paths);
 
     let excluded = args.excluded_dirs();
     let types_filter = args.types_filter();
@@ -61,6 +81,10 @@ fn main() {
     let path_refs: Vec<&Path> = args.paths.iter().map(PathBuf::as_path).collect();
     let fmt = args.format();
     let sort = args.sort_column();
+    let table_color = fmt == OutputFormat::Table
+        && !args.no_color
+        && std::io::stdout().is_terminal()
+        && std::env::var_os("NO_COLOR").is_none();
 
     let pb = match fmt {
         OutputFormat::Table => {
@@ -96,7 +120,7 @@ fn main() {
     };
 
     match fmt {
-        OutputFormat::Table => display::print_table(&output, &label, elapsed, sort),
+        OutputFormat::Table => display::print_table(&output, &label, elapsed, sort, table_color),
         OutputFormat::Json => println!(
             "{}",
             serde_json::to_string(&output).expect("output is serializable")

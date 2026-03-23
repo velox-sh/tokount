@@ -2,18 +2,6 @@ use memchr::memchr;
 use memchr::memchr2;
 use memchr::memchr3;
 
-// memchr/2/3 for ≤3 needles (guaranteed SIMD); SSE2 loop for >3 on x86-64; scalar elsewhere
-#[inline]
-pub fn find_interesting(bytes: &[u8], needles: &[u8]) -> Option<usize> {
-    match needles {
-        [] => None,
-        [a] => memchr(*a, bytes),
-        [a, b] => memchr2(*a, *b, bytes),
-        [a, b, c] => memchr3(*a, *b, *c, bytes),
-        _ => find_interesting_wide(bytes, needles),
-    }
-}
-
 #[cfg(target_arch = "x86_64")]
 #[target_feature(enable = "sse2")]
 #[expect(unsafe_code)]
@@ -63,6 +51,18 @@ fn find_interesting_wide(bytes: &[u8], needles: &[u8]) -> Option<usize> {
 #[inline]
 fn find_interesting_wide(bytes: &[u8], needles: &[u8]) -> Option<usize> {
     bytes.iter().position(|b| needles.contains(b))
+}
+
+// memchr/2/3 for ≤3 needles (guaranteed SIMD); SSE2 loop for >3 on x86-64; scalar elsewhere
+#[inline]
+pub fn find_interesting(bytes: &[u8], needles: &[u8]) -> Option<usize> {
+    match needles {
+        [] => None,
+        [a] => memchr(*a, bytes),
+        [a, b] => memchr2(*a, *b, bytes),
+        [a, b, c] => memchr3(*a, *b, *c, bytes),
+        _ => find_interesting_wide(bytes, needles),
+    }
 }
 
 #[inline]

@@ -34,6 +34,13 @@ thread_local! {
     static READER: RefCell<reader::FileReader> = RefCell::new(reader::FileReader::new());
 }
 
+fn peek_shebang(path: &Path) -> Option<&'static language::LanguageDef> {
+    let file = fs::File::open(path).ok()?;
+    let mut line = String::new();
+    std::io::BufReader::new(file).read_line(&mut line).ok()?;
+    language::LanguageDef::from_shebang(line.trim_end())
+}
+
 /// Walk `paths`, detect languages, and return aggregate line statistics
 pub fn count(paths: &[&Path], config: &EngineConfig<'_>) -> crate::types::OutputStats {
     // unbounded: walker never blocks waiting for consumers (mirrors tokei)
@@ -130,11 +137,4 @@ pub fn count(paths: &[&Path], config: &EngineConfig<'_>) -> crate::types::Output
     merged.gitignore_patterns = walk_info.gitignore_patterns;
 
     merged.into_output()
-}
-
-fn peek_shebang(path: &Path) -> Option<&'static language::LanguageDef> {
-    let file = fs::File::open(path).ok()?;
-    let mut line = String::new();
-    std::io::BufReader::new(file).read_line(&mut line).ok()?;
-    language::LanguageDef::from_shebang(line.trim_end())
 }

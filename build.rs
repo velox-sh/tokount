@@ -49,6 +49,55 @@ fn escape_bytes(s: &str) -> String {
     out
 }
 
+fn emit_phf_map(
+    out: &mut fs::File,
+    static_name: &str,
+    entries: &[(String, String)],
+) -> std::io::Result<()> {
+    let mut map = phf_codegen::Map::new();
+    for (k, v) in entries {
+        map.entry(k.as_str(), v.as_str());
+    }
+    writeln!(
+        out,
+        "pub(super) static {static_name}: phf::Map<&'static str, &'static LanguageDef> = {};",
+        map.build()
+    )
+}
+
+#[inline]
+fn insert_first_byte(set: &mut std::collections::BTreeSet<u8>, token: &str) {
+    if let Some(b) = token.bytes().next() {
+        set.insert(b);
+    }
+}
+
+fn to_const_name(name: &str) -> String {
+    let mut result = String::new();
+    let mut prev_was_sep = true;
+
+    for c in name.chars() {
+        if c.is_alphanumeric() {
+            if prev_was_sep {
+                result.push(c.to_ascii_uppercase());
+            } else {
+                result.push(c);
+            }
+            prev_was_sep = false;
+        } else {
+            if !result.is_empty() && !prev_was_sep {
+                result.push('_');
+            }
+            prev_was_sep = true;
+        }
+    }
+    while result.ends_with('_') {
+        result.pop();
+    }
+
+    format!("LANG_{result}")
+}
+
 #[expect(clippy::cognitive_complexity, clippy::too_many_lines)]
 fn main() {
     let manifest_dir = env::var("CARGO_MANIFEST_DIR").expect("CARGO_MANIFEST_DIR not set");
@@ -139,39 +188,25 @@ fn main() {
         interesting.insert(b'\n');
 
         for s in &lang.line_comment {
-            if let Some(b) = s.bytes().next() {
-                interesting.insert(b);
-            }
+            insert_first_byte(&mut interesting, s);
         }
 
         for pair in &lang.multi_line {
             if pair.len() == 2 {
-                if let Some(b) = pair[0].bytes().next() {
-                    interesting.insert(b);
-                }
-
-                if let Some(b) = pair[1].bytes().next() {
-                    interesting.insert(b);
-                }
+                insert_first_byte(&mut interesting, &pair[0]);
+                insert_first_byte(&mut interesting, &pair[1]);
             }
         }
 
         for pair in &lang.quotes {
             if pair.len() >= 2 {
-                if let Some(b) = pair[0].bytes().next() {
-                    interesting.insert(b);
-                }
-
-                if let Some(b) = pair[1].bytes().next() {
-                    interesting.insert(b);
-                }
+                insert_first_byte(&mut interesting, &pair[0]);
+                insert_first_byte(&mut interesting, &pair[1]);
             }
         }
 
         for s in &lang.important_syntax {
-            if let Some(b) = s.bytes().next() {
-                interesting.insert(b);
-            }
+            insert_first_byte(&mut interesting, s);
         }
 
         let mask_str = {
@@ -225,18 +260,7 @@ fn main() {
         }
     }
 
-    let mut ext_map = phf_codegen::Map::new();
-
-    for (k, v) in &ext_entries {
-        ext_map.entry(k.as_str(), v.as_str());
-    }
-
-    writeln!(
-        out,
-        "pub(super) static EXTENSION_MAP: phf::Map<&'static str, &'static LanguageDef> = {};",
-        ext_map.build()
-    )
-    .unwrap();
+    emit_phf_map(&mut out, "EXTENSION_MAP", &ext_entries).unwrap();
 
     // collect filename entries first so strings outlive phf_codegen borrows
     let mut seen_fns = std::collections::HashSet::new();
@@ -253,18 +277,7 @@ fn main() {
         }
     }
 
-    let mut fn_map = phf_codegen::Map::new();
-
-    for (k, v) in &fn_entries {
-        fn_map.entry(k.as_str(), v.as_str());
-    }
-
-    writeln!(
-        out,
-        "pub(super) static FILENAME_MAP: phf::Map<&'static str, &'static LanguageDef> = {};",
-        fn_map.build()
-    )
-    .unwrap();
+    emit_phf_map(&mut out, "FILENAME_MAP", &fn_entries).unwrap();
 
     // collect shebang/env entries (#!/usr/bin/env <name> or #!/path/to/interp)
     let mut seen_envs = std::collections::HashSet::new();
@@ -290,18 +303,7 @@ fn main() {
         }
     }
 
-    let mut env_map = phf_codegen::Map::new();
-
-    for (k, v) in &env_entries {
-        env_map.entry(k.as_str(), v.as_str());
-    }
-
-    writeln!(
-        out,
-        "pub(super) static SHEBANG_MAP: phf::Map<&'static str, &'static LanguageDef> = {};",
-        env_map.build()
-    )
-    .unwrap();
+    emit_phf_map(&mut out, "SHEBANG_MAP", &env_entries).unwrap();
 
     // NAME_MAP: lowercased language name -> &LanguageDef (for fence identifier resolution)
     let mut name_entries: Vec<(String, String)> = Vec::new();
@@ -315,18 +317,7 @@ fn main() {
         }
     }
 
-    let mut name_map = phf_codegen::Map::new();
-
-    for (k, v) in &name_entries {
-        name_map.entry(k.as_str(), v.as_str());
-    }
-
-    writeln!(
-        out,
-        "pub(super) static NAME_MAP: phf::Map<&'static str, &'static LanguageDef> = {};",
-        name_map.build()
-    )
-    .unwrap();
+    emit_phf_map(&mut out, "NAME_MAP", &name_entries).unwrap();
 
     let names: Vec<String> = langs
         .keys()
@@ -338,30 +329,4 @@ fn main() {
         names.join(", ")
     )
     .unwrap();
-}
-
-fn to_const_name(name: &str) -> String {
-    let mut result = String::new();
-    let mut prev_was_sep = true;
-
-    for c in name.chars() {
-        if c.is_alphanumeric() {
-            if prev_was_sep {
-                result.push(c.to_ascii_uppercase());
-            } else {
-                result.push(c);
-            }
-            prev_was_sep = false;
-        } else {
-            if !result.is_empty() && !prev_was_sep {
-                result.push('_');
-            }
-            prev_was_sep = true;
-        }
-    }
-    while result.ends_with('_') {
-        result.pop();
-    }
-
-    format!("LANG_{result}")
 }

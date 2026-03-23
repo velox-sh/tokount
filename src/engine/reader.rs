@@ -28,24 +28,6 @@ impl Default for FileReader {
 }
 
 impl FileReader {
-    pub fn new() -> Self {
-        Self {
-            buf: Vec::with_capacity(64 * 1024),
-            mmap: None,
-        }
-    }
-
-    pub fn read(&mut self, path: &Path) -> Option<&[u8]> {
-        let file = File::open(path).ok()?;
-        let size = file.metadata().ok()?.size();
-        if size == 0 {
-            self.mmap = None;
-            return None;
-        }
-
-        self.read_file(file, size)
-    }
-
     fn read_file(&mut self, file: File, size: u64) -> Option<&[u8]> {
         if size >= MMAP_THRESHOLD {
             // SAFETY: we hold no other reference to this file's pages; the mmap
@@ -78,5 +60,23 @@ impl FileReader {
         }
 
         Some(&self.buf)
+    }
+
+    pub fn new() -> Self {
+        Self {
+            buf: Vec::with_capacity(64 * 1024),
+            mmap: None,
+        }
+    }
+
+    pub fn read(&mut self, path: &Path) -> Option<&[u8]> {
+        let file = File::open(path).ok()?;
+        let size = file.metadata().ok()?.size();
+        if size == 0 {
+            self.mmap = None;
+            return None;
+        }
+
+        self.read_file(file, size)
     }
 }

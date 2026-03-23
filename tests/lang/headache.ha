@@ -1,4 +1,4 @@
-// 13 lines 9 code 3 comments 1 blanks
+// 13 lines 9 code 3 comments 1 blank
 /* //The Headache cat program */
 // Implementation of Unix Cat in Headache
 
