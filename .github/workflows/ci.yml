@@ -32,8 +32,8 @@ env:
   RUSTUP_MAX_RETRIES: 10
 
 jobs:
-  check:
-    name: fmt / clippy / test
+  fast:
+    name: Fast Checks
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -48,6 +48,23 @@ jobs:
 
       - uses: Swatinem/rust-cache@v2
 
-      - run: cargo fmt --check
+      - run: cargo fmt --all -- --check
       - run: cargo clippy --all-targets -- -D warnings
-      - run: cargo test
+      - run: cargo test --all-features --test flags --test errors
+
+  accuracy:
+    name: Accuracy Fixtures
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - uses: dtolnay/rust-toolchain@nightly
+        with:
+          components: rustfmt, clippy
+
+      - uses: Swatinem/rust-cache@v2
+      - run: cargo test --test lang_accuracy all_languages
