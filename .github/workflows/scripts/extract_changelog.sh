@@ -8,7 +8,7 @@ CHANGELOG="${2:-CHANGELOG.md}"
 [[ ! -f "$CHANGELOG" ]] && exit 1
 
 # extract section for this version (between this ## and the next ##)
-awk -v ver="$VERSION" '
+section="$(awk -v ver="$VERSION" '
     /^## / {
         if (found) exit
         if (index($0, ver)) { found=1; next }
@@ -17,4 +17,11 @@ awk -v ver="$VERSION" '
 ' "$CHANGELOG" \
 	| sed '/<p align="right">/,/<\/p>/d' \
 	| sed -e :a -e '/^[[:space:]]*$/{ $d; N; ba; }' \
-	| sed '/^[[:space:]]*$/{ N; /^\n$/d; }'
+    | sed '/^[[:space:]]*$/{ N; /^\n$/d; }')"
+
+if [[ -z "$section" ]]; then
+    echo "failed to extract release notes for '$VERSION' from $CHANGELOG" >&2
+    exit 1
+fi
+
+printf '%s\n' "$section"

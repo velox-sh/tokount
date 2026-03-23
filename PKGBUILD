@@ -1,6 +1,6 @@
 # Maintainer: MihaiStreames <72852703+MihaiStreames@users.noreply.github.com>
 pkgname=tokount
-pkgver=1.1.1
+pkgver=2.0.0
 pkgrel=1
 pkgdesc="Fast line counter for codebases, powered by tokei"
 arch=(x86_64)
@@ -27,7 +27,7 @@ build() {
 check() {
 	cd "$pkgname-$pkgver"
 	export RUSTUP_TOOLCHAIN=stable
-	cargo test --all-features
+	cargo test --all-features --test flags --test errors
 }
 
 package() {

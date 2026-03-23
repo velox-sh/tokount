@@ -1,0 +1,5 @@
+# exclude language test fixtures from GitHub Linguist stats
+tests/lang/** linguist-vendored
+
+# keep lang accuracy snapshots out too
+tests/lang/snapshots/** linguist-generated

@@ -1,0 +1,10 @@
+# Djot Document
+
+Djot is a light markup language.
+
+```python
+def hello():
+    print("world")
+```
+
+More text here.

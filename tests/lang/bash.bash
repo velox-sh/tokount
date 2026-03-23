@@ -1,0 +1,9 @@
+# 10 lines 5 code 3 comments 1 blank
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Main function
+main() {
+    local name="tokount"
+    echo "Running $name"
+}

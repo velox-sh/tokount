@@ -1,0 +1,6 @@
+# 6 lines 3 code 2 comments 1 blank
+# ripgrep ignore file
+*.tmp
+
+target/
+dist/

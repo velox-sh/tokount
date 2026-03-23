@@ -11,7 +11,7 @@ This monorepo contains three components:
 ## Data flow
 
 ```text
-browser → frontend → backend → database
+browser -> frontend -> backend -> database
 ```
 
 ## Notes

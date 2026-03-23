@@ -1,0 +1,12 @@
+/* 12 lines 8 code 3 comments 1 blank */
+body {
+  margin: 0;
+  /* Reset padding */
+  padding: 0;
+  font-family: sans-serif;
+}
+
+// Color variables
+.container {
+  color: red;
+}

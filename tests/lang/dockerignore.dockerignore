@@ -1,0 +1,7 @@
+# 7 lines 4 code 2 comments 1 blank
+# Ignore build artifacts
+target/
+*.log
+
+node_modules/
+.git/

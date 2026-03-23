@@ -3,11 +3,12 @@ use std::path::PathBuf;
 use std::process;
 
 use clap::Parser;
+use clap::ValueEnum;
 
 use crate::types::ErrorBody;
 use crate::types::ErrorPayload;
 
-/// tokei-powered fast line counter for codebases
+/// Fast line counter for codebases (faster than tokei, scc, and cloc btw)
 #[derive(Parser, Debug)]
 #[command(name = "tokount", version, about)]
 pub struct Args {
@@ -23,9 +24,48 @@ pub struct Args {
     #[arg(short = 'L', long)]
     pub follow_symlinks: bool,
 
-    /// Output raw JSON instead of a human-readable table
-    #[arg(short = 'j', long)]
-    pub json: bool,
+    /// Output format
+    #[arg(short = 'o', long, value_name = "FORMAT")]
+    pub output: Option<OutputFormat>,
+
+    /// Sort output by column (default: code)
+    #[arg(short = 's', long, value_name = "COLUMN")]
+    pub sort: Option<SortColumn>,
+
+    /// Filter output to specific language(s), comma-separated
+    /// (e.g. Rust,Python)
+    #[arg(short = 't', long, value_delimiter = ',')]
+    pub types: Option<Vec<String>>,
+
+    /// Disable .gitignore / .prettierignore respect
+    #[arg(long)]
+    pub no_ignore: bool,
+
+    /// Disable ANSI colors in table output
+    #[arg(long)]
+    pub no_color: bool,
+
+    /// Print all supported languages and exit
+    #[arg(short = 'l', long)]
+    pub languages: bool,
+}
+
+#[derive(Debug, Clone, Copy, ValueEnum, Default)]
+pub enum SortColumn {
+    Files,
+    Lines,
+    Blank,
+    Comment,
+    #[default]
+    Code,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, ValueEnum, Default)]
+pub enum OutputFormat {
+    #[default]
+    Table,
+    Json,
+    Csv,
 }
 
 impl Args {
@@ -41,16 +81,28 @@ impl Args {
         args
     }
 
-    /// Get excluded directories as a Vec of &str
+    pub fn format(&self) -> OutputFormat {
+        self.output.unwrap_or_default()
+    }
+
+    pub fn sort_column(&self) -> SortColumn {
+        self.sort.unwrap_or_default()
+    }
+
     pub fn excluded_dirs(&self) -> Vec<&str> {
         self.excluded
             .as_ref()
             .map(|v| v.iter().map(String::as_str).collect())
             .unwrap_or_default()
     }
+
+    pub fn types_filter(&self) -> Option<Vec<&str>> {
+        self.types
+            .as_ref()
+            .map(|v| v.iter().map(String::as_str).collect())
+    }
 }
 
-/// Emit a structured error payload to stderr and exit with a non-zero code
 pub fn emit_error(kind: &str, message: &str, details: Option<HashMap<String, String>>) -> ! {
     let payload = ErrorPayload {
         error: ErrorBody {
