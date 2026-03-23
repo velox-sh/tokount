@@ -2,7 +2,6 @@
 
 use std::fs::File;
 use std::io::Read;
-use std::os::unix::fs::MetadataExt;
 use std::path::Path;
 
 use memmap2::Mmap;
@@ -71,7 +70,7 @@ impl FileReader {
 
     pub fn read(&mut self, path: &Path) -> Option<&[u8]> {
         let file = File::open(path).ok()?;
-        let size = file.metadata().ok()?.size();
+        let size = file.metadata().ok()?.len();
         if size == 0 {
             self.mmap = None;
             return None;

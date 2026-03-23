@@ -12,6 +12,8 @@ jobs:
   build:
     name: build (${{ matrix.target }})
     runs-on: ${{ matrix.os }}
+    env:
+      RUSTUP_TOOLCHAIN: stable
     strategy:
       fail-fast: false
       matrix:
@@ -29,14 +31,14 @@ jobs:
             os: windows-latest
             cross: false
           - target: x86_64-apple-darwin
-            os: macos-13
+            os: macos-latest
             cross: false
           - target: aarch64-apple-darwin
-            os: macos-14
+            os: macos-latest
             cross: false
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - uses: dtolnay/rust-toolchain@stable
         with:
@@ -62,7 +64,7 @@ jobs:
           if [ "${{ matrix.cross }}" = "true" ]; then
             cross build --release --target ${{ matrix.target }}
           else
-            cargo build --release --target ${{ matrix.target }}
+            cargo +stable build --release --target ${{ matrix.target }}
           fi
 
       - name: Package (Unix)
@@ -71,7 +73,11 @@ jobs:
           BIN=target/${{ matrix.target }}/release/tokount
           ARCHIVE=tokount-${{ github.ref_name }}-${{ matrix.target }}.tar.gz
           tar -czf "$ARCHIVE" -C "$(dirname $BIN)" "$(basename $BIN)"
-          sha256sum "$ARCHIVE" > "$ARCHIVE.sha256"
+          if [ "$RUNNER_OS" = "macOS" ]; then
+            shasum -a 256 "$ARCHIVE" > "$ARCHIVE.sha256"
+          else
+            sha256sum "$ARCHIVE" > "$ARCHIVE.sha256"
+          fi
 
       - name: Package (Windows)
         if: runner.os == 'Windows'
@@ -83,7 +89,7 @@ jobs:
           $hash = (Get-FileHash $ARCHIVE -Algorithm SHA256).Hash.ToLower()
           "$hash  $ARCHIVE" | Out-File "$ARCHIVE.sha256" -Encoding ascii
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           name: tokount-${{ matrix.target }}
           path: tokount-*-${{ matrix.target }}.*
@@ -93,9 +99,9 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v5
         with:
           path: artifacts
           merge-multiple: true
