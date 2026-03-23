@@ -4,8 +4,10 @@
 <div align="center">
 
 [![Stars](https://img.shields.io/github/stars/MihaiStreames/tokount?style=social)](https://github.com/MihaiStreames/tokount/stargazers)
+[![Crates Version](https://img.shields.io/crates/v/tokount?label=Crate)](https://crates.io/crates/tokount)
 [![AUR Version](https://img.shields.io/aur/version/tokount?label=AUR)](https://aur.archlinux.org/packages/tokount)
 [![Rust Edition](https://img.shields.io/badge/Rust-2024-ed7a1f)](https://www.rust-lang.org/)
+[![Downloads](https://img.shields.io/crates/d/tokount?label=Downloads)](https://crates.io/crates/tokount)
 [![License](https://img.shields.io/github/license/MihaiStreames/tokount?label=License)](LICENSE)
 
 </div>
@@ -36,6 +38,7 @@
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
+        <li><a href="#docker-oci-image">Docker (OCI image)</a></li>
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
@@ -98,6 +101,26 @@ yay -S tokount
 
 # or with paru (AUR)
 paru -S tokount
+```
+
+### Docker (OCI image)
+
+Published image:
+
+- `ghcr.io/mihaistreames/tokount`
+- package page: <https://github.com/users/MihaiStreames/packages/container/package/tokount>
+
+Pull and run:
+
+```bash
+# pull latest
+docker pull ghcr.io/mihaistreames/tokount:latest
+
+# run against current directory
+docker run --rm -v "$PWD":/work -w /work ghcr.io/mihaistreames/tokount:latest .
+
+# run a tagged release image
+docker run --rm -v "$PWD":/work -w /work ghcr.io/mihaistreames/tokount:2.0.0 .
 ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
