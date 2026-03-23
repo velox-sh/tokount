@@ -50,7 +50,6 @@ pub fn count(paths: &[&Path], config: &EngineConfig<'_>) -> crate::types::Output
     let excluded_owned: Vec<String> = config.excluded.iter().map(ToString::to_string).collect();
     let follow_symlinks = config.follow_symlinks;
     let no_ignore = config.no_ignore;
-    // Arc so the types list is shared across rayon threads without cloning per-file
     let types_filter: Arc<Option<Vec<String>>> = Arc::new(
         config
             .types_filter
@@ -78,17 +77,18 @@ pub fn count(paths: &[&Path], config: &EngineConfig<'_>) -> crate::types::Output
             let mut thread_stats = stats::ThreadStats::new();
 
             let ext_raw = path.extension().and_then(|e| e.to_str()).unwrap_or("");
-            // extensions in the map are lowercase; normalise before lookup
             let ext_lower;
+
             let ext = if ext_raw.bytes().any(|b| b.is_ascii_uppercase()) {
                 ext_lower = ext_raw.to_ascii_lowercase();
                 ext_lower.as_str()
             } else {
                 ext_raw
             };
+
             let filename_raw = path.file_name().and_then(|n| n.to_str()).unwrap_or("");
-            // filename map is keyed lowercase; normalise before lookup
             let filename_lower;
+
             let filename = if filename_raw.bytes().any(|b| b.is_ascii_uppercase()) {
                 filename_lower = filename_raw.to_ascii_lowercase();
                 filename_lower.as_str()
@@ -99,7 +99,6 @@ pub fn count(paths: &[&Path], config: &EngineConfig<'_>) -> crate::types::Output
             let lang = language::LanguageDef::from_extension(ext)
                 .or_else(|| language::LanguageDef::from_filename(filename))
                 .or_else(|| {
-                    // shebang detection only for files with no recognized extension
                     if ext.is_empty() {
                         peek_shebang(&path)
                     } else {
@@ -108,7 +107,6 @@ pub fn count(paths: &[&Path], config: &EngineConfig<'_>) -> crate::types::Output
                 });
 
             if let Some(lang) = lang {
-                // skip files whose language isn't in the types filter
                 if let Some(types) = types_filter.as_deref()
                     && !types.iter().any(|t| t.eq_ignore_ascii_case(lang.name))
                 {

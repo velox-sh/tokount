@@ -16,39 +16,14 @@ use crate::types::OutputStats;
 const VERSION: &str = env!("CARGO_PKG_VERSION");
 const REPO: &str = "github.com/MihaiStreames/tokount";
 
-fn sort_langs(langs: &mut Vec<&str>, output: &OutputStats, sort: SortColumn) {
-    langs.sort_unstable_by(|a, b| {
-        let as_ = &output.languages[*a];
-        let bs = &output.languages[*b];
-        let cmp = cmp_stats(bs, as_, sort);
+fn sort_by_stats<'a, F>(names: &mut [&str], sort: SortColumn, get: F)
+where
+    F: Fn(&str) -> &'a LangStats,
+{
+    names.sort_unstable_by(|a, b| {
+        let cmp = cmp_stats(get(b), get(a), sort);
         cmp.then_with(|| a.cmp(b))
     });
-}
-
-fn sort_child_langs(langs: &mut Vec<&str>, parent: &crate::types::LangStats, sort: SortColumn) {
-    langs.sort_unstable_by(|a, b| {
-        let as_ = &parent.children[*a];
-        let bs = &parent.children[*b];
-        let cmp = cmp_stats(bs, as_, sort);
-        cmp.then_with(|| a.cmp(b))
-    });
-}
-
-fn sorted_lang_names(output: &OutputStats, sort: SortColumn) -> Vec<&str> {
-    let mut langs: Vec<&str> = output
-        .languages
-        .keys()
-        .filter(|k| k.as_str() != "SUM")
-        .map(String::as_str)
-        .collect();
-    sort_langs(&mut langs, output, sort);
-    langs
-}
-
-fn sorted_child_names(parent: &LangStats, sort: SortColumn) -> Vec<&str> {
-    let mut children: Vec<&str> = parent.children.keys().map(String::as_str).collect();
-    sort_child_langs(&mut children, parent, sort);
-    children
 }
 
 fn print_summary(
@@ -121,6 +96,7 @@ fn total_lines(blank: usize, comment: usize, code: usize) -> usize {
     blank + comment + code
 }
 
+#[expect(clippy::too_many_arguments)]
 fn render_row(
     name: &str,
     files: usize,
@@ -129,6 +105,8 @@ fn render_row(
     code: usize,
     embedded: bool,
     color: bool,
+    bold: bool,
+    uniform_color: Option<Color>,
 ) -> Vec<Cell> {
     let lines = total_lines(blank, comment, code);
     let mut lang = Cell::new(name);
@@ -138,17 +116,36 @@ fn render_row(
     let mut comment_cell = Cell::new(comment).set_alignment(CellAlignment::Right);
     let mut code_cell = Cell::new(code).set_alignment(CellAlignment::Right);
 
+    if bold {
+        lang = lang.add_attribute(Attribute::Bold);
+        files_cell = files_cell.add_attribute(Attribute::Bold);
+        lines_cell = lines_cell.add_attribute(Attribute::Bold);
+        blank_cell = blank_cell.add_attribute(Attribute::Bold);
+        comment_cell = comment_cell.add_attribute(Attribute::Bold);
+        code_cell = code_cell.add_attribute(Attribute::Bold);
+    }
+
     if color {
-        lang = if embedded {
-            lang.fg(Color::Green).add_attribute(Attribute::Dim)
+        if let Some(sum_color) = uniform_color {
+            lang = lang.fg(sum_color);
+            files_cell = files_cell.fg(sum_color);
+            lines_cell = lines_cell.fg(sum_color);
+            blank_cell = blank_cell.fg(sum_color);
+            comment_cell = comment_cell.fg(sum_color);
+            code_cell = code_cell.fg(sum_color);
         } else {
-            lang.fg(Color::Green)
-        };
-        files_cell = numeric_fg(files_cell, Color::White);
-        lines_cell = numeric_fg(lines_cell, Color::White);
-        blank_cell = numeric_fg(blank_cell, Color::DarkGrey);
-        comment_cell = numeric_fg(comment_cell, Color::Yellow);
-        code_cell = numeric_fg(code_cell, Color::Magenta);
+            lang = if embedded {
+                lang.fg(Color::Green).add_attribute(Attribute::Dim)
+            } else {
+                lang.fg(Color::Green)
+            };
+
+            files_cell = files_cell.fg(Color::White);
+            lines_cell = lines_cell.fg(Color::White);
+            blank_cell = blank_cell.fg(Color::DarkGrey);
+            comment_cell = comment_cell.fg(Color::Yellow);
+            code_cell = code_cell.fg(Color::Magenta);
+        }
     }
 
     vec![
@@ -159,55 +156,6 @@ fn render_row(
         comment_cell,
         code_cell,
     ]
-}
-
-fn render_sum_row(
-    files: usize,
-    blank: usize,
-    comment: usize,
-    code: usize,
-    color: bool,
-) -> Vec<Cell> {
-    let lines = total_lines(blank, comment, code);
-    let mut lang = Cell::new("SUM").add_attribute(Attribute::Bold);
-    let mut files_cell = Cell::new(files)
-        .add_attribute(Attribute::Bold)
-        .set_alignment(CellAlignment::Right);
-    let mut lines_cell = Cell::new(lines)
-        .add_attribute(Attribute::Bold)
-        .set_alignment(CellAlignment::Right);
-    let mut blank_cell = Cell::new(blank)
-        .add_attribute(Attribute::Bold)
-        .set_alignment(CellAlignment::Right);
-    let mut comment_cell = Cell::new(comment)
-        .add_attribute(Attribute::Bold)
-        .set_alignment(CellAlignment::Right);
-    let mut code_cell = Cell::new(code)
-        .add_attribute(Attribute::Bold)
-        .set_alignment(CellAlignment::Right);
-
-    if color {
-        lang = lang.fg(Color::Cyan);
-        files_cell = files_cell.fg(Color::Cyan);
-        lines_cell = lines_cell.fg(Color::Cyan);
-        blank_cell = blank_cell.fg(Color::Cyan);
-        comment_cell = comment_cell.fg(Color::Cyan);
-        code_cell = code_cell.fg(Color::Cyan);
-    }
-
-    vec![
-        lang,
-        files_cell,
-        lines_cell,
-        blank_cell,
-        comment_cell,
-        code_cell,
-    ]
-}
-
-#[inline]
-fn numeric_fg(cell: Cell, color: Color) -> Cell {
-    cell.fg(color)
 }
 
 pub fn print_table(
@@ -243,17 +191,24 @@ pub fn print_table(
     );
 
     let mut table = build_table(color);
-    let langs = sorted_lang_names(output, sort);
+    let mut langs: Vec<&str> = output
+        .languages
+        .keys()
+        .filter(|k| k.as_str() != "SUM")
+        .map(String::as_str)
+        .collect();
+    sort_by_stats(&mut langs, sort, |name| &output.languages[name]);
 
     for lang in langs {
         let s = &output.languages[lang];
 
         table.add_row(render_row(
-            lang, s.n_files, s.blank, s.comment, s.code, false, color,
+            lang, s.n_files, s.blank, s.comment, s.code, false, color, false, None,
         ));
 
         if !s.children.is_empty() {
-            let children = sorted_child_names(s, sort);
+            let mut children: Vec<&str> = s.children.keys().map(String::as_str).collect();
+            sort_by_stats(&mut children, sort, |name| &s.children[name]);
 
             for child in children {
                 let child_stats = &s.children[child];
@@ -266,18 +221,24 @@ pub fn print_table(
                     child_stats.code,
                     true,
                     color,
+                    false,
+                    None,
                 ));
             }
         }
     }
 
     if let Some(sum) = sum {
-        table.add_row(render_sum_row(
+        table.add_row(render_row(
+            "SUM",
             sum.n_files,
             sum.blank,
             sum.comment,
             sum.code,
+            false,
             color,
+            true,
+            Some(Color::Cyan),
         ));
     }
 
@@ -285,20 +246,44 @@ pub fn print_table(
 }
 
 pub fn print_csv(output: &OutputStats, sort: SortColumn) {
-    println!("language,files,blank,comment,code");
+    println!("language,files,lines,blank,comment,code");
 
-    for lang in sorted_lang_names(output, sort) {
+    let mut langs: Vec<&str> = output
+        .languages
+        .keys()
+        .filter(|k| k.as_str() != "SUM")
+        .map(String::as_str)
+        .collect();
+    sort_by_stats(&mut langs, sort, |name| &output.languages[name]);
+
+    for lang in langs {
         let s = &output.languages[lang];
+        let lines = total_lines(s.blank, s.comment, s.code);
         println!(
-            "{},{},{},{},{}",
-            lang, s.n_files, s.blank, s.comment, s.code
+            "{},{},{},{},{},{}",
+            lang, s.n_files, lines, s.blank, s.comment, s.code
         );
+
+        if !s.children.is_empty() {
+            let mut children: Vec<&str> = s.children.keys().map(String::as_str).collect();
+            sort_by_stats(&mut children, sort, |name| &s.children[name]);
+
+            for child in children {
+                let child_stats = &s.children[child];
+                let lines = total_lines(child_stats.blank, child_stats.comment, child_stats.code);
+                println!(
+                    "\"|- {}\",0,{},{},{},{}",
+                    child, lines, child_stats.blank, child_stats.comment, child_stats.code
+                );
+            }
+        }
     }
 
     if let Some(sum) = output.languages.get("SUM") {
+        let lines = total_lines(sum.blank, sum.comment, sum.code);
         println!(
-            "SUM,{},{},{},{}",
-            sum.n_files, sum.blank, sum.comment, sum.code
+            "SUM,{},{},{},{},{}",
+            sum.n_files, lines, sum.blank, sum.comment, sum.code
         );
     }
 }

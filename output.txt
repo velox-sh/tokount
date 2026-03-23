@@ -1,0 +1,1673 @@
+{
+  "APL": {
+    "nFiles": 1,
+    "blank": 4,
+    "comment": 3,
+    "code": 3
+  },
+  "LiveScript": {
+    "nFiles": 1,
+    "blank": 6,
+    "comment": 12,
+    "code": 10
+  },
+  "Nix": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 3,
+    "code": 7
+  },
+  "Fennel": {
+    "nFiles": 1,
+    "blank": 5,
+    "comment": 5,
+    "code": 8
+  },
+  "Hex2": {
+    "nFiles": 1,
+    "blank": 24,
+    "comment": 7,
+    "code": 78
+  },
+  "ClojureScript": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 3,
+    "code": 13
+  },
+  "FreeMarker": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 3,
+    "code": 5
+  },
+  "Pony": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 3,
+    "code": 7
+  },
+  "Unreal Shader Header": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 3,
+    "code": 3
+  },
+  "JSX": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 3,
+    "code": 8
+  },
+  "Scala": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 3,
+    "code": 6
+  },
+  "Svelte": {
+    "nFiles": 1,
+    "blank": 5,
+    "comment": 21,
+    "code": 15
+  },
+  "hledger": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 10,
+    "code": 6
+  },
+  "Kaem": {
+    "nFiles": 1,
+    "blank": 7,
+    "comment": 33,
+    "code": 2
+  },
+  "Chapel": {
+    "nFiles": 1,
+    "blank": 6,
+    "comment": 9,
+    "code": 9
+  },
+  "TTCN-3": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 6,
+    "code": 7
+  },
+  "Game Maker Language": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 9,
+    "code": 5
+  },
+  "Racket": {
+    "nFiles": 1,
+    "blank": 11,
+    "comment": 14,
+    "code": 15
+  },
+  "Q": {
+    "nFiles": 1,
+    "blank": 4,
+    "comment": 5,
+    "code": 5
+  },
+  "Stratego/XT": {
+    "nFiles": 1,
+    "blank": 6,
+    "comment": 6,
+    "code": 12
+  },
+  "Lingua Franca": {
+    "nFiles": 1,
+    "blank": 11,
+    "comment": 9,
+    "code": 16
+  },
+  "Templ": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 8,
+    "code": 13
+  },
+  "YAML": {
+    "nFiles": 16,
+    "blank": 66,
+    "comment": 10,
+    "code": 436
+  },
+  "GLSL": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 3,
+    "code": 5
+  },
+  "Assembly": {
+    "nFiles": 1,
+    "blank": 11,
+    "comment": 6,
+    "code": 50
+  },
+  "Gherkin (Cucumber)": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 3,
+    "code": 8
+  },
+  "Lisp": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 4,
+    "code": 4
+  },
+  "ZenCode": {
+    "nFiles": 1,
+    "blank": 5,
+    "comment": 7,
+    "code": 9
+  },
+  "Elvish": {
+    "nFiles": 1,
+    "blank": 4,
+    "comment": 2,
+    "code": 9
+  },
+  "UMPL": {
+    "nFiles": 1,
+    "blank": 8,
+    "comment": 2,
+    "code": 58
+  },
+  "DAML": {
+    "nFiles": 1,
+    "blank": 9,
+    "comment": 9,
+    "code": 24
+  },
+  "Snakemake": {
+    "nFiles": 1,
+    "blank": 13,
+    "comment": 4,
+    "code": 50
+  },
+  "JavaScript": {
+    "nFiles": 1,
+    "blank": 7,
+    "comment": 12,
+    "code": 14
+  },
+  ".NET Resource": {
+    "nFiles": 1,
+    "blank": 0,
+    "comment": 3,
+    "code": 12
+  },
+  "Janet": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 3,
+    "code": 12
+  },
+  "Pan": {
+    "nFiles": 1,
+    "blank": 5,
+    "comment": 4,
+    "code": 11
+  },
+  "WebGPU Shader Language": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 2,
+    "code": 10
+  },
+  "LOLCODE": {
+    "nFiles": 1,
+    "blank": 6,
+    "comment": 9,
+    "code": 11
+  },
+  "Rich Text Format": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 0,
+    "code": 5
+  },
+  "Factor": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 6,
+    "code": 5
+  },
+  "Sass": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 3,
+    "code": 6
+  },
+  "Pascal": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 4,
+    "code": 5
+  },
+  "Rust": {
+    "nFiles": 29,
+    "blank": 379,
+    "comment": 140,
+    "code": 2313
+  },
+  "NuGet Config": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 8,
+    "code": 13
+  },
+  "Scons": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 3,
+    "code": 3
+  },
+  "Perl": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 6,
+    "code": 3
+  },
+  "Stan": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 17,
+    "code": 123
+  },
+  "Luau": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 3,
+    "code": 4
+  },
+  "Gemfile": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 2,
+    "code": 4
+  },
+  "Solidity": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 7,
+    "code": 6
+  },
+  "GDShader": {
+    "nFiles": 1,
+    "blank": 4,
+    "comment": 13,
+    "code": 6
+  },
+  "The WenYan Programming Language": {
+    "nFiles": 1,
+    "blank": 33,
+    "comment": 1,
+    "code": 107
+  },
+  "HICAD": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 3,
+    "code": 4
+  },
+  "Unreal Shader": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 3,
+    "code": 5
+  },
+  "Ballerina": {
+    "nFiles": 1,
+    "blank": 5,
+    "comment": 6,
+    "code": 29
+  },
+  "AWK": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 3,
+    "code": 1
+  },
+  "Plain Text": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 4,
+    "code": 0
+  },
+  "Zig": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 3,
+    "code": 5
+  },
+  "Java": {
+    "nFiles": 1,
+    "blank": 9,
+    "comment": 5,
+    "code": 23
+  },
+  "Unreal Script": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 3,
+    "code": 4
+  },
+  "Go": {
+    "nFiles": 1,
+    "blank": 7,
+    "comment": 6,
+    "code": 24
+  },
+  "Roc": {
+    "nFiles": 1,
+    "blank": 8,
+    "comment": 10,
+    "code": 18
+  },
+  "PKGBUILD": {
+    "nFiles": 2,
+    "blank": 6,
+    "comment": 4,
+    "code": 51
+  },
+  "OpenType Feature File": {
+    "nFiles": 1,
+    "blank": 6,
+    "comment": 24,
+    "code": 24
+  },
+  "JSON5": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 2,
+    "code": 6
+  },
+  "SUM": {
+    "nFiles": 340,
+    "blank": 2057,
+    "comment": 2485,
+    "code": 16955
+  },
+  "ASN.1": {
+    "nFiles": 1,
+    "blank": 7,
+    "comment": 11,
+    "code": 16
+  },
+  "Xtend": {
+    "nFiles": 1,
+    "blank": 6,
+    "comment": 4,
+    "code": 13
+  },
+  "C++ Header": {
+    "nFiles": 1,
+    "blank": 5,
+    "comment": 5,
+    "code": 11
+  },
+  "Typst": {
+    "nFiles": 1,
+    "blank": 4,
+    "comment": 3,
+    "code": 9
+  },
+  "CodeQL": {
+    "nFiles": 1,
+    "blank": 7,
+    "comment": 15,
+    "code": 17
+  },
+  "Ruby": {
+    "nFiles": 2,
+    "blank": 4,
+    "comment": 14,
+    "code": 12
+  },
+  "BQN": {
+    "nFiles": 1,
+    "blank": 4,
+    "comment": 3,
+    "code": 3
+  },
+  "Monkey C": {
+    "nFiles": 1,
+    "blank": 10,
+    "comment": 18,
+    "code": 41
+  },
+  "Dust.js": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 5,
+    "code": 2
+  },
+  "Ur/Web Project": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 1,
+    "code": 1
+  },
+  "Odin": {
+    "nFiles": 1,
+    "blank": 5,
+    "comment": 7,
+    "code": 17
+  },
+  "Alloy": {
+    "nFiles": 1,
+    "blank": 5,
+    "comment": 3,
+    "code": 10
+  },
+  "Godot Scene": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 0,
+    "code": 4
+  },
+  "Fish": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 3,
+    "code": 5
+  },
+  "Djot": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 5,
+    "code": 0,
+    "children": {
+      "Python": {
+        "nFiles": 0,
+        "blank": 0,
+        "comment": 0,
+        "code": 2
+      }
+    }
+  },
+  "BrightScript": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 13,
+    "code": 10
+  },
+  "MSBuild": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 1,
+    "code": 10
+  },
+  "D": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 1,
+    "code": 5
+  },
+  "Mlatu": {
+    "nFiles": 1,
+    "blank": 5,
+    "comment": 3,
+    "code": 14
+  },
+  "Open Policy Agent": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 3,
+    "code": 8
+  },
+  "Slang": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 5,
+    "code": 8
+  },
+  "WebAssembly": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 1,
+    "code": 8
+  },
+  "Ren'Py": {
+    "nFiles": 1,
+    "blank": 15,
+    "comment": 9,
+    "code": 8
+  },
+  "Kotlin": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 3,
+    "code": 8
+  },
+  "Gwion": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 1,
+    "code": 8
+  },
+  "Powershell": {
+    "nFiles": 1,
+    "blank": 4,
+    "comment": 4,
+    "code": 9
+  },
+  "Glimmer JS": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 6,
+    "code": 18
+  },
+  "PL/SQL": {
+    "nFiles": 1,
+    "blank": 4,
+    "comment": 4,
+    "code": 10
+  },
+  "Rusty Object Notation": {
+    "nFiles": 1,
+    "blank": 13,
+    "comment": 7,
+    "code": 137
+  },
+  "Lua": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 4,
+    "code": 4
+  },
+  "Dart": {
+    "nFiles": 1,
+    "blank": 5,
+    "comment": 3,
+    "code": 14
+  },
+  "Tact": {
+    "nFiles": 1,
+    "blank": 4,
+    "comment": 4,
+    "code": 12
+  },
+  "Dhall": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 5,
+    "code": 9
+  },
+  "CSS": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 3,
+    "code": 8
+  },
+  "Modelica": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 5,
+    "code": 13
+  },
+  "gitignore": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 3,
+    "code": 4
+  },
+  "Redscript": {
+    "nFiles": 1,
+    "blank": 8,
+    "comment": 20,
+    "code": 47
+  },
+  "JSON": {
+    "nFiles": 4,
+    "blank": 1,
+    "comment": 0,
+    "code": 5942
+  },
+  "Protocol Buffers": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 2,
+    "code": 6
+  },
+  "Autoconf": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 4,
+    "code": 4
+  },
+  "OpenSCAD": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 16,
+    "code": 15
+  },
+  "C Shell": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 3,
+    "code": 3
+  },
+  "GDB Script": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 5,
+    "code": 7
+  },
+  "VHDL": {
+    "nFiles": 1,
+    "blank": 7,
+    "comment": 7,
+    "code": 20
+  },
+  "TOML": {
+    "nFiles": 6,
+    "blank": 14,
+    "comment": 6,
+    "code": 96
+  },
+  "Elixir": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 3,
+    "code": 7
+  },
+  "GDScript": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 3,
+    "code": 5
+  },
+  "Pug": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 3,
+    "code": 8
+  },
+  "Fragment Shader File": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 2,
+    "code": 7
+  },
+  "FlatBuffers Schema": {
+    "nFiles": 1,
+    "blank": 7,
+    "comment": 6,
+    "code": 21
+  },
+  "Apache Velocity": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 5,
+    "code": 4
+  },
+  "8th": {
+    "nFiles": 1,
+    "blank": 5,
+    "comment": 8,
+    "code": 9
+  },
+  "Cangjie": {
+    "nFiles": 1,
+    "blank": 8,
+    "comment": 8,
+    "code": 34
+  },
+  "SVG": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 2,
+    "code": 5
+  },
+  "Bitbake": {
+    "nFiles": 1,
+    "blank": 5,
+    "comment": 5,
+    "code": 13
+  },
+  "Org": {
+    "nFiles": 1,
+    "blank": 4,
+    "comment": 2,
+    "code": 7
+  },
+  "C Header": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 3,
+    "code": 6
+  },
+  "ABNF": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 5,
+    "code": 3
+  },
+  "Stylus": {
+    "nFiles": 1,
+    "blank": 5,
+    "comment": 5,
+    "code": 10
+  },
+  "Visual Studio Solution": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 0,
+    "code": 16
+  },
+  "HCL": {
+    "nFiles": 1,
+    "blank": 4,
+    "comment": 7,
+    "code": 11
+  },
+  "LLVM": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 1,
+    "code": 17
+  },
+  "INI": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 3,
+    "code": 5
+  },
+  "Emojicode": {
+    "nFiles": 1,
+    "blank": 4,
+    "comment": 10,
+    "code": 10
+  },
+  "Brainfuck": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 0,
+    "code": 2
+  },
+  "HAML": {
+    "nFiles": 1,
+    "blank": 5,
+    "comment": 2,
+    "code": 11
+  },
+  "ignore": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 2,
+    "code": 3
+  },
+  "Hex1": {
+    "nFiles": 1,
+    "blank": 110,
+    "comment": 91,
+    "code": 387
+  },
+  "Headache": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 3,
+    "code": 9
+  },
+  "PO File": {
+    "nFiles": 2,
+    "blank": 7,
+    "comment": 10,
+    "code": 14
+  },
+  "Cython": {
+    "nFiles": 1,
+    "blank": 5,
+    "comment": 3,
+    "code": 21
+  },
+  "HTML": {
+    "nFiles": 1,
+    "blank": 8,
+    "comment": 8,
+    "code": 30
+  },
+  "Edn": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 2,
+    "code": 6
+  },
+  "TSX": {
+    "nFiles": 2,
+    "blank": 2,
+    "comment": 4,
+    "code": 17
+  },
+  "Jupyter": {
+    "nFiles": 1,
+    "blank": 0,
+    "comment": 0,
+    "code": 3167
+  },
+  "Cuda": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 2,
+    "code": 4
+  },
+  "Bicep": {
+    "nFiles": 1,
+    "blank": 7,
+    "comment": 8,
+    "code": 35
+  },
+  "jq": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 5,
+    "code": 3
+  },
+  "C3": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 1,
+    "code": 6
+  },
+  "Unreal Project": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 0,
+    "code": 7
+  },
+  "ReStructuredText": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 0,
+    "code": 5
+  },
+  "Menhir": {
+    "nFiles": 1,
+    "blank": 9,
+    "comment": 7,
+    "code": 31
+  },
+  "AutoHotKey": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 3,
+    "code": 4
+  },
+  "JSONL": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 0,
+    "code": 3
+  },
+  "Phix": {
+    "nFiles": 1,
+    "blank": 7,
+    "comment": 8,
+    "code": 25
+  },
+  "Liquid": {
+    "nFiles": 1,
+    "blank": 4,
+    "comment": 1,
+    "code": 19
+  },
+  "PostCSS": {
+    "nFiles": 2,
+    "blank": 8,
+    "comment": 9,
+    "code": 24
+  },
+  "CSV": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 0,
+    "code": 4
+  },
+  "GraphQL": {
+    "nFiles": 1,
+    "blank": 14,
+    "comment": 3,
+    "code": 71
+  },
+  "Haskell": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 5,
+    "code": 4
+  },
+  "SRecode Template": {
+    "nFiles": 1,
+    "blank": 12,
+    "comment": 2,
+    "code": 23
+  },
+  "Korn Shell": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 4,
+    "code": 11
+  },
+  "Circom": {
+    "nFiles": 1,
+    "blank": 4,
+    "comment": 7,
+    "code": 23
+  },
+  "Ur/Web": {
+    "nFiles": 2,
+    "blank": 3,
+    "comment": 5,
+    "code": 9
+  },
+  "AsciiDoc": {
+    "nFiles": 1,
+    "blank": 7,
+    "comment": 8,
+    "code": 5
+  },
+  "CUE": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 2,
+    "code": 8
+  },
+  "Rakefile": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 2,
+    "code": 4
+  },
+  "SQL": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 5,
+    "code": 4
+  },
+  "FXML": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 2,
+    "code": 6
+  },
+  "Cairo": {
+    "nFiles": 1,
+    "blank": 5,
+    "comment": 13,
+    "code": 32
+  },
+  "LaTeX": {
+    "nFiles": 2,
+    "blank": 5,
+    "comment": 7,
+    "code": 18
+  },
+  "Vertex Shader File": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 2,
+    "code": 7
+  },
+  "Vue": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 9,
+    "code": 24
+  },
+  "JSONC": {
+    "nFiles": 1,
+    "blank": 0,
+    "comment": 4,
+    "code": 5
+  },
+  "Just": {
+    "nFiles": 1,
+    "blank": 50,
+    "comment": 11,
+    "code": 154
+  },
+  "Basic": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 3,
+    "code": 6
+  },
+  "Jsonnet": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 4,
+    "code": 7
+  },
+  "Glimmer TS": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 6,
+    "code": 10
+  },
+  "Pest": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 3,
+    "code": 4
+  },
+  "XML Schema": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 0,
+    "code": 10
+  },
+  "Puppet": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 3,
+    "code": 14
+  },
+  "Zsh": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 3,
+    "code": 4
+  },
+  "EdgeQL": {
+    "nFiles": 1,
+    "blank": 4,
+    "comment": 3,
+    "code": 21
+  },
+  "Scheme": {
+    "nFiles": 1,
+    "blank": 8,
+    "comment": 4,
+    "code": 14
+  },
+  "PlantUML": {
+    "nFiles": 1,
+    "blank": 12,
+    "comment": 13,
+    "code": 10
+  },
+  "Slint": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 2,
+    "code": 21
+  },
+  "Ruby HTML": {
+    "nFiles": 1,
+    "blank": 5,
+    "comment": 8,
+    "code": 21
+  },
+  "Logtalk": {
+    "nFiles": 1,
+    "blank": 20,
+    "comment": 18,
+    "code": 27
+  },
+  "License": {
+    "nFiles": 2,
+    "blank": 77,
+    "comment": 0,
+    "code": 335
+  },
+  "Crystal": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 2,
+    "code": 14
+  },
+  "C": {
+    "nFiles": 1,
+    "blank": 9,
+    "comment": 8,
+    "code": 33
+  },
+  "MDX": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 5,
+    "code": 0,
+    "children": {
+      "JSX": {
+        "nFiles": 0,
+        "blank": 0,
+        "comment": 0,
+        "code": 3
+      }
+    }
+  },
+  "M1 Assembly": {
+    "nFiles": 1,
+    "blank": 36,
+    "comment": 47,
+    "code": 197
+  },
+  "LALRPOP": {
+    "nFiles": 1,
+    "blank": 7,
+    "comment": 3,
+    "code": 26
+  },
+  "ZoKrates": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 6,
+    "code": 3
+  },
+  "Razor": {
+    "nFiles": 2,
+    "blank": 13,
+    "comment": 36,
+    "code": 51
+  },
+  "XML": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 2,
+    "code": 7
+  },
+  "Hex0": {
+    "nFiles": 1,
+    "blank": 30,
+    "comment": 34,
+    "code": 89
+  },
+  "HLSL": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 3,
+    "code": 14
+  },
+  "XHTML": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 2,
+    "code": 5
+  },
+  "Not Quite Perl": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 8,
+    "code": 14
+  },
+  "Thrift": {
+    "nFiles": 1,
+    "blank": 7,
+    "comment": 2,
+    "code": 29
+  },
+  "Swig": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 5,
+    "code": 8
+  },
+  "TypeScript": {
+    "nFiles": 3,
+    "blank": 7,
+    "comment": 11,
+    "code": 36
+  },
+  "QML": {
+    "nFiles": 1,
+    "blank": 4,
+    "comment": 5,
+    "code": 11
+  },
+  "Ebuild": {
+    "nFiles": 1,
+    "blank": 5,
+    "comment": 2,
+    "code": 9
+  },
+  "Dockerfile": {
+    "nFiles": 2,
+    "blank": 9,
+    "comment": 5,
+    "code": 21
+  },
+  "VBScript": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 3,
+    "code": 3
+  },
+  "Makefile": {
+    "nFiles": 1,
+    "blank": 7,
+    "comment": 5,
+    "code": 11
+  },
+  "Stata": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 7,
+    "code": 6
+  },
+  "Bean": {
+    "nFiles": 1,
+    "blank": 8,
+    "comment": 6,
+    "code": 13
+  },
+  "Yarn": {
+    "nFiles": 1,
+    "blank": 0,
+    "comment": 0,
+    "code": 6
+  },
+  "Docker ignore": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 2,
+    "code": 4
+  },
+  "Uiua": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 3,
+    "code": 5
+  },
+  "Bazel": {
+    "nFiles": 2,
+    "blank": 5,
+    "comment": 5,
+    "code": 19
+  },
+  "Raku": {
+    "nFiles": 1,
+    "blank": 8,
+    "comment": 17,
+    "code": 24
+  },
+  "Swift": {
+    "nFiles": 1,
+    "blank": 4,
+    "comment": 14,
+    "code": 6
+  },
+  "Poke": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 1,
+    "code": 2
+  },
+  "CMake": {
+    "nFiles": 1,
+    "blank": 5,
+    "comment": 3,
+    "code": 16
+  },
+  "Tera": {
+    "nFiles": 1,
+    "blank": 5,
+    "comment": 11,
+    "code": 26
+  },
+  "Mojo": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 3,
+    "code": 15
+  },
+  "C#": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 9,
+    "code": 14
+  },
+  "Twig": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 1,
+    "code": 14
+  },
+  "Emacs Lisp": {
+    "nFiles": 1,
+    "blank": 4,
+    "comment": 6,
+    "code": 11
+  },
+  "Forge Config": {
+    "nFiles": 1,
+    "blank": 19,
+    "comment": 40,
+    "code": 20
+  },
+  "CIL (SELinux)": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 3,
+    "code": 15
+  },
+  "Pyret": {
+    "nFiles": 1,
+    "blank": 5,
+    "comment": 8,
+    "code": 9
+  },
+  "Markdown": {
+    "nFiles": 6,
+    "blank": 159,
+    "comment": 319,
+    "code": 11,
+    "children": {
+      "Bash": {
+        "nFiles": 0,
+        "blank": 10,
+        "comment": 12,
+        "code": 14
+      },
+      "Python": {
+        "nFiles": 0,
+        "blank": 0,
+        "comment": 0,
+        "code": 2
+      },
+      "Rust": {
+        "nFiles": 0,
+        "blank": 0,
+        "comment": 0,
+        "code": 3
+      },
+      "JSON": {
+        "nFiles": 0,
+        "blank": 0,
+        "comment": 0,
+        "code": 13
+      },
+      "Plain Text": {
+        "nFiles": 0,
+        "blank": 0,
+        "comment": 373,
+        "code": 0
+      }
+    }
+  },
+  "Objective-C": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 3,
+    "code": 6
+  },
+  "Clojure": {
+    "nFiles": 2,
+    "blank": 6,
+    "comment": 6,
+    "code": 26
+  },
+  "XAML": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 2,
+    "code": 6
+  },
+  "EdgeDB Schema Definition": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 4,
+    "code": 13
+  },
+  "Python": {
+    "nFiles": 4,
+    "blank": 41,
+    "comment": 4,
+    "code": 128
+  },
+  "Futhark": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 3,
+    "code": 2
+  },
+  "Nextflow": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 5,
+    "code": 10
+  },
+  "Cogent": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 2,
+    "code": 2
+  },
+  "D2": {
+    "nFiles": 1,
+    "blank": 5,
+    "comment": 6,
+    "code": 4
+  },
+  "Module-Definition": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 6,
+    "code": 9
+  },
+  "Metal": {
+    "nFiles": 1,
+    "blank": 6,
+    "comment": 5,
+    "code": 21
+  },
+  "Kakoune script": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 2,
+    "code": 8
+  },
+  "MATLAB": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 5,
+    "code": 3
+  },
+  "Elixir Template": {
+    "nFiles": 1,
+    "blank": 0,
+    "comment": 2,
+    "code": 13
+  },
+  "Koka": {
+    "nFiles": 1,
+    "blank": 6,
+    "comment": 12,
+    "code": 11
+  },
+  "Gleam": {
+    "nFiles": 1,
+    "blank": 6,
+    "comment": 4,
+    "code": 24
+  },
+  "ATS": {
+    "nFiles": 1,
+    "blank": 8,
+    "comment": 9,
+    "code": 25
+  },
+  "K": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 4,
+    "code": 2
+  },
+  "ShaderLab": {
+    "nFiles": 1,
+    "blank": 4,
+    "comment": 8,
+    "code": 31
+  },
+  "m4": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 3,
+    "code": 3
+  },
+  "Emacs Dev Env": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 7,
+    "code": 6
+  },
+  "Visual Basic": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 2,
+    "code": 4
+  },
+  "RPM Specfile": {
+    "nFiles": 1,
+    "blank": 16,
+    "comment": 4,
+    "code": 22
+  },
+  "Jinja": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 2,
+    "code": 1
+  },
+  "VB6/VBA": {
+    "nFiles": 2,
+    "blank": 4,
+    "comment": 6,
+    "code": 46
+  },
+  "Arduino C++": {
+    "nFiles": 1,
+    "blank": 4,
+    "comment": 6,
+    "code": 13
+  },
+  "Unison": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 8,
+    "code": 6
+  },
+  "JSLT": {
+    "nFiles": 1,
+    "blank": 26,
+    "comment": 20,
+    "code": 80
+  },
+  "Arturo": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 3,
+    "code": 3
+  },
+  "DM": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 6,
+    "code": 7
+  },
+  "C++": {
+    "nFiles": 2,
+    "blank": 12,
+    "comment": 6,
+    "code": 74
+  },
+  "Unreal Markdown": {
+    "nFiles": 1,
+    "blank": 7,
+    "comment": 11,
+    "code": 2
+  },
+  "F*": {
+    "nFiles": 1,
+    "blank": 3,
+    "comment": 5,
+    "code": 3
+  },
+  "OpenQASM": {
+    "nFiles": 1,
+    "blank": 10,
+    "comment": 21,
+    "code": 58
+  },
+  "HEEx": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 0,
+    "code": 10
+  },
+  "LESS": {
+    "nFiles": 1,
+    "blank": 1,
+    "comment": 3,
+    "code": 6
+  },
+  "Bash": {
+    "nFiles": 2,
+    "blank": 4,
+    "comment": 8,
+    "code": 17
+  },
+  "F#": {
+    "nFiles": 1,
+    "blank": 4,
+    "comment": 5,
+    "code": 6
+  },
+  "KV Language": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 3,
+    "code": 17
+  },
+  "XSL": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 4,
+    "code": 7
+  },
+  "Go HTML": {
+    "nFiles": 1,
+    "blank": 7,
+    "comment": 14,
+    "code": 20
+  },
+  "gitRepos": 1,
+  "gitignorePatterns": [
+    "!.vscode/*.code-snippets",
+    "!.vscode/extensions.json",
+    "!.vscode/launch.json",
+    "!.vscode/settings.json",
+    "!.vscode/tasks.json",
+    "**/*.rs.bk",
+    "*.log",
+    "*.pdb",
+    "*.rs.bk",
+    "*.tmp",
+    "*.vsix",
+    ".DS_Store",
+    ".SRCINFO",
+    ".claude/",
+    ".env",
+    ".history",
+    ".history/",
+    ".ionide",
+    ".next/",
+    ".vscode/",
+    ".vscode/*",
+    "CLAUDE.md",
+    "Cargo.lock",
+    "data/",
+    "debug/",
+    "dist/",
+    "flamegraph.svg",
+    "node_modules/",
+    "perf.data",
+    "target/"
+  ]
+}

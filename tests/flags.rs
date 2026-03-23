@@ -9,7 +9,7 @@ fn flag_output_csv_starts_with_header() {
     assert!(out.status.success());
     let text = String::from_utf8_lossy(&out.stdout);
     assert!(
-        text.starts_with("language,files,blank,comment,code"),
+        text.starts_with("language,files,lines,blank,comment,code"),
         "CSV output did not start with expected header; got: {text:?}"
     );
 }

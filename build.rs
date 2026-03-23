@@ -114,7 +114,6 @@ fn main() {
 
     let mut out = fs::File::create(&dest).expect("failed to create output file");
 
-    // deduplicate const names with numeric suffix
     let mut used_const_names: std::collections::HashMap<String, usize> =
         std::collections::HashMap::new();
     let mut lang_const_names: std::collections::HashMap<String, String> =
@@ -245,7 +244,6 @@ fn main() {
         .unwrap();
     }
 
-    // collect extension entries first so strings outlive phf_codegen borrows
     let mut seen_exts = std::collections::HashSet::new();
     let mut ext_entries: Vec<(String, String)> = Vec::new();
 
@@ -279,7 +277,6 @@ fn main() {
 
     emit_phf_map(&mut out, "FILENAME_MAP", &fn_entries).unwrap();
 
-    // collect shebang/env entries (#!/usr/bin/env <name> or #!/path/to/interp)
     let mut seen_envs = std::collections::HashSet::new();
     let mut env_entries: Vec<(String, String)> = Vec::new();
 
@@ -293,10 +290,10 @@ fn main() {
         }
 
         for shebang in &lang.shebangs {
-            // extract basename from full path, stripping flags (e.g. "#!/bin/awk -f" -> "awk")
             let rest = shebang.strip_prefix("#!").unwrap_or(shebang);
             let first_word = rest.split_whitespace().next().unwrap_or("");
             let basename = first_word.rsplit('/').next().unwrap_or(first_word);
+
             if !basename.is_empty() && seen_envs.insert(basename.to_string()) {
                 env_entries.push((basename.to_string(), format!("&{const_name}")));
             }
@@ -305,7 +302,6 @@ fn main() {
 
     emit_phf_map(&mut out, "SHEBANG_MAP", &env_entries).unwrap();
 
-    // NAME_MAP: lowercased language name -> &LanguageDef (for fence identifier resolution)
     let mut name_entries: Vec<(String, String)> = Vec::new();
     let mut seen_names = std::collections::HashSet::new();
 

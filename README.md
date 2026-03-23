@@ -162,29 +162,79 @@ tokount -l
 github.com/MihaiStreames/tokount v2.0.0  T=0.17s  (1513 files/s, 77285 lines/s)
 251 files  •  1 git repos  •  tokount/
 
-────────────────────────────────────────────────────────────────────────────────
- Language                               Files      Blank      Comment      Code
-════════════════════════════════════════════════════════════════════════════════
- Rust                                      24        294          141      1767
-────────────────────────────────────────────────────────────────────────────────
- YAML                                      16         66           10       436
-────────────────────────────────────────────────────────────────────────────────
- SUM                                      251       1631         1595      9599
-────────────────────────────────────────────────────────────────────────────────
+──────────────────────────────────────────────────────────────────────────────────────────────
+ Language                               Files      Lines      Blanks      Comments       Code
+══════════════════════════════════════════════════════════════════════════════════════════════
+ JSON                                       4       5943           1             0       5942
+──────────────────────────────────────────────────────────────────────────────────────────────
+ Rust                                      29       2832         379           140       2313
+──────────────────────────────────────────────────────────────────────────────────────────────
+ SUM                                      340      21497        2057          2485      16955
+──────────────────────────────────────────────────────────────────────────────────────────────
 ```
 
 **JSON** (`-o json`):
 
 ```json
 {
-  "Rust": { "nFiles": 24 , "blank": 294 , "comment": 141 , "code": 1767 },
-  "SUM":  { "nFiles": 251, "blank": 1631, "comment": 1595, "code": 9599 },
+  "Rust": {
+    "nFiles": 29,
+    "blank": 379,
+    "comment": 140,
+    "code": 2313
+  },
+  "SUM": {
+    "nFiles": 340,
+    "blank": 2057,
+    "comment": 2485,
+    "code": 16955
+  },
   "gitRepos": 1,
-  "gitignorePatterns": ["target/", "node_modules/", ... ]
+  "gitignorePatterns": [
+    "!.vscode/*.code-snippets",
+    "!.vscode/extensions.json",
+    "!.vscode/launch.json",
+    "!.vscode/settings.json",
+    "!.vscode/tasks.json",
+    "**/*.rs.bk",
+    "*.log",
+    "*.pdb",
+    "*.rs.bk",
+    "*.tmp",
+    "*.vsix",
+    ".DS_Store",
+    ".SRCINFO",
+    ".claude/",
+    ".env",
+    ".history",
+    ".history/",
+    ".ionide",
+    ".next/",
+    ".vscode/",
+    ".vscode/*",
+    "CLAUDE.md",
+    "Cargo.lock",
+    "data/",
+    "debug/",
+    "dist/",
+    "flamegraph.svg",
+    "node_modules/",
+    "perf.data",
+    "target/"
+  ]
 }
 ```
 
-**CSV** (`-o csv`): tabular export for spreadsheets and downstream tooling.
+**CSV** (`-o csv`):
+
+Header:
+
+```text
+language,files,lines,blank,comment,code
+```
+
+For files with embedded languages, CSV includes child rows right after the
+parent row, with child labels prefixed as `"|- <child>"` and `files=0`.
 
 Errors go to stderr as structured JSON:
 

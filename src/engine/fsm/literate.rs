@@ -58,8 +58,7 @@ fn push_fence_line(buf: &mut Vec<u8>, line: &[u8], has_newline: bool) {
     }
 }
 
-/// Pure literate: every non-blank line is a comment (e.g. Plain Text)
-/// No syntax tokens, no code possible
+/// Count lines in a literate file, treating all non-blank lines as comments
 pub(super) fn count_pure_literate(content: &[u8]) -> LineCounts {
     let mut counts = zero_counts();
     let mut pos = 0;
@@ -93,20 +92,16 @@ pub(super) fn count_pure_literate(content: &[u8]) -> LineCounts {
     counts
 }
 
-/// Literate with code fences (e.g. Markdown, MDX, Djot)
-/// Lines outside fences are comments (or blank); lines inside fences belong to the child language
-/// Fence delimiter lines (``` or ```rust) count as parent comments
+/// Count lines in a literate file, treating fenced blocks as child languages if possible
 pub(super) fn count_literate_file(content: &[u8], lang: &LanguageDef) -> FileResult {
     let mut counts = zero_counts();
     let mut children: Vec<(&'static str, LineCounts)> = Vec::new();
 
-    // reusable buffer for fenced block content
     let mut fence_buf: Vec<u8> = Vec::new();
     let mut in_fence = false;
     let mut fence_lang: Option<&'static LanguageDef> = None;
     let mut pos = 0;
 
-    // check if a line starts with an important_syntax marker (e.g. ```)
     let fence_marker: &[u8] = lang.important_syntax.first().copied().unwrap_or(b"```");
 
     while pos < content.len() {
@@ -118,11 +113,9 @@ pub(super) fn count_literate_file(content: &[u8], lang: &LanguageDef) -> FileRes
             if is_closing_fence(line, fence_marker) {
                 counts.comment += 1;
 
-                // count fenced content under child language
                 if let Some(child) = fence_lang {
                     let child_result = count_file(&fence_buf, child);
                     children.push((child.name, child_result.counts));
-                    // merge any deeper children (rare but possible)
                     children.extend(child_result.children);
                 } else {
                     // unknown child lang: count fenced lines as parent code
@@ -133,13 +126,12 @@ pub(super) fn count_literate_file(content: &[u8], lang: &LanguageDef) -> FileRes
                 fence_lang = None;
                 in_fence = false;
             } else {
-                // accumulate fenced content (include the newline so line counts are right)
+                // include newline so line counts stay correct
                 push_fence_line(&mut fence_buf, line, has_newline);
             }
         } else if line.starts_with(fence_marker) {
             counts.comment += 1;
 
-            // try to find the child language: first by extension, then by name
             fence_lang = fence_language(line, fence_marker);
             in_fence = true;
         } else if has_non_ws(line) {

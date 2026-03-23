@@ -66,7 +66,6 @@ fn emit_and_finish(counts: &mut LineCounts, line_type: LineType, parse: ParseSta
 
 #[expect(clippy::cognitive_complexity, clippy::too_many_lines)]
 pub fn count_file(content: &[u8], lang: &LanguageDef) -> FileResult {
-    // literate languages have their own fast paths
     if lang.literate {
         return if lang.important_syntax.is_empty() {
             finish(count_pure_literate(content))
@@ -197,7 +196,6 @@ pub fn count_file(content: &[u8], lang: &LanguageDef) -> FileResult {
                 match found {
                     Some(i) => {
                         if bytes[i] == b'\n' {
-                            // multi-line string: both this line and the next are code
                             emit_code_line_and_reset(
                                 &mut counts,
                                 &mut line_type,
@@ -298,7 +296,6 @@ pub fn count_file(content: &[u8], lang: &LanguageDef) -> FileResult {
                     pos += advance;
                 }
                 None => {
-                    // no more interesting bytes: classify any trailing content
                     line_type = classify_prefix(
                         bytes,
                         line_type,

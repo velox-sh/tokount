@@ -25,20 +25,18 @@ Added embedded languages support and decided that literate languages should be c
 
 **New stuff:**
 
-- `literal` support for languages
+- `literate` support for languages
 - Embedded languages support
--
 
 **Changed:**
 
 - Table output now includes embedded languages and has nice colors now
--
 
 ## v2.0.0 — SIMD engine
 
 Using some help and directions from @big-lip-bob, I managed to entirely rewrite counting engine. That means `tokei` is now replaced by a custom byte-level FSM with SIMD-accelerated scanning which now makes `tokount` the fastest line counter available!
 
-> Note: It is only the fastest when we take SSE2 into account. Other architectures will need a deeper look into in order to figure out how to implement SIMD as efficiently as SSE2 does on `x86_64`!
+> Note: It is only the fastest when we take SSE2 into account. Other architectures will need a deeper look into in order to figure out how to implement SIMD as efficiently as SSE2 does on `x86_64`.
 
 **Engine:**
 
