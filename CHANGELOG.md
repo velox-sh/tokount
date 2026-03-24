@@ -56,10 +56,10 @@ That made `languages.json` easier to scale, made parser code easier to reason ab
 
 **Result:**
 
-- engine stays fast
-- parsing rules scale without turning into giant special-case branches
-- stricter linting with less suppression noise
-- easier to iterate on language support without turning maintenance into hell
+1. engine stays fast
+2. parsing rules scale without turning into giant special-case branches
+3. stricter linting with less suppression noise
+4. easier to iterate on language support without turning maintenance into hell
 
 <p align="right">(<a href="#changelog-top">back to top</a>)</p>
 
