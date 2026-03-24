@@ -1,4 +1,3 @@
-//! 50 lines 35 code 8 comments 7 blanks
 /*
 Bicep is a declarative language, which means the elements can appear in any order. Unlike imperative languages, the order of elements doesn't affect how deployment is processed.
 This means you can define resources, variables, and parameters in any order you like.

@@ -1,5 +1,3 @@
-# 24 lines 11 code 5 comments 7 blanks
-
 ##				     ##
 ## IMPORTANT COMMENT ##
 ##					 ##

@@ -1,5 +1,3 @@
-// 12 lines 7 code 2 comments 3 blanks
-
 attribute vec4 position;
 attribute vec2 texCoord;
 

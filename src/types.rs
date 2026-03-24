@@ -7,6 +7,7 @@ use serde::Serialize;
 pub struct LangStats {
     #[serde(rename = "nFiles")]
     pub n_files: usize,
+    pub lines: usize,
     pub blank: usize,
     pub comment: usize,
     pub code: usize,

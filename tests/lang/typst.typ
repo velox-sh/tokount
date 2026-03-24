@@ -1,5 +1,3 @@
-// 16 lines 9 code 3 comments 4 blanks
-
 // Some example settings
 #set document(title: "a title", author: "an author")
 #set page(numbering: "1 / 1", number-align: center)

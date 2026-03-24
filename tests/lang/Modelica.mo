@@ -1,4 +1,3 @@
-// 21 lines 13 code 5 comments 3 blanks
 block Add "Output the sum of the two inputs"
   extends Interfaces.SI2SO;
 

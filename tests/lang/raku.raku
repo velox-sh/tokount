@@ -1,5 +1,3 @@
-# 49 lines 24 code 17 comments 8 blanks
-
 =begin pod
 
 =begin DESCRIPTION

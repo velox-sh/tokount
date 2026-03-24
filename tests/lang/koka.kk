@@ -1,5 +1,3 @@
-// 29 lines 11 code 12 comments 6 blanks
-
 /*---------------------------------------------------------------------------
   Copyright 2020-2021, Microsoft Research, Daan Leijen.
 

@@ -1,5 +1,3 @@
-# 17 lines 12 code 3 comments 2 blanks
-
 # Below is a function
 (defn a-fn
   "Docstring with a hash #"

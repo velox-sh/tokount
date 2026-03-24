@@ -1,5 +1,3 @@
-# 13 lines 8 code 3 comments 2 blanks
-
 package application.authz
 
 # Only owner can update the pet's information

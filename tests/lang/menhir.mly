@@ -1,5 +1,3 @@
-// 47 lines 31 code 7 comments 9 blanks
-
 (* Example from the menhir development with instrumented comments.
  * (* Note: nested C style comments are not allowed. *)
  * https://gitlab.inria.fr/fpottier/menhir/-/tree/master/demos/calc-alias *)

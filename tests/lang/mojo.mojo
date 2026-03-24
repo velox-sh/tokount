@@ -1,6 +1,3 @@
-# 21 lines 15 code 3 comments 3 blanks
-
-
 '''
 This is a docstring.
 # It has multiple lines.

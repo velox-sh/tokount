@@ -1,5 +1,3 @@
-# 17 lines 8 code 5 comments 4 blanks
-
 #: disk-utils/addpart.c:60 disk-utils/delpart.c:61 disk-utils/resizepart.c:101
 msgid "invalid partition number argument"
 msgstr ""

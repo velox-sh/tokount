@@ -1,4 +1,3 @@
-' 34 lines 29 code 3 comments 2 blanks
 VERSION 5.00
 Begin VB.Form Form1
    Caption         =   "Form1"

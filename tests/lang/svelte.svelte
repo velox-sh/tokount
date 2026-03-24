@@ -1,4 +1,3 @@
-<!-- 41 lines 15 code 21 comments 5 blanks -->
 <script>
 /*
 Javascript multi-line

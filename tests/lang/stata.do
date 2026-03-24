@@ -1,4 +1,3 @@
-* 16 lines 6 code 7 comments 3 blanks
 * This is a comment
 **** Any number of * symbol
 

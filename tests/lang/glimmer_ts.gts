@@ -1,4 +1,3 @@
-// 18 lines, 10 code, 6 comments, 2 blanks
 import type { TemplateOnlyComponent } from '@glimmer/component';
 
 // A single-line comment

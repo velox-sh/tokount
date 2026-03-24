@@ -1,4 +1,3 @@
-# 10 lines 4 code 4 comments 2 blanks
 dnl Process this file with autoconf
 AC_INIT([mypackage], [1.0])
 

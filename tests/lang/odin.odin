@@ -1,4 +1,3 @@
-// 29 lines 17 code 7 comments 5 blanks
 import "core:fmt"
 
 /*

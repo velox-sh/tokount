@@ -1,5 +1,3 @@
-# 29 lines, 21 code, 3 comments, 5 blanks
-
 
 def add(x, y):
     '''

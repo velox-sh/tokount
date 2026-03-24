@@ -1,4 +1,3 @@
-# 36 lines 18 code 10 comments 8 blanks
 module [square]
 # this is a comment
 # this is another comment

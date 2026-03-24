@@ -1,5 +1,3 @@
-# 21 lines 11 code 4 comments 5 blanks
-
 # Pan example code, see https://quattor-pan.readthedocs.io/en/stable/pan-book/index.html
 
 prefix "/system/aii/osinstall/ks";

@@ -1,5 +1,3 @@
-# 17 lines 7 code 3 comments 6 blanks
-
 FROM netbsd:7.0.2
 
 MAINTAINER Somebody version: 2.2

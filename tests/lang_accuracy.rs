@@ -6,18 +6,12 @@ use std::fs;
 #[test]
 fn all_languages() {
     let lang_dir = common::lang_dir();
+    let expected_dir = common::lang_expected_dir();
 
     let mut entries: Vec<_> = fs::read_dir(&lang_dir)
         .expect("failed to read tests/lang")
         .filter_map(Result::ok)
-        .filter(|e| {
-            if !e.file_type().is_ok_and(|t| t.is_file()) {
-                return false;
-            }
-            // skip sidecar .expected files (they're not language fixtures)
-            let name = e.file_name();
-            !name.to_string_lossy().ends_with(".expected")
-        })
+        .filter(|e| e.file_type().is_ok_and(|t| t.is_file()))
         .collect();
 
     entries.sort_by_key(std::fs::DirEntry::file_name);
@@ -29,26 +23,20 @@ fn all_languages() {
         let path = entry.path();
         let name = path.file_name().unwrap().to_string_lossy().into_owned();
 
-        // skip unreadable fixtures (usually binary)
-        let Ok(content) = fs::read_to_string(&path) else {
-            skipped.push(format!("{name} (unreadable)"));
+        let sidecar = expected_dir.join(format!("{name}.expected"));
+        let Some(expected) = common::parse_expected_file(&sidecar) else {
+            skipped.push(format!("{name} (no .expected sidecar)"));
             continue;
         };
 
-        let expected = match common::parse_expected_counts(&content) {
-            Some(c) => c,
-            None => {
-                // support fixtures that keep expected counts in a sidecar file
-                let sidecar = path.with_file_name(format!("{name}.expected"));
-                match common::parse_expected_file(&sidecar) {
-                    Some(c) => c,
-                    None => {
-                        skipped.push(format!("{name} (no count header)"));
-                        continue;
-                    }
-                }
-            }
-        };
+        if expected.lines != expected.code + expected.comment + expected.blank {
+            skipped.push(format!(
+                "{name} (inconsistent counts: lines={} vs code+comment+blank={})",
+                expected.lines,
+                expected.code + expected.comment + expected.blank
+            ));
+            continue;
+        }
 
         let json = common::run_json(&path, &["--output", "json", "--no-ignore"]);
 
@@ -59,6 +47,7 @@ fn all_languages() {
         let actual_code = sum["code"].as_u64().unwrap_or(0) as u32;
         let actual_comment = sum["comment"].as_u64().unwrap_or(0) as u32;
         let actual_blank = sum["blank"].as_u64().unwrap_or(0) as u32;
+        let actual_lines = sum["lines"].as_u64().unwrap_or(0) as u32;
 
         // unrecognized fixtures produce no language rows and a zero SUM
         if actual_code == 0
@@ -70,20 +59,28 @@ fn all_languages() {
             continue;
         }
 
-        if actual_code != expected.code
+        if actual_lines != expected.lines
+            || actual_code != expected.code
             || actual_comment != expected.comment
             || actual_blank != expected.blank
         {
             mismatches.push(format!(
-				"  {name}\n    expected: code={} comment={} blank={}\n    actual:   code={} comment={} blank={}",
-				expected.code, expected.comment, expected.blank,
-				actual_code, actual_comment, actual_blank,
+				"  {name}\n    expected: lines={} code={} comment={} blank={}\n    actual:   lines={} code={} comment={} blank={}\n    invariant: lines should equal code+comment+blank={}",
+				expected.lines,
+				expected.code,
+				expected.comment,
+				expected.blank,
+				actual_lines,
+				actual_code,
+				actual_comment,
+				actual_blank,
+				actual_code + actual_comment + actual_blank,
 			));
         }
     }
 
     eprintln!(
-        "\n{} skipped (no count header or unrecognized language):",
+        "\n{} skipped (no sidecar or unrecognized language):",
         skipped.len()
     );
     for s in &skipped {
@@ -111,10 +108,7 @@ fn cross_tool_compare() {
     let mut entries: Vec<_> = fs::read_dir(&lang_dir)
         .expect("failed to read tests/lang")
         .filter_map(Result::ok)
-        .filter(|e| {
-            e.file_type().is_ok_and(|t| t.is_file())
-                && !e.file_name().to_string_lossy().ends_with(".expected")
-        })
+        .filter(|e| e.file_type().is_ok_and(|t| t.is_file()))
         .collect();
 
     entries.sort_by_key(std::fs::DirEntry::file_name);
@@ -134,6 +128,7 @@ fn cross_tool_compare() {
         let tc_code = sum["code"].as_u64().unwrap_or(0);
         let tc_comment = sum["comment"].as_u64().unwrap_or(0);
         let tc_blank = sum["blank"].as_u64().unwrap_or(0);
+        let tc_lines = sum["lines"].as_u64().unwrap_or(0);
 
         // tokei comparison
         let tokei_out = Command::new("tokei")
@@ -149,8 +144,9 @@ fn cross_tool_compare() {
             .arg(&path)
             .output();
 
-        let mut row =
-            format!("{name}: tokount code={tc_code} comment={tc_comment} blank={tc_blank}");
+        let mut row = format!(
+            "{name}: tokount lines={tc_lines} code={tc_code} comment={tc_comment} blank={tc_blank}"
+        );
         let mut any_diff = false;
 
         if let Ok(o) = tokei_out
@@ -173,11 +169,17 @@ fn cross_tool_compare() {
                 }
             }
 
+            let tok_lines = tok_code + tok_comment + tok_blank;
+
             row.push_str(&format!(
-                " | tokei code={tok_code} comment={tok_comment} blank={tok_blank}"
+                " | tokei lines={tok_lines} code={tok_code} comment={tok_comment} blank={tok_blank}"
             ));
 
-            if tc_code != tok_code || tc_comment != tok_comment || tc_blank != tok_blank {
+            if tc_lines != tok_lines
+                || tc_code != tok_code
+                || tc_comment != tok_comment
+                || tc_blank != tok_blank
+            {
                 any_diff = true;
             }
         }
@@ -198,11 +200,17 @@ fn cross_tool_compare() {
                 }
             }
 
+            let scc_lines = scc_code + scc_comment + scc_blank;
+
             row.push_str(&format!(
-                " | scc code={scc_code} comment={scc_comment} blank={scc_blank}"
+                " | scc lines={scc_lines} code={scc_code} comment={scc_comment} blank={scc_blank}"
             ));
 
-            if tc_code != scc_code || tc_comment != scc_comment || tc_blank != scc_blank {
+            if tc_lines != scc_lines
+                || tc_code != scc_code
+                || tc_comment != scc_comment
+                || tc_blank != scc_blank
+            {
                 any_diff = true;
             }
         }

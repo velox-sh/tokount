@@ -1,4 +1,3 @@
-# 16 lines, 9 code, 4 blanks, 2 comments
 echo "This is a
 multiline string
 # with a hash

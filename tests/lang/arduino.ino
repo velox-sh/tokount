@@ -1,5 +1,3 @@
-// 23 lines 13 code 6 comments 4 blanks
-
 int led = 13;
 
 void setup() {

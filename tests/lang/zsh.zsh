@@ -1,4 +1,3 @@
-# 8 lines 4 code 3 comments 1 blank
 #!/usr/bin/env zsh
 
 # Load completions

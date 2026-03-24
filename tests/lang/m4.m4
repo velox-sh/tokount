@@ -1,4 +1,3 @@
-dnl 7 lines 3 code1 blank 3 comments
 The builtin `dnl' stands for “Discard to Next Line”:
 dnl this line is not emitted
 Other text is emitted

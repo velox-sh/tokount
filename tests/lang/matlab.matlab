@@ -1,4 +1,3 @@
-% 10 lines 3 code 5 comments 2 blanks
 function result = add(a, b)
 
 %{ Block comment

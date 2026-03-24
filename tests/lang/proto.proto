@@ -1,4 +1,3 @@
-// 10 lines 6 code 2 comments 2 blanks
 syntax = "proto3";
 
 // User service definition

@@ -1,5 +1,3 @@
-;; 21 lines 11 code 6 comments 4 blanks
-
                                         ; This is a comment line
 ;; This too!
 ;;; This 3!

@@ -1,4 +1,3 @@
-; 20 lines 15 code 3 comments 2 blanks
 ;============= etcd_t ==============
 (allow etcd_t proc_sysctl_t (dir (search)))
 (allow etcd_t proc_sysctl_t (file (read open)))

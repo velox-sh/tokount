@@ -1,4 +1,3 @@
-// 12 lines 8 code 3 comments 1 blank
 import React from 'react';
 
 /* Greeting component */

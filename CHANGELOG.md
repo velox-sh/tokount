@@ -10,7 +10,7 @@
 <details>
   <summary>Table of Contents</summary>
   <ol>
-    <li><a href="#v201--embedded-languages">v2.0.1</a></li>
+    <li><a href="#v210--sections-abstractions-and-less-lint-pain">v2.1.0</a></li>
     <li><a href="#v200--simd-engine">v2.0.0</a></li>
     <li><a href="#v111--windows-symlink-guard">v1.1.1</a></li>
     <li><a href="#v110--human-readable-output--multi-path-support">v1.1.0</a></li>
@@ -19,18 +19,51 @@
   </ol>
 </details>
 
-## v2.0.1 — Embedded languages
+## v2.1.0 — Sections, abstractions, and less lint pain
 
-Added embedded languages support and decided that literate languages should be counted as comments unless they're Markdown, Djot, MDX, etc. An important thing to note is that `tokei` classifies Unreal Markdown as being non-literate, yet it has the `important_syntax` fields. This might be an error. I decided to have it be literate as it's more logical.
+This release came from changing perspective on the engine shape.
 
-**New stuff:**
+Instead of letting language definitions and parser logic grow sideways forever, I split responsibilities into clearer sections and pushed more behavior into data-driven abstractions.
 
-- `literate` support for languages
-- Embedded languages support
+That made `languages.json` easier to scale, made parser code easier to reason about, and helped remove lint suppressions that were making day-to-day work more annoying than it needed to be.
 
-**Changed:**
+**Why this release exists:**
 
-- Table output now includes embedded languages and has nice colors now
+- I wanted to stop fighting growing config/code size every time a language edge case appeared
+- I wanted parsing flow to read like roles (entrypoint/helpers/state) instead of one giant function
+- I wanted strict linting to be a guardrail, not a tax
+
+**What changed:**
+
+- Refactored language definitions to region-based modeling (`comment`, `string`, `child`) with explicit default modes and structured formats
+- Reworked build-time generation to emit the new language model from `languages.json`
+- Removed legacy literate-only parsing path and folded behavior into the unified FSM model
+- Split parser implementation into focused modules:
+  - `parser/mod.rs` for orchestration and entrypoint
+  - `parser/helpers.rs` for reusable parsing helpers and format-specific utilities
+  - `parser/state.rs` for state-machine flow
+- Added support for structured/Jupyter handling and richer embedded child-language detection (`fence`, `tag`, `fixed`)
+- Added `leading_doc_prefixes` handling to support language-specific doc-preface behavior
+- Expanded stable library-facing exports in `lib.rs` (`count`, `EngineConfig`, `OutputStats`, `LangStats`) and improved crate docs
+- Added `CONTRIBUTING.md` covering workflow, ordering, API policy, lint/test expectations
+- Extended accuracy fixtures into `tests/lang.expected/` sidecar files and aligned accuracy harness around sidecar expectations
+
+**Lint and quality direction:**
+
+- Removed parser-level complexity/size suppressions by restructuring code
+- Addressed strict clippy feedback through refactors instead of piling on `#[allow]`
+- Fixed an ATS classification regression introduced during parser refactor and revalidated accuracy
+
+**Result:**
+
+- engine stays fast
+- parsing rules scale without turning into giant special-case branches
+- stricter linting with less suppression noise
+- easier to iterate on language support without turning maintenance into hell
+
+<p align="right">(<a href="#changelog-top">back to top</a>)</p>
+
+---
 
 ## v2.0.0 — SIMD engine
 

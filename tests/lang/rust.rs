@@ -1,4 +1,3 @@
-//! 48 lines 33 code 10 comments 4 blanks
 //! ```rust
 //! fn main () {
 //!     // Comment

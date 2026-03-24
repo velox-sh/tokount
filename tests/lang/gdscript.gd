@@ -1,4 +1,3 @@
-# 10 lines 5 code 3 comments 2 blanks
 extends CharacterBody2D
 
 # Player speed constant

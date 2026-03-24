@@ -1,5 +1,3 @@
-/* 50 lines 34 code 8 comments 8 blanks */
-
 /* /* we can nest block*/ comments in cangjie */
 main(): Unit {
     let start: String = "/*"

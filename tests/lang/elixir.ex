@@ -1,4 +1,3 @@
-# 11 lines 7 code 3 comments 1 blank
 defmodule Greeter do
   # Greets a person by name
   def hello(name) do

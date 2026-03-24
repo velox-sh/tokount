@@ -1,4 +1,3 @@
-// 34 lines 23 code 7 comments 4 blanks
 pragma circom 2.0.8;
 
 /*

@@ -1,4 +1,3 @@
-//! 34 lines 15 code 16 comments 3 blanks
 // https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Commented_Example_Projects
 // The idea is to twist a translated circle:
 // -

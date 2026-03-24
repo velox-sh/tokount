@@ -1,31 +1,63 @@
 /// Static definition of a language's syntax, generated at build time from `languages.json`
+#[derive(Clone, Copy, PartialEq, Eq)]
+pub enum Detection {
+    Fence,
+    Tag,
+    Fixed,
+}
+
+#[derive(Clone, Copy)]
+pub enum RegionKind {
+    /// Lines are comments, `close = b"\n"` for line comments
+    Comment {
+        nested: bool,
+        close_line_is_code: bool,
+    },
+    /// Lines are code, delimiter content is opaque
+    String { escape: bool },
+    /// Switch to a child language until `close`
+    Child {
+        default_lang: Option<&'static str>,
+        detect: Detection,
+    },
+}
+
+#[derive(Clone, Copy)]
+pub struct Region {
+    pub open: &'static [u8],
+    pub close: &'static [u8],
+    pub kind: RegionKind,
+}
+
+#[derive(Clone, Copy, PartialEq, Eq)]
+pub enum DefaultMode {
+    Code,
+    Comment,
+}
+
+#[derive(Clone, Copy, PartialEq, Eq)]
+pub enum StructuredFormat {
+    None,
+    Jupyter,
+}
+
 pub struct LanguageDef {
-    /// Display name (e.g. `"Rust"`, `"Python"`)
     pub name: &'static str,
-    /// Line comment prefixes, longest-first (e.g. `["//", "#"]`)
-    pub line_comments: &'static [&'static [u8]],
-    /// Block comment `(open, close)` pairs, longest-first (e.g. `[("/*", "*/")]`)
-    pub block_comments: &'static [(&'static [u8], &'static [u8])],
-    /// String literal `(open, close, raw)` triples; `raw = true`
-    /// means backslash escapes are ignored
-    pub string_literals: &'static [(&'static [u8], &'static [u8], bool)],
-    /// Whether block comments can be nested (e.g. Kotlin `/* /* */ */`)
-    pub nested_comments: bool,
-    /// When a block comment closes mid-line on a continuation line, upgrade
-    /// the line to Code if alphanumeric content follows the close delimiter
-    /// (e.g. `=end DESCRIPTION` → Code).
-    pub close_line_is_code: bool,
-    /// Deduplicated first-bytes of all tokens used by the scanner to skip uninteresting bytes
+    pub regions: &'static [Region],
     pub interest_bytes: &'static [u8],
-    /// All non-blank lines outside code fences are comments (e.g. Plain Text, Markdown)
-    pub literate: bool,
-    /// Markers that toggle between literate-comment and code mode (e.g. `["```"]` for Markdown)
-    pub important_syntax: &'static [&'static [u8]],
+    pub default_mode: DefaultMode,
+    pub structured_format: StructuredFormat,
+    pub leading_doc_prefixes: &'static [&'static [u8]],
 }
 
 #[allow(dead_code, non_upper_case_globals, unused, non_snake_case)]
 mod generated {
+    use super::DefaultMode;
+    use super::Detection;
     use super::LanguageDef;
+    use super::Region;
+    use super::RegionKind;
+    use super::StructuredFormat;
     include!(concat!(env!("OUT_DIR"), "/generated_languages.rs"));
 }
 

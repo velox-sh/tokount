@@ -1,4 +1,3 @@
--- 10 lines 4 code 5 comments 1 blank
 module Main where
 
 {- Greeting module

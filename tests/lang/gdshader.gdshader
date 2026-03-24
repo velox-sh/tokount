@@ -1,4 +1,3 @@
-// 24 lines 6 code 13 comments 4 blanks
 /*
 test
 test

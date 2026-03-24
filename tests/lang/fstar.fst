@@ -1,5 +1,3 @@
-(* 11 lines 3 code 5 comments 3 blanks *)
-
 module Hello
 
 (* multi

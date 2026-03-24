@@ -1,8 +1,19 @@
 {
-  "FileVersion": 3,
-  "EngineAssociation": "5.3",
-
-  "Category": "Game",
-  "Description": "My game",
-  "Modules": []
+	"FileVersion": 3,
+	"EngineAssociation": "5.5",
+	"Category": "",
+	"Description": "",
+	"Plugins": [
+		{
+			"Name": "ModelingToolsEditorMode",
+			"Enabled": true,
+			"TargetAllowList": [
+				"Editor"
+			]
+		},
+		{
+			"Name": "ProceduralDungeon",
+			"Enabled": true
+		}
+	]
 }

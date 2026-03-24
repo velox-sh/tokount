@@ -1,5 +1,3 @@
-// 12 lines 7 code 2 comments 3 blanks
-
 precision mediump float;
 
 varying vec2 vTexCoord;

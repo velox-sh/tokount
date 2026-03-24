@@ -1,4 +1,3 @@
--- 12 lines 4 code 5 comments 3 blanks
 
 
 SELECT * FROM Users

@@ -1,5 +1,3 @@
-# 13 lines 7 code 2 comments 4 blanks
-
 #+TITLE: This is the title, not a comment
 
 # This is comment

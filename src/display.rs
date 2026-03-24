@@ -96,9 +96,9 @@ fn total_lines(blank: usize, comment: usize, code: usize) -> usize {
     blank + comment + code
 }
 
-#[expect(clippy::too_many_arguments)]
-fn render_row(
-    name: &str,
+#[derive(Clone, Copy)]
+struct RowDisplay<'a> {
+    name: &'a str,
     files: usize,
     blank: usize,
     comment: usize,
@@ -107,7 +107,21 @@ fn render_row(
     color: bool,
     bold: bool,
     uniform_color: Option<Color>,
-) -> Vec<Cell> {
+}
+
+fn render_row(row: RowDisplay<'_>) -> Vec<Cell> {
+    let RowDisplay {
+        name,
+        files,
+        blank,
+        comment,
+        code,
+        embedded,
+        color,
+        bold,
+        uniform_color,
+    } = row;
+
     let lines = total_lines(blank, comment, code);
     let mut lang = Cell::new(name);
     let mut files_cell = Cell::new(files).set_alignment(CellAlignment::Right);
@@ -202,9 +216,17 @@ pub fn print_table(
     for lang in langs {
         let s = &output.languages[lang];
 
-        table.add_row(render_row(
-            lang, s.n_files, s.blank, s.comment, s.code, false, color, false, None,
-        ));
+        table.add_row(render_row(RowDisplay {
+            name: lang,
+            files: s.n_files,
+            blank: s.blank,
+            comment: s.comment,
+            code: s.code,
+            embedded: false,
+            color,
+            bold: false,
+            uniform_color: None,
+        }));
 
         if !s.children.is_empty() {
             let mut children: Vec<&str> = s.children.keys().map(String::as_str).collect();
@@ -213,33 +235,33 @@ pub fn print_table(
             for child in children {
                 let child_stats = &s.children[child];
                 let child_label = format!("|- {child}");
-                table.add_row(render_row(
-                    &child_label,
-                    child_stats.n_files,
-                    child_stats.blank,
-                    child_stats.comment,
-                    child_stats.code,
-                    true,
+                table.add_row(render_row(RowDisplay {
+                    name: &child_label,
+                    files: child_stats.n_files,
+                    blank: child_stats.blank,
+                    comment: child_stats.comment,
+                    code: child_stats.code,
+                    embedded: true,
                     color,
-                    false,
-                    None,
-                ));
+                    bold: false,
+                    uniform_color: None,
+                }));
             }
         }
     }
 
     if let Some(sum) = sum {
-        table.add_row(render_row(
-            "SUM",
-            sum.n_files,
-            sum.blank,
-            sum.comment,
-            sum.code,
-            false,
+        table.add_row(render_row(RowDisplay {
+            name: "SUM",
+            files: sum.n_files,
+            blank: sum.blank,
+            comment: sum.comment,
+            code: sum.code,
+            embedded: false,
             color,
-            true,
-            Some(Color::Cyan),
-        ));
+            bold: true,
+            uniform_color: Some(Color::Cyan),
+        }));
     }
 
     println!("{table}");

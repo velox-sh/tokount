@@ -1,5 +1,3 @@
-// 40 lines 29 code 6 comments 5 blanks
-
 # Returns Bob's response to someone talking to him.
 #
 # + input - whatever is said to Bob

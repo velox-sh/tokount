@@ -1,4 +1,3 @@
-/* 16 lines 8 code 5 comments 3 blanks */
 %module mymodule
 
 /*

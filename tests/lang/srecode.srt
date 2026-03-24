@@ -1,5 +1,3 @@
-;; 37 lines 23 code 2 comments 12 blanks
-
 set escape_start "$"
 set escape_end "$"
 set mode "srecode-template-mode"

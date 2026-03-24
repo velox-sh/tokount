@@ -1,4 +1,3 @@
-; 10 lines 4 code 4 comments 2 blanks
 (defpackage :example (:use :cl))
 
 #| Module documentation

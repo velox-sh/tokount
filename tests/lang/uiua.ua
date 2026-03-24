@@ -1,4 +1,3 @@
-# 9 lines 5 code 3 comments 1 blank
 # Calculate factorial
 # Result ? Number
 Factorial ← |1 (

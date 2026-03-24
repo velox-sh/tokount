@@ -4,90 +4,106 @@
       "resx"
     ],
     "filenames": [],
-    "line_comment": [],
-    "multi_line": [
-      [
-        "<!--",
-        "-->"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "<!--",
+        "close": "-->",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "8th": {
     "extensions": [
       "8th"
     ],
-    "line_comment": [
-      "\\ ",
-      "-- "
-    ],
-    "multi_line": [
-      [
-        "(*",
-        "*)"
-      ]
-    ],
-    "nested": true,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "\\ ",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "-- ",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "(*",
+        "close": "*)",
+        "kind": "comment",
+        "nested": true
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "ABNF": {
     "extensions": [
       "abnf"
     ],
-    "line_comment": [
-      ";"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": ";",
+        "close": "\n",
+        "kind": "comment"
+      }
+    ]
   },
   "Alloy": {
     "extensions": [
       "als"
     ],
-    "line_comment": [
-      "--",
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "--",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      }
+    ]
   },
   "Apache Velocity": {
     "extensions": [
       "vm"
     ],
-    "line_comment": [
-      "##"
-    ],
-    "multi_line": [
-      [
-        "#*",
-        "*#"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "##",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "#*",
+        "close": "*#",
+        "kind": "comment"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "APL": {
@@ -99,48 +115,54 @@
       "apls",
       "dyalog"
     ],
-    "line_comment": [
-      "\u235d"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "⍝",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "Arduino C++": {
     "extensions": [
       "ino"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      }
+    ]
   },
   "Arturo": {
     "extensions": [
       "art"
     ],
-    "line_comment": [
-      ";"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": ";",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "AsciiDoc": {
@@ -148,37 +170,41 @@
       "adoc",
       "asciidoc"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "////",
-        "////"
-      ]
-    ],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "////",
+        "close": "////",
+        "kind": "comment"
+      }
+    ]
   },
   "ASN.1": {
     "extensions": [
       "asn1"
     ],
-    "line_comment": [
-      "--"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "--",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "Assembly": {
@@ -186,21 +212,23 @@
       "asm",
       "s"
     ],
-    "line_comment": [
-      ";"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": ";",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "ATS": {
@@ -211,29 +239,33 @@
       "hats",
       "sats"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ],
-      [
-        "(*",
-        "*)"
-      ],
-      [
-        "////",
-        "THISSHOULDNEVERAPPEARWEHOPE"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "(*",
+        "close": "*)",
+        "kind": "comment"
+      },
+      {
+        "open": "////",
+        "close": "THISSHOULDNEVERAPPEARWEHOPE",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "Autoconf": {
@@ -241,17 +273,23 @@
       "in"
     ],
     "filenames": [],
-    "line_comment": [
-      "#",
-      "dnl"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "dnl",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "AutoHotKey": {
@@ -259,54 +297,64 @@
       "ahk"
     ],
     "filenames": [],
-    "line_comment": [
-      ";"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": ";",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "AWK": {
     "extensions": [
       "awk"
     ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "Ballerina": {
     "extensions": [
       "bal"
     ],
-    "line_comment": [
-      "//",
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "`",
-        "`"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "`",
+        "close": "`",
+        "kind": "string"
+      }
     ]
   },
   "Bash": {
@@ -314,35 +362,40 @@
       "bash"
     ],
     "filenames": [],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "'",
-        "'"
-      ]
-    ],
     "env": [
       "bash"
+    ],
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "Basic": {
     "extensions": [
       "bas"
     ],
-    "line_comment": [
-      "'"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "'",
+        "close": "\n",
+        "kind": "comment"
+      }
+    ]
   },
   "Bazel": {
     "extensions": [
@@ -358,20 +411,23 @@
       "module",
       "workspace"
     ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "Bean": {
@@ -379,16 +435,18 @@
       "bean",
       "beancount"
     ],
-    "line_comment": [
-      ";"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": ";",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "Bicep": {
@@ -396,25 +454,28 @@
       "bicep",
       "bicepparam"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ],
-      [
-        "'''",
-        "'''"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      },
+      {
+        "open": "'''",
+        "close": "'''",
+        "kind": "string"
+      }
     ]
   },
   "Bitbake": {
@@ -424,36 +485,41 @@
       "bbclass",
       "inc"
     ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "BQN": {
     "extensions": [
       "bqn"
     ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "Brainfuck": {
@@ -461,22 +527,26 @@
       "bf"
     ],
     "filenames": [],
-    "line_comment": [],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": []
   },
   "BrightScript": {
     "extensions": [
       "brs"
     ],
-    "line_comment": [
-      "'",
-      "REM"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "'",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "REM",
+        "close": "\n",
+        "kind": "comment"
+      }
+    ]
   },
   "C": {
     "extensions": [
@@ -484,21 +554,23 @@
       "ec",
       "pgc"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "C Header": {
@@ -506,21 +578,23 @@
       "h"
     ],
     "filenames": [],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "C Shell": {
@@ -528,23 +602,26 @@
       "csh"
     ],
     "filenames": [],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "'",
-        "'"
-      ]
-    ],
     "env": [
       "csh"
+    ],
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "C#": {
@@ -552,26 +629,29 @@
       "cs",
       "csx"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "@\"",
-        "\"",
-        "raw"
-      ],
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "@\"",
+        "close": "\"",
+        "kind": "string",
+        "raw": true
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "C++": {
@@ -589,26 +669,29 @@
       "pcc",
       "tpp"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "R\"(",
-        ")\"",
-        "raw"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "R\"(",
+        "close": ")\"",
+        "kind": "string",
+        "raw": true
+      }
     ]
   },
   "C++ Header": {
@@ -620,21 +703,23 @@
       "ipp",
       "ixx"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "C++ Module": {
@@ -648,214 +733,244 @@
       "hppm",
       "hxxm"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "R\"(",
-        ")\"",
-        "raw"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "R\"(",
+        "close": ")\"",
+        "kind": "string",
+        "raw": true
+      }
     ]
   },
   "C3": {
     "extensions": [
       "c3"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ],
-      [
-        "<*",
-        "*>"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "`",
-        "`"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "<*",
+        "close": "*>",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "`",
+        "close": "`",
+        "kind": "string"
+      }
     ]
   },
   "Cairo": {
     "extensions": [
       "cairo"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "Cangjie": {
     "extensions": [
       "cj"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": true,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ],
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "\"\"\"",
-        "\"\"\""
-      ],
-      [
-        "'''",
-        "'''"
-      ],
-      [
-        "##\"",
-        "\"##",
-        "raw"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment",
+        "nested": true
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "\"\"\"",
+        "close": "\"\"\"",
+        "kind": "string"
+      },
+      {
+        "open": "'''",
+        "close": "'''",
+        "kind": "string"
+      },
+      {
+        "open": "##\"",
+        "close": "\"##",
+        "kind": "string",
+        "raw": true
+      }
     ]
   },
   "Chapel": {
     "extensions": [
       "chpl"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "CIL (SELinux)": {
     "extensions": [
       "cil"
     ],
-    "line_comment": [
-      ";"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": ";",
+        "close": "\n",
+        "kind": "comment"
+      }
+    ]
   },
   "Circom": {
     "extensions": [
       "circom"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      }
+    ]
   },
   "Clojure": {
     "extensions": [
       "clj",
       "cljc"
     ],
-    "line_comment": [
-      ";"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": ";",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "ClojureC": {
     "extensions": [
       "cljc"
     ],
-    "line_comment": [
-      ";"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": ";",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "ClojureScript": {
     "extensions": [
       "cljs"
     ],
-    "line_comment": [
-      ";"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": ";",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "CMake": {
@@ -866,21 +981,23 @@
     "filenames": [
       "cmakelists.txt"
     ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [
-      [
-        "#[[",
-        "]]"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "#[[",
+        "close": "]]",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "CodeQL": {
@@ -888,48 +1005,54 @@
       "ql",
       "qll"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "Cogent": {
     "extensions": [
       "cogent"
     ],
-    "line_comment": [
-      "--"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "--",
+        "close": "\n",
+        "kind": "comment"
+      }
+    ]
   },
   "Crystal": {
     "extensions": [
       "cr"
     ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "CSS": {
@@ -937,25 +1060,28 @@
       "css"
     ],
     "filenames": [],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "CSV": {
@@ -963,46 +1089,48 @@
       "csv"
     ],
     "filenames": [],
-    "line_comment": [],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": []
   },
   "Cuda": {
     "extensions": [
       "cu"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "CUE": {
     "extensions": [
       "cue"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "Cython": {
@@ -1011,148 +1139,173 @@
       "pxi",
       "pyx"
     ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ],
-      [
-        "\"\"\"",
-        "\"\"\""
-      ],
-      [
-        "'''",
-        "'''"
-      ],
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      },
+      {
+        "open": "\"\"\"",
+        "close": "\"\"\"",
+        "kind": "string"
+      },
+      {
+        "open": "'''",
+        "close": "'''",
+        "kind": "string"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "D": {
     "extensions": [
       "d"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ],
-      [
-        "/+",
-        "+/"
-      ]
-    ],
-    "nested": true,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment",
+        "nested": true
+      },
+      {
+        "open": "/+",
+        "close": "+/",
+        "kind": "comment",
+        "nested": true
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "D2": {
     "extensions": [
       "d2"
     ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [
-      [
-        "\"\"\"",
-        "\"\"\""
-      ]
-    ],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "\"\"\"",
+        "close": "\"\"\"",
+        "kind": "comment"
+      }
+    ]
   },
   "DAML": {
     "extensions": [
       "daml"
     ],
-    "line_comment": [
-      "-- "
-    ],
-    "multi_line": [
-      [
-        "{-",
-        "-}"
-      ]
-    ],
-    "nested": true,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "-- ",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "{-",
+        "close": "-}",
+        "kind": "comment",
+        "nested": true
+      }
+    ]
   },
   "Dart": {
     "extensions": [
       "dart"
     ],
     "filenames": [],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "'",
-        "'"
-      ],
-      [
-        "\"\"\"",
-        "\"\"\""
-      ],
-      [
-        "'''",
-        "'''"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      },
+      {
+        "open": "\"\"\"",
+        "close": "\"\"\"",
+        "kind": "string"
+      },
+      {
+        "open": "'''",
+        "close": "'''",
+        "kind": "string"
+      }
     ]
   },
   "Dhall": {
     "extensions": [
       "dhall"
     ],
-    "line_comment": [
-      "--"
-    ],
-    "multi_line": [
-      [
-        "{-",
-        "-}"
-      ]
-    ],
-    "nested": true,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "''",
-        "''"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "--",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "{-",
+        "close": "-}",
+        "kind": "comment",
+        "nested": true
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "''",
+        "close": "''",
+        "kind": "string"
+      }
     ]
   },
   "Djot": {
@@ -1161,42 +1314,48 @@
       "djot"
     ],
     "filenames": [],
-    "line_comment": [],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [],
-    "literate": true,
-    "important_syntax": [
-      "```"
+    "default_mode": "comment",
+    "regions": [
+      {
+        "open": "```",
+        "close": "```",
+        "kind": "child",
+        "detect": "fence"
+      }
     ]
   },
   "DM": {
     "extensions": [
       "dm"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": true,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "'",
-        "'"
-      ],
-      [
-        "{\"",
-        "\"}"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment",
+        "nested": true
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      },
+      {
+        "open": "{\"",
+        "close": "\"}",
+        "kind": "string"
+      }
     ]
   },
   "Docker ignore": {
@@ -1206,12 +1365,14 @@
     "filenames": [
       ".dockerignore"
     ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      }
+    ]
   },
   "Dockerfile": {
     "extensions": [
@@ -1220,16 +1381,18 @@
     "filenames": [
       "dockerfile"
     ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "Dream Maker": {
@@ -1237,104 +1400,116 @@
       "dm",
       "dme"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": true,
-    "quotes": [
-      [
-        "{\\\"",
-        "\\\"}"
-      ],
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment",
+        "nested": true
+      },
+      {
+        "open": "{\\\"",
+        "close": "\\\"}",
+        "kind": "string"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "Dust.js": {
     "extensions": [
       "dust"
     ],
-    "line_comment": [],
-    "multi_line": [
-      [
-        "{!",
-        "!}"
-      ]
-    ],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "{!",
+        "close": "!}",
+        "kind": "comment"
+      }
+    ]
   },
   "Ebuild": {
     "extensions": [
       "ebuild",
       "eclass"
     ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "EdgeDB Schema Definition": {
     "extensions": [
       "esdl"
     ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "EdgeQL": {
     "extensions": [
       "edgeql"
     ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ],
-      [
-        "$",
-        "$"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      },
+      {
+        "open": "$",
+        "close": "$",
+        "kind": "string"
+      }
     ]
   },
   "Edn": {
     "extensions": [
       "edn"
     ],
-    "line_comment": [
-      ";"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": ";",
+        "close": "\n",
+        "kind": "comment"
+      }
+    ]
   },
   "Elixir": {
     "extensions": [
@@ -1342,28 +1517,33 @@
       "exs"
     ],
     "filenames": [],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "\"\"\"",
-        "\"\"\""
-      ],
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "'''",
-        "'''"
-      ],
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "\"\"\"",
+        "close": "\"\"\"",
+        "kind": "string"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "'''",
+        "close": "'''",
+        "kind": "string"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "Elixir Template": {
@@ -1371,100 +1551,116 @@
       "eex"
     ],
     "filenames": [],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "\"\"\"",
-        "\"\"\""
-      ],
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "'''",
-        "'''"
-      ],
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "\"\"\"",
+        "close": "\"\"\"",
+        "kind": "string"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "'''",
+        "close": "'''",
+        "kind": "string"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "Elvish": {
     "extensions": [
       "elv"
     ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ],
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "Emacs Dev Env": {
     "extensions": [
       "ede"
     ],
-    "line_comment": [
-      ";"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": ";",
+        "close": "\n",
+        "kind": "comment"
+      }
+    ]
   },
   "Emacs Lisp": {
     "extensions": [
       "el"
     ],
-    "line_comment": [
-      ";"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": ";",
+        "close": "\n",
+        "kind": "comment"
+      }
+    ]
   },
   "Emojicode": {
     "extensions": [
       "emojic",
-      "\ud83c\udf47"
+      "🍇"
     ],
-    "line_comment": [
-      "\ud83d\udcad"
-    ],
-    "multi_line": [
-      [
-        "\ud83d\udcad\ud83d\udd1c",
-        "\ud83d\udd1a\ud83d\udcad"
-      ],
-      [
-        "\ud83d\udcd7",
-        "\ud83d\udcd7"
-      ],
-      [
-        "\ud83d\udcd8",
-        "\ud83d\udcd8"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\u274c\ud83d\udd24",
-        "\u274c\ud83d\udd24"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "💭",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "💭🔜",
+        "close": "🔚💭",
+        "kind": "comment"
+      },
+      {
+        "open": "📗",
+        "close": "📗",
+        "kind": "comment"
+      },
+      {
+        "open": "📘",
+        "close": "📘",
+        "kind": "comment"
+      },
+      {
+        "open": "❌🔤",
+        "close": "❌🔤",
+        "kind": "string"
+      }
     ]
   },
   "F#": {
@@ -1474,30 +1670,34 @@
       "fsscript",
       "fsx"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "(*",
-        "*)"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"\"\"",
-        "\"\"\""
-      ],
-      [
-        "@\"",
-        "\"",
-        "raw"
-      ],
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "(*",
+        "close": "*)",
+        "kind": "comment"
+      },
+      {
+        "open": "\"\"\"",
+        "close": "\"\"\"",
+        "kind": "string"
+      },
+      {
+        "open": "@\"",
+        "close": "\"",
+        "kind": "string",
+        "raw": true
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "F*": {
@@ -1505,107 +1705,131 @@
       "fst",
       "fsti"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "(*",
-        "*)"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "(*",
+        "close": "*)",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "Factor": {
     "extensions": [
       "factor"
     ],
-    "line_comment": [
-      "!",
-      "#!"
-    ],
-    "multi_line": [
-      [
-        "![[",
-        "]]"
-      ],
-      [
-        "![=[",
-        "]=]"
-      ],
-      [
-        "![==[",
-        "]==]"
-      ],
-      [
-        "![===[",
-        "]===]"
-      ],
-      [
-        "![====[",
-        "]====]"
-      ],
-      [
-        "![=====[",
-        "]=====]"
-      ],
-      [
-        "![======[",
-        "]======]"
-      ],
-      [
-        "/*",
-        "*/"
-      ],
-      [
-        "((",
-        "))"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "STRING:",
-        ";"
-      ],
-      [
-        "[======[",
-        "]======]"
-      ],
-      [
-        "[=====[",
-        "]====]"
-      ],
-      [
-        "[====[",
-        "]====]"
-      ],
-      [
-        "[===[",
-        "]===]"
-      ],
-      [
-        "[==[",
-        "]==]"
-      ],
-      [
-        "[=[",
-        "]=]"
-      ],
-      [
-        "[[",
-        "]]"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "!",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "#!",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "![[",
+        "close": "]]",
+        "kind": "comment"
+      },
+      {
+        "open": "![=[",
+        "close": "]=]",
+        "kind": "comment"
+      },
+      {
+        "open": "![==[",
+        "close": "]==]",
+        "kind": "comment"
+      },
+      {
+        "open": "![===[",
+        "close": "]===]",
+        "kind": "comment"
+      },
+      {
+        "open": "![====[",
+        "close": "]====]",
+        "kind": "comment"
+      },
+      {
+        "open": "![=====[",
+        "close": "]=====]",
+        "kind": "comment"
+      },
+      {
+        "open": "![======[",
+        "close": "]======]",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "((",
+        "close": "))",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "STRING:",
+        "close": ";",
+        "kind": "string"
+      },
+      {
+        "open": "[======[",
+        "close": "]======]",
+        "kind": "string"
+      },
+      {
+        "open": "[=====[",
+        "close": "]====]",
+        "kind": "string"
+      },
+      {
+        "open": "[====[",
+        "close": "]====]",
+        "kind": "string"
+      },
+      {
+        "open": "[===[",
+        "close": "]===]",
+        "kind": "string"
+      },
+      {
+        "open": "[==[",
+        "close": "]==]",
+        "kind": "string"
+      },
+      {
+        "open": "[=[",
+        "close": "]=]",
+        "kind": "string"
+      },
+      {
+        "open": "[[",
+        "close": "]]",
+        "kind": "string"
+      }
     ]
   },
   "Fennel": {
@@ -1613,21 +1837,28 @@
       "fnl",
       "fnlm"
     ],
-    "line_comment": [
-      ";",
-      ";;"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        ",",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": ";",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": ";;",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": ",",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "Fish": {
@@ -1635,68 +1866,81 @@
       "fish"
     ],
     "filenames": [],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "'",
-        "'"
-      ]
-    ],
     "env": [
       "fish"
+    ],
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "FlatBuffers Schema": {
     "extensions": [
       "fbs"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      }
+    ]
   },
   "Forge Config": {
     "extensions": [
       "cfg"
     ],
-    "line_comment": [
-      "#",
-      "~"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "~",
+        "close": "\n",
+        "kind": "comment"
+      }
+    ]
   },
   "Fragment Shader File": {
     "extensions": [
       "fsh"
     ],
     "filenames": [],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "FreeMarker": {
@@ -1705,181 +1949,202 @@
       "ftlh",
       "ftlx"
     ],
-    "line_comment": [],
-    "multi_line": [
-      [
-        "<#--",
-        "-->"
-      ]
-    ],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "<#--",
+        "close": "-->",
+        "kind": "comment"
+      }
+    ]
   },
   "Freemarker Template": {
     "extensions": [
       "ftl"
     ],
-    "line_comment": [],
-    "multi_line": [
-      [
-        "<#--",
-        "-->"
-      ]
-    ],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "<#--",
+        "close": "-->",
+        "kind": "comment"
+      }
+    ]
   },
   "Futhark": {
     "extensions": [
       "fut"
     ],
-    "line_comment": [
-      "--"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "--",
+        "close": "\n",
+        "kind": "comment"
+      }
+    ]
   },
   "FXML": {
     "extensions": [
       "fxml"
     ],
     "filenames": [],
-    "line_comment": [],
-    "multi_line": [
-      [
-        "<!--",
-        "-->"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "<!--",
+        "close": "-->",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "Game Maker Language": {
     "extensions": [
       "gml"
     ],
-    "line_comment": [
-      "//",
-      "///"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "///",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "GDB Script": {
     "extensions": [
       "gdb"
     ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      }
+    ]
   },
   "GDScript": {
     "extensions": [
       "gd"
     ],
     "filenames": [],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "\"\"\"",
-        "\"\"\""
-      ],
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "\"\"\"",
+        "close": "\"\"\"",
+        "kind": "string"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "GDShader": {
     "extensions": [
       "gdshader"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      }
+    ]
   },
   "Gemfile": {
     "extensions": [],
     "filenames": [
       "gemfile"
     ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "Gherkin (Cucumber)": {
     "extensions": [
       "feature"
     ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      }
+    ]
   },
   "Gherkin Specification": {
     "extensions": [
       "feature"
     ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      }
+    ]
   },
   "gitignore": {
     "extensions": [
@@ -1888,87 +2153,107 @@
     "filenames": [
       ".gitignore"
     ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      }
+    ]
   },
   "Gleam": {
     "extensions": [
       "gleam"
     ],
-    "line_comment": [
-      "//",
-      "///",
-      "////"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "///",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "////",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "Glimmer JS": {
     "extensions": [
       "gjs"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ],
-      [
-        "<!--",
-        "-->"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ],
-      [
-        "`",
-        "`"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "<!--",
+        "close": "-->",
+        "kind": "comment"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      },
+      {
+        "open": "`",
+        "close": "`",
+        "kind": "string"
+      }
     ]
   },
   "Glimmer TS": {
     "extensions": [
       "gts"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ],
-      [
-        "<!--",
-        "-->"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ],
-      [
-        "`",
-        "`"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "<!--",
+        "close": "-->",
+        "kind": "comment"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      },
+      {
+        "open": "`",
+        "close": "`",
+        "kind": "string"
+      }
     ]
   },
   "GLSL": {
@@ -1990,101 +2275,110 @@
       "glsl"
     ],
     "filenames": [],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "Gml": {
     "extensions": [
       "gml"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      }
+    ]
   },
   "GNU Style Assembly": {
     "extensions": [
       "s"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      }
+    ]
   },
   "Go": {
     "extensions": [
       "go"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "`",
-        "`"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "`",
+        "close": "`",
+        "kind": "string"
+      }
     ]
   },
   "Go HTML": {
     "extensions": [
       "gohtml"
     ],
-    "line_comment": [],
-    "multi_line": [
-      [
-        "<!--",
-        "-->"
-      ],
-      [
-        "{{/*",
-        "*/}}"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "<!--",
+        "close": "-->",
+        "kind": "comment"
+      },
+      {
+        "open": "{{/*",
+        "close": "*/}}",
+        "kind": "comment"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "Go Template": {
@@ -2093,77 +2387,81 @@
       "gohtml",
       "gotxt"
     ],
-    "line_comment": [],
-    "multi_line": [
-      [
-        "{{/*",
-        "*/}}"
-      ]
-    ],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "{{/*",
+        "close": "*/}}",
+        "kind": "comment"
+      }
+    ]
   },
   "Godot Scene": {
     "extensions": [
       "tscn"
     ],
     "filenames": [],
-    "line_comment": [],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": []
   },
   "GraphQL": {
     "extensions": [
       "gql",
       "graphql"
     ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "\"\"\"",
-        "\"\"\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "\"\"\"",
+        "close": "\"\"\"",
+        "kind": "string"
+      }
     ]
   },
   "Gwion": {
     "extensions": [
       "gw"
     ],
-    "line_comment": [
-      "#!"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#!",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "HAML": {
     "extensions": [
       "haml"
     ],
-    "line_comment": [
-      "-#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "-#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "Haskell": {
@@ -2171,21 +2469,24 @@
       "hs"
     ],
     "filenames": [],
-    "line_comment": [
-      "--"
-    ],
-    "multi_line": [
-      [
-        "{-",
-        "-}"
-      ]
-    ],
-    "nested": true,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "--",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "{-",
+        "close": "-}",
+        "kind": "comment",
+        "nested": true
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "HCL": {
@@ -2194,43 +2495,51 @@
       "tf",
       "tfvars"
     ],
-    "line_comment": [
-      "#",
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "Headache": {
     "extensions": [
       "ha"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "HEEx": {
@@ -2238,81 +2547,110 @@
       "heex"
     ],
     "filenames": [],
-    "line_comment": [],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "Hex0": {
     "extensions": [
       "hex0"
     ],
-    "line_comment": [
-      "#",
-      ";"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": ";",
+        "close": "\n",
+        "kind": "comment"
+      }
+    ]
   },
   "Hex1": {
     "extensions": [
       "hex1"
     ],
-    "line_comment": [
-      "#",
-      ";"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": ";",
+        "close": "\n",
+        "kind": "comment"
+      }
+    ]
   },
   "Hex2": {
     "extensions": [
       "hex2"
     ],
-    "line_comment": [
-      "#",
-      ";"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": ";",
+        "close": "\n",
+        "kind": "comment"
+      }
+    ]
   },
   "HICAD": {
     "extensions": [
       "MAC",
       "mac"
     ],
-    "line_comment": [
-      "REM",
-      "rem"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "REM",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "rem",
+        "close": "\n",
+        "kind": "comment"
+      }
+    ]
   },
   "hledger": {
     "extensions": [
       "hledger"
     ],
-    "line_comment": [
-      ";",
-      "#"
-    ],
-    "multi_line": [
-      [
-        "comment",
-        "end comment"
-      ]
-    ],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": ";",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "comment",
+        "close": "end comment",
+        "kind": "comment"
+      }
+    ]
   },
   "HLSL": {
     "extensions": [
@@ -2323,21 +2661,23 @@
       "hlsli"
     ],
     "filenames": [],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "HTML": {
@@ -2345,23 +2685,37 @@
       "htm",
       "html"
     ],
-    "line_comment": [],
-    "multi_line": [
-      [
-        "<!--",
-        "-->"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "<!--",
+        "close": "-->",
+        "kind": "comment"
+      },
+      {
+        "open": "<script",
+        "close": "</script>",
+        "kind": "child",
+        "default": "JavaScript",
+        "detect": "tag"
+      },
+      {
+        "open": "<style",
+        "close": "</style>",
+        "kind": "child",
+        "default": "CSS",
+        "detect": "tag"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "ignore": {
@@ -2371,77 +2725,93 @@
     "filenames": [
       ".ignore"
     ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      }
+    ]
   },
   "INI": {
     "extensions": [
       "ini"
     ],
     "filenames": [],
-    "line_comment": [
-      ";",
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": ";",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      }
+    ]
   },
   "Janet": {
     "extensions": [
       "janet"
     ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "``",
-        "``"
-      ],
-      [
-        "@\"",
-        "\""
-      ],
-      [
-        "'",
-        "'"
-      ],
-      [
-        "`",
-        "`"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "``",
+        "close": "``",
+        "kind": "string"
+      },
+      {
+        "open": "@\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      },
+      {
+        "open": "`",
+        "close": "`",
+        "kind": "string"
+      }
     ]
   },
   "Java": {
     "extensions": [
       "java"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "JavaScript": {
@@ -2450,29 +2820,33 @@
       "js",
       "mjs"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "'",
-        "'"
-      ],
-      [
-        "`",
-        "`"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      },
+      {
+        "open": "`",
+        "close": "`",
+        "kind": "string"
+      }
     ]
   },
   "Jinja": {
@@ -2481,87 +2855,90 @@
       "j2",
       "jinja2"
     ],
-    "line_comment": [],
-    "multi_line": [
-      [
-        "{#",
-        "#}"
-      ]
-    ],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "{#",
+        "close": "#}",
+        "kind": "comment"
+      }
+    ]
   },
   "Jinja2": {
     "extensions": [
       "j2",
       "jinja"
     ],
-    "line_comment": [],
-    "multi_line": [
-      [
-        "{#",
-        "#}"
-      ]
-    ],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "{#",
+        "close": "#}",
+        "kind": "comment"
+      }
+    ]
   },
   "jq": {
     "extensions": [
       "jq"
     ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "JSLT": {
     "extensions": [
       "jslt"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      }
+    ]
   },
   "JSON": {
     "extensions": [
       "json"
     ],
     "filenames": [],
-    "line_comment": [],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": []
   },
   "JSON5": {
     "extensions": [
       "json5"
     ],
     "filenames": [],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "JSONC": {
@@ -2569,21 +2946,23 @@
       "jsonc"
     ],
     "filenames": [],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "JSONL": {
@@ -2591,48 +2970,56 @@
       "jsonl"
     ],
     "filenames": [],
-    "line_comment": [],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": []
   },
   "Jsonnet": {
     "extensions": [
       "jsonnet",
       "libsonnet"
     ],
-    "line_comment": [
-      "#",
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "'",
-        "'"
-      ],
-      [
-        "|||",
-        "|||"
-      ],
-      [
-        "@\"",
-        "\""
-      ],
-      [
-        "@'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      },
+      {
+        "open": "|||",
+        "close": "|||",
+        "kind": "string"
+      },
+      {
+        "open": "@\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "@'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "JSX": {
@@ -2640,28 +3027,28 @@
       "jsx"
     ],
     "filenames": [],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "'",
-        "'"
-      ],
-      [
-        ""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "Jupyter": {
@@ -2669,19 +3056,9 @@
       "ipynb",
       "jpynb"
     ],
-    "line_comment": [],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
-  },
-  "Jupyter Notebooks": {
-    "extensions": [
-      "ipynb"
-    ],
-    "line_comment": [],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "structured_format": "jupyter",
+    "regions": []
   },
   "Just": {
     "extensions": [
@@ -2691,88 +3068,102 @@
     "filenames": [
       "justfile"
     ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "\"\"\"",
-        "\"\"\""
-      ],
-      [
-        "'''",
-        "'''"
-      ],
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "\"\"\"",
+        "close": "\"\"\"",
+        "kind": "string"
+      },
+      {
+        "open": "'''",
+        "close": "'''",
+        "kind": "string"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "K": {
     "extensions": [
       "k"
     ],
-    "line_comment": [
-      "/"
-    ],
-    "multi_line": [],
-    "nested": true,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "/",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "Kaem": {
     "extensions": [
       "kaem"
     ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      }
+    ]
   },
   "Kakoune script": {
     "extensions": [
       "kak"
     ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "Koka": {
     "extensions": [
       "kk"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": true,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment",
+        "nested": true
+      }
+    ]
   },
   "Korn Shell": {
     "extensions": [
@@ -2781,16 +3172,18 @@
     "filenames": [
       ".kshrc"
     ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "Kotlin": {
@@ -2799,66 +3192,75 @@
       "kts"
     ],
     "filenames": [],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": true,
-    "quotes": [
-      [
-        "\"\"\"",
-        "\"\"\""
-      ],
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment",
+        "nested": true
+      },
+      {
+        "open": "\"\"\"",
+        "close": "\"\"\"",
+        "kind": "string"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "KV Language": {
     "extensions": [
       "kv"
     ],
-    "line_comment": [
-      "# "
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "# ",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "LALRPOP": {
     "extensions": [
       "lalrpop"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "#\\\"",
-        "\\\"#"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "#\\\"",
+        "close": "\\\"#",
+        "kind": "string"
+      }
     ]
   },
   "LaTeX": {
@@ -2867,37 +3269,42 @@
       "sty"
     ],
     "filenames": [],
-    "line_comment": [
-      "%"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "%",
+        "close": "\n",
+        "kind": "comment"
+      }
+    ]
   },
   "LESS": {
     "extensions": [
       "less"
     ],
     "filenames": [],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "License": {
@@ -2915,49 +3322,54 @@
       "licence-mit",
       "copyright"
     ],
-    "line_comment": [],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": []
   },
   "Lingua Franca": {
     "extensions": [
       "lf"
     ],
-    "line_comment": [
-      "//",
-      "#"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": true,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment",
+        "nested": true
+      }
+    ]
   },
   "Liquid": {
     "extensions": [
       "liquid"
     ],
-    "line_comment": [],
-    "multi_line": [
-      [
-        "<!--",
-        "-->"
-      ],
-      [
-        "{% comment %}",
-        "{% endcomment %}"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "<!--",
+        "close": "-->",
+        "kind": "comment"
+      },
+      {
+        "open": "{% comment %}",
+        "close": "{% endcomment %}",
+        "kind": "comment"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "Lisp": {
@@ -2967,78 +3379,88 @@
       "asd"
     ],
     "filenames": [],
-    "line_comment": [
-      ";"
-    ],
-    "multi_line": [
-      [
-        "#|",
-        "|#"
-      ]
-    ],
-    "nested": true,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": ";",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "#|",
+        "close": "|#",
+        "kind": "comment",
+        "nested": true
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "LiveScript": {
     "extensions": [
       "ls"
     ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "LLVM": {
     "extensions": [
       "ll"
     ],
-    "line_comment": [
-      ";"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": ";",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "LLVM IR": {
     "extensions": [
       "ll"
     ],
-    "line_comment": [
-      ";"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": ";",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "Logtalk": {
@@ -3046,38 +3468,42 @@
       "lgt",
       "logtalk"
     ],
-    "line_comment": [
-      "%"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "%",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      }
+    ]
   },
   "LOLCODE": {
     "extensions": [
       "lol",
       "lols"
     ],
-    "line_comment": [
-      "BTW"
-    ],
-    "multi_line": [
-      [
-        "OBTW",
-        "TLDR"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "BTW",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "OBTW",
+        "close": "TLDR",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "Lua": {
@@ -3085,25 +3511,28 @@
       "lua"
     ],
     "filenames": [],
-    "line_comment": [
-      "--"
-    ],
-    "multi_line": [
-      [
-        "--[[",
-        "]]"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "--",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "--[[",
+        "close": "]]",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "Luau": {
@@ -3111,57 +3540,69 @@
       "luau"
     ],
     "filenames": [],
-    "line_comment": [
-      "--"
-    ],
-    "multi_line": [
-      [
-        "--[[",
-        "]]"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "'",
-        "'"
-      ],
-      [
-        ""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "--",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "--[[",
+        "close": "]]",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "M1 Assembly": {
     "extensions": [
       "m1"
     ],
-    "line_comment": [
-      "#",
-      ";"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": ";",
+        "close": "\n",
+        "kind": "comment"
+      }
+    ]
   },
   "m4": {
     "extensions": [
       "m4"
     ],
-    "line_comment": [
-      "#",
-      "dnl"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "`",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "dnl",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "`",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "Makefile": {
@@ -3175,12 +3616,14 @@
       "gnumakefile",
       "makefile"
     ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      }
+    ]
   },
   "Markdown": {
     "extensions": [
@@ -3188,13 +3631,14 @@
       "markdown"
     ],
     "filenames": [],
-    "line_comment": [],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [],
-    "literate": true,
-    "important_syntax": [
-      "```"
+    "default_mode": "comment",
+    "regions": [
+      {
+        "open": "```",
+        "close": "```",
+        "kind": "child",
+        "detect": "fence"
+      }
     ]
   },
   "MATLAB": {
@@ -3202,21 +3646,23 @@
       "matlab"
     ],
     "filenames": [],
-    "line_comment": [
-      "%"
-    ],
-    "multi_line": [
-      [
-        "%{",
-        "%}"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "%",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "%{",
+        "close": "%}",
+        "kind": "comment"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "MDX": {
@@ -3224,13 +3670,14 @@
       "mdx"
     ],
     "filenames": [],
-    "line_comment": [],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [],
-    "literate": true,
-    "important_syntax": [
-      "```"
+    "default_mode": "comment",
+    "regions": [
+      {
+        "open": "```",
+        "close": "```",
+        "kind": "child",
+        "detect": "fence"
+      }
     ]
   },
   "Menhir": {
@@ -3239,134 +3686,153 @@
       "mly",
       "vy"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "(*",
-        "*)"
-      ],
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": true,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "(*",
+        "close": "*)",
+        "kind": "comment",
+        "nested": true
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment",
+        "nested": true
+      }
+    ]
   },
   "Metal": {
     "extensions": [
       "metal"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "Metal Shading Language": {
     "extensions": [
       "metal"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      }
+    ]
   },
   "Mlatu": {
     "extensions": [
       "mlt"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      }
+    ]
   },
   "Modelica": {
     "extensions": [
       "mo",
       "mos"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      }
+    ]
   },
   "Module-Definition": {
     "extensions": [
       "def"
     ],
-    "line_comment": [
-      ";"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": ";",
+        "close": "\n",
+        "kind": "comment"
+      }
+    ]
   },
   "Mojo": {
     "extensions": [
       "mojo",
-      "\ud83d\udd25"
+      "🔥"
     ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "Monkey C": {
     "extensions": [
       "mc"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "MSBuild": {
@@ -3384,23 +3850,23 @@
       "vcxproj",
       "vcxproj.filters"
     ],
-    "line_comment": [],
-    "multi_line": [
-      [
-        "<!--",
-        "-->"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "<!--",
+        "close": "-->",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "Nextflow": {
@@ -3408,59 +3874,65 @@
       "nextflow",
       "nf"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      }
+    ]
   },
   "Nix": {
     "extensions": [
       "nix"
     ],
     "filenames": [],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "Not Quite Perl": {
     "extensions": [
       "nqp"
     ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [
-      [
-        "=begin",
-        "=end"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "=begin",
+        "close": "=end",
+        "kind": "comment"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "NuGet Config": {
@@ -3470,19 +3942,18 @@
       "packages.config",
       "nugetdefaults.config"
     ],
-    "line_comment": [],
-    "multi_line": [
-      [
-        "<!--",
-        "-->"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "<!--",
+        "close": "-->",
+        "kind": "comment"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "Objective-C": {
@@ -3490,147 +3961,165 @@
       "m"
     ],
     "filenames": [],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "Odin": {
     "extensions": [
       "odin"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "Open Policy Agent": {
     "extensions": [
       "rego"
     ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "`",
-        "`"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "`",
+        "close": "`",
+        "kind": "string"
+      }
     ]
   },
   "OpenQASM": {
     "extensions": [
       "qasm"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "OpenSCAD": {
     "extensions": [
       "scad"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "OpenType Feature File": {
     "extensions": [
       "fea"
     ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      }
+    ]
   },
   "Org": {
     "extensions": [
       "org"
     ],
-    "line_comment": [
-      "# "
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "# ",
+        "close": "\n",
+        "kind": "comment"
+      }
+    ]
   },
   "Pacman's makepkg": {
     "extensions": [],
     "filenames": [
       "pkgbuild"
     ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "Pan": {
@@ -3638,16 +4127,18 @@
       "pan",
       "tpl"
     ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "Pascal": {
@@ -3655,25 +4146,30 @@
       "pas"
     ],
     "filenames": [],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "{",
-        "}"
-      ],
-      [
-        "(*",
-        "*)"
-      ]
-    ],
-    "nested": true,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "{",
+        "close": "}",
+        "kind": "comment",
+        "nested": true
+      },
+      {
+        "open": "(*",
+        "close": "*)",
+        "kind": "comment",
+        "nested": true
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "Perl": {
@@ -3682,41 +4178,46 @@
       "pm"
     ],
     "filenames": [],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [
-      [
-        "=pod",
-        "=cut"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "=pod",
+        "close": "=cut",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "Pest": {
     "extensions": [
       "pest"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "Phix": {
@@ -3724,27 +4225,40 @@
       "e",
       "exw"
     ],
-    "line_comment": [
-      "--",
-      "//",
-      "#!"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ],
-      [
-        "--/*",
-        "--*/"
-      ]
-    ],
-    "nested": true,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "--",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "#!",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment",
+        "nested": true
+      },
+      {
+        "open": "--/*",
+        "close": "--*/",
+        "kind": "comment",
+        "nested": true
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "PKGBUILD": {
@@ -3754,12 +4268,14 @@
     "filenames": [
       "pkgbuild"
     ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      }
+    ]
   },
   "PL/SQL": {
     "extensions": [
@@ -3779,21 +4295,23 @@
       "vw"
     ],
     "filenames": [],
-    "line_comment": [
-      "--"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "--",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "Plain Text": {
@@ -3802,31 +4320,31 @@
       "txt"
     ],
     "filenames": [],
-    "line_comment": [],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [],
-    "literate": true
+    "default_mode": "comment",
+    "regions": []
   },
   "PlantUML": {
     "extensions": [
       "puml"
     ],
-    "line_comment": [
-      "'"
-    ],
-    "multi_line": [
-      [
-        "/'",
-        "'/"
-      ]
-    ],
-    "nested": true,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "'",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/'",
+        "close": "'/",
+        "kind": "comment",
+        "nested": true
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "PO File": {
@@ -3834,46 +4352,49 @@
       "po",
       "pot"
     ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      }
+    ]
   },
   "Poke": {
     "extensions": [
       "pk"
     ],
-    "line_comment": [],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      }
+    ]
   },
   "Pony": {
     "extensions": [
       "pony"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "PostCSS": {
@@ -3881,21 +4402,23 @@
       "pcss",
       "sss"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "Powershell": {
@@ -3908,29 +4431,33 @@
       "psm1",
       "pssc"
     ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [
-      [
-        "<#",
-        "#>"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "'",
-        "'"
-      ],
-      [
-        "@'",
-        "'@"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "<#",
+        "close": "#>",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      },
+      {
+        "open": "@'",
+        "close": "'@",
+        "kind": "string"
+      }
     ]
   },
   "Protocol Buffers": {
@@ -3938,87 +4465,103 @@
       "proto"
     ],
     "filenames": [],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      }
+    ]
   },
   "Pug": {
     "extensions": [
       "pug"
     ],
-    "line_comment": [
-      "//",
-      "//-"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "#{\\\"",
-        "\\\"}"
-      ],
-      [
-        "#{'",
-        "'}"
-      ],
-      [
-        "#{`",
-        "`}"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "//-",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "#{\\\"",
+        "close": "\\\"}",
+        "kind": "string"
+      },
+      {
+        "open": "#{'",
+        "close": "'}",
+        "kind": "string"
+      },
+      {
+        "open": "#{`",
+        "close": "`}",
+        "kind": "string"
+      }
     ]
   },
   "Puppet": {
     "extensions": [
       "pp"
     ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [
-      [
-        "=begin",
-        "=end"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "=begin",
+        "close": "=end",
+        "kind": "comment"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "Pyret": {
     "extensions": [
       "arr"
     ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [
-      [
-        "#|",
-        "|#"
-      ]
-    ],
-    "nested": true,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ],
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "#|",
+        "close": "|#",
+        "kind": "comment",
+        "nested": true
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "Python": {
@@ -4027,88 +4570,104 @@
       "pyi",
       "pyw"
     ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "'",
-        "'"
-      ],
-      [
-        "r'",
-        "'"
-      ],
-      [
-        "r\"",
-        "\""
-      ],
-      [
-        "\"\"\"",
-        "\"\"\""
-      ],
-      [
-        "'''",
-        "'''"
-      ],
-      [
-        "r\"\"\"",
-        "\"\"\""
-      ],
-      [
-        "r'''",
-        "'''"
-      ],
-      [
-        "f\"\"\"",
-        "\"\"\""
-      ],
-      [
-        "f'''",
-        "'''"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      },
+      {
+        "open": "r'",
+        "close": "'",
+        "kind": "string"
+      },
+      {
+        "open": "r\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "\"\"\"",
+        "close": "\"\"\"",
+        "kind": "string"
+      },
+      {
+        "open": "'''",
+        "close": "'''",
+        "kind": "string"
+      },
+      {
+        "open": "r\"\"\"",
+        "close": "\"\"\"",
+        "kind": "string"
+      },
+      {
+        "open": "r'''",
+        "close": "'''",
+        "kind": "string"
+      },
+      {
+        "open": "f\"\"\"",
+        "close": "\"\"\"",
+        "kind": "string"
+      },
+      {
+        "open": "f'''",
+        "close": "'''",
+        "kind": "string"
+      }
     ]
   },
   "Q": {
     "extensions": [
       "q"
     ],
-    "line_comment": [
-      "/"
-    ],
-    "multi_line": [],
-    "nested": true,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "/",
+        "close": "\n",
+        "kind": "comment"
+      }
+    ]
   },
   "QML": {
     "extensions": [
       "qml"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "Racket": {
@@ -4116,21 +4675,24 @@
       "rkt",
       "scrbl"
     ],
-    "line_comment": [
-      ";"
-    ],
-    "multi_line": [
-      [
-        "#|",
-        "|#"
-      ]
-    ],
-    "nested": true,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": ";",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "#|",
+        "close": "|#",
+        "kind": "comment",
+        "nested": true
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "Rakefile": {
@@ -4141,21 +4703,23 @@
       "rake",
       "rakefile"
     ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [
-      [
-        "=begin",
-        "=end"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "=begin",
+        "close": "=end",
+        "kind": "comment"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "Raku": {
@@ -4169,129 +4733,159 @@
       "rakutest",
       "t"
     ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [
-      [
-        "=begin",
-        "=end"
-      ],
-      [
-        "#`(",
-        ")"
-      ],
-      [
-        "#`[",
-        "]"
-      ],
-      [
-        "#`{",
-        "}"
-      ],
-      [
-        "#`\uff62",
-        "\uff63"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ],
-      [
-        "\u201e",
-        "\u201c"
-      ],
-      [
-        "\u00ab",
-        "\u00bb"
-      ],
-      [
-        "<<",
-        ">>"
-      ],
-      [
-        "\u201c",
-        "\u201d"
-      ],
-      [
-        "\u2019",
-        "\u2018"
-      ],
-      [
-        "\uff62",
-        "\uff63"
-      ]
-    ],
-    "close_line_is_code": true
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "=begin",
+        "close": "=end",
+        "kind": "comment",
+        "close_line_is_code": true
+      },
+      {
+        "open": "#`(",
+        "close": ")",
+        "kind": "comment",
+        "close_line_is_code": true
+      },
+      {
+        "open": "#`[",
+        "close": "]",
+        "kind": "comment",
+        "close_line_is_code": true
+      },
+      {
+        "open": "#`{",
+        "close": "}",
+        "kind": "comment",
+        "close_line_is_code": true
+      },
+      {
+        "open": "#`｢",
+        "close": "｣",
+        "kind": "comment",
+        "close_line_is_code": true
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      },
+      {
+        "open": "„",
+        "close": "“",
+        "kind": "string"
+      },
+      {
+        "open": "«",
+        "close": "»",
+        "kind": "string"
+      },
+      {
+        "open": "<<",
+        "close": ">>",
+        "kind": "string"
+      },
+      {
+        "open": "“",
+        "close": "”",
+        "kind": "string"
+      },
+      {
+        "open": "’",
+        "close": "‘",
+        "kind": "string"
+      },
+      {
+        "open": "｢",
+        "close": "｣",
+        "kind": "string"
+      }
+    ]
   },
   "Razor": {
     "extensions": [
       "cshtml",
       "razor"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "<!--",
-        "-->"
-      ],
-      [
-        "@*",
-        "*@"
-      ],
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "<!--",
+        "close": "-->",
+        "kind": "comment"
+      },
+      {
+        "open": "@*",
+        "close": "*@",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      }
+    ]
   },
   "Redscript": {
     "extensions": [
       "reds"
     ],
-    "line_comment": [
-      "//",
-      "///"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": true,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "///",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment",
+        "nested": true
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "Ren'Py": {
     "extensions": [
       "rpy"
     ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ],
-      [
-        "`",
-        "`"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      },
+      {
+        "open": "`",
+        "close": "`",
+        "kind": "string"
+      }
     ]
   },
   "ReStructuredText": {
@@ -4299,51 +4893,52 @@
       "rst"
     ],
     "filenames": [],
-    "line_comment": [],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": []
   },
   "Rich Text Format": {
     "extensions": [
       "rtf"
     ],
     "filenames": [],
-    "line_comment": [],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": []
   },
   "Roc": {
     "extensions": [
       "roc"
     ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ],
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "RPM Specfile": {
     "extensions": [
       "spec"
     ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      }
+    ]
   },
   "Ruby": {
     "extensions": [
@@ -4353,21 +4948,23 @@
     "env": [
       "ruby"
     ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [
-      [
-        "=begin",
-        "=end"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "=begin",
+        "close": "=end",
+        "kind": "comment"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "Ruby HTML": {
@@ -4375,71 +4972,93 @@
       "erb",
       "rhtml"
     ],
-    "line_comment": [],
-    "multi_line": [
-      [
-        "<!--",
-        "-->"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "<!--",
+        "close": "-->",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "Rust": {
     "extensions": [
       "rs"
     ],
-    "line_comment": [
-      "//"
+    "default_mode": "code",
+    "leading_doc_prefixes": [
+      "//!",
+      "///"
     ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": true,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "r##\"",
-        "\"##",
-        "raw"
-      ],
-      [
-        "r#\"",
-        "\"#",
-        "raw"
-      ]
+    "regions": [
+      {
+        "open": "//!",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "///",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment",
+        "nested": true
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "r##\"",
+        "close": "\"##",
+        "kind": "string",
+        "raw": true
+      },
+      {
+        "open": "r#\"",
+        "close": "\"#",
+        "kind": "string",
+        "raw": true
+      }
     ]
   },
   "Rusty Object Notation": {
     "extensions": [
       "ron"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": true,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment",
+        "nested": true
+      }
+    ]
   },
   "Sass": {
     "extensions": [
@@ -4447,25 +5066,28 @@
       "scss"
     ],
     "filenames": [],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "Scala": {
@@ -4474,21 +5096,23 @@
       "scala"
     ],
     "filenames": [],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "Scheme": {
@@ -4496,17 +5120,20 @@
       "scm",
       "ss"
     ],
-    "line_comment": [
-      ";"
-    ],
-    "multi_line": [
-      [
-        "#|",
-        "|#"
-      ]
-    ],
-    "nested": true,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": ";",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "#|",
+        "close": "|#",
+        "kind": "comment",
+        "nested": true
+      }
+    ]
   },
   "Scons": {
     "extensions": [
@@ -4518,20 +5145,23 @@
       "sconscript",
       "sconstruct"
     ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ],
-      [
-        "'''",
-        "'''"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      },
+      {
+        "open": "'''",
+        "close": "'''",
+        "kind": "string"
+      }
     ]
   },
   "ShaderLab": {
@@ -4539,58 +5169,64 @@
       "shader",
       "cginc"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      }
+    ]
   },
   "Slang": {
     "extensions": [
       "slang"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "Slint": {
     "extensions": [
       "slint"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "Snakemake": {
@@ -4601,75 +5237,90 @@
     "filenames": [
       "snakefile"
     ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "'",
-        "'"
-      ],
-      [
-        "\"\"\"",
-        "\"\"\""
-      ],
-      [
-        "'''",
-        "'''"
-      ],
-      [
-        "r\"\"\"",
-        "\"\"\""
-      ],
-      [
-        "r'''",
-        "'''"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      },
+      {
+        "open": "\"\"\"",
+        "close": "\"\"\"",
+        "kind": "string"
+      },
+      {
+        "open": "'''",
+        "close": "'''",
+        "kind": "string"
+      },
+      {
+        "open": "r\"\"\"",
+        "close": "\"\"\"",
+        "kind": "string"
+      },
+      {
+        "open": "r'''",
+        "close": "'''",
+        "kind": "string"
+      }
     ]
   },
   "Solidity": {
     "extensions": [
       "sol"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "Specman e": {
     "extensions": [
       "e"
     ],
-    "line_comment": [
-      "--",
-      "//"
-    ],
-    "multi_line": [
-      [
-        "'>",
-        "<'"
-      ]
-    ],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "--",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "'>",
+        "close": "<'",
+        "kind": "comment"
+      }
+    ]
   },
   "SQL": {
     "extensions": [
@@ -4678,54 +5329,64 @@
       "dql",
       "sql"
     ],
-    "line_comment": [
-      "--"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "--",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "SRecode Template": {
     "extensions": [
       "srt"
     ],
-    "line_comment": [
-      ";;"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": ";;",
+        "close": "\n",
+        "kind": "comment"
+      }
+    ]
   },
   "Stan": {
     "extensions": [
       "stan"
     ],
-    "line_comment": [
-      "#",
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "Stata": {
@@ -4733,113 +5394,141 @@
       "ado",
       "do"
     ],
-    "line_comment": [
-      "*",
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "`\"",
-        "\"'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "*",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "`\"",
+        "close": "\"'",
+        "kind": "string"
+      }
     ]
   },
   "Stratego/XT": {
     "extensions": [
       "str"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "$[",
-        "]"
-      ],
-      [
-        "$<",
-        ">"
-      ],
-      [
-        "${",
-        "}"
-      ],
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "$[",
+        "close": "]",
+        "kind": "string"
+      },
+      {
+        "open": "$<",
+        "close": ">",
+        "kind": "string"
+      },
+      {
+        "open": "${",
+        "close": "}",
+        "kind": "string"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "Stylus": {
     "extensions": [
       "styl"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "Svelte": {
     "extensions": [
       "svelte"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "<!--",
-        "-->"
-      ],
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "<!--",
+        "close": "-->",
+        "kind": "comment"
+      },
+      {
+        "open": "<script",
+        "close": "</script>",
+        "kind": "child",
+        "default": "JavaScript",
+        "detect": "tag"
+      },
+      {
+        "open": "<style",
+        "close": "</style>",
+        "kind": "child",
+        "default": "CSS",
+        "detect": "tag"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      },
+      {
+        "open": "`",
+        "close": "`",
+        "kind": "string"
+      }
     ]
   },
   "SVG": {
@@ -4847,44 +5536,47 @@
       "svg"
     ],
     "filenames": [],
-    "line_comment": [],
-    "multi_line": [
-      [
-        "<!--",
-        "-->"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "<!--",
+        "close": "-->",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "Swift": {
     "extensions": [
       "swift"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": true,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment",
+        "nested": true
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "Swig": {
@@ -4892,43 +5584,52 @@
       "i",
       "swg"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": true,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment",
+        "nested": true
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "Tact": {
     "extensions": [
       "tact"
     ],
-    "line_comment": [
-      "//",
-      "///"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "///",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "Templ": {
@@ -4936,56 +5637,61 @@
       "templ",
       "tmpl"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ],
-      [
-        "<!--",
-        "-->"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "`",
-        "`"
-      ],
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "<!--",
+        "close": "-->",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "`",
+        "close": "`",
+        "kind": "string"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "Tera": {
     "extensions": [
       "tera"
     ],
-    "line_comment": [],
-    "multi_line": [
-      [
-        "<!--",
-        "-->"
-      ],
-      [
-        "{#",
-        "#}"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "<!--",
+        "close": "-->",
+        "kind": "comment"
+      },
+      {
+        "open": "{#",
+        "close": "#}",
+        "kind": "comment"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "Terraform": {
@@ -4994,61 +5700,79 @@
       "tfvars",
       "tf.json"
     ],
-    "line_comment": [
-      "#",
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      }
+    ]
   },
   "The WenYan Programming Language": {
     "extensions": [
       "wy"
     ],
-    "line_comment": [],
-    "multi_line": [
-      [
-        "\u6279\u66f0\u3002",
-        "\u3002"
-      ],
-      [
-        "\u758f\u66f0\u3002",
-        "\u3002"
-      ]
-    ],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "注曰「「",
+        "close": "」」",
+        "kind": "comment"
+      },
+      {
+        "open": "批曰。",
+        "close": "。",
+        "kind": "comment"
+      },
+      {
+        "open": "疏曰。",
+        "close": "。",
+        "kind": "comment"
+      }
+    ]
   },
   "Thrift": {
     "extensions": [
       "thrift"
     ],
-    "line_comment": [
-      "#",
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "TOML": {
@@ -5056,53 +5780,61 @@
       "toml"
     ],
     "filenames": [],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "\"\"\"",
-        "\"\"\""
-      ],
-      [
-        "'''",
-        "'''"
-      ],
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "\"\"\"",
+        "close": "\"\"\"",
+        "kind": "string"
+      },
+      {
+        "open": "'''",
+        "close": "'''",
+        "kind": "string"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "TSX": {
     "extensions": [
       "tsx"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ],
-      [
-        "`",
-        "`"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      },
+      {
+        "open": "`",
+        "close": "`",
+        "kind": "string"
+      }
     ]
   },
   "TTCN-3": {
@@ -5111,54 +5843,54 @@
       "ttcn3",
       "ttcnpp"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "Twig": {
     "extensions": [
       "twig"
     ],
-    "line_comment": [],
-    "multi_line": [
-      [
-        "<!--",
-        "-->"
-      ],
-      [
-        "{#",
-        "#}"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "<!--",
+        "close": "-->",
+        "kind": "comment"
+      },
+      {
+        "open": "{#",
+        "close": "#}",
+        "kind": "comment"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "Twig Template": {
     "extensions": [
       "twig"
     ],
-    "line_comment": [],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": []
   },
   "TypeScript": {
     "extensions": [
@@ -5166,107 +5898,122 @@
       "mts",
       "ts"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "'",
-        "'"
-      ],
-      [
-        "`",
-        "`"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      },
+      {
+        "open": "`",
+        "close": "`",
+        "kind": "string"
+      }
     ]
   },
   "Typst": {
     "extensions": [
       "typ"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": true,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment",
+        "nested": true
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "Uiua": {
     "extensions": [
       "ua"
     ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      }
+    ]
   },
   "UMPL": {
     "extensions": [
       "umpl"
     ],
-    "line_comment": [
-      "!"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "`",
-        "`"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "!",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "`",
+        "close": "`",
+        "kind": "string"
+      }
     ]
   },
   "Unison": {
     "extensions": [
       "u"
     ],
-    "line_comment": [
-      "--"
-    ],
-    "multi_line": [
-      [
-        "{-",
-        "-}"
-      ]
-    ],
-    "nested": true,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "--",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "{-",
+        "close": "-}",
+        "kind": "comment",
+        "nested": true
+      }
+    ]
   },
   "Unreal Markdown": {
     "extensions": [
       "udn"
     ],
     "filenames": [],
-    "line_comment": [],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [],
-    "literate": true,
-    "important_syntax": [
-      "```"
+    "default_mode": "comment",
+    "regions": [
+      {
+        "open": "```",
+        "close": "```",
+        "kind": "child",
+        "detect": "fence"
+      }
     ]
   },
   "Unreal Project": {
@@ -5274,10 +6021,8 @@
       "uproject"
     ],
     "filenames": [],
-    "line_comment": [],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": []
   },
   "Unreal Script": {
     "extensions": [
@@ -5286,21 +6031,23 @@
       "upkg"
     ],
     "filenames": [],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "Unreal Shader": {
@@ -5308,21 +6055,23 @@
       "usf"
     ],
     "filenames": [],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "Unreal Shader Header": {
@@ -5330,21 +6079,23 @@
       "ush"
     ],
     "filenames": [],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "Ur/Web": {
@@ -5352,31 +6103,32 @@
       "ur",
       "urs"
     ],
-    "line_comment": [],
-    "multi_line": [
-      [
-        "(*",
-        "*)"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "(*",
+        "close": "*)",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "Ur/Web Project": {
     "extensions": [
       "urp"
     ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      }
+    ]
   },
   "VB6/VBA": {
     "extensions": [
@@ -5386,40 +6138,50 @@
       "ctl",
       "dsr"
     ],
-    "line_comment": [
-      "'"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "'",
+        "close": "\n",
+        "kind": "comment"
+      }
+    ]
   },
   "VBScript": {
     "extensions": [
       "vbs"
     ],
-    "line_comment": [
-      "'",
-      "REM"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "'",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "REM",
+        "close": "\n",
+        "kind": "comment"
+      }
+    ]
   },
   "Vertex Shader File": {
     "extensions": [
       "vsh"
     ],
     "filenames": [],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "VHDL": {
@@ -5427,81 +6189,101 @@
       "vhd",
       "vhdl"
     ],
-    "line_comment": [
-      "--"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "--",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      }
+    ]
   },
   "Visual Basic": {
     "extensions": [
       "vb"
     ],
-    "line_comment": [
-      "'"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "'",
+        "close": "\n",
+        "kind": "comment"
+      }
+    ]
   },
   "Visual Basic for Applications": {
     "extensions": [
       "cls"
     ],
-    "line_comment": [
-      "'"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "'",
+        "close": "\n",
+        "kind": "comment"
+      }
+    ]
   },
   "Visual Studio Solution": {
     "extensions": [
       "sln"
     ],
     "filenames": [],
-    "line_comment": [],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": []
   },
   "Vue": {
     "extensions": [
       "vue"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "<!--",
-        "-->"
-      ],
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "'",
-        "'"
-      ],
-      [
-        "`",
-        "`"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "<!--",
+        "close": "-->",
+        "kind": "comment"
+      },
+      {
+        "open": "<script",
+        "close": "</script>",
+        "kind": "child",
+        "default": "JavaScript",
+        "detect": "tag"
+      },
+      {
+        "open": "<style",
+        "close": "</style>",
+        "kind": "child",
+        "default": "CSS",
+        "detect": "tag"
+      },
+      {
+        "open": "<template",
+        "close": "</template>",
+        "kind": "child",
+        "default": "HTML",
+        "detect": "tag"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      },
+      {
+        "open": "`",
+        "close": "`",
+        "kind": "string"
+      }
     ]
   },
   "WebAssembly": {
@@ -5509,85 +6291,73 @@
       "wat",
       "wast"
     ],
-    "line_comment": [
-      ";;"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": ";;",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "WebGPU Shader Language": {
     "extensions": [
       "wgsl"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      }
+    ]
   },
   "WebGPU Shading Language": {
     "extensions": [
       "wgsl"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": []
-  },
-  "wenyan": {
-    "extensions": [
-      "wy"
-    ],
-    "line_comment": [],
-    "multi_line": [
-      [
-        "\u6279\u66f0\u3002",
-        "\u3002"
-      ],
-      [
-        "\u758f\u66f0\u3002",
-        "\u3002"
-      ]
-    ],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      }
+    ]
   },
   "XAML": {
     "extensions": [
       "xaml"
     ],
     "filenames": [],
-    "line_comment": [],
-    "multi_line": [
-      [
-        "<!--",
-        "-->"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "<!--",
+        "close": "-->",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "XHTML": {
@@ -5595,19 +6365,18 @@
       "xhtml"
     ],
     "filenames": [],
-    "line_comment": [],
-    "multi_line": [
-      [
-        "<!--",
-        "-->"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "<!--",
+        "close": "-->",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "XML": {
@@ -5615,23 +6384,23 @@
       "xml"
     ],
     "filenames": [],
-    "line_comment": [],
-    "multi_line": [
-      [
-        "<!--",
-        "-->"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "<!--",
+        "close": "-->",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "XML Schema": {
@@ -5639,62 +6408,64 @@
       "xsd"
     ],
     "filenames": [],
-    "line_comment": [],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": []
   },
   "XSL": {
     "extensions": [
       "xsl",
       "xslt"
     ],
-    "line_comment": [],
-    "multi_line": [
-      [
-        "<!--",
-        "-->"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ],
-      [
-        "\"",
-        "\""
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "<!--",
+        "close": "-->",
+        "kind": "comment"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      }
     ]
   },
   "Xtend": {
     "extensions": [
       "xtend"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "'",
-        "'"
-      ],
-      [
-        "'''",
-        "'''"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      },
+      {
+        "open": "'''",
+        "close": "'''",
+        "kind": "string"
+      }
     ]
   },
   "YAML": {
@@ -5702,16 +6473,18 @@
       "yaml",
       "yml"
     ],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   },
   "Yarn": {
@@ -5719,96 +6492,110 @@
       "yarn"
     ],
     "filenames": [],
-    "line_comment": [],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": []
   },
   "ZenCode": {
     "extensions": [
       "zs"
     ],
-    "line_comment": [
-      "//",
-      "#"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": [
-      [
-        "'",
-        "'"
-      ],
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "@\"",
-        "\"",
-        "raw"
-      ],
-      [
-        "@'",
-        "'",
-        "raw"
-      ]
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "@\"",
+        "close": "\"",
+        "kind": "string",
+        "raw": true
+      },
+      {
+        "open": "@'",
+        "close": "'",
+        "kind": "string",
+        "raw": true
+      }
     ]
   },
   "Zig": {
     "extensions": [
       "zig"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      }
+    ]
   },
   "ZoKrates": {
     "extensions": [
       "zok"
     ],
-    "line_comment": [
-      "//"
-    ],
-    "multi_line": [
-      [
-        "/*",
-        "*/"
-      ]
-    ],
-    "nested": false,
-    "quotes": []
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "//",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "/*",
+        "close": "*/",
+        "kind": "comment"
+      }
+    ]
   },
   "Zsh": {
     "extensions": [
       "zsh"
     ],
     "filenames": [],
-    "line_comment": [
-      "#"
-    ],
-    "multi_line": [],
-    "nested": false,
-    "quotes": [
-      [
-        "\"",
-        "\""
-      ],
-      [
-        "'",
-        "'"
-      ]
-    ],
     "env": [
       "zsh"
+    ],
+    "default_mode": "code",
+    "regions": [
+      {
+        "open": "#",
+        "close": "\n",
+        "kind": "comment"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "kind": "string"
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "kind": "string"
+      }
     ]
   }
 }

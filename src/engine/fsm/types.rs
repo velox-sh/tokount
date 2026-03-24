@@ -1,3 +1,6 @@
+use crate::engine::language::Detection;
+use crate::engine::language::LanguageDef;
+
 /// Result of counting a single file, including any embedded child language blocks
 pub struct FileResult {
     pub counts: LineCounts,
@@ -24,7 +27,7 @@ pub(super) enum LineType {
 }
 
 // context is stored in the variant -> no separate `block_open`, `string_close` etc.
-#[derive(Clone, Copy, PartialEq, Eq)]
+#[derive(Clone, Copy)]
 pub(super) enum ParseState {
     Normal,
     LineComment,
@@ -32,10 +35,16 @@ pub(super) enum ParseState {
         depth: u8,
         open: &'static [u8],
         close: &'static [u8],
+        nested: bool,
+        close_line_is_code: bool,
     },
     InString {
         close: &'static [u8],
-        raw: bool,
+        escape: bool,
+    },
+    InChild {
+        close: &'static [u8],
+        child_lang: Option<&'static LanguageDef>,
     },
 }
 
@@ -44,10 +53,17 @@ pub(super) enum TokenMatch {
     BlockComment {
         open: &'static [u8],
         close: &'static [u8],
+        nested: bool,
+        close_line_is_code: bool,
     },
     StringLiteral {
         close: &'static [u8],
-        raw: bool,
+        escape: bool,
+    },
+    Child {
+        close: &'static [u8],
+        default_lang: Option<&'static str>,
+        detect: Detection,
     },
     Other,
 }

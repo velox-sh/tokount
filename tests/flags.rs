@@ -85,3 +85,29 @@ fn flag_languages_nonempty_and_contains_rust() {
         "--languages output did not contain 'Rust'; got: {text}"
     );
 }
+
+#[test]
+fn flag_json_lines_matches_components() {
+    let root = common::fixtures_dir().join("monorepo");
+    let json = common::run_json(&root, &["--output", "json"]);
+
+    let obj = json.as_object().expect("output is not a JSON object");
+
+    for (name, row) in obj {
+        if name == "gitRepos" || name == "gitignorePatterns" {
+            continue;
+        }
+
+        let lines = row["lines"].as_u64().unwrap_or(0);
+        let code = row["code"].as_u64().unwrap_or(0);
+        let comment = row["comment"].as_u64().unwrap_or(0);
+        let blank = row["blank"].as_u64().unwrap_or(0);
+
+        assert_eq!(
+            lines,
+            code + comment + blank,
+            "{name}.lines ({lines}) did not match code+comment+blank ({})",
+            code + comment + blank
+        );
+    }
+}

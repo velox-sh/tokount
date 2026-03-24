@@ -1,5 +1,6 @@
 use super::types::TokenMatch;
 use crate::engine::language::LanguageDef;
+use crate::engine::language::RegionKind;
 
 // longest-match: longer opener beats shorter prefix even across token types
 // (e.g. `////` block comment wins over `//` line comment in AsciiDoc)
@@ -8,24 +9,38 @@ pub(super) fn match_token(rest: &[u8], lang: &LanguageDef) -> (TokenMatch, usize
     let mut best: Option<TokenMatch> = None;
     let mut best_len = 0usize;
 
-    for &lc in lang.line_comments {
-        if lc.len() > best_len && rest.starts_with(lc) {
-            best = Some(TokenMatch::LineComment);
-            best_len = lc.len();
-        }
-    }
-
-    for &(open, close) in lang.block_comments {
-        if open.len() > best_len && rest.starts_with(open) {
-            best = Some(TokenMatch::BlockComment { open, close });
-            best_len = open.len();
-        }
-    }
-
-    for &(open, close, raw) in lang.string_literals {
-        if open.len() > best_len && rest.starts_with(open) {
-            best = Some(TokenMatch::StringLiteral { close, raw });
-            best_len = open.len();
+    for region in lang.regions {
+        if region.open.len() > best_len && rest.starts_with(region.open) {
+            best = Some(match region.kind {
+                RegionKind::Comment {
+                    nested,
+                    close_line_is_code,
+                } => {
+                    if region.close == b"\n" {
+                        TokenMatch::LineComment
+                    } else {
+                        TokenMatch::BlockComment {
+                            open: region.open,
+                            close: region.close,
+                            nested,
+                            close_line_is_code,
+                        }
+                    }
+                }
+                RegionKind::String { escape } => TokenMatch::StringLiteral {
+                    close: region.close,
+                    escape,
+                },
+                RegionKind::Child {
+                    default_lang,
+                    detect,
+                } => TokenMatch::Child {
+                    close: region.close,
+                    default_lang,
+                    detect,
+                },
+            });
+            best_len = region.open.len();
         }
     }
 

@@ -1,4 +1,3 @@
-# 15 lines 7 code 5 comments 3 blanks
 #
 # This is a comment line. We don't have multi-comment lines
 #

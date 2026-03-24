@@ -1,4 +1,3 @@
-/* 21 lines 11 code 5 comments 5 blanks */
 #ifndef TEST_H
 #define TEST_H
 

@@ -25,11 +25,16 @@ pub(super) fn classify_prefix(
     line_type: LineType,
     block_started_this_line: bool,
     close_line_is_code: bool,
+    default_is_comment: bool,
 ) -> LineType {
     match line_type {
         LineType::Blank => {
             if prefix.iter().any(|&c| !matches!(c, b' ' | b'\t' | b'\r')) {
-                LineType::Code
+                if default_is_comment {
+                    LineType::Comment
+                } else {
+                    LineType::Code
+                }
             } else {
                 LineType::Blank
             }

@@ -1,5 +1,3 @@
-// chapel 24 lines 9 code 9 comments 6 blanks
-
 // Tidy line comment
 
 /* Tidy block

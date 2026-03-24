@@ -1,5 +1,3 @@
-# 42 lines 22 code 4 comments 16 blanks
-
 Name:           example
 Version:        0.0.1
 Release:        1%{?dist}

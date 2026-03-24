@@ -1,4 +1,3 @@
-// 10 lines 6 code 3 comments 1 blank
 #ifndef TOKOUNT_H
 #define TOKOUNT_H
 

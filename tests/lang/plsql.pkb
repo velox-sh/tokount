@@ -1,5 +1,3 @@
--- 18 lines 10 code 4 comments 4 blanks
-
 CREATE OR REPLACE PROCEDURE greet_user(p_name IN VARCHAR2) AS
     v_message VARCHAR2(100);
 BEGIN

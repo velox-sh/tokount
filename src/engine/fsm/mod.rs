@@ -1,5 +1,4 @@
 mod classify;
-mod literate;
 mod parser;
 mod token;
 mod types;

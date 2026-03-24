@@ -1,5 +1,3 @@
-// 20 lines 14 code 3 comments 3 blanks
-
 // vertex shader input/output
 struct VSInput {
     float4 position : POSITION;

@@ -1,5 +1,3 @@
-! 14 lines, 5 code, 6 comments, 3 blanks
-
 /* we can use some dependencies */
 USING: math multiline sequences ;
 

@@ -42,8 +42,10 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
+    <li><a href="#library-usage">Library Usage</a></li>
     <li><a href="#output-formats">Output Formats</a></li>
     <li><a href="#benchmarks">Benchmarks</a></li>
+    <li><a href="#contributing">Contributing</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
     <li><a href="#license">License</a></li>
   </ol>
@@ -172,6 +174,43 @@ tokount -l
 | `--languages`       | `-l`  | print all supported languages and exit                |
 | `--help`            | `-h`  | print help                                            |
 | `--version`         | `-V`  | print version                                         |
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- LIBRARY USAGE -->
+
+## Library Usage
+
+tokount is CLI-first, but it also exposes a small library API.
+
+Install as a dependency:
+
+```bash
+cargo add tokount
+```
+
+Example:
+
+```rust
+use std::path::Path;
+
+use tokount::count;
+use tokount::EngineConfig;
+
+let config = EngineConfig {
+  excluded: &[],
+  follow_symlinks: false,
+  no_ignore: false,
+  types_filter: None,
+};
+
+let stats = count(&[Path::new(".")], &config);
+println!("total code lines: {}", stats.languages["SUM"].code);
+```
+
+See docs.rs for crate docs and API reference:
+
+- <https://docs.rs/tokount>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

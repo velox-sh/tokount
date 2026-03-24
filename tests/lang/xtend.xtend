@@ -1,5 +1,3 @@
-// 23 lines 13 code 4 comments 6 blanks
-
 class Test {
 
     static def void main(String[] args) {

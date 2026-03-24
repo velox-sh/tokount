@@ -1,5 +1,3 @@
-// 20 lines 12 code 4 comments 4 blanks
-
 import "@stdlib/deploy"; // comment
 
 /* comment */

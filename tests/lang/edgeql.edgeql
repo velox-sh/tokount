@@ -1,5 +1,3 @@
-# 28 lines 21 code 3 comments 4 blanks
-
 select User {
     name,
     friends: {

@@ -1,5 +1,3 @@
-// 22 lines 14 code 3 comments 5 blanks
-
 // simple Dart class example
 class Animal {
     final String name;

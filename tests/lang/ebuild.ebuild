@@ -1,5 +1,3 @@
-# 16 lines 9 code 2 comments 5 blanks
-
 # test comment
 
 EAPI=8

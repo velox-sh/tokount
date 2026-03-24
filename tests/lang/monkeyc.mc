@@ -1,4 +1,3 @@
-// 69 lines 41 code 18 comments 10 blanks
 // Slightly modified template from the "Garmin.monkey-c" VS Code extension.
 import Toybox.Application;
 import Toybox.Graphics;

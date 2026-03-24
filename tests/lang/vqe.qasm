@@ -1,4 +1,3 @@
-// 89 lines 58 code 21 comments 10 blanks
 /*
  * Variational eigensolver example
  *

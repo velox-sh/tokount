@@ -1,5 +1,3 @@
-# 18 lines 13 code 3 comments 2 blanks
-
 # build hello-greet
 cc_library(
     name = "hello-greet",

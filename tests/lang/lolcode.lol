@@ -1,4 +1,3 @@
-BTW 26 lines 11 code 9 comments 6 blanks
 HAI 1.3
 
 BTW TEST!

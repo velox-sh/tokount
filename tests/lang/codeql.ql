@@ -1,5 +1,3 @@
-//! 40 lines 17 code 15 comments 7 blanks
-
 /**
  * @name fu
  * @description bar

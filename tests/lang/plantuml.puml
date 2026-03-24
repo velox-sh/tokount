@@ -1,4 +1,3 @@
-' 35 lines 10 code 13 comments 12 blanks
 ' plantuml line comments must start at the beginning of a line.
 ' plantuml block comments must either start on a newline or start and end on the same line as they start.
 ' strings cannot span multiple lines.

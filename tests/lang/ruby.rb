@@ -1,4 +1,3 @@
-# 20 lines 9 code 8 comments 2 blanks
 x = 3
 if x < 2
   p = "Smaller"

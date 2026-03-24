@@ -72,6 +72,7 @@ impl ThreadStats {
     pub fn into_output(self) -> OutputStats {
         let mut total = LangStats {
             n_files: 0,
+            lines: 0,
             blank: 0,
             comment: 0,
             code: 0,
@@ -102,6 +103,7 @@ impl ThreadStats {
                                     child_name.to_string(),
                                     LangStats {
                                         n_files: 0,
+                                        lines: e.blank + e.comment + e.code,
                                         blank: e.blank,
                                         comment: e.comment,
                                         code: e.code,
@@ -117,6 +119,7 @@ impl ThreadStats {
                     name.to_string(),
                     LangStats {
                         n_files: entry.files,
+                        lines: entry.blank + entry.comment + entry.code,
                         blank: entry.blank,
                         comment: entry.comment,
                         code: entry.code,
@@ -125,6 +128,8 @@ impl ThreadStats {
                 );
             }
         }
+
+        total.lines = total.blank + total.comment + total.code;
 
         languages.insert("SUM".to_string(), total);
 

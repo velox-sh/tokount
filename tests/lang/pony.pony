@@ -1,5 +1,3 @@
-// 12 lines 7 code 3 comments 2 blanks
-
 /* com-
     -ment */
 

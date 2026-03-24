@@ -1,5 +1,3 @@
-/* 46 lines 37 code 3 comments 6 blanks */
-
 #include <stdio.h>
 
 // bubble_sort_function

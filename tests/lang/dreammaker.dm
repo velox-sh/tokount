@@ -1,4 +1,3 @@
-// 17 lines 7 code 6 comments 3 blanks
 /*
  * /* Hello! */
  */

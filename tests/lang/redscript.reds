@@ -1,5 +1,3 @@
-// 75 lines 47 code 20 comments 8 blanks
-
 // redscript allows line comments
 /* as well as block comments */
 

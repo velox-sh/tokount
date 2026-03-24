@@ -1,5 +1,3 @@
-// 34 lines 21 code 6 comments 7 blanks
-
 include "another_schema.fbs";
 
 namespace Example;
