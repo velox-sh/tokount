@@ -83,25 +83,31 @@ Inside impl blocks:
 2. Public methods
 3. Private helpers
 
-For parser/state-machine style modules, split by role:
-
-- mod.rs: public entrypoint and module wiring
-- helpers.rs: pure helpers and parsing utilities
-- state.rs: state machine/data flow
-
 ## Comments And Docs
 
-Comments:
+### Comments
 
 - Explain why, invariants, or non-obvious trade-offs
 - Do not narrate obvious operations
 - Inline comments should be lowercase and concise
+- Use `//` for comments (plain text, not rustdoc)
 
-Rust docs:
+### Rust Documentation Comments
 
-- Public API should have rustdoc comments
+Rustdoc (`///`) rules apply to **src/** only, not tests/:
+
+- **Exported items only**: `///` goes on any item marked `pub` (not `pub(super)` or `pub(crate)`). This includes re-exported structs, enums, functions, and their `pub` fields. Items in `#[doc(hidden)]` modules still get `///` docs if they're `pub` and re-exported.
+  - Include at least one runnable or `no_run` example for public entrypoints
+- **Private items**: `pub(super)` and `pub(crate)` items get no `///` docs — use plain `//` if needed
+- **Field/variant docs**: Only document when the name is genuinely ambiguous
+  - `pub code: usize` doesn't need a doc (self-evident)
+  - `pub n_files: usize` with doc about "child rows use 0" is justified (non-obvious)
+- **Exception**: `cli.rs` requires `///` on every field for clap's help text derivation
+
+### Crate-level docs
+
 - Crate-level docs belong in src/lib.rs
-- Include at least one runnable or no_run example for public entrypoints
+- Must describe the public API and provide usage examples for supported surface (EngineConfig, count, OutputStats, LangStats)
 
 ## Linting And Tests
 

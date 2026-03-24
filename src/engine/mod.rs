@@ -1,6 +1,6 @@
-//! Engine internals backing the crate-level [`crate::count`] API
-//!
-//! Most users should call [`crate::count`] via crate root re-exports.
+// engine internals backing the crate-level count API
+// most users should call count() via crate root re-exports
+// not through this module directly
 
 #[doc(hidden)]
 pub mod fsm;
@@ -26,6 +26,7 @@ use crossbeam_channel::unbounded;
 use rayon::prelude::*;
 
 /// Configuration for a [`count`] run
+#[derive(Default)]
 pub struct EngineConfig<'a> {
     /// Glob patterns for paths to exclude (e.g. `["target", "vendor"]`)
     pub excluded: &'a [&'a str],
@@ -51,12 +52,7 @@ fn peek_shebang(path: &Path) -> Option<&'static language::LanguageDef> {
     language::LanguageDef::from_shebang(line.trim_end())
 }
 
-/// Walk paths, detect languages, and return aggregate line statistics
-///
-/// Notes:
-/// - Output always includes a `SUM` row in `OutputStats.languages`
-/// - Unknown file types are skipped
-/// - Child language blocks (for example fenced code in Markdown) are merged into totals
+/// Walk paths, detect languages, and return aggregate line statistics.
 ///
 /// # Example
 ///
@@ -68,9 +64,7 @@ fn peek_shebang(path: &Path) -> Option<&'static language::LanguageDef> {
 ///
 /// let config = EngineConfig {
 ///     excluded: &["target", "node_modules"],
-///     follow_symlinks: false,
-///     no_ignore: false,
-///     types_filter: None,
+///     ..Default::default()
 /// };
 ///
 /// let stats = count(&[Path::new(".")], &config);
@@ -80,6 +74,7 @@ fn peek_shebang(path: &Path) -> Option<&'static language::LanguageDef> {
 ///     total.n_files, total.lines, total.code
 /// );
 /// ```
+#[must_use]
 pub fn count(paths: &[&Path], config: &EngineConfig<'_>) -> crate::types::OutputStats {
     // unbounded: walker never blocks waiting for consumers (mirrors tokei)
     let (tx, rx) = unbounded::<PathBuf>();

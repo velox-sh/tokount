@@ -4,18 +4,14 @@ use crate::engine::language::LanguageDef;
 /// Result of counting a single file, including any embedded child language blocks
 pub struct FileResult {
     pub counts: LineCounts,
-    /// Embedded child language blocks: `(language_name, counts)`
     pub children: Vec<(&'static str, LineCounts)>,
 }
 
 /// Line counts for a single file, broken down by classification
 #[derive(Copy, Clone)]
 pub struct LineCounts {
-    /// Lines containing code (possibly also containing a comment)
     pub code: u32,
-    /// Lines containing only comments (no code)
     pub comment: u32,
-    /// Empty or whitespace-only lines
     pub blank: u32,
 }
 
@@ -26,7 +22,6 @@ pub(super) enum LineType {
     Comment,
 }
 
-// context is stored in the variant -> no separate `block_open`, `string_close` etc.
 #[derive(Clone, Copy)]
 pub(super) enum ParseState {
     Normal,

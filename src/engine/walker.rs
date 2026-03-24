@@ -12,6 +12,7 @@ use crossbeam_channel::Sender;
 use ignore::WalkBuilder;
 use ignore::WalkState;
 
+/// Configuration for recursive directory traversal
 pub struct WalkConfig<'a> {
     pub roots: &'a [&'a Path],
     pub excluded: &'a [&'a str],
@@ -19,6 +20,7 @@ pub struct WalkConfig<'a> {
     pub no_ignore: bool,
 }
 
+/// Results from a complete filesystem walk
 pub struct WalkResult {
     pub git_repos: usize,
     pub gitignore_patterns: Vec<String>,
@@ -66,6 +68,7 @@ fn extend_patterns(patterns: &Mutex<Vec<String>>, new_patterns: Vec<String>) {
     }
 }
 
+/// Walk `config.roots` in parallel, sending discovered file paths to `tx`
 pub fn walk_parallel(config: &WalkConfig<'_>, tx: &Sender<PathBuf>) -> WalkResult {
     if config.roots.is_empty() {
         return empty_walk_result();
@@ -95,9 +98,11 @@ pub fn walk_parallel(config: &WalkConfig<'_>, tx: &Sender<PathBuf>) -> WalkResul
         .hidden(false) // count .env, .bashrc, etc.
         .filter_entry(move |entry| {
             let name = entry.file_name().to_str().unwrap_or("");
+
             if entry.file_type().is_some_and(|t| t.is_dir()) {
                 return !excluded.iter().any(|e| e == name);
             }
+
             true
         });
 
@@ -117,6 +122,7 @@ pub fn walk_parallel(config: &WalkConfig<'_>, tx: &Sender<PathBuf>) -> WalkResul
             let Ok(entry) = result else {
                 return WalkState::Continue;
             };
+
             let Some(file_type) = entry.file_type() else {
                 return WalkState::Continue;
             };
@@ -130,7 +136,6 @@ pub fn walk_parallel(config: &WalkConfig<'_>, tx: &Sender<PathBuf>) -> WalkResul
 
             if file_type.is_file() {
                 let name = entry.file_name().to_str().unwrap_or("");
-
                 if name == ".gitignore" || name == ".prettierignore" {
                     extend_patterns(&patterns, parse_ignore_file(entry.path()));
                     return WalkState::Continue;
@@ -150,9 +155,9 @@ pub fn walk_parallel(config: &WalkConfig<'_>, tx: &Sender<PathBuf>) -> WalkResul
     // Arc strong count is 1 here (clone was dropped above); Mutex is never poisoned
     // (no panics inside the parallel walk body), so both unwraps are infallible
     let mut pats = Arc::try_unwrap(patterns)
-        .expect("patterns Arc still has live clones")
+        .expect("Patterns Arc still has live clones")
         .into_inner()
-        .expect("patterns Mutex was poisoned");
+        .expect("Patterns Mutex was poisoned");
     pats.sort();
     pats.dedup();
 

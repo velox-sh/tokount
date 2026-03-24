@@ -4,9 +4,8 @@ use std::process;
 
 use clap::Parser;
 use clap::ValueEnum;
-
-use crate::types::ErrorBody;
-use crate::types::ErrorPayload;
+use tokount::types::ErrorBody;
+use tokount::types::ErrorPayload;
 
 /// Fast line counter for codebases (faster than tokei, scc, and cloc btw)
 #[derive(Parser, Debug)]
@@ -17,7 +16,7 @@ pub struct Args {
     pub paths: Vec<PathBuf>,
 
     /// Comma-separated directories to exclude
-    #[arg(short = 'e', long, value_delimiter = ',')]
+    #[arg(short = 'e', long = "exclude", value_delimiter = ',')]
     pub excluded: Option<Vec<String>>,
 
     /// Follow symbolic links
@@ -32,6 +31,10 @@ pub struct Args {
     #[arg(short = 's', long, value_name = "COLUMN")]
     pub sort: Option<SortColumn>,
 
+    /// Reverse sort output by column (ascending)
+    #[arg(short = 'r', long, value_name = "COLUMN", conflicts_with = "sort")]
+    pub rsort: Option<SortColumn>,
+
     /// Filter output to specific language(s), comma-separated
     /// (e.g. Rust,Python)
     #[arg(short = 't', long, value_delimiter = ',')]
@@ -44,6 +47,10 @@ pub struct Args {
     /// Disable ANSI colors in table output
     #[arg(long)]
     pub no_color: bool,
+
+    /// Do not print statistics about embedded child languages
+    #[arg(short = 'C', long)]
+    pub compact: bool,
 
     /// Print all supported languages and exit
     #[arg(short = 'l', long)]
@@ -78,6 +85,20 @@ impl Args {
             process::exit(2);
         }
 
+        if let Some(types) = &args.types
+            && let Some(invalid) = types
+                .iter()
+                .find(|name| !tokount::is_supported_language(name))
+        {
+            let mut details = HashMap::new();
+            details.insert("language".to_string(), invalid.clone());
+            emit_error(
+                "UnknownLanguage",
+                "Unsupported language name in --types",
+                Some(details),
+            );
+        }
+
         args
     }
 
@@ -86,7 +107,11 @@ impl Args {
     }
 
     pub fn sort_column(&self) -> SortColumn {
-        self.sort.unwrap_or_default()
+        self.sort.or(self.rsort).unwrap_or_default()
+    }
+
+    pub fn sort_reverse(&self) -> bool {
+        self.rsort.is_some()
     }
 
     pub fn excluded_dirs(&self) -> Vec<&str> {

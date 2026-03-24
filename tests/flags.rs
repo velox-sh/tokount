@@ -111,3 +111,110 @@ fn flag_json_lines_matches_components() {
         );
     }
 }
+
+#[test]
+fn flag_exclude_removes_targeted_subtree_languages() {
+    let root = common::fixtures_dir().join("monorepo");
+
+    let baseline = common::run_json(&root, &["--output", "json"]);
+    let excluded = common::run_json(&root, &["--output", "json", "--exclude", "frontend"]);
+
+    let base_files = baseline["SUM"]["nFiles"]
+        .as_u64()
+        .expect("baseline SUM.nFiles missing");
+    let excluded_files = excluded["SUM"]["nFiles"]
+        .as_u64()
+        .expect("excluded SUM.nFiles missing");
+
+    assert!(
+        excluded_files < base_files,
+        "excluding frontend should reduce file count ({excluded_files} !< {base_files})"
+    );
+
+    let excluded_obj = excluded
+        .as_object()
+        .expect("excluded output is not a JSON object");
+    assert!(
+        !excluded_obj.contains_key("TypeScript"),
+        "TypeScript should disappear when frontend is excluded"
+    );
+    assert!(
+        !excluded_obj.contains_key("TSX"),
+        "TSX should disappear when frontend is excluded"
+    );
+    assert!(
+        !excluded_obj.contains_key("JSON"),
+        "JSON should disappear when frontend is excluded"
+    );
+}
+
+#[test]
+fn flag_rsort_orders_ascending_by_code() {
+    let root = common::fixtures_dir().join("monorepo");
+    let out = common::run(&[root.to_str().unwrap(), "--output", "csv", "--rsort", "code"]);
+
+    assert!(out.status.success());
+    let text = String::from_utf8_lossy(&out.stdout);
+
+    let mut seen_non_sum = false;
+    let mut prev_code = 0_u64;
+
+    for line in text.lines().skip(1) {
+        if line.starts_with('"') || line.starts_with("SUM,") || line.is_empty() {
+            continue;
+        }
+
+        let cols: Vec<&str> = line.split(',').collect();
+        let code = cols
+            .get(5)
+            .and_then(|v| v.parse::<u64>().ok())
+            .expect("csv code column missing or invalid");
+
+        if !seen_non_sum {
+            prev_code = code;
+            seen_non_sum = true;
+            continue;
+        }
+
+        assert!(
+            prev_code <= code,
+            "--rsort code should be ascending, but saw {prev_code} then {code}"
+        );
+        prev_code = code;
+    }
+
+    assert!(seen_non_sum, "no language rows were parsed from csv output");
+}
+
+#[test]
+fn flag_compact_hides_child_rows_in_csv() {
+    let root = common::fixtures_dir().join("monorepo");
+
+    let out = common::run(&[root.to_str().unwrap(), "--output", "csv", "--compact"]);
+
+    assert!(out.status.success());
+    let text = String::from_utf8_lossy(&out.stdout);
+    assert!(
+        !text.contains(">> "),
+        "--compact should hide embedded child rows, got: {text}"
+    );
+}
+
+#[test]
+fn flag_types_unknown_language_errors() {
+    let root = common::fixtures_dir().join("single_rust");
+    let out = common::run(&[
+        root.to_str().unwrap(),
+        "--output",
+        "json",
+        "--types",
+        "DefinitelyNotALanguage",
+    ]);
+
+    assert!(!out.status.success(), "expected unknown --types to fail");
+    let stderr = String::from_utf8_lossy(&out.stderr);
+    assert!(
+        stderr.contains("UnknownLanguage"),
+        "stderr did not contain UnknownLanguage: {stderr}"
+    );
+}

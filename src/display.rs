@@ -10,21 +10,25 @@ use comfy_table::ContentArrangement;
 use comfy_table::Table;
 use comfy_table::Width;
 use comfy_table::presets::UTF8_BORDERS_ONLY;
+use tokount::types::LangStats;
+use tokount::types::OutputStats;
 
 use crate::cli::SortColumn;
-use crate::types::LangStats;
-use crate::types::OutputStats;
 
 const VERSION: &str = env!("CARGO_PKG_VERSION");
 const REPO: &str = "github.com/MihaiStreames/tokount";
 const CHILD_ROW_PREFIX: &str = ">> ";
 
-fn sort_by_stats<'a, F>(names: &mut [&str], sort: SortColumn, get: F)
+fn sort_by_stats<'a, F>(names: &mut [&str], sort: SortColumn, reverse: bool, get: F)
 where
     F: Fn(&str) -> &'a LangStats,
 {
     names.sort_unstable_by(|a, b| {
-        let cmp = cmp_stats(get(b), get(a), sort);
+        let cmp = if reverse {
+            cmp_stats(get(a), get(b), sort)
+        } else {
+            cmp_stats(get(b), get(a), sort)
+        };
         cmp.then_with(|| a.cmp(b))
     });
 }
@@ -59,12 +63,12 @@ fn build_table(color: bool) -> Table {
         ]);
 
     if let Some(col) = table.column_mut(0) {
-        col.set_padding((1, 2));
+        col.set_padding((1, 1));
     }
 
     for col_idx in 1..=5 {
         if let Some(col) = table.column_mut(col_idx) {
-            col.set_padding((1, 2));
+            col.set_padding((1, 1));
             col.set_constraint(ColumnConstraint::Absolute(Width::Fixed(11)));
         }
     }
@@ -101,7 +105,7 @@ fn cmp_stats(a: &LangStats, b: &LangStats, sort: SortColumn) -> Ordering {
 
 #[inline]
 fn total_lines(blank: usize, comment: usize, code: usize) -> usize {
-    blank + comment + code // wow such math
+    blank + comment + code
 }
 
 #[derive(Clone, Copy)]
@@ -174,7 +178,9 @@ pub fn print_table(
     label: &str,
     elapsed: Duration,
     sort: SortColumn,
+    sort_reverse: bool,
     color: bool,
+    compact: bool,
 ) {
     let sum = output.languages.get("SUM");
     let total_files = sum.map_or(0, |s| s.n_files);
@@ -209,7 +215,9 @@ pub fn print_table(
         .filter(|k| k.as_str() != "SUM")
         .map(String::as_str)
         .collect();
-    sort_by_stats(&mut langs, sort, |name| &output.languages[name]);
+    sort_by_stats(&mut langs, sort, sort_reverse, |name| {
+        &output.languages[name]
+    });
 
     for lang in langs {
         let s = &output.languages[lang];
@@ -225,9 +233,9 @@ pub fn print_table(
             uniform_color: None,
         }));
 
-        if !s.children.is_empty() {
+        if !compact && !s.children.is_empty() {
             let mut children: Vec<&str> = s.children.keys().map(String::as_str).collect();
-            sort_by_stats(&mut children, sort, |name| &s.children[name]);
+            sort_by_stats(&mut children, sort, sort_reverse, |name| &s.children[name]);
 
             for child in children {
                 let child_stats = &s.children[child];
@@ -262,7 +270,7 @@ pub fn print_table(
     println!("{table}");
 }
 
-pub fn print_csv(output: &OutputStats, sort: SortColumn) {
+pub fn print_csv(output: &OutputStats, sort: SortColumn, sort_reverse: bool, compact: bool) {
     println!("language,files,lines,blank,comment,code");
 
     let mut langs: Vec<&str> = output
@@ -271,7 +279,9 @@ pub fn print_csv(output: &OutputStats, sort: SortColumn) {
         .filter(|k| k.as_str() != "SUM")
         .map(String::as_str)
         .collect();
-    sort_by_stats(&mut langs, sort, |name| &output.languages[name]);
+    sort_by_stats(&mut langs, sort, sort_reverse, |name| {
+        &output.languages[name]
+    });
 
     for lang in langs {
         let s = &output.languages[lang];
@@ -281,9 +291,9 @@ pub fn print_csv(output: &OutputStats, sort: SortColumn) {
             lang, s.n_files, lines, s.blank, s.comment, s.code
         );
 
-        if !s.children.is_empty() {
+        if !compact && !s.children.is_empty() {
             let mut children: Vec<&str> = s.children.keys().map(String::as_str).collect();
-            sort_by_stats(&mut children, sort, |name| &s.children[name]);
+            sort_by_stats(&mut children, sort, sort_reverse, |name| &s.children[name]);
 
             for child in children {
                 let child_stats = &s.children[child];

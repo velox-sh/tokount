@@ -12,9 +12,9 @@ use cli::OutputFormat;
 use cli::emit_error;
 use indicatif::ProgressBar;
 use indicatif::ProgressStyle;
-use tokount::engine;
-use tokount::engine::EngineConfig;
-use tokount::types;
+use tokount::EngineConfig;
+use tokount::count;
+use tokount::supported_languages;
 
 fn single_detail(key: &str, value: String) -> HashMap<String, String> {
     let mut details = HashMap::new();
@@ -63,9 +63,8 @@ fn spinner() -> ProgressBar {
 fn main() {
     let args = Args::parse_args();
 
-    // --languages: print all supported languages and exit
     if args.languages {
-        for name in engine::language::LanguageDef::all_names() {
+        for name in supported_languages() {
             println!("{name}");
         }
         return;
@@ -75,12 +74,16 @@ fn main() {
 
     let excluded = args.excluded_dirs();
     let types_filter = args.types_filter();
+
     let types_refs: Option<Vec<&str>> = types_filter
         .as_ref()
         .map(|ts| ts.iter().map(|s| s as &str).collect());
+
     let path_refs: Vec<&Path> = args.paths.iter().map(PathBuf::as_path).collect();
     let fmt = args.format();
     let sort = args.sort_column();
+    let sort_reverse = args.sort_reverse();
+
     let table_color = fmt == OutputFormat::Table
         && !args.no_color
         && std::io::stdout().is_terminal()
@@ -97,7 +100,7 @@ fn main() {
 
     let start = Instant::now();
 
-    let output = engine::count(
+    let output = count(
         &path_refs,
         &EngineConfig {
             excluded: &excluded,
@@ -120,11 +123,19 @@ fn main() {
     };
 
     match fmt {
-        OutputFormat::Table => display::print_table(&output, &label, elapsed, sort, table_color),
+        OutputFormat::Table => display::print_table(
+            &output,
+            &label,
+            elapsed,
+            sort,
+            sort_reverse,
+            table_color,
+            args.compact,
+        ),
         OutputFormat::Json => println!(
             "{}",
             serde_json::to_string(&output).expect("output is serializable")
         ),
-        OutputFormat::Csv => display::print_csv(&output, sort),
+        OutputFormat::Csv => display::print_csv(&output, sort, sort_reverse, args.compact),
     }
 }

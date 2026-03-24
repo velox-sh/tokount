@@ -1,4 +1,4 @@
-/// Static definition of a language's syntax, generated at build time from `languages.json`
+/// Detection strategy for identifying child language blocks
 #[derive(Clone, Copy, PartialEq, Eq)]
 pub enum Detection {
     Fence,
@@ -6,22 +6,23 @@ pub enum Detection {
     Fixed,
 }
 
+/// Classification of a syntax region (comment, string, or child block)
 #[derive(Clone, Copy)]
 pub enum RegionKind {
-    /// Lines are comments, `close = b"\n"` for line comments
     Comment {
         nested: bool,
         close_line_is_code: bool,
     },
-    /// Lines are code, delimiter content is opaque
-    String { escape: bool },
-    /// Switch to a child language until `close`
+    String {
+        escape: bool,
+    },
     Child {
         default_lang: Option<&'static str>,
         detect: Detection,
     },
 }
 
+/// A contiguous region with opening/closing delimiters
 #[derive(Clone, Copy)]
 pub struct Region {
     pub open: &'static [u8],
@@ -29,18 +30,21 @@ pub struct Region {
     pub kind: RegionKind,
 }
 
+/// Default line classification if no specific features are found
 #[derive(Clone, Copy, PartialEq, Eq)]
 pub enum DefaultMode {
     Code,
     Comment,
 }
 
+/// Structured document format requiring special parsing
 #[derive(Clone, Copy, PartialEq, Eq)]
 pub enum StructuredFormat {
     None,
     Jupyter,
 }
 
+/// Static definition of a language's syntax, generated at build time from languages.json
 pub struct LanguageDef {
     pub name: &'static str,
     pub regions: &'static [Region],
@@ -62,10 +66,12 @@ mod generated {
 }
 
 impl LanguageDef {
+    /// Look up a language by file extension (e.g. `"rs"`, `"py"`)
     pub fn from_extension(ext: &str) -> Option<&'static LanguageDef> {
         generated::EXTENSION_MAP.get(ext).copied()
     }
 
+    /// Look up a language by exact filename (e.g. `"Makefile"`, `"Dockerfile"`)
     pub fn from_filename(name: &str) -> Option<&'static LanguageDef> {
         generated::FILENAME_MAP.get(name).copied()
     }
@@ -85,6 +91,7 @@ impl LanguageDef {
         generated::SHEBANG_MAP.get(name).copied()
     }
 
+    /// All supported language display names in sorted order
     pub fn all_names() -> &'static [&'static str] {
         generated::LANGUAGE_NAMES
     }

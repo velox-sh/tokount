@@ -1,3 +1,6 @@
+#[cfg(target_arch = "x86_64")]
+use std::arch::x86_64::*;
+
 use memchr::memchr;
 use memchr::memchr2;
 use memchr::memchr3;
@@ -6,8 +9,6 @@ use memchr::memchr3;
 #[target_feature(enable = "sse2")]
 #[expect(unsafe_code)]
 unsafe fn find_interesting_sse2(bytes: &[u8], needles: &[u8]) -> Option<usize> {
-    use std::arch::x86_64::*;
-
     unsafe {
         let len = bytes.len();
         let ptr = bytes.as_ptr();
@@ -53,7 +54,8 @@ fn find_interesting_wide(bytes: &[u8], needles: &[u8]) -> Option<usize> {
     bytes.iter().position(|b| needles.contains(b))
 }
 
-// memchr/2/3 for ≤3 needles (guaranteed SIMD); SSE2 loop for >3 on x86-64; scalar elsewhere
+/// Find the next occurrence of any byte in `needles`
+/// (memchr/2/3 for ≤3 needles (guaranteed SIMD); SSE2 loop for >3 on x86-64; scalar elsewhere)
 #[inline]
 pub fn find_interesting(bytes: &[u8], needles: &[u8]) -> Option<usize> {
     match needles {
@@ -65,11 +67,13 @@ pub fn find_interesting(bytes: &[u8], needles: &[u8]) -> Option<usize> {
     }
 }
 
+/// Find the next newline
 #[inline]
 pub fn find_newline(bytes: &[u8]) -> Option<usize> {
     memchr(b'\n', bytes)
 }
 
+/// Find the next newline or `close_byte` (used for line comment terminators)
 #[inline]
 pub fn find_newline_or(bytes: &[u8], close_byte: u8) -> Option<usize> {
     if close_byte == b'\n' {
@@ -79,16 +83,19 @@ pub fn find_newline_or(bytes: &[u8], close_byte: u8) -> Option<usize> {
     }
 }
 
+/// Find the end of a string literal with escape support (`\`, newline, or close)
 #[inline]
 pub fn find_string_end(bytes: &[u8], close_byte: u8) -> Option<usize> {
     memchr3(b'\n', close_byte, b'\\', bytes)
 }
 
+/// Find the end of a raw string literal without escape support (newline or close)
 #[inline]
 pub fn find_string_end_no_escape(bytes: &[u8], close_byte: u8) -> Option<usize> {
     memchr2(b'\n', close_byte, bytes)
 }
 
+/// Find the next token relevant to nested block comment tracking
 #[inline]
 pub fn find_nested_block(bytes: &[u8], open_first: u8, close_first: u8) -> Option<usize> {
     if open_first == close_first {

@@ -11,6 +11,7 @@ use helpers::parse_jupyter_cells;
 use helpers::zero_counts;
 use state::Parser;
 
+/// Count lines in `content` according to `lang`'s syntax rules
 pub fn count_file(content: &[u8], lang: &LanguageDef) -> FileResult {
     if lang.structured_format == StructuredFormat::Jupyter {
         return parse_jupyter_cells(content);

@@ -1,50 +1,50 @@
-//! Public output types used by the crate-level counting API
-
 use std::collections::HashMap;
 
 use serde::Serialize;
 
-/// Per-language line statistics
+/// Per-language line statistics.
+///
+/// A row in the output table/json keyed by language name.
 #[derive(Serialize)]
 pub struct LangStats {
-    /// Number of files matched to this language
+    /// Number of files matched to this language.
+    ///
+    /// Child rows use `0` because they are embedded blocks inside a parent file.
     #[serde(rename = "nFiles")]
     pub n_files: usize,
-    /// Total lines for this row (`blank + comment + code`)
     pub lines: usize,
-    /// Blank lines
     pub blank: usize,
-    /// Comment lines
     pub comment: usize,
-    /// Code lines
     pub code: usize,
-    /// Embedded child language blocks (e.g. Rust code inside Markdown fences)
+    /// Embedded child language blocks keyed by child language name.
+    ///
+    /// Example: Rust code fences inside Markdown appear under the Markdown row.
     #[serde(skip_serializing_if = "HashMap::is_empty")]
     pub children: HashMap<String, LangStats>,
 }
 
-/// Complete output structure with language stats and metadata
+/// Complete counting output with per-language stats and walk metadata.
 #[derive(Serialize)]
 pub struct OutputStats {
-    /// Language rows keyed by language name, includes `SUM`
+    /// Language rows keyed by language name.
+    ///
+    /// Always includes a `SUM` key with totals across all counted files.
     #[serde(flatten)]
     pub languages: HashMap<String, LangStats>,
-    /// Number of git repositories discovered while walking input roots
     #[serde(rename = "gitRepos")]
     pub git_repos: usize,
-    /// Collected ignore patterns used during walk/filtering
     #[serde(rename = "gitignorePatterns")]
     pub gitignore_patterns: Vec<String>,
 }
 
-/// Structured error payload for stderr output
+// structured error payload for stderr output
 #[doc(hidden)]
 #[derive(Serialize)]
 pub struct ErrorPayload {
     pub error: ErrorBody,
 }
 
-/// Error details emitted by tokount
+// error details emitted to stderr as JSON
 #[doc(hidden)]
 #[derive(Serialize)]
 pub struct ErrorBody {
