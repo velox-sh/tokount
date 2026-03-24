@@ -5,9 +5,11 @@ use comfy_table::Attribute;
 use comfy_table::Cell;
 use comfy_table::CellAlignment;
 use comfy_table::Color;
+use comfy_table::ColumnConstraint;
 use comfy_table::ContentArrangement;
 use comfy_table::Table;
-use comfy_table::presets::UTF8_HORIZONTAL_ONLY;
+use comfy_table::Width;
+use comfy_table::presets::UTF8_BORDERS_ONLY;
 
 use crate::cli::SortColumn;
 use crate::types::LangStats;
@@ -15,6 +17,7 @@ use crate::types::OutputStats;
 
 const VERSION: &str = env!("CARGO_PKG_VERSION");
 const REPO: &str = "github.com/MihaiStreames/tokount";
+const CHILD_ROW_PREFIX: &str = ">> ";
 
 fn sort_by_stats<'a, F>(names: &mut [&str], sort: SortColumn, get: F)
 where
@@ -44,23 +47,25 @@ fn print_summary(
 fn build_table(color: bool) -> Table {
     let mut table = Table::new();
     table
-        .load_preset(UTF8_HORIZONTAL_ONLY)
-        .set_content_arrangement(ContentArrangement::Dynamic)
+        .load_preset(UTF8_BORDERS_ONLY)
+        .set_content_arrangement(ContentArrangement::Disabled)
         .set_header(vec![
             header_cell("Language", false, color),
             header_cell("Files", true, color),
             header_cell("Lines", true, color),
-            header_cell("Blanks", true, color),
-            header_cell("Comments", true, color),
             header_cell("Code", true, color),
+            header_cell("Comments", true, color),
+            header_cell("Blanks", true, color),
         ]);
 
     if let Some(col) = table.column_mut(0) {
-        col.set_padding((1, 3));
+        col.set_padding((1, 2));
     }
+
     for col_idx in 1..=5 {
         if let Some(col) = table.column_mut(col_idx) {
-            col.set_padding((4, 1));
+            col.set_padding((1, 2));
+            col.set_constraint(ColumnConstraint::Absolute(Width::Fixed(11)));
         }
     }
 
@@ -69,12 +74,15 @@ fn build_table(color: bool) -> Table {
 
 fn header_cell(name: &str, right_aligned: bool, color: bool) -> Cell {
     let mut cell = Cell::new(name).add_attribute(Attribute::Bold);
+
     if right_aligned {
         cell = cell.set_alignment(CellAlignment::Right);
     }
+
     if color {
         cell = cell.fg(Color::Cyan);
     }
+
     cell
 }
 
@@ -93,7 +101,7 @@ fn cmp_stats(a: &LangStats, b: &LangStats, sort: SortColumn) -> Ordering {
 
 #[inline]
 fn total_lines(blank: usize, comment: usize, code: usize) -> usize {
-    blank + comment + code
+    blank + comment + code // wow such math
 }
 
 #[derive(Clone, Copy)]
@@ -103,7 +111,6 @@ struct RowDisplay<'a> {
     blank: usize,
     comment: usize,
     code: usize,
-    embedded: bool,
     color: bool,
     bold: bool,
     uniform_color: Option<Color>,
@@ -116,7 +123,6 @@ fn render_row(row: RowDisplay<'_>) -> Vec<Cell> {
         blank,
         comment,
         code,
-        embedded,
         color,
         bold,
         uniform_color,
@@ -126,9 +132,9 @@ fn render_row(row: RowDisplay<'_>) -> Vec<Cell> {
     let mut lang = Cell::new(name);
     let mut files_cell = Cell::new(files).set_alignment(CellAlignment::Right);
     let mut lines_cell = Cell::new(lines).set_alignment(CellAlignment::Right);
-    let mut blank_cell = Cell::new(blank).set_alignment(CellAlignment::Right);
-    let mut comment_cell = Cell::new(comment).set_alignment(CellAlignment::Right);
     let mut code_cell = Cell::new(code).set_alignment(CellAlignment::Right);
+    let mut comment_cell = Cell::new(comment).set_alignment(CellAlignment::Right);
+    let mut blank_cell = Cell::new(blank).set_alignment(CellAlignment::Right);
 
     if bold {
         lang = lang.add_attribute(Attribute::Bold);
@@ -144,21 +150,12 @@ fn render_row(row: RowDisplay<'_>) -> Vec<Cell> {
             lang = lang.fg(sum_color);
             files_cell = files_cell.fg(sum_color);
             lines_cell = lines_cell.fg(sum_color);
-            blank_cell = blank_cell.fg(sum_color);
-            comment_cell = comment_cell.fg(sum_color);
             code_cell = code_cell.fg(sum_color);
+            comment_cell = comment_cell.fg(sum_color);
+            blank_cell = blank_cell.fg(sum_color);
         } else {
-            lang = if embedded {
-                lang.fg(Color::Green).add_attribute(Attribute::Dim)
-            } else {
-                lang.fg(Color::Green)
-            };
-
-            files_cell = files_cell.fg(Color::White);
-            lines_cell = lines_cell.fg(Color::White);
-            blank_cell = blank_cell.fg(Color::DarkGrey);
-            comment_cell = comment_cell.fg(Color::Yellow);
-            code_cell = code_cell.fg(Color::Magenta);
+            // keep color only on language names
+            lang = lang.fg(Color::Green);
         }
     }
 
@@ -166,9 +163,9 @@ fn render_row(row: RowDisplay<'_>) -> Vec<Cell> {
         lang,
         files_cell,
         lines_cell,
-        blank_cell,
-        comment_cell,
         code_cell,
+        comment_cell,
+        blank_cell,
     ]
 }
 
@@ -189,6 +186,7 @@ pub fn print_table(
     } else {
         0.0
     };
+
     let lines_per_sec = if secs > 0.0 {
         total_lines as f64 / secs
     } else {
@@ -222,7 +220,6 @@ pub fn print_table(
             blank: s.blank,
             comment: s.comment,
             code: s.code,
-            embedded: false,
             color,
             bold: false,
             uniform_color: None,
@@ -234,14 +231,13 @@ pub fn print_table(
 
             for child in children {
                 let child_stats = &s.children[child];
-                let child_label = format!("|- {child}");
+                let child_label = format!("{CHILD_ROW_PREFIX}{child}");
                 table.add_row(render_row(RowDisplay {
                     name: &child_label,
                     files: child_stats.n_files,
                     blank: child_stats.blank,
                     comment: child_stats.comment,
                     code: child_stats.code,
-                    embedded: true,
                     color,
                     bold: false,
                     uniform_color: None,
@@ -257,7 +253,6 @@ pub fn print_table(
             blank: sum.blank,
             comment: sum.comment,
             code: sum.code,
-            embedded: false,
             color,
             bold: true,
             uniform_color: Some(Color::Cyan),
@@ -294,8 +289,13 @@ pub fn print_csv(output: &OutputStats, sort: SortColumn) {
                 let child_stats = &s.children[child];
                 let lines = total_lines(child_stats.blank, child_stats.comment, child_stats.code);
                 println!(
-                    "\"|- {}\",0,{},{},{},{}",
-                    child, lines, child_stats.blank, child_stats.comment, child_stats.code
+                    "\"{}{}\",0,{},{},{},{}",
+                    CHILD_ROW_PREFIX,
+                    child,
+                    lines,
+                    child_stats.blank,
+                    child_stats.comment,
+                    child_stats.code
                 );
             }
         }

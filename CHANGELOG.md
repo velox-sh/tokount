@@ -10,6 +10,7 @@
 <details>
   <summary>Table of Contents</summary>
   <ol>
+    <li><a href="#v211--table-output-polish--release-alignment">v2.1.1</a></li>
     <li><a href="#v210--sections-abstractions-and-less-lint-pain">v2.1.0</a></li>
     <li><a href="#v200--simd-engine">v2.0.0</a></li>
     <li><a href="#v111--windows-symlink-guard">v1.1.1</a></li>
@@ -18,6 +19,28 @@
     <li><a href="#v100--initial-release">v1.0.0</a></li>
   </ol>
 </details>
+
+## v2.1.1 — Table output polish & release alignment
+
+This release is about making default output easier to scan and making release artifacts line up with the current CLI behavior.
+
+**What changed:**
+
+- Reworked table rendering to use clearer borders and stable spacing rules
+- Added explicit numeric column width constraints so `Files`, `Lines`, `Code`, `Comments`, and `Blanks` stay visually aligned
+- Switched child-language labels to a stronger, consistent prefix (`>> <child>`)
+- Updated README output examples (table/json/csv) to match current output shape and v2.1.1 usage
+- Bumped crate/package version metadata to `2.1.1` (`Cargo.toml`, `PKGBUILD`)
+
+**Result:**
+
+1. table output looks more consistent across terminals
+2. column sizing is predictable instead of drifting by content
+3. docs and package metadata match the released behavior
+
+<p align="right">(<a href="#changelog-top">back to top</a>)</p>
+
+---
 
 ## v2.1.0 — Sections, abstractions, and less lint pain
 

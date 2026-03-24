@@ -122,7 +122,7 @@ docker pull ghcr.io/mihaistreames/tokount:latest
 docker run --rm -v "$PWD":/work -w /work ghcr.io/mihaistreames/tokount:latest .
 
 # run a tagged release image
-docker run --rm -v "$PWD":/work -w /work ghcr.io/mihaistreames/tokount:2.1.0 .
+docker run --rm -v "$PWD":/work -w /work ghcr.io/mihaistreames/tokount:2.1.1 .
 ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -221,18 +221,16 @@ See docs.rs for crate docs and API reference:
 **Table** (default):
 
 ```console
-github.com/MihaiStreames/tokount v2.1.0  T=0.17s  (1513 files/s, 77285 lines/s)
-251 files  •  1 git repos  •  tokount/
+github.com/MihaiStreames/tokount v2.1.1  T=0.25s  (1394 files/s, 103336 lines/s)
+342 files  •  1 git repos  •  tokount/
 
-──────────────────────────────────────────────────────────────────────────────────────────────
- Language                               Files      Lines      Blanks      Comments       Code
-══════════════════════════════════════════════════════════════════════════════════════════════
- JSON                                       4       5943           1             0       5942
-──────────────────────────────────────────────────────────────────────────────────────────────
- Rust                                      29       2832         379           140       2313
-──────────────────────────────────────────────────────────────────────────────────────────────
- SUM                                      340      21497        2057          2485      16955
-──────────────────────────────────────────────────────────────────────────────────────────────
+┌──────────────────────────────────────────────────────────────────────────────────────────────┐
+│ Language                              Files       Lines        Code    Comments      Blanks  │
+╞══════════════════════════════════════════════════════════════════════════════════════════════╡
+│ Rust                                     30        3474        2938         123         413  │
+│ >> Markdown                               0          51          14          25          12  │
+│ SUM                                     342       25361       18695        4007        2659  │
+└──────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
 **JSON** (`-o json`):
@@ -240,16 +238,27 @@ github.com/MihaiStreames/tokount v2.1.0  T=0.17s  (1513 files/s, 77285 lines/s)
 ```json
 {
   "Rust": {
-    "nFiles": 29,
-    "blank": 379,
-    "comment": 140,
-    "code": 2313
+    "nFiles": 30,
+    "lines": 3474,
+    "blank": 413,
+    "comment": 123,
+    "code": 2938,
+    "children": {
+      "Markdown": {
+        "nFiles": 0,
+        "lines": 51,
+        "blank": 12,
+        "comment": 25,
+        "code": 14
+      }
+    }
   },
   "SUM": {
-    "nFiles": 340,
-    "blank": 2057,
-    "comment": 2485,
-    "code": 16955
+    "nFiles": 342,
+    "lines": 25359,
+    "blank": 2659,
+    "comment": 4007,
+    "code": 18693
   },
   "gitRepos": 1,
   "gitignorePatterns": [
@@ -289,14 +298,12 @@ github.com/MihaiStreames/tokount v2.1.0  T=0.17s  (1513 files/s, 77285 lines/s)
 
 **CSV** (`-o csv`):
 
-Header:
-
-```text
+```csv
 language,files,lines,blank,comment,code
+Rust,30,3474,413,123,2938
+">> Markdown",0,51,12,25,14
+SUM,342,25370,2659,4007,18704
 ```
-
-For files with embedded languages, CSV includes child rows right after the
-parent row, with child labels prefixed as `"|- <child>"` and `files=0`.
 
 Errors go to stderr as structured JSON:
 
