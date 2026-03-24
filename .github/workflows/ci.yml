@@ -52,6 +52,28 @@ jobs:
       - run: cargo clippy --all-targets -- -D warnings
       - run: cargo test --all-features --test flags --test errors
 
+  docs:
+    name: Docs
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - uses: Swatinem/rust-cache@v2
+
+      - name: Build docs (deny rustdoc warnings)
+        env:
+          RUSTDOCFLAGS: -D warnings
+        run: cargo doc --no-deps
+
+      - name: Run doctests
+        run: cargo test --doc
+
   accuracy:
     name: Accuracy Fixtures
     runs-on: ubuntu-latest

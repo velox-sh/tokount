@@ -32,6 +32,10 @@ serde = { version = "1.0.228", features = ["derive"] }
 name = "tokount"
 path = "src/lib.rs"
 
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]
+
 [[bin]]
 name = "tokount"
 path = "src/main.rs"

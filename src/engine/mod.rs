@@ -1,8 +1,18 @@
+//! Engine internals backing the crate-level [`crate::count`] API
+//!
+//! Most users should call [`crate::count`] via crate root re-exports.
+
+#[doc(hidden)]
 pub mod fsm;
+#[doc(hidden)]
 pub mod language;
+#[doc(hidden)]
 pub mod reader;
+#[doc(hidden)]
 pub mod scanner;
+#[doc(hidden)]
 pub mod stats;
+#[doc(hidden)]
 pub mod walker;
 
 use std::cell::RefCell;
@@ -21,7 +31,7 @@ pub struct EngineConfig<'a> {
     pub excluded: &'a [&'a str],
     /// Whether to follow symbolic links when walking directories
     pub follow_symlinks: bool,
-    /// Disable `.gitignore` / `.ignore` file filtering
+    /// Disable ignore-file filtering (`.gitignore`, `.ignore`, `.prettierignore`)
     pub no_ignore: bool,
     /// If set, only count files whose language name matches one of these strings
     /// (case-insensitive)
@@ -41,7 +51,35 @@ fn peek_shebang(path: &Path) -> Option<&'static language::LanguageDef> {
     language::LanguageDef::from_shebang(line.trim_end())
 }
 
-/// Walk `paths`, detect languages, and return aggregate line statistics
+/// Walk paths, detect languages, and return aggregate line statistics
+///
+/// Notes:
+/// - Output always includes a `SUM` row in `OutputStats.languages`
+/// - Unknown file types are skipped
+/// - Child language blocks (for example fenced code in Markdown) are merged into totals
+///
+/// # Example
+///
+/// ```no_run
+/// use std::path::Path;
+///
+/// use tokount::EngineConfig;
+/// use tokount::count;
+///
+/// let config = EngineConfig {
+///     excluded: &["target", "node_modules"],
+///     follow_symlinks: false,
+///     no_ignore: false,
+///     types_filter: None,
+/// };
+///
+/// let stats = count(&[Path::new(".")], &config);
+/// let total = &stats.languages["SUM"];
+/// println!(
+///     "files={} lines={} code={}",
+///     total.n_files, total.lines, total.code
+/// );
+/// ```
 pub fn count(paths: &[&Path], config: &EngineConfig<'_>) -> crate::types::OutputStats {
     // unbounded: walker never blocks waiting for consumers (mirrors tokei)
     let (tx, rx) = unbounded::<PathBuf>();

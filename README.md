@@ -122,7 +122,7 @@ docker pull ghcr.io/mihaistreames/tokount:latest
 docker run --rm -v "$PWD":/work -w /work ghcr.io/mihaistreames/tokount:latest .
 
 # run a tagged release image
-docker run --rm -v "$PWD":/work -w /work ghcr.io/mihaistreames/tokount:2.0.0 .
+docker run --rm -v "$PWD":/work -w /work ghcr.io/mihaistreames/tokount:2.1.0 .
 ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -221,7 +221,7 @@ See docs.rs for crate docs and API reference:
 **Table** (default):
 
 ```console
-github.com/MihaiStreames/tokount v2.0.0  T=0.17s  (1513 files/s, 77285 lines/s)
+github.com/MihaiStreames/tokount v2.1.0  T=0.17s  (1513 files/s, 77285 lines/s)
 251 files  •  1 git repos  •  tokount/
 
 ──────────────────────────────────────────────────────────────────────────────────────────────
