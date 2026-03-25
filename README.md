@@ -4,11 +4,11 @@
 <div align="center">
 
 [![Stars](https://img.shields.io/github/stars/MihaiStreames/tokount?style=social)](https://github.com/MihaiStreames/tokount/stargazers)
+[![Lines of Code](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/MihaiStreames/tokount/master/assets/badge.json)](https://github.com/MihaiStreames/tokount)
 [![Crates Version](https://img.shields.io/crates/v/tokount?label=Crate)](https://crates.io/crates/tokount)
 [![AUR Version](https://img.shields.io/aur/version/tokount?label=AUR)](https://aur.archlinux.org/packages/tokount)
 [![Rust Edition](https://img.shields.io/badge/Rust-2024-ed7a1f)](https://www.rust-lang.org/)
 [![Downloads](https://img.shields.io/crates/d/tokount?label=Downloads)](https://crates.io/crates/tokount)
-[![Lines of Code](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/MihaiStreames/tokount/master/assets/badge.json)](https://github.com/MihaiStreames/tokount)
 [![License](https://img.shields.io/github/license/MihaiStreames/tokount?label=License)](LICENSE)
 
 </div>
@@ -43,7 +43,6 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#library-usage">Library Usage</a></li>
     <li><a href="#output-formats">Output Formats</a></li>
     <li>
       <a href="#integrations">Integrations</a>
@@ -53,7 +52,7 @@
       </ul>
     </li>
     <li><a href="#benchmarks">Benchmarks</a></li>
-    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#library-usage">Library Usage</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
     <li><a href="#license">License</a></li>
   </ol>
@@ -188,44 +187,6 @@ tokount -l
 | `--languages`       | `-l`  | print all supported languages and exit                |
 | `--help`            | `-h`  | print help                                            |
 | `--version`         | `-V`  | print version                                         |
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- LIBRARY USAGE -->
-
-## Library Usage
-
-tokount is CLI-first, but it also exposes a small library API.
-
-Install as a dependency:
-
-```bash
-cargo add tokount
-```
-
-Example:
-
-```rust
-use std::path::Path;
-
-use tokount::count;
-use tokount::EngineConfig;
-
-let config = EngineConfig {
-  excluded: &[],
-  follow_symlinks: false,
-  no_ignore: false,
-  types_filter: None,
-  same_filesystem: false,
-};
-
-let stats = count(&[Path::new(".")], &config);
-println!("total code lines: {}", stats.languages["SUM"].code);
-```
-
-See docs.rs for crate docs and API reference:
-
-- <https://docs.rs/tokount>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -418,6 +379,44 @@ To reproduce:
 ```bash
 ./benchmark.sh
 ```
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- LIBRARY USAGE -->
+
+## Library Usage
+
+tokount is CLI-first, but it also exposes a small library API.
+
+Install as a dependency:
+
+```bash
+cargo add tokount
+```
+
+Example:
+
+```rust
+use std::path::Path;
+
+use tokount::count;
+use tokount::EngineConfig;
+
+let config = EngineConfig {
+  excluded: &[],
+  follow_symlinks: false,
+  no_ignore: false,
+  types_filter: None,
+  same_filesystem: false,
+};
+
+let stats = count(&[Path::new(".")], &config);
+println!("total code lines: {}", stats.languages["SUM"].code);
+```
+
+See docs.rs for crate docs and API reference:
+
+- <https://docs.rs/tokount>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
