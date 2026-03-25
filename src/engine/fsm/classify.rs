@@ -17,8 +17,6 @@ pub(super) fn emit(counts: &mut LineCounts, line_type: LineType, parse: ParseSta
     }
 }
 
-// Comment -> Code when block opened+closed on same line, or `close_line_is_code` (Raku `=end`),
-// but only if alphanumeric content is present, orphaned `*/` must not trigger this
 #[inline(always)]
 pub(super) fn classify_prefix(
     prefix: &[u8],

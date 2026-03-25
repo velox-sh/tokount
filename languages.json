@@ -3128,7 +3128,7 @@
       }
     ]
   },
-  "Kakoune script": {
+  "KakouneScript": {
     "extensions": [
       "kak"
     ],

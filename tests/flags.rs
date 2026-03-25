@@ -111,3 +111,58 @@ fn flag_json_lines_matches_components() {
         );
     }
 }
+
+#[test]
+fn flag_exclude_removes_targeted_subtree_languages() {
+    let root = common::fixtures_dir().join("monorepo");
+
+    let baseline = common::run_json(&root, &["--output", "json"]);
+    let excluded = common::run_json(&root, &["--output", "json", "--exclude", "frontend"]);
+
+    let base_files = baseline["SUM"]["nFiles"]
+        .as_u64()
+        .expect("baseline SUM.nFiles missing");
+    let excluded_files = excluded["SUM"]["nFiles"]
+        .as_u64()
+        .expect("excluded SUM.nFiles missing");
+
+    assert!(
+        excluded_files < base_files,
+        "excluding frontend should reduce file count ({excluded_files} !< {base_files})"
+    );
+
+    let excluded_obj = excluded
+        .as_object()
+        .expect("excluded output is not a JSON object");
+    assert!(
+        !excluded_obj.contains_key("TypeScript"),
+        "TypeScript should disappear when frontend is excluded"
+    );
+    assert!(
+        !excluded_obj.contains_key("TSX"),
+        "TSX should disappear when frontend is excluded"
+    );
+    assert!(
+        !excluded_obj.contains_key("JSON"),
+        "JSON should disappear when frontend is excluded"
+    );
+}
+
+#[test]
+fn flag_types_unknown_language_errors() {
+    let root = common::fixtures_dir().join("single_rust");
+    let out = common::run(&[
+        root.to_str().unwrap(),
+        "--output",
+        "json",
+        "--types",
+        "DefinitelyNotALanguage",
+    ]);
+
+    assert!(!out.status.success(), "expected unknown --types to fail");
+    let stderr = String::from_utf8_lossy(&out.stderr);
+    assert!(
+        stderr.contains("UnknownLanguage"),
+        "stderr did not contain UnknownLanguage: {stderr}"
+    );
+}

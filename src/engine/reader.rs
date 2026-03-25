@@ -1,19 +1,30 @@
 #![expect(unsafe_code)]
-
 use std::fs::File;
 use std::io::Read;
+#[cfg(unix)]
+use std::os::unix::fs::FileTypeExt;
 use std::path::Path;
 
 use memmap2::Mmap;
 
 // NUL byte detection window
-// matches the heuristic used by git and ripgrep
 const BINARY_CHECK_LEN: usize = 8 * 1024;
 
 // mmap for files larger than this
 // buffered read below (mmap overhead dominates on small files)
 const MMAP_THRESHOLD: u64 = 64 * 1024;
 
+#[cfg(unix)]
+fn is_special_file_type(ft: std::fs::FileType) -> bool {
+    ft.is_block_device() || ft.is_char_device() || ft.is_fifo() || ft.is_socket()
+}
+
+#[cfg(not(unix))]
+fn is_special_file_type(_ft: std::fs::FileType) -> bool {
+    false
+}
+
+/// Reusable file reader with mmap support for large files
 pub struct FileReader {
     buf: Vec<u8>,
     // holds the current mmap alive so we can return a zero-copy slice from read()
@@ -61,6 +72,7 @@ impl FileReader {
         Some(&self.buf)
     }
 
+    /// Create a new file reader
     pub fn new() -> Self {
         Self {
             buf: Vec::with_capacity(64 * 1024),
@@ -68,9 +80,17 @@ impl FileReader {
         }
     }
 
+    /// Read a file into a reusable buffer; returns `None` for binary files, empty files, or errors
     pub fn read(&mut self, path: &Path) -> Option<&[u8]> {
         let file = File::open(path).ok()?;
-        let size = file.metadata().ok()?.len();
+        let metadata = file.metadata().ok()?;
+
+        if !metadata.file_type().is_file() || is_special_file_type(metadata.file_type()) {
+            self.mmap = None;
+            return None;
+        }
+
+        let size = metadata.len();
         if size == 0 {
             self.mmap = None;
             return None;

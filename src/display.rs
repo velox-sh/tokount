@@ -10,10 +10,10 @@ use comfy_table::ContentArrangement;
 use comfy_table::Table;
 use comfy_table::Width;
 use comfy_table::presets::UTF8_BORDERS_ONLY;
+use tokount::types::LangStats;
+use tokount::types::OutputStats;
 
 use crate::cli::SortColumn;
-use crate::types::LangStats;
-use crate::types::OutputStats;
 
 const VERSION: &str = env!("CARGO_PKG_VERSION");
 const REPO: &str = "github.com/MihaiStreames/tokount";
@@ -59,12 +59,12 @@ fn build_table(color: bool) -> Table {
         ]);
 
     if let Some(col) = table.column_mut(0) {
-        col.set_padding((1, 2));
+        col.set_padding((1, 1));
     }
 
     for col_idx in 1..=5 {
         if let Some(col) = table.column_mut(col_idx) {
-            col.set_padding((1, 2));
+            col.set_padding((1, 1));
             col.set_constraint(ColumnConstraint::Absolute(Width::Fixed(11)));
         }
     }

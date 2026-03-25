@@ -212,7 +212,6 @@ fn detect_tag_lang(
     default_lang.and_then(resolve_lang_ident)
 }
 
-// parse jupyter cells and delegate to existing language parsers per cell
 pub(super) fn parse_jupyter_cells(content: &[u8]) -> FileResult {
     let mut py_total = zero_counts();
     let mut md_total = zero_counts();

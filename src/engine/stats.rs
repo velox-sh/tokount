@@ -4,6 +4,7 @@ use crate::engine::fsm::FileResult;
 use crate::types::LangStats;
 use crate::types::OutputStats;
 
+/// Per-language counts from a single file
 #[derive(Default, Clone)]
 pub struct LangEntry {
     pub files: usize,
@@ -12,6 +13,7 @@ pub struct LangEntry {
     pub blank: usize,
 }
 
+/// Thread-local accumulation of line statistics
 #[derive(Default)]
 pub struct ThreadStats {
     pub langs: HashMap<&'static str, LangEntry>,
@@ -21,10 +23,12 @@ pub struct ThreadStats {
 }
 
 impl ThreadStats {
+    /// Create new thread-local stats accumulator
     pub fn new() -> Self {
         Self::default()
     }
 
+    /// Accumulate a single file's counts into this thread's stats
     pub fn add(&mut self, lang_name: &'static str, result: FileResult) {
         let entry = self.langs.entry(lang_name).or_default();
         entry.files += 1;
@@ -46,6 +50,7 @@ impl ThreadStats {
         }
     }
 
+    /// Merge another thread's stats into this one (used for rayon reduce)
     pub fn merge(&mut self, other: ThreadStats) {
         for (name, entry) in other.langs {
             let e = self.langs.entry(name).or_default();
@@ -69,6 +74,7 @@ impl ThreadStats {
         self.gitignore_patterns.extend(other.gitignore_patterns);
     }
 
+    /// Consume stats and produce the final `OutputStats` with a `SUM` row
     pub fn into_output(self) -> OutputStats {
         let mut total = LangStats {
             n_files: 0,
@@ -78,6 +84,7 @@ impl ThreadStats {
             code: 0,
             children: HashMap::new(),
         };
+
         let mut languages = HashMap::new();
 
         for (name, entry) in &self.langs {

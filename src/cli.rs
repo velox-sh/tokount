@@ -4,9 +4,8 @@ use std::process;
 
 use clap::Parser;
 use clap::ValueEnum;
-
-use crate::types::ErrorBody;
-use crate::types::ErrorPayload;
+use tokount::types::ErrorBody;
+use tokount::types::ErrorPayload;
 
 /// Fast line counter for codebases (faster than tokei, scc, and cloc btw)
 #[derive(Parser, Debug)]
@@ -18,7 +17,7 @@ pub struct Args {
 
     /// Comma-separated directories to exclude
     #[arg(short = 'e', long, value_delimiter = ',')]
-    pub excluded: Option<Vec<String>>,
+    pub exclude: Option<Vec<String>>,
 
     /// Follow symbolic links
     #[arg(short = 'L', long)]
@@ -78,6 +77,20 @@ impl Args {
             process::exit(2);
         }
 
+        if let Some(types) = &args.types
+            && let Some(invalid) = types
+                .iter()
+                .find(|name| !tokount::is_supported_language(name))
+        {
+            let mut details = HashMap::new();
+            details.insert("language".to_string(), invalid.clone());
+            emit_error(
+                "UnknownLanguage",
+                "Unsupported language name in --types",
+                Some(details),
+            );
+        }
+
         args
     }
 
@@ -90,7 +103,7 @@ impl Args {
     }
 
     pub fn excluded_dirs(&self) -> Vec<&str> {
-        self.excluded
+        self.exclude
             .as_ref()
             .map(|v| v.iter().map(String::as_str).collect())
             .unwrap_or_default()

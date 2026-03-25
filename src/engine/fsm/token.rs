@@ -2,8 +2,6 @@ use super::types::TokenMatch;
 use crate::engine::language::LanguageDef;
 use crate::engine::language::RegionKind;
 
-// longest-match: longer opener beats shorter prefix even across token types
-// (e.g. `////` block comment wins over `//` line comment in AsciiDoc)
 #[inline(always)]
 pub(super) fn match_token(rest: &[u8], lang: &LanguageDef) -> (TokenMatch, usize) {
     let mut best: Option<TokenMatch> = None;

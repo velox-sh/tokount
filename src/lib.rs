@@ -1,23 +1,8 @@
-//! tokount: The fastest line counter for codebases
+//! # tokount
 //!
-//! tokount is CLI-first, but it also exposes a small and stable library API
-//! for programmatic counting.
-//!
-//! # Recommended API
-//!
-//! Prefer the re-exported surface at crate root:
-//! - [`EngineConfig`]
-//! - [`count`]
-//! - [`OutputStats`]
-//! - [`LangStats`]
-//!
-//! `count` returns an [`OutputStats`] map keyed by language name and always
-//! includes a `SUM` row with totals across all counted files.
-//!
-//! # Data shape
-//!
-//! `OutputStats.languages` is a map of language name -> [`LangStats`].
-//! Embedded-language counts are available through [`LangStats::children`].
+//! Fast, accurate line counter for codebases. Primarily a
+//! [CLI tool](https://github.com/MihaiStreames/tokount), this crate
+//! exposes the counting engine as a library.
 //!
 //! # Quick start
 //!
@@ -27,13 +12,7 @@
 //! use tokount::EngineConfig;
 //! use tokount::count;
 //!
-//! let config = EngineConfig {
-//!     excluded: &[],
-//!     follow_symlinks: false,
-//!     no_ignore: false,
-//!     types_filter: None,
-//! };
-//! let stats = count(&[Path::new(".")], &config);
+//! let stats = count(&[Path::new(".")], &EngineConfig::default());
 //! println!("{} code lines", stats.languages["SUM"].code);
 //! ```
 
@@ -42,11 +21,37 @@ pub mod engine;
 #[doc(hidden)]
 pub mod types;
 
-/// Engine configuration used by [`count`]
 pub use engine::EngineConfig;
-/// Count code/comment/blank lines across one or more paths
 pub use engine::count;
-/// Per-language statistics row
 pub use types::LangStats;
-/// Top-level output payload with language stats and metadata
 pub use types::OutputStats;
+
+/// Returns all supported language display names.
+///
+/// The returned names are the same values accepted by `EngineConfig.types_filter`
+/// and printed by the CLI's `--languages` output.
+///
+/// # Example
+///
+/// ```
+/// let langs = tokount::supported_languages();
+/// assert!(langs.contains(&"Rust"));
+/// ```
+#[must_use]
+pub fn supported_languages() -> &'static [&'static str] {
+    engine::language::LanguageDef::all_names()
+}
+
+/// Returns true when `name` matches a supported language (case-insensitive).
+///
+/// # Example
+///
+/// ```
+/// assert!(tokount::is_supported_language("rust"));
+/// assert!(tokount::is_supported_language("Rust"));
+/// assert!(!tokount::is_supported_language("DefinitelyNotALanguage"));
+/// ```
+#[must_use]
+pub fn is_supported_language(name: &str) -> bool {
+    engine::language::LanguageDef::from_name(name).is_some()
+}

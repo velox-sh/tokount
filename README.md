@@ -122,7 +122,7 @@ docker pull ghcr.io/mihaistreames/tokount:latest
 docker run --rm -v "$PWD":/work -w /work ghcr.io/mihaistreames/tokount:latest .
 
 # run a tagged release image
-docker run --rm -v "$PWD":/work -w /work ghcr.io/mihaistreames/tokount:2.1.1 .
+docker run --rm -v "$PWD":/work -w /work ghcr.io/mihaistreames/tokount:2.1.2 .
 ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -165,7 +165,7 @@ tokount -l
 
 | Flag                | Short | What it does                                          |
 | ------------------- | ----- | ----------------------------------------------------- |
-| `--excluded <DIRS>` | `-e`  | comma-separated directories to exclude                |
+| `--exclude <DIRS>`  | `-e`  | comma-separated directories to exclude                |
 | `--follow-symlinks` | `-L`  | follow symbolic links when scanning                   |
 | `--output <FORMAT>` | `-o`  | output format: `table` (default), `json`, `csv`       |
 | `--sort <COLUMN>`   | `-s`  | sort by: `files`, `lines`, `blank`, `comment`, `code` |
@@ -221,7 +221,7 @@ See docs.rs for crate docs and API reference:
 **Table** (default):
 
 ```console
-github.com/MihaiStreames/tokount v2.1.1  T=0.25s  (1394 files/s, 103336 lines/s)
+github.com/MihaiStreames/tokount v2.1.2  T=0.25s  (1394 files/s, 103336 lines/s)
 342 files  •  1 git repos  •  tokount/
 
 ┌──────────────────────────────────────────────────────────────────────────────────────────────┐
