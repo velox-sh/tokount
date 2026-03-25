@@ -3,6 +3,7 @@
 <!-- PROJECT SHIELDS -->
 <div align="center">
 
+[![Lines of Code](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/MihaiStreames/tokount/master/assets/badge.json)](https://github.com/MihaiStreames/tokount)
 [![Stars](https://img.shields.io/github/stars/MihaiStreames/tokount?style=social)](https://github.com/MihaiStreames/tokount/stargazers)
 [![Crates Version](https://img.shields.io/crates/v/tokount?label=Crate)](https://crates.io/crates/tokount)
 [![AUR Version](https://img.shields.io/aur/version/tokount?label=AUR)](https://aur.archlinux.org/packages/tokount)

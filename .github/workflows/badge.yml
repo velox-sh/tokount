@@ -1,0 +1,12 @@
+name: Update badge
+on:
+  push:
+    branches: [master]
+
+jobs:
+  badge:
+    uses: MihaiStreames/tokount-action/.github/workflows/badge.yml@v1
+    with:
+      exclude: target,data
+    permissions:
+      contents: write
