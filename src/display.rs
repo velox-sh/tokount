@@ -1,4 +1,5 @@
 use std::cmp::Ordering;
+use std::io::IsTerminal;
 use std::time::Duration;
 
 use comfy_table::Attribute;
@@ -10,21 +11,29 @@ use comfy_table::ContentArrangement;
 use comfy_table::Table;
 use comfy_table::Width;
 use comfy_table::presets::UTF8_BORDERS_ONLY;
+use indicatif::ProgressBar;
+use indicatif::ProgressStyle;
 use tokount::types::LangStats;
 use tokount::types::OutputStats;
 
+use crate::cli::Args;
+use crate::cli::OutputFormat;
 use crate::cli::SortColumn;
 
 const VERSION: &str = env!("CARGO_PKG_VERSION");
 const REPO: &str = "github.com/MihaiStreames/tokount";
 const CHILD_ROW_PREFIX: &str = ">> ";
 
-fn sort_by_stats<'a, F>(names: &mut [&str], sort: SortColumn, get: F)
+fn sort_by_stats<'a, F>(names: &mut [&str], sort: SortColumn, reverse: bool, get: F)
 where
     F: Fn(&str) -> &'a LangStats,
 {
     names.sort_unstable_by(|a, b| {
-        let cmp = cmp_stats(get(b), get(a), sort);
+        let cmp = if reverse {
+            cmp_stats(get(a), get(b), sort)
+        } else {
+            cmp_stats(get(b), get(a), sort)
+        };
         cmp.then_with(|| a.cmp(b))
     });
 }
@@ -169,12 +178,26 @@ fn render_row(row: RowDisplay<'_>) -> Vec<Cell> {
     ]
 }
 
+fn spinner() -> ProgressBar {
+    let pb = ProgressBar::new_spinner();
+    pb.set_style(
+        ProgressStyle::default_spinner()
+            .tick_strings(&["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"])
+            .template("{spinner} {msg}")
+            .expect("spinner template is valid"),
+    );
+    pb.enable_steady_tick(std::time::Duration::from_millis(80));
+    pb
+}
+
 pub fn print_table(
     output: &OutputStats,
     label: &str,
     elapsed: Duration,
     sort: SortColumn,
+    sort_reverse: bool,
     color: bool,
+    compact: bool,
 ) {
     let sum = output.languages.get("SUM");
     let total_files = sum.map_or(0, |s| s.n_files);
@@ -209,7 +232,9 @@ pub fn print_table(
         .filter(|k| k.as_str() != "SUM")
         .map(String::as_str)
         .collect();
-    sort_by_stats(&mut langs, sort, |name| &output.languages[name]);
+    sort_by_stats(&mut langs, sort, sort_reverse, |name| {
+        &output.languages[name]
+    });
 
     for lang in langs {
         let s = &output.languages[lang];
@@ -225,9 +250,9 @@ pub fn print_table(
             uniform_color: None,
         }));
 
-        if !s.children.is_empty() {
+        if !compact && !s.children.is_empty() {
             let mut children: Vec<&str> = s.children.keys().map(String::as_str).collect();
-            sort_by_stats(&mut children, sort, |name| &s.children[name]);
+            sort_by_stats(&mut children, sort, sort_reverse, |name| &s.children[name]);
 
             for child in children {
                 let child_stats = &s.children[child];
@@ -262,7 +287,7 @@ pub fn print_table(
     println!("{table}");
 }
 
-pub fn print_csv(output: &OutputStats, sort: SortColumn) {
+pub fn print_csv(output: &OutputStats, sort: SortColumn, sort_reverse: bool, compact: bool) {
     println!("language,files,lines,blank,comment,code");
 
     let mut langs: Vec<&str> = output
@@ -271,7 +296,9 @@ pub fn print_csv(output: &OutputStats, sort: SortColumn) {
         .filter(|k| k.as_str() != "SUM")
         .map(String::as_str)
         .collect();
-    sort_by_stats(&mut langs, sort, |name| &output.languages[name]);
+    sort_by_stats(&mut langs, sort, sort_reverse, |name| {
+        &output.languages[name]
+    });
 
     for lang in langs {
         let s = &output.languages[lang];
@@ -281,9 +308,9 @@ pub fn print_csv(output: &OutputStats, sort: SortColumn) {
             lang, s.n_files, lines, s.blank, s.comment, s.code
         );
 
-        if !s.children.is_empty() {
+        if !compact && !s.children.is_empty() {
             let mut children: Vec<&str> = s.children.keys().map(String::as_str).collect();
-            sort_by_stats(&mut children, sort, |name| &s.children[name]);
+            sort_by_stats(&mut children, sort, sort_reverse, |name| &s.children[name]);
 
             for child in children {
                 let child_stats = &s.children[child];
@@ -307,5 +334,43 @@ pub fn print_csv(output: &OutputStats, sort: SortColumn) {
             "SUM,{},{},{},{},{}",
             sum.n_files, lines, sum.blank, sum.comment, sum.code
         );
+    }
+}
+
+pub fn start_spinner(fmt: OutputFormat) -> Option<ProgressBar> {
+    if fmt == OutputFormat::Table {
+        let pb = spinner();
+        pb.set_message("Counting lines...");
+        Some(pb)
+    } else {
+        None
+    }
+}
+
+pub fn render(output: &OutputStats, label: &str, elapsed: Duration, args: &Args) {
+    let fmt = args.format();
+    let sort = args.sort_column();
+    let sort_reverse = args.sort_reverse();
+
+    match fmt {
+        OutputFormat::Table => {
+            let color = !args.no_color
+                && std::io::stdout().is_terminal()
+                && std::env::var_os("NO_COLOR").is_none();
+            print_table(
+                output,
+                label,
+                elapsed,
+                sort,
+                sort_reverse,
+                color,
+                args.compact,
+            );
+        }
+        OutputFormat::Json => println!(
+            "{}",
+            serde_json::to_string(output).expect("output is serializable")
+        ),
+        OutputFormat::Csv => print_csv(output, sort, sort_reverse, args.compact),
     }
 }

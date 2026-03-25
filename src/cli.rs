@@ -1,4 +1,5 @@
 use std::collections::HashMap;
+use std::path::Path;
 use std::path::PathBuf;
 use std::process;
 
@@ -31,6 +32,10 @@ pub struct Args {
     #[arg(short = 's', long, value_name = "COLUMN")]
     pub sort: Option<SortColumn>,
 
+    /// Reverse sort output by column (ascending)
+    #[arg(short = 'r', long, value_name = "COLUMN", conflicts_with = "sort")]
+    pub rsort: Option<SortColumn>,
+
     /// Filter output to specific language(s), comma-separated
     /// (e.g. Rust,Python)
     #[arg(short = 't', long, value_delimiter = ',')]
@@ -43,6 +48,14 @@ pub struct Args {
     /// Disable ANSI colors in table output
     #[arg(long)]
     pub no_color: bool,
+
+    /// Do not print statistics about embedded child languages
+    #[arg(short = 'C', long)]
+    pub compact: bool,
+
+    /// Do not cross filesystem boundaries (skips /proc, /sys, NFS mounts, etc.)
+    #[arg(short = 'x', long)]
+    pub same_filesystem: bool,
 
     /// Print all supported languages and exit
     #[arg(short = 'l', long)]
@@ -99,7 +112,35 @@ impl Args {
     }
 
     pub fn sort_column(&self) -> SortColumn {
-        self.sort.unwrap_or_default()
+        self.sort.or(self.rsort).unwrap_or_default()
+    }
+
+    pub fn sort_reverse(&self) -> bool {
+        self.rsort.is_some()
+    }
+
+    pub fn label(&self) -> String {
+        if self.paths.len() == 1 {
+            self.paths[0].display().to_string()
+        } else {
+            format!("{} paths", self.paths.len())
+        }
+    }
+
+    pub fn validate(&self) {
+        for path in &self.paths {
+            if !path.exists() {
+                emit_error("NotFound", "Path does not exist", Some(path_detail(path)));
+            }
+
+            if let Err(err) = path.metadata() {
+                emit_error(
+                    "IoError",
+                    "Failed to read path metadata",
+                    Some(io_detail(path, &err)),
+                );
+            }
+        }
     }
 
     pub fn excluded_dirs(&self) -> Vec<&str> {
@@ -114,6 +155,18 @@ impl Args {
             .as_ref()
             .map(|v| v.iter().map(String::as_str).collect())
     }
+}
+
+fn path_detail(path: &Path) -> HashMap<String, String> {
+    let mut details = HashMap::new();
+    details.insert("path".to_string(), path.display().to_string());
+    details
+}
+
+fn io_detail(path: &Path, err: &std::io::Error) -> HashMap<String, String> {
+    let mut details = path_detail(path);
+    details.insert("error".to_string(), err.to_string());
+    details
 }
 
 pub fn emit_error(kind: &str, message: &str, details: Option<HashMap<String, String>>) -> ! {

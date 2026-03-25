@@ -10,6 +10,7 @@
 <details>
   <summary>Table of Contents</summary>
   <ol>
+    <li><a href="#v214--new-flags">v2.1.4</a></li>
     <li><a href="#v213--oom-fix--same-filesystem">v2.1.3</a></li>
     <li><a href="#v212--docs-polish">v2.1.2</a></li>
     <li><a href="#v211--table-output-polish--release-alignment">v2.1.1</a></li>
@@ -21,6 +22,24 @@
     <li><a href="#v100--initial-release">v1.0.0</a></li>
   </ol>
 </details>
+
+## v2.1.4 — New flags
+
+**New:**
+
+- `-r` / `--rsort <COLUMN>` — reverse-sort output by column (ascending); conflicts with `--sort`
+- `-C` / `--compact` — suppress child language rows (embedded languages like Markdown-in-Rust)
+- `-x` / `--same-filesystem` flag is now wired through the CLI (was added to the engine in v2.1.3)
+
+**Improved:**
+
+- Path validation moved into `Args::validate()` — cleaner separation from `main`
+- Label logic moved into `Args::label()` — single-path shows path, multi-path shows count
+- `display::render()` and `display::start_spinner()` replace the inline match in `main`
+
+<p align="right">(<a href="#changelog-top">back to top</a>)</p>
+
+---
 
 ## v2.1.3 — OOM fix & same-filesystem
 
