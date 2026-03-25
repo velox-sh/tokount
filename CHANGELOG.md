@@ -10,6 +10,7 @@
 <details>
   <summary>Table of Contents</summary>
   <ol>
+    <li><a href="#v215--code-cleanup">v2.1.5</a></li>
     <li><a href="#v214--new-flags">v2.1.4</a></li>
     <li><a href="#v213--oom-fix--same-filesystem">v2.1.3</a></li>
     <li><a href="#v212--docs-polish">v2.1.2</a></li>
@@ -22,6 +23,19 @@
     <li><a href="#v100--initial-release">v1.0.0</a></li>
   </ol>
 </details>
+
+## v2.1.5 — Code cleanup
+
+**Refactored (no behavior changes):**
+
+- Extracted `detect_language()` and `process_file()` from the inline closure in `count()` — reduces nesting and makes each step a named function
+- Added `RowDisplay::from_stats()` and `RowDisplay::sum()` constructors — removes repeated struct literals in table/csv rendering
+- Inlined `print_summary()` into `print_table()` — it was only called once
+- Made `print_table()`, `print_csv()`, and `spinner()` private — all output goes through `render()`
+
+<p align="right">(<a href="#changelog-top">back to top</a>)</p>
+
+---
 
 ## v2.1.4 — New flags
 

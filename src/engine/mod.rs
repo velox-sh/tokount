@@ -25,7 +25,7 @@ use std::sync::Arc;
 use crossbeam_channel::bounded;
 use rayon::prelude::*;
 
-/// Configuration for a [`count`] run
+/// Configuration for a [`count`] run.
 #[derive(Default)]
 pub struct EngineConfig<'a> {
     /// Glob patterns for paths to exclude (e.g. `["target", "vendor"]`)
@@ -54,6 +54,60 @@ fn peek_shebang(path: &Path) -> Option<&'static language::LanguageDef> {
     language::LanguageDef::from_shebang(line.trim_end())
 }
 
+fn detect_language(path: &Path) -> Option<&'static language::LanguageDef> {
+    let ext_raw = path.extension().and_then(|e| e.to_str()).unwrap_or("");
+    let ext_lower;
+
+    let ext = if ext_raw.bytes().any(|b| b.is_ascii_uppercase()) {
+        ext_lower = ext_raw.to_ascii_lowercase();
+        ext_lower.as_str()
+    } else {
+        ext_raw
+    };
+
+    let filename_raw = path.file_name().and_then(|n| n.to_str()).unwrap_or("");
+    let filename_lower;
+
+    let filename = if filename_raw.bytes().any(|b| b.is_ascii_uppercase()) {
+        filename_lower = filename_raw.to_ascii_lowercase();
+        filename_lower.as_str()
+    } else {
+        filename_raw
+    };
+
+    language::LanguageDef::from_extension(ext)
+        .or_else(|| language::LanguageDef::from_filename(filename))
+        .or_else(|| {
+            if ext.is_empty() {
+                peek_shebang(path)
+            } else {
+                None
+            }
+        })
+}
+
+fn process_file(path: &Path, types_filter: &Option<Vec<String>>) -> stats::ThreadStats {
+    let mut thread_stats = stats::ThreadStats::new();
+
+    let Some(lang) = detect_language(path) else {
+        return thread_stats;
+    };
+
+    if let Some(types) = types_filter.as_deref()
+        && !types.iter().any(|t| t.eq_ignore_ascii_case(lang.name))
+    {
+        return thread_stats;
+    }
+
+    READER.with(|r| {
+        if let Some(content) = r.borrow_mut().read(path) {
+            thread_stats.add(lang.name, fsm::count_file(content, lang));
+        }
+    });
+
+    thread_stats
+}
+
 /// Walk paths, detect languages, and return aggregate line statistics.
 ///
 /// # Example
@@ -71,6 +125,7 @@ fn peek_shebang(path: &Path) -> Option<&'static language::LanguageDef> {
 ///
 /// let stats = count(&[Path::new(".")], &config);
 /// let total = &stats.languages["SUM"];
+///
 /// println!(
 ///     "files={} lines={} code={}",
 ///     total.n_files, total.lines, total.code
@@ -110,56 +165,7 @@ pub fn count(paths: &[&Path], config: &EngineConfig<'_>) -> crate::types::Output
     let merged = rx
         .into_iter()
         .par_bridge()
-        .map(|path| {
-            let mut thread_stats = stats::ThreadStats::new();
-
-            let ext_raw = path.extension().and_then(|e| e.to_str()).unwrap_or("");
-            let ext_lower;
-
-            let ext = if ext_raw.bytes().any(|b| b.is_ascii_uppercase()) {
-                ext_lower = ext_raw.to_ascii_lowercase();
-                ext_lower.as_str()
-            } else {
-                ext_raw
-            };
-
-            let filename_raw = path.file_name().and_then(|n| n.to_str()).unwrap_or("");
-            let filename_lower;
-
-            let filename = if filename_raw.bytes().any(|b| b.is_ascii_uppercase()) {
-                filename_lower = filename_raw.to_ascii_lowercase();
-                filename_lower.as_str()
-            } else {
-                filename_raw
-            };
-
-            let lang = language::LanguageDef::from_extension(ext)
-                .or_else(|| language::LanguageDef::from_filename(filename))
-                .or_else(|| {
-                    if ext.is_empty() {
-                        peek_shebang(&path)
-                    } else {
-                        None
-                    }
-                });
-
-            if let Some(lang) = lang {
-                if let Some(types) = types_filter.as_deref()
-                    && !types.iter().any(|t| t.eq_ignore_ascii_case(lang.name))
-                {
-                    return thread_stats;
-                }
-
-                READER.with(|r| {
-                    if let Some(content) = r.borrow_mut().read(&path) {
-                        let result = fsm::count_file(content, lang);
-                        thread_stats.add(lang.name, result);
-                    }
-                });
-            }
-
-            thread_stats
-        })
+        .map(|path| process_file(&path, &types_filter))
         .reduce(stats::ThreadStats::new, |mut a, b| {
             a.merge(b);
             a

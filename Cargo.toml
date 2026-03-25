@@ -1,6 +1,6 @@
 [package]
 name = "tokount"
-version = "2.1.4"
+version = "2.1.5"
 description = "The fastest line counter for codebases"
 authors = ["MihaiStreames <72852703+MihaiStreames@users.noreply.github.com>"]
 license = "MIT"
