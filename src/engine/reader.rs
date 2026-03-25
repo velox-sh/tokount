@@ -17,6 +17,10 @@ const BINARY_CHECK_LEN: usize = 8 * 1024;
 // buffered read below (mmap overhead dominates on small files)
 const MMAP_THRESHOLD: u64 = 64 * 1024;
 
+// skip files larger than this — no source file is this big, and pseudo-files
+// like /proc/kcore report enormous sizes that would cause OOM when mmap'd
+const MAX_FILE_SIZE: u64 = 512 * 1024 * 1024; // 512 MiB
+
 #[cfg(unix)]
 fn is_special_file_type(ft: std::fs::FileType) -> bool {
     ft.is_block_device() || ft.is_char_device() || ft.is_fifo() || ft.is_socket()
@@ -41,6 +45,10 @@ impl Default for FileReader {
 
 impl FileReader {
     fn read_file(&mut self, file: File, size: u64) -> Option<&[u8]> {
+        if size > MAX_FILE_SIZE {
+            return None;
+        }
+
         if size >= MMAP_THRESHOLD {
             // we hold no other reference to this file's pages
             // the mmap is stored in self.mmap and dropped before the next read() call
