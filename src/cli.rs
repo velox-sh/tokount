@@ -1,4 +1,5 @@
 use std::collections::HashMap;
+use std::path::Path;
 use std::path::PathBuf;
 use std::process;
 
@@ -16,8 +17,8 @@ pub struct Args {
     pub paths: Vec<PathBuf>,
 
     /// Comma-separated directories to exclude
-    #[arg(short = 'e', long = "exclude", value_delimiter = ',')]
-    pub excluded: Option<Vec<String>>,
+    #[arg(short = 'e', long, value_delimiter = ',')]
+    pub exclude: Option<Vec<String>>,
 
     /// Follow symbolic links
     #[arg(short = 'L', long)]
@@ -51,6 +52,10 @@ pub struct Args {
     /// Do not print statistics about embedded child languages
     #[arg(short = 'C', long)]
     pub compact: bool,
+
+    /// Do not cross filesystem boundaries (skips /proc, /sys, NFS mounts, etc.)
+    #[arg(short = 'x', long)]
+    pub same_filesystem: bool,
 
     /// Print all supported languages and exit
     #[arg(short = 'l', long)]
@@ -115,7 +120,7 @@ impl Args {
     }
 
     pub fn excluded_dirs(&self) -> Vec<&str> {
-        self.excluded
+        self.exclude
             .as_ref()
             .map(|v| v.iter().map(String::as_str).collect())
             .unwrap_or_default()
@@ -126,6 +131,42 @@ impl Args {
             .as_ref()
             .map(|v| v.iter().map(String::as_str).collect())
     }
+
+    pub fn label(&self) -> String {
+        if self.paths.len() == 1 {
+            self.paths[0].display().to_string()
+        } else {
+            format!("{} paths", self.paths.len())
+        }
+    }
+
+    pub fn validate(&self) {
+        for path in &self.paths {
+            if !path.exists() {
+                emit_error("NotFound", "Path does not exist", Some(path_detail(path)));
+            }
+
+            if let Err(err) = path.metadata() {
+                emit_error(
+                    "IoError",
+                    "Failed to read path metadata",
+                    Some(io_detail(path, &err)),
+                );
+            }
+        }
+    }
+}
+
+fn path_detail(path: &Path) -> HashMap<String, String> {
+    let mut details = HashMap::new();
+    details.insert("path".to_string(), path.display().to_string());
+    details
+}
+
+fn io_detail(path: &Path, err: &std::io::Error) -> HashMap<String, String> {
+    let mut details = path_detail(path);
+    details.insert("error".to_string(), err.to_string());
+    details
 }
 
 pub fn emit_error(kind: &str, message: &str, details: Option<HashMap<String, String>>) -> ! {

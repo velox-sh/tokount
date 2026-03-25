@@ -122,7 +122,7 @@ docker pull ghcr.io/mihaistreames/tokount:latest
 docker run --rm -v "$PWD":/work -w /work ghcr.io/mihaistreames/tokount:latest .
 
 # run a tagged release image
-docker run --rm -v "$PWD":/work -w /work ghcr.io/mihaistreames/tokount:2.1.2 .
+docker run --rm -v "$PWD":/work -w /work ghcr.io/mihaistreames/tokount:2.2.0 .
 ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -153,7 +153,7 @@ tokount . -s lines
 tokount . -r code
 
 # hide embedded-language rows in table/csv
-tokount . --compact
+tokount . -C
 
 # count only specific languages
 tokount . -t Rust,Python

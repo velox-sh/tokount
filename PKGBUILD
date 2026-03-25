@@ -1,6 +1,6 @@
 # Maintainer: MihaiStreames <72852703+MihaiStreames@users.noreply.github.com>
 pkgname=tokount
-pkgver=2.1.2
+pkgver=2.2.0
 pkgrel=1
 pkgdesc="The fastest line counter for codebases"
 arch=(x86_64)

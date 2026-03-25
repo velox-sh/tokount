@@ -1,6 +1,6 @@
 [package]
 name = "tokount"
-version = "2.1.2"
+version = "2.2.0"
 description = "The fastest line counter for codebases"
 authors = ["MihaiStreames <72852703+MihaiStreames@users.noreply.github.com>"]
 license = "MIT"
@@ -46,6 +46,12 @@ lto = true
 codegen-units = 1
 strip = "symbols"
 panic = "abort"
+
+[profile.profiling]
+inherits = "release"
+debug = 1       # line-level symbols without full debuginfo bloat
+strip = false   # keep symbols for perf/flamegraph
+lto = false     # LTO inlines across crates, collapsing flamegraph frames
 
 [lints.rust]
 unsafe_code = "warn"

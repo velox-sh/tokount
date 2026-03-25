@@ -1,4 +1,5 @@
 use std::cmp::Ordering;
+use std::io::IsTerminal;
 use std::time::Duration;
 
 use comfy_table::Attribute;
@@ -10,9 +11,13 @@ use comfy_table::ContentArrangement;
 use comfy_table::Table;
 use comfy_table::Width;
 use comfy_table::presets::UTF8_BORDERS_ONLY;
+use indicatif::ProgressBar;
+use indicatif::ProgressStyle;
 use tokount::types::LangStats;
 use tokount::types::OutputStats;
 
+use crate::cli::Args;
+use crate::cli::OutputFormat;
 use crate::cli::SortColumn;
 
 const VERSION: &str = env!("CARGO_PKG_VERSION");
@@ -31,21 +36,6 @@ where
         };
         cmp.then_with(|| a.cmp(b))
     });
-}
-
-fn print_summary(
-    total_files: usize,
-    git_repos: usize,
-    label: &str,
-    secs: f64,
-    files_per_sec: f64,
-    lines_per_sec: f64,
-) {
-    println!(
-        "{REPO} v{VERSION}  T={secs:.2}s  ({files_per_sec:.0} files/s, {lines_per_sec:.0} lines/s)"
-    );
-    println!("{total_files} files  •  {git_repos} git repos  •  {label}");
-    println!();
 }
 
 fn build_table(color: bool) -> Table {
@@ -105,7 +95,7 @@ fn cmp_stats(a: &LangStats, b: &LangStats, sort: SortColumn) -> Ordering {
 
 #[inline]
 fn total_lines(blank: usize, comment: usize, code: usize) -> usize {
-    blank + comment + code
+    blank + comment + code // wow such math
 }
 
 #[derive(Clone, Copy)]
@@ -118,6 +108,34 @@ struct RowDisplay<'a> {
     color: bool,
     bold: bool,
     uniform_color: Option<Color>,
+}
+
+impl<'a> RowDisplay<'a> {
+    fn from_stats(name: &'a str, s: &LangStats, color: bool) -> Self {
+        Self {
+            name,
+            files: s.n_files,
+            blank: s.blank,
+            comment: s.comment,
+            code: s.code,
+            color,
+            bold: false,
+            uniform_color: None,
+        }
+    }
+
+    fn sum(s: &LangStats, color: bool) -> Self {
+        Self {
+            name: "SUM",
+            files: s.n_files,
+            blank: s.blank,
+            comment: s.comment,
+            code: s.code,
+            color,
+            bold: true,
+            uniform_color: Some(Color::Cyan),
+        }
+    }
 }
 
 fn render_row(row: RowDisplay<'_>) -> Vec<Cell> {
@@ -173,7 +191,7 @@ fn render_row(row: RowDisplay<'_>) -> Vec<Cell> {
     ]
 }
 
-pub fn print_table(
+fn print_table(
     output: &OutputStats,
     label: &str,
     elapsed: Duration,
@@ -184,29 +202,27 @@ pub fn print_table(
 ) {
     let sum = output.languages.get("SUM");
     let total_files = sum.map_or(0, |s| s.n_files);
-    let total_lines = sum.map_or(0, |s| s.blank + s.comment + s.code);
+    let total_lines_count = sum.map_or(0, |s| s.blank + s.comment + s.code);
     let secs = elapsed.as_secs_f64();
-
     let files_per_sec = if secs > 0.0 {
         total_files as f64 / secs
     } else {
         0.0
     };
-
     let lines_per_sec = if secs > 0.0 {
-        total_lines as f64 / secs
+        total_lines_count as f64 / secs
     } else {
         0.0
     };
 
-    print_summary(
-        total_files,
-        output.git_repos,
-        label,
-        secs,
-        files_per_sec,
-        lines_per_sec,
+    println!(
+        "{REPO} v{VERSION}  T={secs:.2}s  ({files_per_sec:.0} files/s, {lines_per_sec:.0} lines/s)"
     );
+    println!(
+        "{total_files} files  •  {git_repos} git repos  •  {label}",
+        git_repos = output.git_repos
+    );
+    println!();
 
     let mut table = build_table(color);
     let mut langs: Vec<&str> = output
@@ -221,17 +237,7 @@ pub fn print_table(
 
     for lang in langs {
         let s = &output.languages[lang];
-
-        table.add_row(render_row(RowDisplay {
-            name: lang,
-            files: s.n_files,
-            blank: s.blank,
-            comment: s.comment,
-            code: s.code,
-            color,
-            bold: false,
-            uniform_color: None,
-        }));
+        table.add_row(render_row(RowDisplay::from_stats(lang, s, color)));
 
         if !compact && !s.children.is_empty() {
             let mut children: Vec<&str> = s.children.keys().map(String::as_str).collect();
@@ -240,37 +246,23 @@ pub fn print_table(
             for child in children {
                 let child_stats = &s.children[child];
                 let child_label = format!("{CHILD_ROW_PREFIX}{child}");
-                table.add_row(render_row(RowDisplay {
-                    name: &child_label,
-                    files: child_stats.n_files,
-                    blank: child_stats.blank,
-                    comment: child_stats.comment,
-                    code: child_stats.code,
+                table.add_row(render_row(RowDisplay::from_stats(
+                    &child_label,
+                    child_stats,
                     color,
-                    bold: false,
-                    uniform_color: None,
-                }));
+                )));
             }
         }
     }
 
     if let Some(sum) = sum {
-        table.add_row(render_row(RowDisplay {
-            name: "SUM",
-            files: sum.n_files,
-            blank: sum.blank,
-            comment: sum.comment,
-            code: sum.code,
-            color,
-            bold: true,
-            uniform_color: Some(Color::Cyan),
-        }));
+        table.add_row(render_row(RowDisplay::sum(sum, color)));
     }
 
     println!("{table}");
 }
 
-pub fn print_csv(output: &OutputStats, sort: SortColumn, sort_reverse: bool, compact: bool) {
+fn print_csv(output: &OutputStats, sort: SortColumn, sort_reverse: bool, compact: bool) {
     println!("language,files,lines,blank,comment,code");
 
     let mut langs: Vec<&str> = output
@@ -317,5 +309,57 @@ pub fn print_csv(output: &OutputStats, sort: SortColumn, sort_reverse: bool, com
             "SUM,{},{},{},{},{}",
             sum.n_files, lines, sum.blank, sum.comment, sum.code
         );
+    }
+}
+
+fn spinner() -> ProgressBar {
+    let pb = ProgressBar::new_spinner();
+    pb.set_style(
+        ProgressStyle::default_spinner()
+            .tick_strings(&["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"])
+            .template("{spinner} {msg}")
+            .expect("spinner template is valid"),
+    );
+    pb.enable_steady_tick(std::time::Duration::from_millis(80));
+    pb
+}
+
+pub fn start_spinner(fmt: OutputFormat) -> Option<ProgressBar> {
+    if fmt == OutputFormat::Table {
+        let pb = spinner();
+        pb.set_message("Counting lines...");
+        Some(pb)
+    } else {
+        None
+    }
+}
+
+pub fn render(output: &OutputStats, label: &str, elapsed: Duration, args: &Args) {
+    let fmt = args.format();
+    let sort = args.sort_column();
+    let sort_reverse = args.sort_reverse();
+
+    match fmt {
+        OutputFormat::Table => {
+            let color = !args.no_color
+                && std::io::stdout().is_terminal()
+                && std::env::var_os("NO_COLOR").is_none();
+            print_table(
+                output,
+                label,
+                elapsed,
+                sort,
+                sort_reverse,
+                color,
+                args.compact,
+            );
+        }
+
+        OutputFormat::Json => println!(
+            "{}",
+            serde_json::to_string(output).expect("output is serializable")
+        ),
+
+        OutputFormat::Csv => print_csv(output, sort, sort_reverse, args.compact),
     }
 }

@@ -10,7 +10,7 @@
 <details>
   <summary>Table of Contents</summary>
   <ol>
-    <li><a href="#v212--new-flags--library-polish">v2.1.2</a></li>
+    <li><a href="#v220--performance">v2.2.0</a></li>
     <li><a href="#v211--table-output-polish--release-alignment">v2.1.1</a></li>
     <li><a href="#v210--sections-abstractions-and-less-lint-pain">v2.1.0</a></li>
     <li><a href="#v200--simd-engine">v2.0.0</a></li>
@@ -21,19 +21,28 @@
   </ol>
 </details>
 
-## v2.1.2 — New flags & library polish
+## v2.2.0 — Performance
+
+Flamegraph-driven optimization pass. ~2.5x faster than v2.1.1 on real workloads, with zero accuracy changes.
+
+The big wins came from three places: upgrading the SIMD scanner from SSE2 to AVX2 (doubles the bytes per chunk), fixing a redundant `fstat64` on every mmap'd file, and adding a first-byte guard to token matching that short-circuits the common case. Running flamegraphs on a 44k-file Go codebase before and after confirmed the gains.
 
 **New stuff:**
 
+- `-x`/`--same-filesystem` — don't cross filesystem boundaries; fixes SIGKILL when scanning `/` due to OOM from virtual filesystems like `/proc` and `/sys`
 - `-r`/`--rsort` — reverse sort by column (ascending); mutually exclusive with `--sort`
 - `-C`/`--compact` — hide embedded child language rows from table and CSV output
-- `EngineConfig` now implements `Default`
+- Bounded walker channel — backpressure so the walker can't get arbitrarily far ahead of the consumers and blow memory
 
 **Improved:**
 
+- SIMD scanner upgraded from SSE2 (16 bytes/chunk) to AVX2 (32 bytes/chunk) with runtime detection and SSE2 fallback; broadcast vectors hoisted out of the chunk loop
+- `mmap` path no longer does a redundant `fstat64` — we already have the size from `metadata()`, so we pass it directly via `MmapOptions::new().len(size)`; also added `MADV_SEQUENTIAL` so the kernel prefetches ahead
+- Token matching has a first-byte guard — if the first byte doesn't match any region opener, `starts_with` is never called
+- Shebang detection now opens the file once, reads the first line, seeks back to 0, and hands the fd to `FileReader` — no second `open` syscall
 - `--types` now validates names at startup and exits with a structured `UnknownLanguage` error on unknown input
-- Trimmed crate-level docs, added one-liners to all internal `pub` functions
-- `#[must_use]` on `count`, `supported_languages`, and `is_supported_language`
+- `main.rs` is pure orchestration now; validation, label formatting, and spinner logic live in `cli.rs` and `display.rs`
+- Trimmed crate-level docs, added one-liners to all internal `pub` functions; `#[must_use]` on `count`, `supported_languages`, and `is_supported_language`
 
 <p align="right">(<a href="#changelog-top">back to top</a>)</p>
 

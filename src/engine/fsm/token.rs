@@ -4,11 +4,18 @@ use crate::engine::language::RegionKind;
 
 #[inline(always)]
 pub(super) fn match_token(rest: &[u8], lang: &LanguageDef) -> (TokenMatch, usize) {
+    let Some(&first) = rest.first() else {
+        return (TokenMatch::Other, 1);
+    };
     let mut best: Option<TokenMatch> = None;
     let mut best_len = 0usize;
 
     for region in lang.regions {
-        if region.open.len() > best_len && rest.starts_with(region.open) {
+        // first-byte guard: skips starts_with for regions that can't match
+        if region.open.first().copied() == Some(first)
+            && region.open.len() > best_len
+            && rest.starts_with(region.open)
+        {
             best = Some(match region.kind {
                 RegionKind::Comment {
                     nested,
@@ -25,10 +32,12 @@ pub(super) fn match_token(rest: &[u8], lang: &LanguageDef) -> (TokenMatch, usize
                         }
                     }
                 }
+
                 RegionKind::String { escape } => TokenMatch::StringLiteral {
                     close: region.close,
                     escape,
                 },
+
                 RegionKind::Child {
                     default_lang,
                     detect,
@@ -38,6 +47,7 @@ pub(super) fn match_token(rest: &[u8], lang: &LanguageDef) -> (TokenMatch, usize
                     detect,
                 },
             });
+
             best_len = region.open.len();
         }
     }

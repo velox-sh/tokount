@@ -5,7 +5,10 @@ use std::io::Read;
 use std::os::unix::fs::FileTypeExt;
 use std::path::Path;
 
+#[cfg(unix)]
+use memmap2::Advice;
 use memmap2::Mmap;
+use memmap2::MmapOptions;
 
 // NUL byte detection window
 const BINARY_CHECK_LEN: usize = 8 * 1024;
@@ -27,7 +30,6 @@ fn is_special_file_type(_ft: std::fs::FileType) -> bool {
 /// Reusable file reader with mmap support for large files
 pub struct FileReader {
     buf: Vec<u8>,
-    // holds the current mmap alive so we can return a zero-copy slice from read()
     mmap: Option<Mmap>,
 }
 
@@ -40,14 +42,20 @@ impl Default for FileReader {
 impl FileReader {
     fn read_file(&mut self, file: File, size: u64) -> Option<&[u8]> {
         if size >= MMAP_THRESHOLD {
-            // SAFETY: we hold no other reference to this file's pages; the mmap
-            // is stored in self.mmap and dropped before the next read() call
-            let map = unsafe { Mmap::map(&file) }.ok()?;
+            // we hold no other reference to this file's pages
+            // the mmap is stored in self.mmap and dropped before the next read() call
+            // len() skips the internal fstat64 that Mmap::map() would call
+            // since we already have the size from metadata() above
+            let map = unsafe { MmapOptions::new().len(size as usize).map(&file) }.ok()?;
 
             let check_len = map.len().min(BINARY_CHECK_LEN);
             if memchr::memchr(0, &map[..check_len]).is_some() {
                 return None;
             }
+
+            // scanning is sequential; hint the kernel to prefetch ahead
+            #[cfg(unix)]
+            map.advise(Advice::Sequential).ok();
 
             self.mmap = Some(map);
             self.buf.clear();
@@ -78,6 +86,11 @@ impl FileReader {
             buf: Vec::with_capacity(64 * 1024),
             mmap: None,
         }
+    }
+
+    /// Read from an already-open file; skips the `open` + `stat` syscalls
+    pub fn read_open(&mut self, file: File, size: u64) -> Option<&[u8]> {
+        self.read_file(file, size)
     }
 
     /// Read a file into a reusable buffer; returns `None` for binary files, empty files, or errors
