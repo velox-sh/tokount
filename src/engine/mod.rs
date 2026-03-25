@@ -22,7 +22,7 @@ use std::path::Path;
 use std::path::PathBuf;
 use std::sync::Arc;
 
-use crossbeam_channel::unbounded;
+use crossbeam_channel::bounded;
 use rayon::prelude::*;
 
 /// Configuration for a [`count`] run
@@ -37,6 +37,8 @@ pub struct EngineConfig<'a> {
     /// If set, only count files whose language name matches one of these strings
     /// (case-insensitive)
     pub types_filter: Option<&'a [&'a str]>,
+    /// Do not cross filesystem boundaries (skips `/proc`, `/sys`, NFS mounts, etc.)
+    pub same_filesystem: bool,
 }
 
 // thread-local reader reuses the same buffer across all files on a given
@@ -76,13 +78,14 @@ fn peek_shebang(path: &Path) -> Option<&'static language::LanguageDef> {
 /// ```
 #[must_use]
 pub fn count(paths: &[&Path], config: &EngineConfig<'_>) -> crate::types::OutputStats {
-    // unbounded: walker never blocks waiting for consumers (mirrors tokei)
-    let (tx, rx) = unbounded::<PathBuf>();
+    // backpressure prevents OOM when walker outruns consumers on huge scans
+    let (tx, rx) = bounded::<PathBuf>(256);
 
     let owned_paths: Vec<PathBuf> = paths.iter().map(|p| p.to_path_buf()).collect();
     let excluded_owned: Vec<String> = config.excluded.iter().map(ToString::to_string).collect();
     let follow_symlinks = config.follow_symlinks;
     let no_ignore = config.no_ignore;
+    let same_filesystem = config.same_filesystem;
     let types_filter: Arc<Option<Vec<String>>> = Arc::new(
         config
             .types_filter
@@ -98,6 +101,7 @@ pub fn count(paths: &[&Path], config: &EngineConfig<'_>) -> crate::types::Output
             excluded: &excluded_refs,
             follow_symlinks,
             no_ignore,
+            same_filesystem,
         };
 
         walker::walk_parallel(&walk_config, &tx)

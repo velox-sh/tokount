@@ -10,6 +10,7 @@
 <details>
   <summary>Table of Contents</summary>
   <ol>
+    <li><a href="#v213--oom-fix--same-filesystem">v2.1.3</a></li>
     <li><a href="#v212--docs-polish">v2.1.2</a></li>
     <li><a href="#v211--table-output-polish--release-alignment">v2.1.1</a></li>
     <li><a href="#v210--sections-abstractions-and-less-lint-pain">v2.1.0</a></li>
@@ -20,6 +21,20 @@
     <li><a href="#v100--initial-release">v1.0.0</a></li>
   </ol>
 </details>
+
+## v2.1.3 — OOM fix & same-filesystem
+
+**Fixed:**
+
+- Running `tokount /` (or any scan spanning virtual filesystems) no longer causes OOM SIGKILL. The walker channel is now bounded (256) so backpressure kicks in before memory fills up (fixes [#5](https://github.com/MihaiStreames/tokount/issues/5), reported by [@UnderNowhere](https://github.com/UnderNowhere))
+
+**New:**
+
+- `-x` / `--same-filesystem` flag — skip `/proc`, `/sys`, NFS mounts, and any path that crosses a filesystem boundary
+
+<p align="right">(<a href="#changelog-top">back to top</a>)</p>
+
+---
 
 ## v2.1.2 — Docs polish
 

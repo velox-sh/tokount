@@ -18,6 +18,7 @@ pub struct WalkConfig<'a> {
     pub excluded: &'a [&'a str],
     pub follow_symlinks: bool,
     pub no_ignore: bool,
+    pub same_filesystem: bool,
 }
 
 /// Results from a complete filesystem walk
@@ -91,6 +92,7 @@ pub fn walk_parallel(config: &WalkConfig<'_>, tx: &Sender<PathBuf>) -> WalkResul
 
     builder
         .follow_links(config.follow_symlinks)
+        .same_file_system(config.same_filesystem)
         .git_ignore(use_git_ignore)
         .git_global(use_git_ignore)
         .git_exclude(use_git_ignore)

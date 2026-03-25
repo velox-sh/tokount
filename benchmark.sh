@@ -12,7 +12,7 @@ set -euo pipefail
 # Optional: cloc (only when --cloc is set)
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-BINARY="$SCRIPT_DIR/target/release/tokount"
+BINARY="/tmp/tokount-bench"
 ASSETS="$SCRIPT_DIR/assets"
 RESULTS="$ASSETS/bench_results.json"
 
@@ -30,6 +30,7 @@ done
 if [[ $NO_BUILD -eq 0 ]]; then
     echo "Building tokount (release)..."
     cargo build --release -q --manifest-path "$SCRIPT_DIR/Cargo.toml"
+    cp "$SCRIPT_DIR/target/release/tokount" "$BINARY"
 fi
 
 [[ -x "$BINARY" ]] || { echo "error: binary not found: $BINARY" >&2; exit 1; }
@@ -60,6 +61,7 @@ printf '\nTools: %s\n\n' "${TOOL_NAMES[*]}"
 # ---------------------------------------------------------------------------
 BENCH_TMPDIR="$(mktemp -d "/tmp/.bench_XXXXXX")"
 trap 'echo "Cleaning up $BENCH_TMPDIR ..."; rm -rf "$BENCH_TMPDIR"' EXIT
+
 
 CASE_NAMES=(
     "Tokount (25k lines)"

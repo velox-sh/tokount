@@ -106,6 +106,7 @@ fn main() {
             follow_symlinks: args.follow_symlinks,
             no_ignore: args.no_ignore,
             types_filter: types_refs.as_deref(),
+            ..Default::default()
         },
     );
 
