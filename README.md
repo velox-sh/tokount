@@ -3,12 +3,12 @@
 <!-- PROJECT SHIELDS -->
 <div align="center">
 
-[![Lines of Code](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/MihaiStreames/tokount/master/assets/badge.json)](https://github.com/MihaiStreames/tokount)
 [![Stars](https://img.shields.io/github/stars/MihaiStreames/tokount?style=social)](https://github.com/MihaiStreames/tokount/stargazers)
 [![Crates Version](https://img.shields.io/crates/v/tokount?label=Crate)](https://crates.io/crates/tokount)
 [![AUR Version](https://img.shields.io/aur/version/tokount?label=AUR)](https://aur.archlinux.org/packages/tokount)
 [![Rust Edition](https://img.shields.io/badge/Rust-2024-ed7a1f)](https://www.rust-lang.org/)
 [![Downloads](https://img.shields.io/crates/d/tokount?label=Downloads)](https://crates.io/crates/tokount)
+[![Lines of Code](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/MihaiStreames/tokount/master/assets/badge.json)](https://github.com/MihaiStreames/tokount)
 [![License](https://img.shields.io/github/license/MihaiStreames/tokount?label=License)](LICENSE)
 
 </div>
@@ -45,6 +45,13 @@
     <li><a href="#usage">Usage</a></li>
     <li><a href="#library-usage">Library Usage</a></li>
     <li><a href="#output-formats">Output Formats</a></li>
+    <li>
+      <a href="#integrations">Integrations</a>
+      <ul>
+        <li><a href="#github-actions">GitHub Actions</a></li>
+        <li><a href="#pre-commit-hook">pre-commit Hook</a></li>
+      </ul>
+    </li>
     <li><a href="#benchmarks">Benchmarks</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
@@ -324,6 +331,66 @@ Errors go to stderr as structured JSON:
   }
 }
 ```
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- INTEGRATIONS -->
+
+## Integrations
+
+Reusable GitHub Actions workflows and a pre-commit hook are available via [tokount-action](https://github.com/MihaiStreames/tokount-action).
+
+### GitHub Actions
+
+**Self-updating lines-of-code badge** — add to `.github/workflows/badge.yml`:
+
+```yaml
+name: Update badge
+on:
+  push:
+    branches: [main, master]
+
+jobs:
+  badge:
+    uses: MihaiStreames/tokount-action/.github/workflows/badge.yml@v1
+    with:
+      exclude: target,node_modules
+    permissions:
+      contents: write
+```
+
+**PR stats comment** — add to `.github/workflows/pr-stats.yml`:
+
+```yaml
+name: PR stats
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  stats:
+    uses: MihaiStreames/tokount-action/.github/workflows/pr-stats.yml@v1
+    with:
+      exclude: target,node_modules
+    permissions:
+      pull-requests: write
+```
+
+See [tokount-action](https://github.com/MihaiStreames/tokount-action) for full setup instructions, including the badge JSON seed file.
+
+### pre-commit Hook
+
+Add to your `.pre-commit-config.yaml`:
+
+```yaml
+repos:
+  - repo: https://github.com/MihaiStreames/tokount-action
+    rev: v1
+    hooks:
+      - id: tokount
+```
+
+Prints a line count summary before every commit. Requires `tokount` in `PATH`.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
