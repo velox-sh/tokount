@@ -150,6 +150,10 @@ tokount . -o csv
 
 # sort by a different column
 tokount . -s lines
+tokount . -r code
+
+# hide embedded-language rows in table/csv
+tokount . -C
 
 # count only specific languages
 tokount . -t Rust,Python
@@ -169,8 +173,10 @@ tokount -l
 | `--follow-symlinks` | `-L`  | follow symbolic links when scanning                   |
 | `--output <FORMAT>` | `-o`  | output format: `table` (default), `json`, `csv`       |
 | `--sort <COLUMN>`   | `-s`  | sort by: `files`, `lines`, `blank`, `comment`, `code` |
+| `--rsort <COLUMN>`  | `-r`  | reverse sort (ascending) by the same columns          |
 | `--types <LANGS>`   | `-t`  | filter to specific language(s), comma-separated       |
 | `--no-ignore`       |       | disable `.gitignore` / `.prettierignore` respect      |
+| `--compact`         | `-C`  | hide embedded child-language rows in table/csv output |
 | `--languages`       | `-l`  | print all supported languages and exit                |
 | `--help`            | `-h`  | print help                                            |
 | `--version`         | `-V`  | print version                                         |

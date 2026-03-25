@@ -29,7 +29,6 @@
 
 - `-r` / `--rsort <COLUMN>` — reverse-sort output by column (ascending); conflicts with `--sort`
 - `-C` / `--compact` — suppress child language rows (embedded languages like Markdown-in-Rust)
-- `-x` / `--same-filesystem` flag is now wired through the CLI (was added to the engine in v2.1.3)
 
 **Improved:**
 
