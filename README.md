@@ -209,6 +209,7 @@ let config = EngineConfig {
   follow_symlinks: false,
   no_ignore: false,
   types_filter: None,
+  same_filesystem: false,
 };
 
 let stats = count(&[Path::new(".")], &config);
