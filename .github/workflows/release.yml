@@ -89,7 +89,7 @@ jobs:
           $hash = (Get-FileHash $ARCHIVE -Algorithm SHA256).Hash.ToLower()
           "$hash  $ARCHIVE" | Out-File "$ARCHIVE.sha256" -Encoding ascii
 
-      - uses: actions/upload-artifact@v5
+      - uses: actions/upload-artifact@v7
         with:
           name: tokount-${{ matrix.target }}
           path: tokount-*-${{ matrix.target }}.*
