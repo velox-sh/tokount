@@ -72,7 +72,7 @@ CASE_NAMES=(
     "Linux (31.3M lines)"
 )
 CASE_URLS=(
-    "https://github.com/MihaiStreames/tokount"
+    "https://github.com/velox-sh/tokount"
     "https://github.com/redis/redis"
     "https://github.com/astral-sh/ruff"
     "https://github.com/python/cpython"

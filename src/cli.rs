@@ -11,7 +11,7 @@ use tokount::types::ErrorPayload;
 /// Fast line counter for codebases (faster than tokei, scc, and cloc btw)
 #[derive(Parser, Debug)]
 #[command(name = "tokount", version, about)]
-pub struct Args {
+pub(crate) struct Args {
     /// Paths to analyze (files or directories)
     #[arg(num_args(1..))]
     pub paths: Vec<PathBuf>,
@@ -63,7 +63,7 @@ pub struct Args {
 }
 
 #[derive(Debug, Clone, Copy, ValueEnum, Default)]
-pub enum SortColumn {
+pub(crate) enum SortColumn {
     Files,
     Lines,
     Blank,
@@ -73,7 +73,7 @@ pub enum SortColumn {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, ValueEnum, Default)]
-pub enum OutputFormat {
+pub(crate) enum OutputFormat {
     #[default]
     Table,
     Json,
@@ -81,7 +81,7 @@ pub enum OutputFormat {
 }
 
 impl Args {
-    pub fn parse_args() -> Self {
+    pub(crate) fn parse_args() -> Self {
         let args = Self::parse();
 
         #[cfg(target_os = "windows")]
@@ -107,19 +107,19 @@ impl Args {
         args
     }
 
-    pub fn format(&self) -> OutputFormat {
+    pub(crate) fn format(&self) -> OutputFormat {
         self.output.unwrap_or_default()
     }
 
-    pub fn sort_column(&self) -> SortColumn {
+    pub(crate) fn sort_column(&self) -> SortColumn {
         self.sort.or(self.rsort).unwrap_or_default()
     }
 
-    pub fn sort_reverse(&self) -> bool {
+    pub(crate) fn sort_reverse(&self) -> bool {
         self.rsort.is_some()
     }
 
-    pub fn label(&self) -> String {
+    pub(crate) fn label(&self) -> String {
         if self.paths.len() == 1 {
             self.paths[0].display().to_string()
         } else {
@@ -127,7 +127,7 @@ impl Args {
         }
     }
 
-    pub fn validate(&self) {
+    pub(crate) fn validate(&self) {
         for path in &self.paths {
             if !path.exists() {
                 emit_error("NotFound", "Path does not exist", Some(path_detail(path)));
@@ -143,14 +143,14 @@ impl Args {
         }
     }
 
-    pub fn excluded_dirs(&self) -> Vec<&str> {
+    pub(crate) fn excluded_dirs(&self) -> Vec<&str> {
         self.exclude
             .as_ref()
             .map(|v| v.iter().map(String::as_str).collect())
             .unwrap_or_default()
     }
 
-    pub fn types_filter(&self) -> Option<Vec<&str>> {
+    pub(crate) fn types_filter(&self) -> Option<Vec<&str>> {
         self.types
             .as_ref()
             .map(|v| v.iter().map(String::as_str).collect())
@@ -169,7 +169,7 @@ fn io_detail(path: &Path, err: &std::io::Error) -> HashMap<String, String> {
     details
 }
 
-pub fn emit_error(kind: &str, message: &str, details: Option<HashMap<String, String>>) -> ! {
+pub(crate) fn emit_error(kind: &str, message: &str, details: Option<HashMap<String, String>>) -> ! {
     let payload = ErrorPayload {
         error: ErrorBody {
             kind: kind.to_string(),
@@ -185,5 +185,6 @@ pub fn emit_error(kind: &str, message: &str, details: Option<HashMap<String, Str
         }
     }
 
+    #[expect(clippy::exit)]
     process::exit(2);
 }

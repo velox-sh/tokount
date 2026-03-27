@@ -10,6 +10,7 @@
 <details>
   <summary>Table of Contents</summary>
   <ol>
+    <li><a href="#v216--housekeeping">v2.1.6</a></li>
     <li><a href="#v215--code-cleanup">v2.1.5</a></li>
     <li><a href="#v214--new-flags">v2.1.4</a></li>
     <li><a href="#v213--oom-fix--same-filesystem">v2.1.3</a></li>
@@ -23,6 +24,18 @@
     <li><a href="#v100--initial-release">v1.0.0</a></li>
   </ol>
 </details>
+
+## v2.1.6 — Housekeeping
+
+**Changed:**
+
+- Moved project to the `velox-sh` GitHub org
+- Added `rust-version = "1.92"` — older toolchains now get a clear error instead of a cryptic compile failure
+- Tightened Clippy lints (`unreachable_pub`, `dbg_macro`, `exit`, `get_unwrap`, `rc_buffer`, `rc_mutex`, `empty_drop`, `rest_pat_in_fully_bound_structs`)
+
+<p align="right">(<a href="#changelog-top">back to top</a>)</p>
+
+---
 
 ## v2.1.5 — Code cleanup
 
@@ -58,7 +71,7 @@
 
 **Fixed:**
 
-- Running `tokount /` (or any scan spanning virtual filesystems) no longer causes OOM SIGKILL. The walker channel is now bounded (256) so backpressure kicks in before memory fills up (fixes [#5](https://github.com/MihaiStreames/tokount/issues/5), reported by [@UnderNowhere](https://github.com/UnderNowhere))
+- Running `tokount /` (or any scan spanning virtual filesystems) no longer causes OOM SIGKILL. The walker channel is now bounded (256) so backpressure kicks in before memory fills up (fixes [#5](https://github.com/velox-sh/tokount/issues/5), reported by [@UnderNowhere](https://github.com/UnderNowhere))
 
 **New:**
 

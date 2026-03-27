@@ -5,36 +5,36 @@ use std::process::Command;
 use serde_json::Value;
 
 #[allow(dead_code)]
-pub struct ExpectedCounts {
-    pub lines: u32,
-    pub code: u32,
-    pub comment: u32,
-    pub blank: u32,
+pub(crate) struct ExpectedCounts {
+    pub(crate) lines: u32,
+    pub(crate) code: u32,
+    pub(crate) comment: u32,
+    pub(crate) blank: u32,
 }
 
 // shared across test binaries; not every binary uses every helper
 #[allow(dead_code)]
-pub fn repo_root() -> PathBuf {
+pub(crate) fn repo_root() -> PathBuf {
     PathBuf::from(env!("CARGO_MANIFEST_DIR"))
 }
 
 #[allow(dead_code)]
-pub fn fixtures_dir() -> PathBuf {
+pub(crate) fn fixtures_dir() -> PathBuf {
     repo_root().join("tests/fixtures")
 }
 
 #[allow(dead_code)]
-pub fn lang_dir() -> PathBuf {
+pub(crate) fn lang_dir() -> PathBuf {
     repo_root().join("tests/lang")
 }
 
 #[allow(dead_code)]
-pub fn lang_expected_dir() -> PathBuf {
+pub(crate) fn lang_expected_dir() -> PathBuf {
     repo_root().join("tests/lang.expected")
 }
 
 #[allow(dead_code)]
-pub fn run(args: &[&str]) -> std::process::Output {
+pub(crate) fn run(args: &[&str]) -> std::process::Output {
     Command::new(env!("CARGO_BIN_EXE_tokount"))
         .args(args)
         .output()
@@ -42,7 +42,7 @@ pub fn run(args: &[&str]) -> std::process::Output {
 }
 
 #[allow(dead_code)]
-pub fn run_json(path: &Path, extra_args: &[&str]) -> Value {
+pub(crate) fn run_json(path: &Path, extra_args: &[&str]) -> Value {
     let out = Command::new(env!("CARGO_BIN_EXE_tokount"))
         .arg(path)
         .args(extra_args)
@@ -62,7 +62,7 @@ pub fn run_json(path: &Path, extra_args: &[&str]) -> Value {
 // sidecar format: first line is `lines code comment blank` (4 space-separated integers)
 // optional attribution on subsequent lines is ignored
 #[allow(dead_code)]
-pub fn parse_expected_file(sidecar: &std::path::Path) -> Option<ExpectedCounts> {
+pub(crate) fn parse_expected_file(sidecar: &std::path::Path) -> Option<ExpectedCounts> {
     let content = std::fs::read_to_string(sidecar).ok()?;
     let line = content.lines().next()?;
 

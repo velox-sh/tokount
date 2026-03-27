@@ -21,7 +21,7 @@ use crate::cli::OutputFormat;
 use crate::cli::SortColumn;
 
 const VERSION: &str = env!("CARGO_PKG_VERSION");
-const REPO: &str = "github.com/MihaiStreames/tokount";
+const REPO: &str = "github.com/velox-sh/tokount";
 const CHILD_ROW_PREFIX: &str = ">> ";
 
 fn sort_by_stats<'a, F>(names: &mut [&str], sort: SortColumn, reverse: bool, get: F)
@@ -327,7 +327,7 @@ fn spinner() -> ProgressBar {
     pb
 }
 
-pub fn start_spinner(fmt: OutputFormat) -> Option<ProgressBar> {
+pub(crate) fn start_spinner(fmt: OutputFormat) -> Option<ProgressBar> {
     if fmt == OutputFormat::Table {
         let pb = spinner();
         pb.set_message("Counting lines...");
@@ -337,7 +337,7 @@ pub fn start_spinner(fmt: OutputFormat) -> Option<ProgressBar> {
     }
 }
 
-pub fn render(output: &OutputStats, label: &str, elapsed: Duration, args: &Args) {
+pub(crate) fn render(output: &OutputStats, label: &str, elapsed: Duration, args: &Args) {
     let fmt = args.format();
     let sort = args.sort_column();
     let sort_reverse = args.sort_reverse();

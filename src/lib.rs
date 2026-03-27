@@ -1,7 +1,7 @@
 //! # tokount
 //!
 //! Fast, accurate line counter for codebases. Primarily a
-//! [CLI tool](https://github.com/MihaiStreames/tokount), this crate
+//! [CLI tool](https://github.com/velox-sh/tokount), this crate
 //! exposes the counting engine as a library.
 //!
 //! # Quick start
